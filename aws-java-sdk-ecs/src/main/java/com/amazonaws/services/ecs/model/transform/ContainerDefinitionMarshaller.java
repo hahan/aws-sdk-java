@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -103,6 +103,8 @@ public class ContainerDefinitionMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("systemControls").build();
     private static final MarshallingInfo<List> RESOURCEREQUIREMENTS_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("resourceRequirements").build();
+    private static final MarshallingInfo<StructuredPojo> FIRELENSCONFIGURATION_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("firelensConfiguration").build();
 
     private static final ContainerDefinitionMarshaller instance = new ContainerDefinitionMarshaller();
 
@@ -157,6 +159,7 @@ public class ContainerDefinitionMarshaller {
             protocolMarshaller.marshall(containerDefinition.getHealthCheck(), HEALTHCHECK_BINDING);
             protocolMarshaller.marshall(containerDefinition.getSystemControls(), SYSTEMCONTROLS_BINDING);
             protocolMarshaller.marshall(containerDefinition.getResourceRequirements(), RESOURCEREQUIREMENTS_BINDING);
+            protocolMarshaller.marshall(containerDefinition.getFirelensConfiguration(), FIRELENSCONFIGURATION_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,6 +27,8 @@ import com.amazonaws.annotation.SdkInternalApi;
 @SdkInternalApi
 public class VideoCodecSettingsMarshaller {
 
+    private static final MarshallingInfo<StructuredPojo> AV1SETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("av1Settings").build();
     private static final MarshallingInfo<String> CODEC_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("codec").build();
     private static final MarshallingInfo<StructuredPojo> FRAMECAPTURESETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
@@ -56,6 +58,7 @@ public class VideoCodecSettingsMarshaller {
         }
 
         try {
+            protocolMarshaller.marshall(videoCodecSettings.getAv1Settings(), AV1SETTINGS_BINDING);
             protocolMarshaller.marshall(videoCodecSettings.getCodec(), CODEC_BINDING);
             protocolMarshaller.marshall(videoCodecSettings.getFrameCaptureSettings(), FRAMECAPTURESETTINGS_BINDING);
             protocolMarshaller.marshall(videoCodecSettings.getH264Settings(), H264SETTINGS_BINDING);

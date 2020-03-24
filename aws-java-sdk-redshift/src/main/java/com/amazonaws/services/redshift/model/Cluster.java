@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -106,6 +106,11 @@ public class Cluster implements Serializable, Cloneable {
      * <li>
      * <p>
      * <code>modifying</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>paused</code>
      * </p>
      * </li>
      * <li>
@@ -435,6 +440,38 @@ public class Cluster implements Serializable, Cloneable {
     private String snapshotScheduleState;
     /**
      * <p>
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and
+     * backups enabled.
+     * </p>
+     */
+    private java.util.Date expectedNextSnapshotScheduleTime;
+    /**
+     * <p>
+     * The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible
+     * values are the following:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * OnTrack - The next snapshot is expected to be taken on time.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Pending - The next snapshot is pending to be taken.
+     * </p>
+     * </li>
+     * </ul>
+     */
+    private String expectedNextSnapshotScheduleTimeStatus;
+    /**
+     * <p>
+     * The date and time in UTC when system maintenance can begin.
+     * </p>
+     */
+    private java.util.Date nextMaintenanceWindowStartTime;
+    /**
+     * <p>
      * Returns the following:
      * </p>
      * <ul>
@@ -604,6 +641,11 @@ public class Cluster implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
+     * <code>paused</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>rebooting</code>
      * </p>
      * </li>
@@ -700,6 +742,11 @@ public class Cluster implements Serializable, Cloneable {
      *        <li>
      *        <p>
      *        <code>modifying</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>paused</code>
      *        </p>
      *        </li>
      *        <li>
@@ -810,6 +857,11 @@ public class Cluster implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
+     * <code>paused</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>rebooting</code>
      * </p>
      * </li>
@@ -905,6 +957,11 @@ public class Cluster implements Serializable, Cloneable {
      *         <li>
      *         <p>
      *         <code>modifying</code>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>paused</code>
      *         </p>
      *         </li>
      *         <li>
@@ -1015,6 +1072,11 @@ public class Cluster implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
+     * <code>paused</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>rebooting</code>
      * </p>
      * </li>
@@ -1111,6 +1173,11 @@ public class Cluster implements Serializable, Cloneable {
      *        <li>
      *        <p>
      *        <code>modifying</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>paused</code>
      *        </p>
      *        </li>
      *        <li>
@@ -3436,6 +3503,207 @@ public class Cluster implements Serializable, Cloneable {
 
     /**
      * <p>
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and
+     * backups enabled.
+     * </p>
+     * 
+     * @param expectedNextSnapshotScheduleTime
+     *        The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot
+     *        schedule and backups enabled.
+     */
+
+    public void setExpectedNextSnapshotScheduleTime(java.util.Date expectedNextSnapshotScheduleTime) {
+        this.expectedNextSnapshotScheduleTime = expectedNextSnapshotScheduleTime;
+    }
+
+    /**
+     * <p>
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and
+     * backups enabled.
+     * </p>
+     * 
+     * @return The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot
+     *         schedule and backups enabled.
+     */
+
+    public java.util.Date getExpectedNextSnapshotScheduleTime() {
+        return this.expectedNextSnapshotScheduleTime;
+    }
+
+    /**
+     * <p>
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and
+     * backups enabled.
+     * </p>
+     * 
+     * @param expectedNextSnapshotScheduleTime
+     *        The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot
+     *        schedule and backups enabled.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withExpectedNextSnapshotScheduleTime(java.util.Date expectedNextSnapshotScheduleTime) {
+        setExpectedNextSnapshotScheduleTime(expectedNextSnapshotScheduleTime);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible
+     * values are the following:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * OnTrack - The next snapshot is expected to be taken on time.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Pending - The next snapshot is pending to be taken.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param expectedNextSnapshotScheduleTimeStatus
+     *        The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled.
+     *        Possible values are the following:</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        OnTrack - The next snapshot is expected to be taken on time.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Pending - The next snapshot is pending to be taken.
+     *        </p>
+     *        </li>
+     */
+
+    public void setExpectedNextSnapshotScheduleTimeStatus(String expectedNextSnapshotScheduleTimeStatus) {
+        this.expectedNextSnapshotScheduleTimeStatus = expectedNextSnapshotScheduleTimeStatus;
+    }
+
+    /**
+     * <p>
+     * The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible
+     * values are the following:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * OnTrack - The next snapshot is expected to be taken on time.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Pending - The next snapshot is pending to be taken.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @return The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled.
+     *         Possible values are the following:</p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         OnTrack - The next snapshot is expected to be taken on time.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Pending - The next snapshot is pending to be taken.
+     *         </p>
+     *         </li>
+     */
+
+    public String getExpectedNextSnapshotScheduleTimeStatus() {
+        return this.expectedNextSnapshotScheduleTimeStatus;
+    }
+
+    /**
+     * <p>
+     * The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible
+     * values are the following:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * OnTrack - The next snapshot is expected to be taken on time.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Pending - The next snapshot is pending to be taken.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param expectedNextSnapshotScheduleTimeStatus
+     *        The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled.
+     *        Possible values are the following:</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        OnTrack - The next snapshot is expected to be taken on time.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Pending - The next snapshot is pending to be taken.
+     *        </p>
+     *        </li>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withExpectedNextSnapshotScheduleTimeStatus(String expectedNextSnapshotScheduleTimeStatus) {
+        setExpectedNextSnapshotScheduleTimeStatus(expectedNextSnapshotScheduleTimeStatus);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The date and time in UTC when system maintenance can begin.
+     * </p>
+     * 
+     * @param nextMaintenanceWindowStartTime
+     *        The date and time in UTC when system maintenance can begin.
+     */
+
+    public void setNextMaintenanceWindowStartTime(java.util.Date nextMaintenanceWindowStartTime) {
+        this.nextMaintenanceWindowStartTime = nextMaintenanceWindowStartTime;
+    }
+
+    /**
+     * <p>
+     * The date and time in UTC when system maintenance can begin.
+     * </p>
+     * 
+     * @return The date and time in UTC when system maintenance can begin.
+     */
+
+    public java.util.Date getNextMaintenanceWindowStartTime() {
+        return this.nextMaintenanceWindowStartTime;
+    }
+
+    /**
+     * <p>
+     * The date and time in UTC when system maintenance can begin.
+     * </p>
+     * 
+     * @param nextMaintenanceWindowStartTime
+     *        The date and time in UTC when system maintenance can begin.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withNextMaintenanceWindowStartTime(java.util.Date nextMaintenanceWindowStartTime) {
+        setNextMaintenanceWindowStartTime(nextMaintenanceWindowStartTime);
+        return this;
+    }
+
+    /**
+     * <p>
      * Returns the following:
      * </p>
      * <ul>
@@ -3639,6 +3907,12 @@ public class Cluster implements Serializable, Cloneable {
             sb.append("SnapshotScheduleIdentifier: ").append(getSnapshotScheduleIdentifier()).append(",");
         if (getSnapshotScheduleState() != null)
             sb.append("SnapshotScheduleState: ").append(getSnapshotScheduleState()).append(",");
+        if (getExpectedNextSnapshotScheduleTime() != null)
+            sb.append("ExpectedNextSnapshotScheduleTime: ").append(getExpectedNextSnapshotScheduleTime()).append(",");
+        if (getExpectedNextSnapshotScheduleTimeStatus() != null)
+            sb.append("ExpectedNextSnapshotScheduleTimeStatus: ").append(getExpectedNextSnapshotScheduleTimeStatus()).append(",");
+        if (getNextMaintenanceWindowStartTime() != null)
+            sb.append("NextMaintenanceWindowStartTime: ").append(getNextMaintenanceWindowStartTime()).append(",");
         if (getResizeInfo() != null)
             sb.append("ResizeInfo: ").append(getResizeInfo());
         sb.append("}");
@@ -3826,6 +4100,21 @@ public class Cluster implements Serializable, Cloneable {
             return false;
         if (other.getSnapshotScheduleState() != null && other.getSnapshotScheduleState().equals(this.getSnapshotScheduleState()) == false)
             return false;
+        if (other.getExpectedNextSnapshotScheduleTime() == null ^ this.getExpectedNextSnapshotScheduleTime() == null)
+            return false;
+        if (other.getExpectedNextSnapshotScheduleTime() != null
+                && other.getExpectedNextSnapshotScheduleTime().equals(this.getExpectedNextSnapshotScheduleTime()) == false)
+            return false;
+        if (other.getExpectedNextSnapshotScheduleTimeStatus() == null ^ this.getExpectedNextSnapshotScheduleTimeStatus() == null)
+            return false;
+        if (other.getExpectedNextSnapshotScheduleTimeStatus() != null
+                && other.getExpectedNextSnapshotScheduleTimeStatus().equals(this.getExpectedNextSnapshotScheduleTimeStatus()) == false)
+            return false;
+        if (other.getNextMaintenanceWindowStartTime() == null ^ this.getNextMaintenanceWindowStartTime() == null)
+            return false;
+        if (other.getNextMaintenanceWindowStartTime() != null
+                && other.getNextMaintenanceWindowStartTime().equals(this.getNextMaintenanceWindowStartTime()) == false)
+            return false;
         if (other.getResizeInfo() == null ^ this.getResizeInfo() == null)
             return false;
         if (other.getResizeInfo() != null && other.getResizeInfo().equals(this.getResizeInfo()) == false)
@@ -3880,6 +4169,9 @@ public class Cluster implements Serializable, Cloneable {
         hashCode = prime * hashCode + ((getDeferredMaintenanceWindows() == null) ? 0 : getDeferredMaintenanceWindows().hashCode());
         hashCode = prime * hashCode + ((getSnapshotScheduleIdentifier() == null) ? 0 : getSnapshotScheduleIdentifier().hashCode());
         hashCode = prime * hashCode + ((getSnapshotScheduleState() == null) ? 0 : getSnapshotScheduleState().hashCode());
+        hashCode = prime * hashCode + ((getExpectedNextSnapshotScheduleTime() == null) ? 0 : getExpectedNextSnapshotScheduleTime().hashCode());
+        hashCode = prime * hashCode + ((getExpectedNextSnapshotScheduleTimeStatus() == null) ? 0 : getExpectedNextSnapshotScheduleTimeStatus().hashCode());
+        hashCode = prime * hashCode + ((getNextMaintenanceWindowStartTime() == null) ? 0 : getNextMaintenanceWindowStartTime().hashCode());
         hashCode = prime * hashCode + ((getResizeInfo() == null) ? 0 : getResizeInfo().hashCode());
         return hashCode;
     }

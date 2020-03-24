@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -459,6 +459,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
     }
 
     @Override
+    public java.util.concurrent.Future<CancelMLTaskRunResult> cancelMLTaskRunAsync(CancelMLTaskRunRequest request) {
+
+        return cancelMLTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<CancelMLTaskRunResult> cancelMLTaskRunAsync(final CancelMLTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<CancelMLTaskRunRequest, CancelMLTaskRunResult> asyncHandler) {
+        final CancelMLTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<CancelMLTaskRunResult>() {
+            @Override
+            public CancelMLTaskRunResult call() throws Exception {
+                CancelMLTaskRunResult result = null;
+
+                try {
+                    result = executeCancelMLTaskRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<CreateClassifierResult> createClassifierAsync(CreateClassifierRequest request) {
 
         return createClassifierAsync(request, null);
@@ -641,6 +674,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
 
                 try {
                     result = executeCreateJob(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<CreateMLTransformResult> createMLTransformAsync(CreateMLTransformRequest request) {
+
+        return createMLTransformAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<CreateMLTransformResult> createMLTransformAsync(final CreateMLTransformRequest request,
+            final com.amazonaws.handlers.AsyncHandler<CreateMLTransformRequest, CreateMLTransformResult> asyncHandler) {
+        final CreateMLTransformRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<CreateMLTransformResult>() {
+            @Override
+            public CreateMLTransformResult call() throws Exception {
+                CreateMLTransformResult result = null;
+
+                try {
+                    result = executeCreateMLTransform(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -1070,6 +1136,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
 
                 try {
                     result = executeDeleteJob(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<DeleteMLTransformResult> deleteMLTransformAsync(DeleteMLTransformRequest request) {
+
+        return deleteMLTransformAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DeleteMLTransformResult> deleteMLTransformAsync(final DeleteMLTransformRequest request,
+            final com.amazonaws.handlers.AsyncHandler<DeleteMLTransformRequest, DeleteMLTransformResult> asyncHandler) {
+        final DeleteMLTransformRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<DeleteMLTransformResult>() {
+            @Override
+            public DeleteMLTransformResult call() throws Exception {
+                DeleteMLTransformResult result = null;
+
+                try {
+                    result = executeDeleteMLTransform(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -1847,6 +1946,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
     }
 
     @Override
+    public java.util.concurrent.Future<GetJobBookmarkResult> getJobBookmarkAsync(GetJobBookmarkRequest request) {
+
+        return getJobBookmarkAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetJobBookmarkResult> getJobBookmarkAsync(final GetJobBookmarkRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetJobBookmarkRequest, GetJobBookmarkResult> asyncHandler) {
+        final GetJobBookmarkRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetJobBookmarkResult>() {
+            @Override
+            public GetJobBookmarkResult call() throws Exception {
+                GetJobBookmarkResult result = null;
+
+                try {
+                    result = executeGetJobBookmark(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<GetJobRunResult> getJobRunAsync(GetJobRunRequest request) {
 
         return getJobRunAsync(request, null);
@@ -1930,6 +2062,138 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
 
                 try {
                     result = executeGetJobs(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTaskRunResult> getMLTaskRunAsync(GetMLTaskRunRequest request) {
+
+        return getMLTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTaskRunResult> getMLTaskRunAsync(final GetMLTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetMLTaskRunRequest, GetMLTaskRunResult> asyncHandler) {
+        final GetMLTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetMLTaskRunResult>() {
+            @Override
+            public GetMLTaskRunResult call() throws Exception {
+                GetMLTaskRunResult result = null;
+
+                try {
+                    result = executeGetMLTaskRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTaskRunsResult> getMLTaskRunsAsync(GetMLTaskRunsRequest request) {
+
+        return getMLTaskRunsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTaskRunsResult> getMLTaskRunsAsync(final GetMLTaskRunsRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetMLTaskRunsRequest, GetMLTaskRunsResult> asyncHandler) {
+        final GetMLTaskRunsRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetMLTaskRunsResult>() {
+            @Override
+            public GetMLTaskRunsResult call() throws Exception {
+                GetMLTaskRunsResult result = null;
+
+                try {
+                    result = executeGetMLTaskRuns(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTransformResult> getMLTransformAsync(GetMLTransformRequest request) {
+
+        return getMLTransformAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTransformResult> getMLTransformAsync(final GetMLTransformRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetMLTransformRequest, GetMLTransformResult> asyncHandler) {
+        final GetMLTransformRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetMLTransformResult>() {
+            @Override
+            public GetMLTransformResult call() throws Exception {
+                GetMLTransformResult result = null;
+
+                try {
+                    result = executeGetMLTransform(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTransformsResult> getMLTransformsAsync(GetMLTransformsRequest request) {
+
+        return getMLTransformsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetMLTransformsResult> getMLTransformsAsync(final GetMLTransformsRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetMLTransformsRequest, GetMLTransformsResult> asyncHandler) {
+        final GetMLTransformsRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetMLTransformsResult>() {
+            @Override
+            public GetMLTransformsResult call() throws Exception {
+                GetMLTransformsResult result = null;
+
+                try {
+                    result = executeGetMLTransforms(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -2738,6 +3002,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
     }
 
     @Override
+    public java.util.concurrent.Future<ListMLTransformsResult> listMLTransformsAsync(ListMLTransformsRequest request) {
+
+        return listMLTransformsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<ListMLTransformsResult> listMLTransformsAsync(final ListMLTransformsRequest request,
+            final com.amazonaws.handlers.AsyncHandler<ListMLTransformsRequest, ListMLTransformsResult> asyncHandler) {
+        final ListMLTransformsRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<ListMLTransformsResult>() {
+            @Override
+            public ListMLTransformsResult call() throws Exception {
+                ListMLTransformsResult result = null;
+
+                try {
+                    result = executeListMLTransforms(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<ListTriggersResult> listTriggersAsync(ListTriggersRequest request) {
 
         return listTriggersAsync(request, null);
@@ -2938,6 +3235,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
     }
 
     @Override
+    public java.util.concurrent.Future<SearchTablesResult> searchTablesAsync(SearchTablesRequest request) {
+
+        return searchTablesAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<SearchTablesResult> searchTablesAsync(final SearchTablesRequest request,
+            final com.amazonaws.handlers.AsyncHandler<SearchTablesRequest, SearchTablesResult> asyncHandler) {
+        final SearchTablesRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<SearchTablesResult>() {
+            @Override
+            public SearchTablesResult call() throws Exception {
+                SearchTablesResult result = null;
+
+                try {
+                    result = executeSearchTables(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<StartCrawlerResult> startCrawlerAsync(StartCrawlerRequest request) {
 
         return startCrawlerAsync(request, null);
@@ -3004,6 +3334,72 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
     }
 
     @Override
+    public java.util.concurrent.Future<StartExportLabelsTaskRunResult> startExportLabelsTaskRunAsync(StartExportLabelsTaskRunRequest request) {
+
+        return startExportLabelsTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartExportLabelsTaskRunResult> startExportLabelsTaskRunAsync(final StartExportLabelsTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<StartExportLabelsTaskRunRequest, StartExportLabelsTaskRunResult> asyncHandler) {
+        final StartExportLabelsTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<StartExportLabelsTaskRunResult>() {
+            @Override
+            public StartExportLabelsTaskRunResult call() throws Exception {
+                StartExportLabelsTaskRunResult result = null;
+
+                try {
+                    result = executeStartExportLabelsTaskRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartImportLabelsTaskRunResult> startImportLabelsTaskRunAsync(StartImportLabelsTaskRunRequest request) {
+
+        return startImportLabelsTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartImportLabelsTaskRunResult> startImportLabelsTaskRunAsync(final StartImportLabelsTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<StartImportLabelsTaskRunRequest, StartImportLabelsTaskRunResult> asyncHandler) {
+        final StartImportLabelsTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<StartImportLabelsTaskRunResult>() {
+            @Override
+            public StartImportLabelsTaskRunResult call() throws Exception {
+                StartImportLabelsTaskRunResult result = null;
+
+                try {
+                    result = executeStartImportLabelsTaskRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<StartJobRunResult> startJobRunAsync(StartJobRunRequest request) {
 
         return startJobRunAsync(request, null);
@@ -3021,6 +3417,74 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
 
                 try {
                     result = executeStartJobRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartMLEvaluationTaskRunResult> startMLEvaluationTaskRunAsync(StartMLEvaluationTaskRunRequest request) {
+
+        return startMLEvaluationTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartMLEvaluationTaskRunResult> startMLEvaluationTaskRunAsync(final StartMLEvaluationTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<StartMLEvaluationTaskRunRequest, StartMLEvaluationTaskRunResult> asyncHandler) {
+        final StartMLEvaluationTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<StartMLEvaluationTaskRunResult>() {
+            @Override
+            public StartMLEvaluationTaskRunResult call() throws Exception {
+                StartMLEvaluationTaskRunResult result = null;
+
+                try {
+                    result = executeStartMLEvaluationTaskRun(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartMLLabelingSetGenerationTaskRunResult> startMLLabelingSetGenerationTaskRunAsync(
+            StartMLLabelingSetGenerationTaskRunRequest request) {
+
+        return startMLLabelingSetGenerationTaskRunAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartMLLabelingSetGenerationTaskRunResult> startMLLabelingSetGenerationTaskRunAsync(
+            final StartMLLabelingSetGenerationTaskRunRequest request,
+            final com.amazonaws.handlers.AsyncHandler<StartMLLabelingSetGenerationTaskRunRequest, StartMLLabelingSetGenerationTaskRunResult> asyncHandler) {
+        final StartMLLabelingSetGenerationTaskRunRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<StartMLLabelingSetGenerationTaskRunResult>() {
+            @Override
+            public StartMLLabelingSetGenerationTaskRunResult call() throws Exception {
+                StartMLLabelingSetGenerationTaskRunResult result = null;
+
+                try {
+                    result = executeStartMLLabelingSetGenerationTaskRun(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -3483,6 +3947,39 @@ public class AWSGlueAsyncClient extends AWSGlueClient implements AWSGlueAsync {
 
                 try {
                     result = executeUpdateJob(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<UpdateMLTransformResult> updateMLTransformAsync(UpdateMLTransformRequest request) {
+
+        return updateMLTransformAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<UpdateMLTransformResult> updateMLTransformAsync(final UpdateMLTransformRequest request,
+            final com.amazonaws.handlers.AsyncHandler<UpdateMLTransformRequest, UpdateMLTransformResult> asyncHandler) {
+        final UpdateMLTransformRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<UpdateMLTransformResult>() {
+            @Override
+            public UpdateMLTransformResult call() throws Exception {
+                UpdateMLTransformResult result = null;
+
+                try {
+                    result = executeUpdateMLTransform(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

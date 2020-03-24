@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -32,7 +32,10 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
      * <p>
      * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the
      * Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-     * address allocation ID.
+     * address allocation ID. For EC2 instances, this is the EC2 instance ID.
+     * </p>
+     * <p>
+     * An Application Load Balancer can be either internal or internet-facing.
      * </p>
      */
     private String endpointId;
@@ -91,18 +94,39 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
      * </ul>
      */
     private String healthReason;
+    /**
+     * <p>
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value
+     * is true or false. The default value is true for new accelerators.
+     * </p>
+     * <p>
+     * If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request
+     * header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing
+     * Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.
+     * </p>
+     */
+    private Boolean clientIPPreservationEnabled;
 
     /**
      * <p>
      * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the
      * Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-     * address allocation ID.
+     * address allocation ID. For EC2 instances, this is the EC2 instance ID.
+     * </p>
+     * <p>
+     * An Application Load Balancer can be either internal or internet-facing.
      * </p>
      * 
      * @param endpointId
      *        An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is
      *        the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the
-     *        Elastic IP address allocation ID.
+     *        Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p>
+     *        <p>
+     *        An Application Load Balancer can be either internal or internet-facing.
      */
 
     public void setEndpointId(String endpointId) {
@@ -113,12 +137,17 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
      * <p>
      * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the
      * Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-     * address allocation ID.
+     * address allocation ID. For EC2 instances, this is the EC2 instance ID.
+     * </p>
+     * <p>
+     * An Application Load Balancer can be either internal or internet-facing.
      * </p>
      * 
      * @return An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is
      *         the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the
-     *         Elastic IP address allocation ID.
+     *         Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p>
+     *         <p>
+     *         An Application Load Balancer can be either internal or internet-facing.
      */
 
     public String getEndpointId() {
@@ -129,13 +158,18 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
      * <p>
      * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the
      * Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-     * address allocation ID.
+     * address allocation ID. For EC2 instances, this is the EC2 instance ID.
+     * </p>
+     * <p>
+     * An Application Load Balancer can be either internal or internet-facing.
      * </p>
      * 
      * @param endpointId
      *        An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is
      *        the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the
-     *        Elastic IP address allocation ID.
+     *        Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p>
+     *        <p>
+     *        An Application Load Balancer can be either internal or internet-facing.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -507,6 +541,142 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
     }
 
     /**
+     * <p>
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value
+     * is true or false. The default value is true for new accelerators.
+     * </p>
+     * <p>
+     * If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request
+     * header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing
+     * Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.
+     * </p>
+     * 
+     * @param clientIPPreservationEnabled
+     *        Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The
+     *        value is true or false. The default value is true for new accelerators. </p>
+     *        <p>
+     *        If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code>
+     *        request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the
+     *        accelerator.
+     *        </p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html">
+     *        Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer
+     *        Guide</i>.
+     */
+
+    public void setClientIPPreservationEnabled(Boolean clientIPPreservationEnabled) {
+        this.clientIPPreservationEnabled = clientIPPreservationEnabled;
+    }
+
+    /**
+     * <p>
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value
+     * is true or false. The default value is true for new accelerators.
+     * </p>
+     * <p>
+     * If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request
+     * header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing
+     * Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.
+     * </p>
+     * 
+     * @return Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint.
+     *         The value is true or false. The default value is true for new accelerators. </p>
+     *         <p>
+     *         If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code>
+     *         request header as traffic travels to applications on the Application Load Balancer endpoint fronted by
+     *         the accelerator.
+     *         </p>
+     *         <p>
+     *         For more information, see <a href=
+     *         "https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html">
+     *         Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer
+     *         Guide</i>.
+     */
+
+    public Boolean getClientIPPreservationEnabled() {
+        return this.clientIPPreservationEnabled;
+    }
+
+    /**
+     * <p>
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value
+     * is true or false. The default value is true for new accelerators.
+     * </p>
+     * <p>
+     * If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request
+     * header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing
+     * Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.
+     * </p>
+     * 
+     * @param clientIPPreservationEnabled
+     *        Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The
+     *        value is true or false. The default value is true for new accelerators. </p>
+     *        <p>
+     *        If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code>
+     *        request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the
+     *        accelerator.
+     *        </p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html">
+     *        Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer
+     *        Guide</i>.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public EndpointDescription withClientIPPreservationEnabled(Boolean clientIPPreservationEnabled) {
+        setClientIPPreservationEnabled(clientIPPreservationEnabled);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value
+     * is true or false. The default value is true for new accelerators.
+     * </p>
+     * <p>
+     * If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request
+     * header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing
+     * Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.
+     * </p>
+     * 
+     * @return Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint.
+     *         The value is true or false. The default value is true for new accelerators. </p>
+     *         <p>
+     *         If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code>
+     *         request header as traffic travels to applications on the Application Load Balancer endpoint fronted by
+     *         the accelerator.
+     *         </p>
+     *         <p>
+     *         For more information, see <a href=
+     *         "https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html">
+     *         Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer
+     *         Guide</i>.
+     */
+
+    public Boolean isClientIPPreservationEnabled() {
+        return this.clientIPPreservationEnabled;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -525,7 +695,9 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
         if (getHealthState() != null)
             sb.append("HealthState: ").append(getHealthState()).append(",");
         if (getHealthReason() != null)
-            sb.append("HealthReason: ").append(getHealthReason());
+            sb.append("HealthReason: ").append(getHealthReason()).append(",");
+        if (getClientIPPreservationEnabled() != null)
+            sb.append("ClientIPPreservationEnabled: ").append(getClientIPPreservationEnabled());
         sb.append("}");
         return sb.toString();
     }
@@ -556,6 +728,10 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
             return false;
         if (other.getHealthReason() != null && other.getHealthReason().equals(this.getHealthReason()) == false)
             return false;
+        if (other.getClientIPPreservationEnabled() == null ^ this.getClientIPPreservationEnabled() == null)
+            return false;
+        if (other.getClientIPPreservationEnabled() != null && other.getClientIPPreservationEnabled().equals(this.getClientIPPreservationEnabled()) == false)
+            return false;
         return true;
     }
 
@@ -568,6 +744,7 @@ public class EndpointDescription implements Serializable, Cloneable, StructuredP
         hashCode = prime * hashCode + ((getWeight() == null) ? 0 : getWeight().hashCode());
         hashCode = prime * hashCode + ((getHealthState() == null) ? 0 : getHealthState().hashCode());
         hashCode = prime * hashCode + ((getHealthReason() == null) ? 0 : getHealthReason().hashCode());
+        hashCode = prime * hashCode + ((getClientIPPreservationEnabled() == null) ? 0 : getClientIPPreservationEnabled().hashCode());
         return hashCode;
     }
 

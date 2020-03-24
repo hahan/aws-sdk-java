@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -59,6 +59,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
     }
 
     @Override
+    public ReplicationGroup completeMigration(CompleteMigrationRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public Snapshot copySnapshot(CopySnapshotRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -84,12 +89,22 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
     }
 
     @Override
+    public GlobalReplicationGroup createGlobalReplicationGroup(CreateGlobalReplicationGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public ReplicationGroup createReplicationGroup(CreateReplicationGroupRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public Snapshot createSnapshot(CreateSnapshotRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public GlobalReplicationGroup decreaseNodeGroupsInGlobalReplicationGroup(DecreaseNodeGroupsInGlobalReplicationGroupRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -115,6 +130,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
 
     @Override
     public DeleteCacheSubnetGroupResult deleteCacheSubnetGroup(DeleteCacheSubnetGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public GlobalReplicationGroup deleteGlobalReplicationGroup(DeleteGlobalReplicationGroupRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -199,6 +219,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
     }
 
     @Override
+    public DescribeGlobalReplicationGroupsResult describeGlobalReplicationGroups(DescribeGlobalReplicationGroupsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public DescribeReplicationGroupsResult describeReplicationGroups(DescribeReplicationGroupsRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -249,6 +274,21 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
     }
 
     @Override
+    public GlobalReplicationGroup disassociateGlobalReplicationGroup(DisassociateGlobalReplicationGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public GlobalReplicationGroup failoverGlobalReplicationGroup(FailoverGlobalReplicationGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public GlobalReplicationGroup increaseNodeGroupsInGlobalReplicationGroup(IncreaseNodeGroupsInGlobalReplicationGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public ReplicationGroup increaseReplicaCount(IncreaseReplicaCountRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -284,6 +324,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
     }
 
     @Override
+    public GlobalReplicationGroup modifyGlobalReplicationGroup(ModifyGlobalReplicationGroupRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public ReplicationGroup modifyReplicationGroup(ModifyReplicationGroupRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -295,6 +340,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
 
     @Override
     public ReservedCacheNode purchaseReservedCacheNodesOffering(PurchaseReservedCacheNodesOfferingRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public GlobalReplicationGroup rebalanceSlotsInGlobalReplicationGroup(RebalanceSlotsInGlobalReplicationGroupRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -315,6 +365,11 @@ public class AbstractAmazonElastiCache implements AmazonElastiCache {
 
     @Override
     public CacheSecurityGroup revokeCacheSecurityGroupIngress(RevokeCacheSecurityGroupIngressRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public ReplicationGroup startMigration(StartMigrationRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 

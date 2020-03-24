@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -43,6 +43,8 @@ public class CreateJobRequestMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("Command").build();
     private static final MarshallingInfo<Map> DEFAULTARGUMENTS_BINDING = MarshallingInfo.builder(MarshallingType.MAP)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("DefaultArguments").build();
+    private static final MarshallingInfo<Map> NONOVERRIDABLEARGUMENTS_BINDING = MarshallingInfo.builder(MarshallingType.MAP)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("NonOverridableArguments").build();
     private static final MarshallingInfo<StructuredPojo> CONNECTIONS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("Connections").build();
     private static final MarshallingInfo<Integer> MAXRETRIES_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER)
@@ -59,6 +61,8 @@ public class CreateJobRequestMarshaller {
             .marshallLocationName("Tags").build();
     private static final MarshallingInfo<StructuredPojo> NOTIFICATIONPROPERTY_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("NotificationProperty").build();
+    private static final MarshallingInfo<String> GLUEVERSION_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("GlueVersion").build();
     private static final MarshallingInfo<Integer> NUMBEROFWORKERS_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("NumberOfWorkers").build();
     private static final MarshallingInfo<String> WORKERTYPE_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
@@ -87,6 +91,7 @@ public class CreateJobRequestMarshaller {
             protocolMarshaller.marshall(createJobRequest.getExecutionProperty(), EXECUTIONPROPERTY_BINDING);
             protocolMarshaller.marshall(createJobRequest.getCommand(), COMMAND_BINDING);
             protocolMarshaller.marshall(createJobRequest.getDefaultArguments(), DEFAULTARGUMENTS_BINDING);
+            protocolMarshaller.marshall(createJobRequest.getNonOverridableArguments(), NONOVERRIDABLEARGUMENTS_BINDING);
             protocolMarshaller.marshall(createJobRequest.getConnections(), CONNECTIONS_BINDING);
             protocolMarshaller.marshall(createJobRequest.getMaxRetries(), MAXRETRIES_BINDING);
             protocolMarshaller.marshall(createJobRequest.getAllocatedCapacity(), ALLOCATEDCAPACITY_BINDING);
@@ -95,6 +100,7 @@ public class CreateJobRequestMarshaller {
             protocolMarshaller.marshall(createJobRequest.getSecurityConfiguration(), SECURITYCONFIGURATION_BINDING);
             protocolMarshaller.marshall(createJobRequest.getTags(), TAGS_BINDING);
             protocolMarshaller.marshall(createJobRequest.getNotificationProperty(), NOTIFICATIONPROPERTY_BINDING);
+            protocolMarshaller.marshall(createJobRequest.getGlueVersion(), GLUEVERSION_BINDING);
             protocolMarshaller.marshall(createJobRequest.getNumberOfWorkers(), NUMBEROFWORKERS_BINDING);
             protocolMarshaller.marshall(createJobRequest.getWorkerType(), WORKERTYPE_BINDING);
         } catch (Exception e) {

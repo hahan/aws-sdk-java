@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -19,7 +19,7 @@
  * authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and
  * partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics,
  * machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no
- * infrastructure to buy and setup.
+ * infrastructure to buy and set up.
  * </p>
  */
 package com.amazonaws.services.transfer;

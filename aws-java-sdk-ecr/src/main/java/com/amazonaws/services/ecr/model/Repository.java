@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -60,6 +60,14 @@ public class Repository implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private java.util.Date createdAt;
+    /**
+     * <p>
+     * The tag mutability setting for the repository.
+     * </p>
+     */
+    private String imageTagMutability;
+
+    private ImageScanningConfiguration imageScanningConfiguration;
 
     /**
      * <p>
@@ -280,6 +288,91 @@ public class Repository implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * The tag mutability setting for the repository.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository.
+     * @see ImageTagMutability
+     */
+
+    public void setImageTagMutability(String imageTagMutability) {
+        this.imageTagMutability = imageTagMutability;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository.
+     * </p>
+     * 
+     * @return The tag mutability setting for the repository.
+     * @see ImageTagMutability
+     */
+
+    public String getImageTagMutability() {
+        return this.imageTagMutability;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ImageTagMutability
+     */
+
+    public Repository withImageTagMutability(String imageTagMutability) {
+        setImageTagMutability(imageTagMutability);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ImageTagMutability
+     */
+
+    public Repository withImageTagMutability(ImageTagMutability imageTagMutability) {
+        this.imageTagMutability = imageTagMutability.toString();
+        return this;
+    }
+
+    /**
+     * @param imageScanningConfiguration
+     */
+
+    public void setImageScanningConfiguration(ImageScanningConfiguration imageScanningConfiguration) {
+        this.imageScanningConfiguration = imageScanningConfiguration;
+    }
+
+    /**
+     * @return
+     */
+
+    public ImageScanningConfiguration getImageScanningConfiguration() {
+        return this.imageScanningConfiguration;
+    }
+
+    /**
+     * @param imageScanningConfiguration
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Repository withImageScanningConfiguration(ImageScanningConfiguration imageScanningConfiguration) {
+        setImageScanningConfiguration(imageScanningConfiguration);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -300,7 +393,11 @@ public class Repository implements Serializable, Cloneable, StructuredPojo {
         if (getRepositoryUri() != null)
             sb.append("RepositoryUri: ").append(getRepositoryUri()).append(",");
         if (getCreatedAt() != null)
-            sb.append("CreatedAt: ").append(getCreatedAt());
+            sb.append("CreatedAt: ").append(getCreatedAt()).append(",");
+        if (getImageTagMutability() != null)
+            sb.append("ImageTagMutability: ").append(getImageTagMutability()).append(",");
+        if (getImageScanningConfiguration() != null)
+            sb.append("ImageScanningConfiguration: ").append(getImageScanningConfiguration());
         sb.append("}");
         return sb.toString();
     }
@@ -335,6 +432,14 @@ public class Repository implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getCreatedAt() != null && other.getCreatedAt().equals(this.getCreatedAt()) == false)
             return false;
+        if (other.getImageTagMutability() == null ^ this.getImageTagMutability() == null)
+            return false;
+        if (other.getImageTagMutability() != null && other.getImageTagMutability().equals(this.getImageTagMutability()) == false)
+            return false;
+        if (other.getImageScanningConfiguration() == null ^ this.getImageScanningConfiguration() == null)
+            return false;
+        if (other.getImageScanningConfiguration() != null && other.getImageScanningConfiguration().equals(this.getImageScanningConfiguration()) == false)
+            return false;
         return true;
     }
 
@@ -348,6 +453,8 @@ public class Repository implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getRepositoryName() == null) ? 0 : getRepositoryName().hashCode());
         hashCode = prime * hashCode + ((getRepositoryUri() == null) ? 0 : getRepositoryUri().hashCode());
         hashCode = prime * hashCode + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        hashCode = prime * hashCode + ((getImageTagMutability() == null) ? 0 : getImageTagMutability().hashCode());
+        hashCode = prime * hashCode + ((getImageScanningConfiguration() == null) ? 0 : getImageScanningConfiguration().hashCode());
         return hashCode;
     }
 

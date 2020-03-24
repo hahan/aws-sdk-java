@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -46,6 +46,12 @@ public class CustomerGateway implements Serializable, Cloneable {
     private String ipAddress;
     /**
      * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     */
+    private String certificateArn;
+    /**
+     * <p>
      * The current state of the customer gateway (<code>pending | available | deleting | deleted</code>).
      * </p>
      */
@@ -56,6 +62,12 @@ public class CustomerGateway implements Serializable, Cloneable {
      * </p>
      */
     private String type;
+    /**
+     * <p>
+     * The name of customer gateway device.
+     * </p>
+     */
+    private String deviceName;
     /**
      * <p>
      * Any tags assigned to the customer gateway.
@@ -185,6 +197,46 @@ public class CustomerGateway implements Serializable, Cloneable {
 
     /**
      * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @param certificateArn
+     *        The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+
+    public void setCertificateArn(String certificateArn) {
+        this.certificateArn = certificateArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @return The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+
+    public String getCertificateArn() {
+        return this.certificateArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @param certificateArn
+     *        The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CustomerGateway withCertificateArn(String certificateArn) {
+        setCertificateArn(certificateArn);
+        return this;
+    }
+
+    /**
+     * <p>
      * The current state of the customer gateway (<code>pending | available | deleting | deleted</code>).
      * </p>
      * 
@@ -260,6 +312,46 @@ public class CustomerGateway implements Serializable, Cloneable {
 
     public CustomerGateway withType(String type) {
         setType(type);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The name of customer gateway device.
+     * </p>
+     * 
+     * @param deviceName
+     *        The name of customer gateway device.
+     */
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    /**
+     * <p>
+     * The name of customer gateway device.
+     * </p>
+     * 
+     * @return The name of customer gateway device.
+     */
+
+    public String getDeviceName() {
+        return this.deviceName;
+    }
+
+    /**
+     * <p>
+     * The name of customer gateway device.
+     * </p>
+     * 
+     * @param deviceName
+     *        The name of customer gateway device.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CustomerGateway withDeviceName(String deviceName) {
+        setDeviceName(deviceName);
         return this;
     }
 
@@ -354,10 +446,14 @@ public class CustomerGateway implements Serializable, Cloneable {
             sb.append("CustomerGatewayId: ").append(getCustomerGatewayId()).append(",");
         if (getIpAddress() != null)
             sb.append("IpAddress: ").append(getIpAddress()).append(",");
+        if (getCertificateArn() != null)
+            sb.append("CertificateArn: ").append(getCertificateArn()).append(",");
         if (getState() != null)
             sb.append("State: ").append(getState()).append(",");
         if (getType() != null)
             sb.append("Type: ").append(getType()).append(",");
+        if (getDeviceName() != null)
+            sb.append("DeviceName: ").append(getDeviceName()).append(",");
         if (getTags() != null)
             sb.append("Tags: ").append(getTags());
         sb.append("}");
@@ -386,6 +482,10 @@ public class CustomerGateway implements Serializable, Cloneable {
             return false;
         if (other.getIpAddress() != null && other.getIpAddress().equals(this.getIpAddress()) == false)
             return false;
+        if (other.getCertificateArn() == null ^ this.getCertificateArn() == null)
+            return false;
+        if (other.getCertificateArn() != null && other.getCertificateArn().equals(this.getCertificateArn()) == false)
+            return false;
         if (other.getState() == null ^ this.getState() == null)
             return false;
         if (other.getState() != null && other.getState().equals(this.getState()) == false)
@@ -393,6 +493,10 @@ public class CustomerGateway implements Serializable, Cloneable {
         if (other.getType() == null ^ this.getType() == null)
             return false;
         if (other.getType() != null && other.getType().equals(this.getType()) == false)
+            return false;
+        if (other.getDeviceName() == null ^ this.getDeviceName() == null)
+            return false;
+        if (other.getDeviceName() != null && other.getDeviceName().equals(this.getDeviceName()) == false)
             return false;
         if (other.getTags() == null ^ this.getTags() == null)
             return false;
@@ -409,8 +513,10 @@ public class CustomerGateway implements Serializable, Cloneable {
         hashCode = prime * hashCode + ((getBgpAsn() == null) ? 0 : getBgpAsn().hashCode());
         hashCode = prime * hashCode + ((getCustomerGatewayId() == null) ? 0 : getCustomerGatewayId().hashCode());
         hashCode = prime * hashCode + ((getIpAddress() == null) ? 0 : getIpAddress().hashCode());
+        hashCode = prime * hashCode + ((getCertificateArn() == null) ? 0 : getCertificateArn().hashCode());
         hashCode = prime * hashCode + ((getState() == null) ? 0 : getState().hashCode());
         hashCode = prime * hashCode + ((getType() == null) ? 0 : getType().hashCode());
+        hashCode = prime * hashCode + ((getDeviceName() == null) ? 0 : getDeviceName().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         return hashCode;
     }

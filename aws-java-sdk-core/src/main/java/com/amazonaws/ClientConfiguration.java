@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,12 @@ package com.amazonaws;
 
 import com.amazonaws.annotation.NotThreadSafe;
 import com.amazonaws.http.IdleConnectionReaper;
+import com.amazonaws.http.SystemPropertyTlsKeyManagersProvider;
+import com.amazonaws.http.TlsKeyManagersProvider;
 import com.amazonaws.retry.PredefinedRetryPolicies;
+import com.amazonaws.retry.RetryMode;
 import com.amazonaws.retry.RetryPolicy;
+import com.amazonaws.util.StringUtils;
 import com.amazonaws.util.ValidationUtils;
 import com.amazonaws.util.VersionInfoUtils;
 import java.net.InetAddress;
@@ -29,6 +33,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Client configuration options such as proxy settings, user agent string, max retry attempts, etc.
@@ -37,6 +44,7 @@ import java.util.Map;
  */
 @NotThreadSafe
 public class ClientConfiguration {
+    private static final Log log = LogFactory.getLog(ClientConfiguration.class);
 
     /** The default timeout for creating new connections. */
     public static final int DEFAULT_CONNECTION_TIMEOUT = 10 * 1000;
@@ -207,7 +215,7 @@ public class ClientConfiguration {
     private int maxConnections = DEFAULT_MAX_CONNECTIONS;
 
     /**
-     * The amount of time to wait (in milliseconds) for data to be transfered over an established,
+     * The amount of time to wait (in milliseconds) for data to be transferred over an established,
      * open connection before the connection is timed out. A value of 0 means infinity, and is not
      * recommended.
      */
@@ -356,6 +364,13 @@ public class ClientConfiguration {
      */
     private boolean disableHostPrefixInjection;
 
+    private final AtomicReference<URLHolder> httpProxyHolder = new AtomicReference<URLHolder>();
+
+    private final AtomicReference<URLHolder> httpsProxyHolder = new AtomicReference<URLHolder>();
+
+    private TlsKeyManagersProvider tlsKeyManagersProvider;
+    private RetryMode retryMode;
+
     public ClientConfiguration() {
         apacheHttpClientConfig = new ApacheHttpClientConfig();
     }
@@ -403,6 +418,10 @@ public class ClientConfiguration {
         this.headers.putAll(other.getHeaders());
         this.maxConsecutiveRetriesBeforeThrottling = other.getMaxConsecutiveRetriesBeforeThrottling();
         this.disableHostPrefixInjection = other.disableHostPrefixInjection;
+        this.httpProxyHolder.set(other.httpProxyHolder.get());
+        this.httpsProxyHolder.set(other.httpsProxyHolder.get());
+        this.tlsKeyManagersProvider = other.tlsKeyManagersProvider;
+        this.retryMode = other.retryMode;
     }
 
     /**
@@ -622,7 +641,8 @@ public class ClientConfiguration {
      * Returns the value for the given environment variable.
      */
     private String getEnvironmentVariable(String environmentVariable) {
-        return System.getenv(environmentVariable);
+        String value = StringUtils.trim(System.getenv(environmentVariable));
+        return StringUtils.hasValue(value) ? value : null;
     }
 
     /**
@@ -630,9 +650,8 @@ public class ClientConfiguration {
      * the lowercase version of variable.
      */
     private String getEnvironmentVariableCaseInsensitive(String environmentVariable) {
-        return getEnvironmentVariable(environmentVariable) != null
-                ? getEnvironmentVariable(environmentVariable)
-                : getEnvironmentVariable(environmentVariable.toLowerCase());
+        String result = getEnvironmentVariable(environmentVariable);
+        return result != null ? result : getEnvironmentVariable(environmentVariable.toLowerCase());
     }
 
     /**
@@ -682,13 +701,11 @@ public class ClientConfiguration {
      * variable HTTP_PROXY/http_proxy.
      */
     private String getProxyHostEnvironment() {
-        try {
-            return getProtocol() == Protocol.HTTPS
-                    ? new URL(getEnvironmentVariableCaseInsensitive("HTTPS_PROXY")).getHost()
-                    : new URL(getEnvironmentVariableCaseInsensitive("HTTP_PROXY")).getHost();
-        } catch (MalformedURLException e) {
-            return null;
+        URL httpProxy = getHttpProxyEnvironmentVariable();
+        if (httpProxy != null) {
+            return httpProxy.getHost();
         }
+        return null;
     }
 
     /**
@@ -764,13 +781,11 @@ public class ClientConfiguration {
      * variable HTTP_PROXY/http_proxy.
      */
     private int getProxyPortEnvironment() {
-        try {
-            return getProtocol() == Protocol.HTTPS
-                    ? new URL(getEnvironmentVariableCaseInsensitive("HTTPS_PROXY")).getPort()
-                    : new URL(getEnvironmentVariableCaseInsensitive("HTTP_PROXY")).getPort();
-        } catch (MalformedURLException e) {
-            return proxyPort;
+        URL httpProxy = getHttpProxyEnvironmentVariable();
+        if (httpProxy != null) {
+            return httpProxy.getPort();
         }
+        return proxyPort;
     }
 
     /**
@@ -869,13 +884,14 @@ public class ClientConfiguration {
      * the value of the environment variable HTTP_PROXY/http_proxy.
      */
     private String getProxyUsernameEnvironment() {
-        try {
-            return getProtocol() == Protocol.HTTPS
-                    ? new URL(getEnvironmentVariableCaseInsensitive("HTTPS_PROXY")).getUserInfo().split(":", 2)[0]
-                    : new URL(getEnvironmentVariableCaseInsensitive("HTTP_PROXY")).getUserInfo().split(":", 2)[0];
-        } catch (Exception e) {
-            return null;
+        URL httpProxy = getHttpProxyEnvironmentVariable();
+        if (httpProxy != null) {
+            try {
+                return httpProxy.getUserInfo().split(":", 2)[0];
+            } catch (Exception ignored) {
+            }
         }
+        return null;
     }
 
     /**
@@ -947,13 +963,14 @@ public class ClientConfiguration {
      * variable HTTP_PROXY/http_proxy.
      */
     private String getProxyPasswordEnvironment() {
-        try {
-            return getProtocol() == Protocol.HTTPS
-                    ? new URL(getEnvironmentVariableCaseInsensitive("HTTPS_PROXY")).getUserInfo().split(":", 2)[1]
-                    : new URL(getEnvironmentVariableCaseInsensitive("HTTP_PROXY")).getUserInfo().split(":", 2)[1];
-        } catch (Exception e) {
-            return null;
+        URL httpProxy = getHttpProxyEnvironmentVariable();
+        if (httpProxy != null) {
+            try {
+                return httpProxy.getUserInfo().split(":", 2)[1];
+            } catch (Exception ignored) {
+            }
         }
+        return null;
     }
 
     /**
@@ -1247,7 +1264,7 @@ public class ClientConfiguration {
      */
     public void setMaxErrorRetry(int maxErrorRetry) {
         if (maxErrorRetry < 0) {
-            throw new IllegalArgumentException("maxErrorRetry shoud be non-negative");
+            throw new IllegalArgumentException("maxErrorRetry should be non-negative");
         }
         this.maxErrorRetry = maxErrorRetry;
     }
@@ -1267,11 +1284,38 @@ public class ClientConfiguration {
     }
 
     /**
-     * Returns the amount of time to wait (in milliseconds) for data to be transfered over an
+     * Sets the RetryMode to use
+     *
+     * @param retryMode the retryMode
+     * @return The updated ClientConfiguration object.
+     */
+    public ClientConfiguration withRetryMode(RetryMode retryMode) {
+        setRetryMode(retryMode);
+        return this;
+    }
+
+    /**
+     * Sets the RetryMode to use
+     *
+     * @param retryMode the retryMode
+     */
+    public void setRetryMode(RetryMode retryMode) {
+        this.retryMode = retryMode;
+    }
+
+    /**
+     * @return the retryMode
+     */
+    public RetryMode getRetryMode() {
+        return retryMode;
+    }
+
+    /**
+     * Returns the amount of time to wait (in milliseconds) for data to be transferred over an
      * established, open connection before the connection times out and is closed. A value of 0
      * means infinity, and isn't recommended.
      *
-     * @return The amount of time to wait (in milliseconds) for data to be transfered over an
+     * @return The amount of time to wait (in milliseconds) for data to be transferred over an
      *         established, open connection before the connection times out and is closed.
      */
     public int getSocketTimeout() {
@@ -1279,12 +1323,12 @@ public class ClientConfiguration {
     }
 
     /**
-     * Sets the amount of time to wait (in milliseconds) for data to be transfered over an
+     * Sets the amount of time to wait (in milliseconds) for data to be transferred over an
      * established, open connection before the connection times out and is closed. A value of 0
      * means infinity, and isn't recommended.
      *
      * @param socketTimeout
-     *            The amount of time to wait (in milliseconds) for data to be transfered over an
+     *            The amount of time to wait (in milliseconds) for data to be transferred over an
      *            established, open connection before the connection times out and is closed.
      */
     public void setSocketTimeout(int socketTimeout) {
@@ -1292,12 +1336,12 @@ public class ClientConfiguration {
     }
 
     /**
-     * Sets the amount of time to wait (in milliseconds) for data to be transfered over an
+     * Sets the amount of time to wait (in milliseconds) for data to be transferred over an
      * established, open connection before the connection times out and is closed, and returns the
      * updated ClientConfiguration object so that additional method calls may be chained together.
      *
      * @param socketTimeout
-     *            The amount of time to wait (in milliseconds) for data to be transfered over an
+     *            The amount of time to wait (in milliseconds) for data to be transferred over an
      *            established, open connection before the connection times out and is closed.
      * @return The updated ClientConfiguration object.
      */
@@ -2385,5 +2429,68 @@ public class ClientConfiguration {
     public ClientConfiguration withDisableHostPrefixInjection(boolean disableHostPrefixInjection) {
         setDisableHostPrefixInjection(disableHostPrefixInjection);
         return this;
+    }
+
+    /**
+     * @return {@link TlsKeyManagersProvider} that will provide the {@link javax.net.ssl.KeyManager}s to use when
+     * constructing the client's SSL context.
+     * <p>
+     * The default is {@link SystemPropertyTlsKeyManagersProvider}.
+     */
+    public TlsKeyManagersProvider getTlsKeyManagersProvider() {
+        return tlsKeyManagersProvider;
+    }
+
+    /**
+     * Sets {@link TlsKeyManagersProvider} that will provide the {@link javax.net.ssl.KeyManager}s to use when
+     * constructing the client's SSL context.
+     * <p>
+     * The default is {@link SystemPropertyTlsKeyManagersProvider}.
+     */
+    public ClientConfiguration withTlsKeyManagersProvider(TlsKeyManagersProvider tlsKeyManagersProvider) {
+        this.tlsKeyManagersProvider = tlsKeyManagersProvider;
+        return this;
+    }
+
+    /**
+     * Sets {@link TlsKeyManagersProvider} that will provide the {@link javax.net.ssl.KeyManager}s to use when
+     * constructing the client's SSL context.
+     * <p>
+     * The default used by the client will be {@link SystemPropertyTlsKeyManagersProvider}. Set an instance {@link
+     * com.amazonaws.http.NoneTlsKeyManagersProvider} or another instance of {@link TlsKeyManagersProvider} to override
+     * it.
+     */
+    public void setTlsKeyManagersProvider(TlsKeyManagersProvider tlsKeyManagersProvider) {
+        withTlsKeyManagersProvider(tlsKeyManagersProvider);
+    }
+
+    private URL getHttpProxyEnvironmentVariable() {
+        if (getProtocol() == Protocol.HTTP) {
+            return getUrlEnvVar(httpProxyHolder, "HTTP_PROXY");
+        }
+        return getUrlEnvVar(httpsProxyHolder, "HTTPS_PROXY");
+    }
+
+    private URL getUrlEnvVar(AtomicReference<URLHolder> cache, String name) {
+        if (cache.get() == null) {
+            URLHolder holder = new URLHolder();
+            String value = getEnvironmentVariableCaseInsensitive(name);
+            if (value != null) {
+                try {
+                    holder.url = new URL(value);
+                } catch (MalformedURLException e) {
+                    if (log.isWarnEnabled()) {
+                        log.warn(String.format("Unable to parse %s environment variable value '%s' as URL. It is " +
+                                "malformed.", name, value), e);
+                    }
+                }
+            }
+            cache.compareAndSet(null, holder);
+        }
+        return cache.get().url;
+    }
+
+    static class URLHolder {
+        private URL url;
     }
 }

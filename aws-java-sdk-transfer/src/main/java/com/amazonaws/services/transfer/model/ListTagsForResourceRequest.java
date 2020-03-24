@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -40,8 +40,8 @@ public class ListTagsForResourceRequest extends com.amazonaws.AmazonWebServiceRe
     private Integer maxResults;
     /**
      * <p>
-     * When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code>
-     * parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code>
+     * When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code>
+     * parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code>
      * parameter to continue listing additional tags.
      * </p>
      */
@@ -135,15 +135,15 @@ public class ListTagsForResourceRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code>
-     * parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code>
+     * When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code>
+     * parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code>
      * parameter to continue listing additional tags.
      * </p>
      * 
      * @param nextToken
-     *        When you request additional results from the <code>ListTagsForResource</code> call, a
-     *        <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the
-     *        <code>NextToken</code> parameter to continue listing additional tags.
+     *        When you request additional results from the <code>ListTagsForResource</code> operation, a
+     *        <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command to
+     *        the <code>NextToken</code> parameter to continue listing additional tags.
      */
 
     public void setNextToken(String nextToken) {
@@ -152,14 +152,14 @@ public class ListTagsForResourceRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code>
-     * parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code>
+     * When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code>
+     * parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code>
      * parameter to continue listing additional tags.
      * </p>
      * 
-     * @return When you request additional results from the <code>ListTagsForResource</code> call, a
-     *         <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the
-     *         <code>NextToken</code> parameter to continue listing additional tags.
+     * @return When you request additional results from the <code>ListTagsForResource</code> operation, a
+     *         <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command to
+     *         the <code>NextToken</code> parameter to continue listing additional tags.
      */
 
     public String getNextToken() {
@@ -168,15 +168,15 @@ public class ListTagsForResourceRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code>
-     * parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code>
+     * When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code>
+     * parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code>
      * parameter to continue listing additional tags.
      * </p>
      * 
      * @param nextToken
-     *        When you request additional results from the <code>ListTagsForResource</code> call, a
-     *        <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the
-     *        <code>NextToken</code> parameter to continue listing additional tags.
+     *        When you request additional results from the <code>ListTagsForResource</code> operation, a
+     *        <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command to
+     *        the <code>NextToken</code> parameter to continue listing additional tags.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

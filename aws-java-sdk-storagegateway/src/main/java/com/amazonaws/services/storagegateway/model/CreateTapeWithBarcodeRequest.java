@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,7 +31,7 @@ public class CreateTapeWithBarcodeRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the
-     * <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     * <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      * </p>
      */
     private String gatewayARN;
@@ -99,12 +99,12 @@ public class CreateTapeWithBarcodeRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the
-     * <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     * <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      * </p>
      * 
      * @param gatewayARN
      *        The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use
-     *        the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     *        the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      */
 
     public void setGatewayARN(String gatewayARN) {
@@ -114,11 +114,11 @@ public class CreateTapeWithBarcodeRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the
-     * <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     * <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      * </p>
      * 
      * @return The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use
-     *         the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     *         the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      */
 
     public String getGatewayARN() {
@@ -128,12 +128,12 @@ public class CreateTapeWithBarcodeRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the
-     * <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     * <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      * </p>
      * 
      * @param gatewayARN
      *        The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use
-     *        the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+     *        the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

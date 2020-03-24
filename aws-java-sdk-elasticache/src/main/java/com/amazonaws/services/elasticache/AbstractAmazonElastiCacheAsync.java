@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -80,6 +80,19 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     }
 
     @Override
+    public java.util.concurrent.Future<ReplicationGroup> completeMigrationAsync(CompleteMigrationRequest request) {
+
+        return completeMigrationAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<ReplicationGroup> completeMigrationAsync(CompleteMigrationRequest request,
+            com.amazonaws.handlers.AsyncHandler<CompleteMigrationRequest, ReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public java.util.concurrent.Future<Snapshot> copySnapshotAsync(CopySnapshotRequest request) {
 
         return copySnapshotAsync(request, null);
@@ -145,6 +158,19 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     }
 
     @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> createGlobalReplicationGroupAsync(CreateGlobalReplicationGroupRequest request) {
+
+        return createGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> createGlobalReplicationGroupAsync(CreateGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<CreateGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public java.util.concurrent.Future<ReplicationGroup> createReplicationGroupAsync(CreateReplicationGroupRequest request) {
 
         return createReplicationGroupAsync(request, null);
@@ -166,6 +192,21 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     @Override
     public java.util.concurrent.Future<Snapshot> createSnapshotAsync(CreateSnapshotRequest request,
             com.amazonaws.handlers.AsyncHandler<CreateSnapshotRequest, Snapshot> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> decreaseNodeGroupsInGlobalReplicationGroupAsync(
+            DecreaseNodeGroupsInGlobalReplicationGroupRequest request) {
+
+        return decreaseNodeGroupsInGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> decreaseNodeGroupsInGlobalReplicationGroupAsync(
+            DecreaseNodeGroupsInGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<DecreaseNodeGroupsInGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
 
         throw new java.lang.UnsupportedOperationException();
     }
@@ -231,6 +272,19 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     @Override
     public java.util.concurrent.Future<DeleteCacheSubnetGroupResult> deleteCacheSubnetGroupAsync(DeleteCacheSubnetGroupRequest request,
             com.amazonaws.handlers.AsyncHandler<DeleteCacheSubnetGroupRequest, DeleteCacheSubnetGroupResult> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> deleteGlobalReplicationGroupAsync(DeleteGlobalReplicationGroupRequest request) {
+
+        return deleteGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> deleteGlobalReplicationGroupAsync(DeleteGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<DeleteGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
 
         throw new java.lang.UnsupportedOperationException();
     }
@@ -504,6 +558,21 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     }
 
     @Override
+    public java.util.concurrent.Future<DescribeGlobalReplicationGroupsResult> describeGlobalReplicationGroupsAsync(
+            DescribeGlobalReplicationGroupsRequest request) {
+
+        return describeGlobalReplicationGroupsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeGlobalReplicationGroupsResult> describeGlobalReplicationGroupsAsync(
+            DescribeGlobalReplicationGroupsRequest request,
+            com.amazonaws.handlers.AsyncHandler<DescribeGlobalReplicationGroupsRequest, DescribeGlobalReplicationGroupsResult> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public java.util.concurrent.Future<DescribeReplicationGroupsResult> describeReplicationGroupsAsync(DescribeReplicationGroupsRequest request) {
 
         return describeReplicationGroupsAsync(request, null);
@@ -677,6 +746,47 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     }
 
     @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> disassociateGlobalReplicationGroupAsync(DisassociateGlobalReplicationGroupRequest request) {
+
+        return disassociateGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> disassociateGlobalReplicationGroupAsync(DisassociateGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<DisassociateGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> failoverGlobalReplicationGroupAsync(FailoverGlobalReplicationGroupRequest request) {
+
+        return failoverGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> failoverGlobalReplicationGroupAsync(FailoverGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<FailoverGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> increaseNodeGroupsInGlobalReplicationGroupAsync(
+            IncreaseNodeGroupsInGlobalReplicationGroupRequest request) {
+
+        return increaseNodeGroupsInGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> increaseNodeGroupsInGlobalReplicationGroupAsync(
+            IncreaseNodeGroupsInGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<IncreaseNodeGroupsInGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public java.util.concurrent.Future<ReplicationGroup> increaseReplicaCountAsync(IncreaseReplicaCountRequest request) {
 
         return increaseReplicaCountAsync(request, null);
@@ -781,6 +891,19 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     }
 
     @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> modifyGlobalReplicationGroupAsync(ModifyGlobalReplicationGroupRequest request) {
+
+        return modifyGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> modifyGlobalReplicationGroupAsync(ModifyGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<ModifyGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public java.util.concurrent.Future<ReplicationGroup> modifyReplicationGroupAsync(ModifyReplicationGroupRequest request) {
 
         return modifyReplicationGroupAsync(request, null);
@@ -815,6 +938,20 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     @Override
     public java.util.concurrent.Future<ReservedCacheNode> purchaseReservedCacheNodesOfferingAsync(PurchaseReservedCacheNodesOfferingRequest request,
             com.amazonaws.handlers.AsyncHandler<PurchaseReservedCacheNodesOfferingRequest, ReservedCacheNode> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> rebalanceSlotsInGlobalReplicationGroupAsync(RebalanceSlotsInGlobalReplicationGroupRequest request) {
+
+        return rebalanceSlotsInGlobalReplicationGroupAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GlobalReplicationGroup> rebalanceSlotsInGlobalReplicationGroupAsync(
+            RebalanceSlotsInGlobalReplicationGroupRequest request,
+            com.amazonaws.handlers.AsyncHandler<RebalanceSlotsInGlobalReplicationGroupRequest, GlobalReplicationGroup> asyncHandler) {
 
         throw new java.lang.UnsupportedOperationException();
     }
@@ -867,6 +1004,19 @@ public class AbstractAmazonElastiCacheAsync extends AbstractAmazonElastiCache im
     @Override
     public java.util.concurrent.Future<CacheSecurityGroup> revokeCacheSecurityGroupIngressAsync(RevokeCacheSecurityGroupIngressRequest request,
             com.amazonaws.handlers.AsyncHandler<RevokeCacheSecurityGroupIngressRequest, CacheSecurityGroup> asyncHandler) {
+
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public java.util.concurrent.Future<ReplicationGroup> startMigrationAsync(StartMigrationRequest request) {
+
+        return startMigrationAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<ReplicationGroup> startMigrationAsync(StartMigrationRequest request,
+            com.amazonaws.handlers.AsyncHandler<StartMigrationRequest, ReplicationGroup> asyncHandler) {
 
         throw new java.lang.UnsupportedOperationException();
     }

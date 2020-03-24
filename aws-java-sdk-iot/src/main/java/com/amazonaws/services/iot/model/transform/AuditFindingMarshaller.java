@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -28,6 +28,8 @@ import com.amazonaws.annotation.SdkInternalApi;
 @SdkInternalApi
 public class AuditFindingMarshaller {
 
+    private static final MarshallingInfo<String> FINDINGID_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("findingId").build();
     private static final MarshallingInfo<String> TASKID_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("taskId").build();
     private static final MarshallingInfo<String> CHECKNAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
@@ -63,6 +65,7 @@ public class AuditFindingMarshaller {
         }
 
         try {
+            protocolMarshaller.marshall(auditFinding.getFindingId(), FINDINGID_BINDING);
             protocolMarshaller.marshall(auditFinding.getTaskId(), TASKID_BINDING);
             protocolMarshaller.marshall(auditFinding.getCheckName(), CHECKNAME_BINDING);
             protocolMarshaller.marshall(auditFinding.getTaskStartTime(), TASKSTARTTIME_BINDING);

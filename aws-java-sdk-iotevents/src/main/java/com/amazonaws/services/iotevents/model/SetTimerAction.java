@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -39,7 +39,18 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
      * The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
      * </p>
      */
+    @Deprecated
     private Integer seconds;
+    /**
+     * <p>
+     * The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     * <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     * <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is
+     * 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration
+     * is rounded down to the nearest whole number.
+     * </p>
+     */
+    private String durationExpression;
 
     /**
      * <p>
@@ -89,7 +100,7 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
      * @param seconds
      *        The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
      */
-
+    @Deprecated
     public void setSeconds(Integer seconds) {
         this.seconds = seconds;
     }
@@ -101,7 +112,7 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
      * 
      * @return The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
      */
-
+    @Deprecated
     public Integer getSeconds() {
         return this.seconds;
     }
@@ -115,9 +126,73 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
      *        The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
-
+    @Deprecated
     public SetTimerAction withSeconds(Integer seconds) {
         setSeconds(seconds);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     * <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     * <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is
+     * 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration
+     * is rounded down to the nearest whole number.
+     * </p>
+     * 
+     * @param durationExpression
+     *        The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     *        <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     *        <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration
+     *        is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the
+     *        duration is rounded down to the nearest whole number.
+     */
+
+    public void setDurationExpression(String durationExpression) {
+        this.durationExpression = durationExpression;
+    }
+
+    /**
+     * <p>
+     * The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     * <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     * <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is
+     * 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration
+     * is rounded down to the nearest whole number.
+     * </p>
+     * 
+     * @return The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     *         <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     *         <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration
+     *         is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of
+     *         the duration is rounded down to the nearest whole number.
+     */
+
+    public String getDurationExpression() {
+        return this.durationExpression;
+    }
+
+    /**
+     * <p>
+     * The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     * <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     * <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is
+     * 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration
+     * is rounded down to the nearest whole number.
+     * </p>
+     * 
+     * @param durationExpression
+     *        The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (
+     *        <code>$variable.&lt;variable-name&gt;</code>), and input values (
+     *        <code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration
+     *        is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the
+     *        duration is rounded down to the nearest whole number.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public SetTimerAction withDurationExpression(String durationExpression) {
+        setDurationExpression(durationExpression);
         return this;
     }
 
@@ -136,7 +211,9 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
         if (getTimerName() != null)
             sb.append("TimerName: ").append(getTimerName()).append(",");
         if (getSeconds() != null)
-            sb.append("Seconds: ").append(getSeconds());
+            sb.append("Seconds: ").append(getSeconds()).append(",");
+        if (getDurationExpression() != null)
+            sb.append("DurationExpression: ").append(getDurationExpression());
         sb.append("}");
         return sb.toString();
     }
@@ -159,6 +236,10 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getSeconds() != null && other.getSeconds().equals(this.getSeconds()) == false)
             return false;
+        if (other.getDurationExpression() == null ^ this.getDurationExpression() == null)
+            return false;
+        if (other.getDurationExpression() != null && other.getDurationExpression().equals(this.getDurationExpression()) == false)
+            return false;
         return true;
     }
 
@@ -169,6 +250,7 @@ public class SetTimerAction implements Serializable, Cloneable, StructuredPojo {
 
         hashCode = prime * hashCode + ((getTimerName() == null) ? 0 : getTimerName().hashCode());
         hashCode = prime * hashCode + ((getSeconds() == null) ? 0 : getSeconds().hashCode());
+        hashCode = prime * hashCode + ((getDurationExpression() == null) ? 0 : getDurationExpression().hashCode());
         return hashCode;
     }
 

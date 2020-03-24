@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -80,19 +80,21 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of
      * input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel
-     * provides the S3 location where the input data is stored. It also provides information about the stored data: the
-     * MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     * provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the
+     * stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
      * </p>
      * <p>
      * Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an
-     * S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     * S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if
+     * you specify an EFS location, input data files will be made available as input streams. They do not need to be
+     * downloaded.
      * </p>
      */
     private java.util.List<Channel> inputDataConfig;
     /**
      * <p>
-     * Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders
-     * for the artifacts.
+     * Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
+     * subfolders for the artifacts.
      * </p>
      */
     private OutputDataConfig outputDataConfig;
@@ -144,11 +146,6 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      */
     private Boolean enableNetworkIsolation;
     /**
@@ -162,6 +159,37 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * </p>
      */
     private Boolean enableInterContainerTrafficEncryption;
+    /**
+     * <p>
+     * To train models using managed spot training, choose <code>True</code>. Managed spot training provides a fully
+     * managed and scalable infrastructure for training machine learning models. this option is useful when training
+     * jobs can be interrupted and when there is flexibility when the training job is run.
+     * </p>
+     * <p>
+     * The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a starting
+     * point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+     * to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * </p>
+     */
+    private Boolean enableManagedSpotTraining;
+    /**
+     * <p>
+     * Contains information about the output location for managed spot training checkpoint data.
+     * </p>
+     */
+    private CheckpointConfig checkpointConfig;
+
+    private DebugHookConfig debugHookConfig;
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     */
+    private java.util.List<DebugRuleConfiguration> debugRuleConfigurations;
+
+    private TensorBoardOutputConfig tensorBoardOutputConfig;
+
+    private ExperimentConfig experimentConfig;
 
     /**
      * <p>
@@ -275,6 +303,13 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
         setHyperParameters(hyperParameters);
         return this;
     }
+
+    /**
+     * Add a single HyperParameters entry
+     *
+     * @see CreateTrainingJobRequest#withHyperParameters
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public CreateTrainingJobRequest addHyperParametersEntry(String key, String value) {
         if (null == this.hyperParameters) {
@@ -490,12 +525,14 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of
      * input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel
-     * provides the S3 location where the input data is stored. It also provides information about the stored data: the
-     * MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     * provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the
+     * stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
      * </p>
      * <p>
      * Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an
-     * S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     * S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if
+     * you specify an EFS location, input data files will be made available as input streams. They do not need to be
+     * downloaded.
      * </p>
      * 
      * @return An array of <code>Channel</code> objects. Each channel is a named input source.
@@ -503,13 +540,15 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      *         <p>
      *         Algorithms can accept input data from one or more channels. For example, an algorithm might have two
      *         channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration
-     *         for each channel provides the S3 location where the input data is stored. It also provides information
-     *         about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO
-     *         format.
+     *         for each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides
+     *         information about the stored data: the MIME type, compression method, and whether the data is wrapped in
+     *         RecordIO format.
      *         </p>
      *         <p>
      *         Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files
      *         from an S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     *         For example, if you specify an EFS location, input data files will be made available as input streams.
+     *         They do not need to be downloaded.
      */
 
     public java.util.List<Channel> getInputDataConfig() {
@@ -524,12 +563,14 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of
      * input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel
-     * provides the S3 location where the input data is stored. It also provides information about the stored data: the
-     * MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     * provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the
+     * stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
      * </p>
      * <p>
      * Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an
-     * S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     * S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if
+     * you specify an EFS location, input data files will be made available as input streams. They do not need to be
+     * downloaded.
      * </p>
      * 
      * @param inputDataConfig
@@ -538,12 +579,15 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      *        <p>
      *        Algorithms can accept input data from one or more channels. For example, an algorithm might have two
      *        channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for
-     *        each channel provides the S3 location where the input data is stored. It also provides information about
-     *        the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     *        each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides
+     *        information about the stored data: the MIME type, compression method, and whether the data is wrapped in
+     *        RecordIO format.
      *        </p>
      *        <p>
      *        Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files
      *        from an S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     *        For example, if you specify an EFS location, input data files will be made available as input streams.
+     *        They do not need to be downloaded.
      */
 
     public void setInputDataConfig(java.util.Collection<Channel> inputDataConfig) {
@@ -563,12 +607,14 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of
      * input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel
-     * provides the S3 location where the input data is stored. It also provides information about the stored data: the
-     * MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     * provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the
+     * stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
      * </p>
      * <p>
      * Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an
-     * S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     * S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if
+     * you specify an EFS location, input data files will be made available as input streams. They do not need to be
+     * downloaded.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -582,12 +628,15 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      *        <p>
      *        Algorithms can accept input data from one or more channels. For example, an algorithm might have two
      *        channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for
-     *        each channel provides the S3 location where the input data is stored. It also provides information about
-     *        the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     *        each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides
+     *        information about the stored data: the MIME type, compression method, and whether the data is wrapped in
+     *        RecordIO format.
      *        </p>
      *        <p>
      *        Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files
      *        from an S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     *        For example, if you specify an EFS location, input data files will be made available as input streams.
+     *        They do not need to be downloaded.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -609,12 +658,14 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of
      * input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel
-     * provides the S3 location where the input data is stored. It also provides information about the stored data: the
-     * MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     * provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the
+     * stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
      * </p>
      * <p>
      * Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an
-     * S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     * S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if
+     * you specify an EFS location, input data files will be made available as input streams. They do not need to be
+     * downloaded.
      * </p>
      * 
      * @param inputDataConfig
@@ -623,12 +674,15 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      *        <p>
      *        Algorithms can accept input data from one or more channels. For example, an algorithm might have two
      *        channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for
-     *        each channel provides the S3 location where the input data is stored. It also provides information about
-     *        the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.
+     *        each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides
+     *        information about the stored data: the MIME type, compression method, and whether the data is wrapped in
+     *        RecordIO format.
      *        </p>
      *        <p>
      *        Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files
      *        from an S3 bucket to a local directory in the Docker container, or makes it available as input streams.
+     *        For example, if you specify an EFS location, input data files will be made available as input streams.
+     *        They do not need to be downloaded.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -639,12 +693,12 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders
-     * for the artifacts.
+     * Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
+     * subfolders for the artifacts.
      * </p>
      * 
      * @param outputDataConfig
-     *        Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates
+     *        Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
      *        subfolders for the artifacts.
      */
 
@@ -654,11 +708,11 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders
-     * for the artifacts.
+     * Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
+     * subfolders for the artifacts.
      * </p>
      * 
-     * @return Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates
+     * @return Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
      *         subfolders for the artifacts.
      */
 
@@ -668,12 +722,12 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders
-     * for the artifacts.
+     * Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
+     * subfolders for the artifacts.
      * </p>
      * 
      * @param outputDataConfig
-     *        Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates
+     *        Specifies the path to the S3 location where you want to store model artifacts. Amazon SageMaker creates
      *        subfolders for the artifacts.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -980,21 +1034,12 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *        between peers within a training cluster for distributed training. If you enable network isolation for
      *        training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *        model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *        <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public void setEnableNetworkIsolation(Boolean enableNetworkIsolation) {
@@ -1008,20 +1053,11 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *         between peers within a training cluster for distributed training. If you enable network isolation for
      *         training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *         model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *         <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean getEnableNetworkIsolation() {
@@ -1035,21 +1071,12 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *        between peers within a training cluster for distributed training. If you enable network isolation for
      *        training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *        model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *        <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        model artifacts through the specified VPC, but the training container does not have network access.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1065,20 +1092,11 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *         between peers within a training cluster for distributed training. If you enable network isolation for
      *         training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *         model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *         <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean isEnableNetworkIsolation() {
@@ -1178,6 +1196,298 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     }
 
     /**
+     * <p>
+     * To train models using managed spot training, choose <code>True</code>. Managed spot training provides a fully
+     * managed and scalable infrastructure for training machine learning models. this option is useful when training
+     * jobs can be interrupted and when there is flexibility when the training job is run.
+     * </p>
+     * <p>
+     * The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a starting
+     * point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+     * to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        To train models using managed spot training, choose <code>True</code>. Managed spot training provides a
+     *        fully managed and scalable infrastructure for training machine learning models. this option is useful when
+     *        training jobs can be interrupted and when there is flexibility when the training job is run. </p>
+     *        <p>
+     *        The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a
+     *        starting point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch.
+     *        They can be used to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     */
+
+    public void setEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        this.enableManagedSpotTraining = enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * To train models using managed spot training, choose <code>True</code>. Managed spot training provides a fully
+     * managed and scalable infrastructure for training machine learning models. this option is useful when training
+     * jobs can be interrupted and when there is flexibility when the training job is run.
+     * </p>
+     * <p>
+     * The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a starting
+     * point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+     * to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * </p>
+     * 
+     * @return To train models using managed spot training, choose <code>True</code>. Managed spot training provides a
+     *         fully managed and scalable infrastructure for training machine learning models. this option is useful
+     *         when training jobs can be interrupted and when there is flexibility when the training job is run. </p>
+     *         <p>
+     *         The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a
+     *         starting point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch.
+     *         They can be used to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     */
+
+    public Boolean getEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * To train models using managed spot training, choose <code>True</code>. Managed spot training provides a fully
+     * managed and scalable infrastructure for training machine learning models. this option is useful when training
+     * jobs can be interrupted and when there is flexibility when the training job is run.
+     * </p>
+     * <p>
+     * The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a starting
+     * point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+     * to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        To train models using managed spot training, choose <code>True</code>. Managed spot training provides a
+     *        fully managed and scalable infrastructure for training machine learning models. this option is useful when
+     *        training jobs can be interrupted and when there is flexibility when the training job is run. </p>
+     *        <p>
+     *        The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a
+     *        starting point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch.
+     *        They can be used to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        setEnableManagedSpotTraining(enableManagedSpotTraining);
+        return this;
+    }
+
+    /**
+     * <p>
+     * To train models using managed spot training, choose <code>True</code>. Managed spot training provides a fully
+     * managed and scalable infrastructure for training machine learning models. this option is useful when training
+     * jobs can be interrupted and when there is flexibility when the training job is run.
+     * </p>
+     * <p>
+     * The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a starting
+     * point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+     * to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     * </p>
+     * 
+     * @return To train models using managed spot training, choose <code>True</code>. Managed spot training provides a
+     *         fully managed and scalable infrastructure for training machine learning models. this option is useful
+     *         when training jobs can be interrupted and when there is flexibility when the training job is run. </p>
+     *         <p>
+     *         The complete and intermediate results of jobs are stored in an Amazon S3 bucket, and can be used as a
+     *         starting point to train models incrementally. Amazon SageMaker provides metrics and logs in CloudWatch.
+     *         They can be used to see when managed spot training jobs are running, interrupted, resumed, or completed.
+     */
+
+    public Boolean isEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * Contains information about the output location for managed spot training checkpoint data.
+     * </p>
+     * 
+     * @param checkpointConfig
+     *        Contains information about the output location for managed spot training checkpoint data.
+     */
+
+    public void setCheckpointConfig(CheckpointConfig checkpointConfig) {
+        this.checkpointConfig = checkpointConfig;
+    }
+
+    /**
+     * <p>
+     * Contains information about the output location for managed spot training checkpoint data.
+     * </p>
+     * 
+     * @return Contains information about the output location for managed spot training checkpoint data.
+     */
+
+    public CheckpointConfig getCheckpointConfig() {
+        return this.checkpointConfig;
+    }
+
+    /**
+     * <p>
+     * Contains information about the output location for managed spot training checkpoint data.
+     * </p>
+     * 
+     * @param checkpointConfig
+     *        Contains information about the output location for managed spot training checkpoint data.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withCheckpointConfig(CheckpointConfig checkpointConfig) {
+        setCheckpointConfig(checkpointConfig);
+        return this;
+    }
+
+    /**
+     * @param debugHookConfig
+     */
+
+    public void setDebugHookConfig(DebugHookConfig debugHookConfig) {
+        this.debugHookConfig = debugHookConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public DebugHookConfig getDebugHookConfig() {
+        return this.debugHookConfig;
+    }
+
+    /**
+     * @param debugHookConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withDebugHookConfig(DebugHookConfig debugHookConfig) {
+        setDebugHookConfig(debugHookConfig);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @return Configuration information for debugging rules.
+     */
+
+    public java.util.List<DebugRuleConfiguration> getDebugRuleConfigurations() {
+        return debugRuleConfigurations;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     */
+
+    public void setDebugRuleConfigurations(java.util.Collection<DebugRuleConfiguration> debugRuleConfigurations) {
+        if (debugRuleConfigurations == null) {
+            this.debugRuleConfigurations = null;
+            return;
+        }
+
+        this.debugRuleConfigurations = new java.util.ArrayList<DebugRuleConfiguration>(debugRuleConfigurations);
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setDebugRuleConfigurations(java.util.Collection)} or
+     * {@link #withDebugRuleConfigurations(java.util.Collection)} if you want to override the existing values.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withDebugRuleConfigurations(DebugRuleConfiguration... debugRuleConfigurations) {
+        if (this.debugRuleConfigurations == null) {
+            setDebugRuleConfigurations(new java.util.ArrayList<DebugRuleConfiguration>(debugRuleConfigurations.length));
+        }
+        for (DebugRuleConfiguration ele : debugRuleConfigurations) {
+            this.debugRuleConfigurations.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withDebugRuleConfigurations(java.util.Collection<DebugRuleConfiguration> debugRuleConfigurations) {
+        setDebugRuleConfigurations(debugRuleConfigurations);
+        return this;
+    }
+
+    /**
+     * @param tensorBoardOutputConfig
+     */
+
+    public void setTensorBoardOutputConfig(TensorBoardOutputConfig tensorBoardOutputConfig) {
+        this.tensorBoardOutputConfig = tensorBoardOutputConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public TensorBoardOutputConfig getTensorBoardOutputConfig() {
+        return this.tensorBoardOutputConfig;
+    }
+
+    /**
+     * @param tensorBoardOutputConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withTensorBoardOutputConfig(TensorBoardOutputConfig tensorBoardOutputConfig) {
+        setTensorBoardOutputConfig(tensorBoardOutputConfig);
+        return this;
+    }
+
+    /**
+     * @param experimentConfig
+     */
+
+    public void setExperimentConfig(ExperimentConfig experimentConfig) {
+        this.experimentConfig = experimentConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public ExperimentConfig getExperimentConfig() {
+        return this.experimentConfig;
+    }
+
+    /**
+     * @param experimentConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateTrainingJobRequest withExperimentConfig(ExperimentConfig experimentConfig) {
+        setExperimentConfig(experimentConfig);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1212,7 +1522,19 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
         if (getEnableNetworkIsolation() != null)
             sb.append("EnableNetworkIsolation: ").append(getEnableNetworkIsolation()).append(",");
         if (getEnableInterContainerTrafficEncryption() != null)
-            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption());
+            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption()).append(",");
+        if (getEnableManagedSpotTraining() != null)
+            sb.append("EnableManagedSpotTraining: ").append(getEnableManagedSpotTraining()).append(",");
+        if (getCheckpointConfig() != null)
+            sb.append("CheckpointConfig: ").append(getCheckpointConfig()).append(",");
+        if (getDebugHookConfig() != null)
+            sb.append("DebugHookConfig: ").append(getDebugHookConfig()).append(",");
+        if (getDebugRuleConfigurations() != null)
+            sb.append("DebugRuleConfigurations: ").append(getDebugRuleConfigurations()).append(",");
+        if (getTensorBoardOutputConfig() != null)
+            sb.append("TensorBoardOutputConfig: ").append(getTensorBoardOutputConfig()).append(",");
+        if (getExperimentConfig() != null)
+            sb.append("ExperimentConfig: ").append(getExperimentConfig());
         sb.append("}");
         return sb.toString();
     }
@@ -1276,6 +1598,30 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
         if (other.getEnableInterContainerTrafficEncryption() != null
                 && other.getEnableInterContainerTrafficEncryption().equals(this.getEnableInterContainerTrafficEncryption()) == false)
             return false;
+        if (other.getEnableManagedSpotTraining() == null ^ this.getEnableManagedSpotTraining() == null)
+            return false;
+        if (other.getEnableManagedSpotTraining() != null && other.getEnableManagedSpotTraining().equals(this.getEnableManagedSpotTraining()) == false)
+            return false;
+        if (other.getCheckpointConfig() == null ^ this.getCheckpointConfig() == null)
+            return false;
+        if (other.getCheckpointConfig() != null && other.getCheckpointConfig().equals(this.getCheckpointConfig()) == false)
+            return false;
+        if (other.getDebugHookConfig() == null ^ this.getDebugHookConfig() == null)
+            return false;
+        if (other.getDebugHookConfig() != null && other.getDebugHookConfig().equals(this.getDebugHookConfig()) == false)
+            return false;
+        if (other.getDebugRuleConfigurations() == null ^ this.getDebugRuleConfigurations() == null)
+            return false;
+        if (other.getDebugRuleConfigurations() != null && other.getDebugRuleConfigurations().equals(this.getDebugRuleConfigurations()) == false)
+            return false;
+        if (other.getTensorBoardOutputConfig() == null ^ this.getTensorBoardOutputConfig() == null)
+            return false;
+        if (other.getTensorBoardOutputConfig() != null && other.getTensorBoardOutputConfig().equals(this.getTensorBoardOutputConfig()) == false)
+            return false;
+        if (other.getExperimentConfig() == null ^ this.getExperimentConfig() == null)
+            return false;
+        if (other.getExperimentConfig() != null && other.getExperimentConfig().equals(this.getExperimentConfig()) == false)
+            return false;
         return true;
     }
 
@@ -1296,6 +1642,12 @@ public class CreateTrainingJobRequest extends com.amazonaws.AmazonWebServiceRequ
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         hashCode = prime * hashCode + ((getEnableNetworkIsolation() == null) ? 0 : getEnableNetworkIsolation().hashCode());
         hashCode = prime * hashCode + ((getEnableInterContainerTrafficEncryption() == null) ? 0 : getEnableInterContainerTrafficEncryption().hashCode());
+        hashCode = prime * hashCode + ((getEnableManagedSpotTraining() == null) ? 0 : getEnableManagedSpotTraining().hashCode());
+        hashCode = prime * hashCode + ((getCheckpointConfig() == null) ? 0 : getCheckpointConfig().hashCode());
+        hashCode = prime * hashCode + ((getDebugHookConfig() == null) ? 0 : getDebugHookConfig().hashCode());
+        hashCode = prime * hashCode + ((getDebugRuleConfigurations() == null) ? 0 : getDebugRuleConfigurations().hashCode());
+        hashCode = prime * hashCode + ((getTensorBoardOutputConfig() == null) ? 0 : getTensorBoardOutputConfig().hashCode());
+        hashCode = prime * hashCode + ((getExperimentConfig() == null) ? 0 : getExperimentConfig().hashCode());
         return hashCode;
     }
 

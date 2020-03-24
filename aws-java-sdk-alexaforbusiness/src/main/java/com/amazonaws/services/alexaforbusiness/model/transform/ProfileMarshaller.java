@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -43,6 +43,8 @@ public class ProfileMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("TemperatureUnit").build();
     private static final MarshallingInfo<String> WAKEWORD_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("WakeWord").build();
+    private static final MarshallingInfo<String> LOCALE_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("Locale").build();
     private static final MarshallingInfo<Boolean> SETUPMODEDISABLED_BINDING = MarshallingInfo.builder(MarshallingType.BOOLEAN)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("SetupModeDisabled").build();
     private static final MarshallingInfo<Integer> MAXVOLUMELIMIT_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER)
@@ -51,6 +53,8 @@ public class ProfileMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("PSTNEnabled").build();
     private static final MarshallingInfo<String> ADDRESSBOOKARN_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("AddressBookArn").build();
+    private static final MarshallingInfo<StructuredPojo> MEETINGROOMCONFIGURATION_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("MeetingRoomConfiguration").build();
 
     private static final ProfileMarshaller instance = new ProfileMarshaller();
 
@@ -76,10 +80,12 @@ public class ProfileMarshaller {
             protocolMarshaller.marshall(profile.getDistanceUnit(), DISTANCEUNIT_BINDING);
             protocolMarshaller.marshall(profile.getTemperatureUnit(), TEMPERATUREUNIT_BINDING);
             protocolMarshaller.marshall(profile.getWakeWord(), WAKEWORD_BINDING);
+            protocolMarshaller.marshall(profile.getLocale(), LOCALE_BINDING);
             protocolMarshaller.marshall(profile.getSetupModeDisabled(), SETUPMODEDISABLED_BINDING);
             protocolMarshaller.marshall(profile.getMaxVolumeLimit(), MAXVOLUMELIMIT_BINDING);
             protocolMarshaller.marshall(profile.getPSTNEnabled(), PSTNENABLED_BINDING);
             protocolMarshaller.marshall(profile.getAddressBookArn(), ADDRESSBOOKARN_BINDING);
+            protocolMarshaller.marshall(profile.getMeetingRoomConfiguration(), MEETINGROOMCONFIGURATION_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -111,15 +111,21 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior
-     * or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0
-     * means zero percent confidence and 100 means 100 percent confidence.
+     * or issue that it was intended to identify.
+     * </p>
+     * <p>
+     * Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means
+     * 100 percent confidence.
      * </p>
      */
     private java.util.List<NumberFilter> confidence;
     /**
      * <p>
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     * underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding.
+     * </p>
+     * <p>
+     * A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most
+     * critical resources.
      * </p>
      */
     private java.util.List<NumberFilter> criticality;
@@ -301,37 +307,37 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     private java.util.List<DateFilter> processTerminatedAt;
     /**
      * <p>
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      * </p>
      */
     private java.util.List<StringFilter> threatIntelIndicatorType;
     /**
      * <p>
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      * </p>
      */
     private java.util.List<StringFilter> threatIntelIndicatorValue;
     /**
      * <p>
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      * </p>
      */
     private java.util.List<StringFilter> threatIntelIndicatorCategory;
     /**
      * <p>
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      * </p>
      */
     private java.util.List<DateFilter> threatIntelIndicatorLastObservedAt;
     /**
      * <p>
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      * </p>
      */
     private java.util.List<StringFilter> threatIntelIndicatorSource;
     /**
      * <p>
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      * </p>
      */
     private java.util.List<StringFilter> threatIntelIndicatorSourceUrl;
@@ -415,7 +421,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     private java.util.List<StringFilter> resourceAwsEc2InstanceSubnetId;
     /**
      * <p>
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      * </p>
      */
     private java.util.List<DateFilter> resourceAwsEc2InstanceLaunchedAt;
@@ -482,7 +488,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported
-     * standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * </p>
      */
     private java.util.List<StringFilter> complianceStatus;
@@ -498,6 +504,35 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      */
     private java.util.List<StringFilter> workflowState;
+    /**
+     * <p>
+     * The status of the investigation into a finding. Allowed values are the following.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when
+     * the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     * </p>
+     * </li>
+     * </ul>
+     */
+    private java.util.List<StringFilter> workflowStatus;
     /**
      * <p>
      * The updated record state for the finding.
@@ -1444,13 +1479,18 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior
-     * or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0
-     * means zero percent confidence and 100 means 100 percent confidence.
+     * or issue that it was intended to identify.
+     * </p>
+     * <p>
+     * Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means
+     * 100 percent confidence.
      * </p>
      * 
      * @return A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the
-     *         behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-     *         scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     *         behavior or issue that it was intended to identify.</p>
+     *         <p>
+     *         Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100
+     *         means 100 percent confidence.
      */
 
     public java.util.List<NumberFilter> getConfidence() {
@@ -1460,14 +1500,19 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior
-     * or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0
-     * means zero percent confidence and 100 means 100 percent confidence.
+     * or issue that it was intended to identify.
+     * </p>
+     * <p>
+     * Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means
+     * 100 percent confidence.
      * </p>
      * 
      * @param confidence
      *        A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the
-     *        behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-     *        scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     *        behavior or issue that it was intended to identify.</p>
+     *        <p>
+     *        Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100
+     *        means 100 percent confidence.
      */
 
     public void setConfidence(java.util.Collection<NumberFilter> confidence) {
@@ -1482,8 +1527,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior
-     * or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0
-     * means zero percent confidence and 100 means 100 percent confidence.
+     * or issue that it was intended to identify.
+     * </p>
+     * <p>
+     * Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means
+     * 100 percent confidence.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -1493,8 +1541,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * 
      * @param confidence
      *        A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the
-     *        behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-     *        scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     *        behavior or issue that it was intended to identify.</p>
+     *        <p>
+     *        Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100
+     *        means 100 percent confidence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1511,14 +1561,19 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior
-     * or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0
-     * means zero percent confidence and 100 means 100 percent confidence.
+     * or issue that it was intended to identify.
+     * </p>
+     * <p>
+     * Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means
+     * 100 percent confidence.
      * </p>
      * 
      * @param confidence
      *        A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the
-     *        behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-     *        scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     *        behavior or issue that it was intended to identify.</p>
+     *        <p>
+     *        Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100
+     *        means 100 percent confidence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1529,13 +1584,17 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     * underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding.
+     * </p>
+     * <p>
+     * A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most
+     * critical resources.
      * </p>
      * 
-     * @return The level of importance assigned to the resources associated with the finding. A score of 0 means that
-     *         the underlying resources have no criticality, and a score of 100 is reserved for the most critical
-     *         resources.
+     * @return The level of importance assigned to the resources associated with the finding.</p>
+     *         <p>
+     *         A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for
+     *         the most critical resources.
      */
 
     public java.util.List<NumberFilter> getCriticality() {
@@ -1544,13 +1603,18 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     * underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding.
+     * </p>
+     * <p>
+     * A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most
+     * critical resources.
      * </p>
      * 
      * @param criticality
-     *        The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     *        underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     *        The level of importance assigned to the resources associated with the finding.</p>
+     *        <p>
+     *        A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for
+     *        the most critical resources.
      */
 
     public void setCriticality(java.util.Collection<NumberFilter> criticality) {
@@ -1564,8 +1628,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     * underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding.
+     * </p>
+     * <p>
+     * A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most
+     * critical resources.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -1574,8 +1641,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param criticality
-     *        The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     *        underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     *        The level of importance assigned to the resources associated with the finding.</p>
+     *        <p>
+     *        A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for
+     *        the most critical resources.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1591,13 +1660,18 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     * underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding.
+     * </p>
+     * <p>
+     * A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most
+     * critical resources.
      * </p>
      * 
      * @param criticality
-     *        The level of importance assigned to the resources associated with the finding. A score of 0 means that the
-     *        underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     *        The level of importance assigned to the resources associated with the finding.</p>
+     *        <p>
+     *        A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for
+     *        the most critical resources.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3654,10 +3728,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      * </p>
      * 
-     * @return The type of a threat intel indicator.
+     * @return The type of a threat intelligence indicator.
      */
 
     public java.util.List<StringFilter> getThreatIntelIndicatorType() {
@@ -3666,11 +3740,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorType
-     *        The type of a threat intel indicator.
+     *        The type of a threat intelligence indicator.
      */
 
     public void setThreatIntelIndicatorType(java.util.Collection<StringFilter> threatIntelIndicatorType) {
@@ -3684,7 +3758,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -3693,7 +3767,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorType
-     *        The type of a threat intel indicator.
+     *        The type of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3709,11 +3783,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorType
-     *        The type of a threat intel indicator.
+     *        The type of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3724,10 +3798,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      * </p>
      * 
-     * @return The value of a threat intel indicator.
+     * @return The value of a threat intelligence indicator.
      */
 
     public java.util.List<StringFilter> getThreatIntelIndicatorValue() {
@@ -3736,11 +3810,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorValue
-     *        The value of a threat intel indicator.
+     *        The value of a threat intelligence indicator.
      */
 
     public void setThreatIntelIndicatorValue(java.util.Collection<StringFilter> threatIntelIndicatorValue) {
@@ -3754,7 +3828,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -3763,7 +3837,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorValue
-     *        The value of a threat intel indicator.
+     *        The value of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3779,11 +3853,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorValue
-     *        The value of a threat intel indicator.
+     *        The value of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3794,10 +3868,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      * </p>
      * 
-     * @return The category of a threat intel indicator.
+     * @return The category of a threat intelligence indicator.
      */
 
     public java.util.List<StringFilter> getThreatIntelIndicatorCategory() {
@@ -3806,11 +3880,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorCategory
-     *        The category of a threat intel indicator.
+     *        The category of a threat intelligence indicator.
      */
 
     public void setThreatIntelIndicatorCategory(java.util.Collection<StringFilter> threatIntelIndicatorCategory) {
@@ -3824,7 +3898,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -3833,7 +3907,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorCategory
-     *        The category of a threat intel indicator.
+     *        The category of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3849,11 +3923,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorCategory
-     *        The category of a threat intel indicator.
+     *        The category of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3864,10 +3938,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      * </p>
      * 
-     * @return The date/time of the last observation of a threat intel indicator.
+     * @return The date/time of the last observation of a threat intelligence indicator.
      */
 
     public java.util.List<DateFilter> getThreatIntelIndicatorLastObservedAt() {
@@ -3876,11 +3950,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorLastObservedAt
-     *        The date/time of the last observation of a threat intel indicator.
+     *        The date/time of the last observation of a threat intelligence indicator.
      */
 
     public void setThreatIntelIndicatorLastObservedAt(java.util.Collection<DateFilter> threatIntelIndicatorLastObservedAt) {
@@ -3894,7 +3968,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -3904,7 +3978,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorLastObservedAt
-     *        The date/time of the last observation of a threat intel indicator.
+     *        The date/time of the last observation of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3920,11 +3994,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      * </p>
      * 
      * @param threatIntelIndicatorLastObservedAt
-     *        The date/time of the last observation of a threat intel indicator.
+     *        The date/time of the last observation of a threat intelligence indicator.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3935,10 +4009,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      * </p>
      * 
-     * @return The source of the threat intel.
+     * @return The source of the threat intelligence.
      */
 
     public java.util.List<StringFilter> getThreatIntelIndicatorSource() {
@@ -3947,11 +4021,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      * </p>
      * 
      * @param threatIntelIndicatorSource
-     *        The source of the threat intel.
+     *        The source of the threat intelligence.
      */
 
     public void setThreatIntelIndicatorSource(java.util.Collection<StringFilter> threatIntelIndicatorSource) {
@@ -3965,7 +4039,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -3974,7 +4048,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorSource
-     *        The source of the threat intel.
+     *        The source of the threat intelligence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3990,11 +4064,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      * </p>
      * 
      * @param threatIntelIndicatorSource
-     *        The source of the threat intel.
+     *        The source of the threat intelligence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -4005,10 +4079,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      * </p>
      * 
-     * @return The URL for more details from the source of the threat intel.
+     * @return The URL for more details from the source of the threat intelligence.
      */
 
     public java.util.List<StringFilter> getThreatIntelIndicatorSourceUrl() {
@@ -4017,11 +4091,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      * </p>
      * 
      * @param threatIntelIndicatorSourceUrl
-     *        The URL for more details from the source of the threat intel.
+     *        The URL for more details from the source of the threat intelligence.
      */
 
     public void setThreatIntelIndicatorSourceUrl(java.util.Collection<StringFilter> threatIntelIndicatorSourceUrl) {
@@ -4035,7 +4109,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -4044,7 +4118,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param threatIntelIndicatorSourceUrl
-     *        The URL for more details from the source of the threat intel.
+     *        The URL for more details from the source of the threat intelligence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -4060,11 +4134,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      * </p>
      * 
      * @param threatIntelIndicatorSourceUrl
-     *        The URL for more details from the source of the threat intel.
+     *        The URL for more details from the source of the threat intelligence.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -4989,10 +5063,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      * </p>
      * 
-     * @return The date/time the instance was launched.
+     * @return The date and time the instance was launched.
      */
 
     public java.util.List<DateFilter> getResourceAwsEc2InstanceLaunchedAt() {
@@ -5001,11 +5075,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      * </p>
      * 
      * @param resourceAwsEc2InstanceLaunchedAt
-     *        The date/time the instance was launched.
+     *        The date and time the instance was launched.
      */
 
     public void setResourceAwsEc2InstanceLaunchedAt(java.util.Collection<DateFilter> resourceAwsEc2InstanceLaunchedAt) {
@@ -5019,7 +5093,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -5028,7 +5102,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * </p>
      * 
      * @param resourceAwsEc2InstanceLaunchedAt
-     *        The date/time the instance was launched.
+     *        The date and time the instance was launched.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -5044,11 +5118,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     /**
      * <p>
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      * </p>
      * 
      * @param resourceAwsEc2InstanceLaunchedAt
-     *        The date/time the instance was launched.
+     *        The date and time the instance was launched.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -5760,11 +5834,11 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported
-     * standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * </p>
      * 
      * @return Exclusive to findings that are generated as the result of a check run against a specific rule in a
-     *         supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     *         supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      */
 
     public java.util.List<StringFilter> getComplianceStatus() {
@@ -5774,12 +5848,12 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported
-     * standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * </p>
      * 
      * @param complianceStatus
      *        Exclusive to findings that are generated as the result of a check run against a specific rule in a
-     *        supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     *        supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      */
 
     public void setComplianceStatus(java.util.Collection<StringFilter> complianceStatus) {
@@ -5794,7 +5868,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported
-     * standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -5804,7 +5878,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
      * 
      * @param complianceStatus
      *        Exclusive to findings that are generated as the result of a check run against a specific rule in a
-     *        supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     *        supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -5821,12 +5895,12 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
     /**
      * <p>
      * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported
-     * standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * </p>
      * 
      * @param complianceStatus
      *        Exclusive to findings that are generated as the result of a check run against a specific rule in a
-     *        supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     *        supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -5972,6 +6046,256 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
 
     public AwsSecurityFindingFilters withWorkflowState(java.util.Collection<StringFilter> workflowState) {
         setWorkflowState(workflowState);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The status of the investigation into a finding. Allowed values are the following.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when
+     * the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @return The status of the investigation into a finding. Allowed values are the following.</p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue.
+     *         Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     *         </p>
+     *         </li>
+     */
+
+    public java.util.List<StringFilter> getWorkflowStatus() {
+        return workflowStatus;
+    }
+
+    /**
+     * <p>
+     * The status of the investigation into a finding. Allowed values are the following.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when
+     * the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param workflowStatus
+     *        The status of the investigation into a finding. Allowed values are the following.</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used
+     *        when the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     *        </p>
+     *        </li>
+     */
+
+    public void setWorkflowStatus(java.util.Collection<StringFilter> workflowStatus) {
+        if (workflowStatus == null) {
+            this.workflowStatus = null;
+            return;
+        }
+
+        this.workflowStatus = new java.util.ArrayList<StringFilter>(workflowStatus);
+    }
+
+    /**
+     * <p>
+     * The status of the investigation into a finding. Allowed values are the following.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when
+     * the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setWorkflowStatus(java.util.Collection)} or {@link #withWorkflowStatus(java.util.Collection)} if you want
+     * to override the existing values.
+     * </p>
+     * 
+     * @param workflowStatus
+     *        The status of the investigation into a finding. Allowed values are the following.</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used
+     *        when the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     *        </p>
+     *        </li>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public AwsSecurityFindingFilters withWorkflowStatus(StringFilter... workflowStatus) {
+        if (this.workflowStatus == null) {
+            setWorkflowStatus(new java.util.ArrayList<StringFilter>(workflowStatus.length));
+        }
+        for (StringFilter ele : workflowStatus) {
+            this.workflowStatus.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * The status of the investigation into a finding. Allowed values are the following.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when
+     * the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param workflowStatus
+     *        The status of the investigation into a finding. Allowed values are the following.</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>NEW</code> - The initial state of a finding, before it is reviewed.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used
+     *        when the initial reviewer is not the resource owner, and needs intervention from the resource owner.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.
+     *        </p>
+     *        </li>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public AwsSecurityFindingFilters withWorkflowStatus(java.util.Collection<StringFilter> workflowStatus) {
+        setWorkflowStatus(workflowStatus);
         return this;
     }
 
@@ -6629,6 +6953,8 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
             sb.append("VerificationState: ").append(getVerificationState()).append(",");
         if (getWorkflowState() != null)
             sb.append("WorkflowState: ").append(getWorkflowState()).append(",");
+        if (getWorkflowStatus() != null)
+            sb.append("WorkflowStatus: ").append(getWorkflowStatus()).append(",");
         if (getRecordState() != null)
             sb.append("RecordState: ").append(getRecordState()).append(",");
         if (getRelatedFindingsProductArn() != null)
@@ -6973,6 +7299,10 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
             return false;
         if (other.getWorkflowState() != null && other.getWorkflowState().equals(this.getWorkflowState()) == false)
             return false;
+        if (other.getWorkflowStatus() == null ^ this.getWorkflowStatus() == null)
+            return false;
+        if (other.getWorkflowStatus() != null && other.getWorkflowStatus().equals(this.getWorkflowStatus()) == false)
+            return false;
         if (other.getRecordState() == null ^ this.getRecordState() == null)
             return false;
         if (other.getRecordState() != null && other.getRecordState().equals(this.getRecordState()) == false)
@@ -7086,6 +7416,7 @@ public class AwsSecurityFindingFilters implements Serializable, Cloneable, Struc
         hashCode = prime * hashCode + ((getComplianceStatus() == null) ? 0 : getComplianceStatus().hashCode());
         hashCode = prime * hashCode + ((getVerificationState() == null) ? 0 : getVerificationState().hashCode());
         hashCode = prime * hashCode + ((getWorkflowState() == null) ? 0 : getWorkflowState().hashCode());
+        hashCode = prime * hashCode + ((getWorkflowStatus() == null) ? 0 : getWorkflowStatus().hashCode());
         hashCode = prime * hashCode + ((getRecordState() == null) ? 0 : getRecordState().hashCode());
         hashCode = prime * hashCode + ((getRelatedFindingsProductArn() == null) ? 0 : getRelatedFindingsProductArn().hashCode());
         hashCode = prime * hashCode + ((getRelatedFindingsId() == null) ? 0 : getRelatedFindingsId().hashCode());

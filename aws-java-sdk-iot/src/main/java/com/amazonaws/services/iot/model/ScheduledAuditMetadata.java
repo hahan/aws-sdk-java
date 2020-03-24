@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -39,7 +39,7 @@ public class ScheduledAuditMetadata implements Serializable, Cloneable, Structur
     private String scheduledAuditArn;
     /**
      * <p>
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      * </p>
      */
     private String frequency;
@@ -141,11 +141,11 @@ public class ScheduledAuditMetadata implements Serializable, Cloneable, Structur
 
     /**
      * <p>
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      * </p>
      * 
      * @param frequency
-     *        How often the scheduled audit takes place.
+     *        How often the scheduled audit occurs.
      * @see AuditFrequency
      */
 
@@ -155,10 +155,10 @@ public class ScheduledAuditMetadata implements Serializable, Cloneable, Structur
 
     /**
      * <p>
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      * </p>
      * 
-     * @return How often the scheduled audit takes place.
+     * @return How often the scheduled audit occurs.
      * @see AuditFrequency
      */
 
@@ -168,11 +168,11 @@ public class ScheduledAuditMetadata implements Serializable, Cloneable, Structur
 
     /**
      * <p>
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      * </p>
      * 
      * @param frequency
-     *        How often the scheduled audit takes place.
+     *        How often the scheduled audit occurs.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see AuditFrequency
      */
@@ -184,11 +184,11 @@ public class ScheduledAuditMetadata implements Serializable, Cloneable, Structur
 
     /**
      * <p>
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      * </p>
      * 
      * @param frequency
-     *        How often the scheduled audit takes place.
+     *        How often the scheduled audit occurs.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see AuditFrequency
      */

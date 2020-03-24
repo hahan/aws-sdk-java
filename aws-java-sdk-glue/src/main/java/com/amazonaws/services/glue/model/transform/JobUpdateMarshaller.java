@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -41,6 +41,8 @@ public class JobUpdateMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("Command").build();
     private static final MarshallingInfo<Map> DEFAULTARGUMENTS_BINDING = MarshallingInfo.builder(MarshallingType.MAP)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("DefaultArguments").build();
+    private static final MarshallingInfo<Map> NONOVERRIDABLEARGUMENTS_BINDING = MarshallingInfo.builder(MarshallingType.MAP)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("NonOverridableArguments").build();
     private static final MarshallingInfo<StructuredPojo> CONNECTIONS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("Connections").build();
     private static final MarshallingInfo<Integer> MAXRETRIES_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER)
@@ -59,6 +61,8 @@ public class JobUpdateMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("SecurityConfiguration").build();
     private static final MarshallingInfo<StructuredPojo> NOTIFICATIONPROPERTY_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("NotificationProperty").build();
+    private static final MarshallingInfo<String> GLUEVERSION_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("GlueVersion").build();
 
     private static final JobUpdateMarshaller instance = new JobUpdateMarshaller();
 
@@ -82,6 +86,7 @@ public class JobUpdateMarshaller {
             protocolMarshaller.marshall(jobUpdate.getExecutionProperty(), EXECUTIONPROPERTY_BINDING);
             protocolMarshaller.marshall(jobUpdate.getCommand(), COMMAND_BINDING);
             protocolMarshaller.marshall(jobUpdate.getDefaultArguments(), DEFAULTARGUMENTS_BINDING);
+            protocolMarshaller.marshall(jobUpdate.getNonOverridableArguments(), NONOVERRIDABLEARGUMENTS_BINDING);
             protocolMarshaller.marshall(jobUpdate.getConnections(), CONNECTIONS_BINDING);
             protocolMarshaller.marshall(jobUpdate.getMaxRetries(), MAXRETRIES_BINDING);
             protocolMarshaller.marshall(jobUpdate.getAllocatedCapacity(), ALLOCATEDCAPACITY_BINDING);
@@ -91,6 +96,7 @@ public class JobUpdateMarshaller {
             protocolMarshaller.marshall(jobUpdate.getNumberOfWorkers(), NUMBEROFWORKERS_BINDING);
             protocolMarshaller.marshall(jobUpdate.getSecurityConfiguration(), SECURITYCONFIGURATION_BINDING);
             protocolMarshaller.marshall(jobUpdate.getNotificationProperty(), NOTIFICATIONPROPERTY_BINDING);
+            protocolMarshaller.marshall(jobUpdate.getGlueVersion(), GLUEVERSION_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

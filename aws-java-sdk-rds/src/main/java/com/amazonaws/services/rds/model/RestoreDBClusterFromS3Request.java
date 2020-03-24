@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -142,16 +142,37 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * The version number of the database engine to use.
      * </p>
      * <p>
+     * To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the
+     * following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use
+     * the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
      * <b>Aurora MySQL</b>
      * </p>
      * <p>
-     * Example: <code>5.6.10a</code>
+     * Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     * <code>5.7.mysql_aurora.2.04.5</code>
      * </p>
      * <p>
      * <b>Aurora PostgreSQL</b>
      * </p>
      * <p>
-     * Example: <code>9.6.3</code>
+     * Example: <code>9.6.3</code>, <code>10.7</code>
      * </p>
      */
     private String engineVersion;
@@ -298,6 +319,11 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
      * accounts. By default, mapping is disabled.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication</a> in the <i>Amazon Aurora User Guide.</i>
+     * </p>
      */
     private Boolean enableIAMDatabaseAuthentication;
     /**
@@ -384,6 +410,25 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * </p>
      */
     private Boolean copyTagsToSnapshot;
+    /**
+     * <p>
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this
+     * operation.
+     * </p>
+     * <p>
+     * For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to
+     * the DB cluster. For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     * Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     * </p>
+     */
+    private String domain;
+    /**
+     * <p>
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     * </p>
+     */
+    private String domainIAMRoleName;
 
     /**
      * <p>
@@ -1149,31 +1194,74 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * The version number of the database engine to use.
      * </p>
      * <p>
+     * To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the
+     * following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use
+     * the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
      * <b>Aurora MySQL</b>
      * </p>
      * <p>
-     * Example: <code>5.6.10a</code>
+     * Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     * <code>5.7.mysql_aurora.2.04.5</code>
      * </p>
      * <p>
      * <b>Aurora PostgreSQL</b>
      * </p>
      * <p>
-     * Example: <code>9.6.3</code>
+     * Example: <code>9.6.3</code>, <code>10.7</code>
      * </p>
      * 
      * @param engineVersion
      *        The version number of the database engine to use.</p>
      *        <p>
+     *        To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora),
+     *        use the following command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
+     *        To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible
+     *        Aurora), use the following command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
+     *        To list all of the available engine versions for <code>aurora-postgresql</code>, use the following
+     *        command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
      *        <b>Aurora MySQL</b>
      *        </p>
      *        <p>
-     *        Example: <code>5.6.10a</code>
+     *        Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     *        <code>5.7.mysql_aurora.2.04.5</code>
      *        </p>
      *        <p>
      *        <b>Aurora PostgreSQL</b>
      *        </p>
      *        <p>
-     *        Example: <code>9.6.3</code>
+     *        Example: <code>9.6.3</code>, <code>10.7</code>
      */
 
     public void setEngineVersion(String engineVersion) {
@@ -1185,30 +1273,73 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * The version number of the database engine to use.
      * </p>
      * <p>
+     * To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the
+     * following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use
+     * the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
      * <b>Aurora MySQL</b>
      * </p>
      * <p>
-     * Example: <code>5.6.10a</code>
+     * Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     * <code>5.7.mysql_aurora.2.04.5</code>
      * </p>
      * <p>
      * <b>Aurora PostgreSQL</b>
      * </p>
      * <p>
-     * Example: <code>9.6.3</code>
+     * Example: <code>9.6.3</code>, <code>10.7</code>
      * </p>
      * 
      * @return The version number of the database engine to use.</p>
      *         <p>
+     *         To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora),
+     *         use the following command:
+     *         </p>
+     *         <p>
+     *         <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     *         </p>
+     *         <p>
+     *         To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible
+     *         Aurora), use the following command:
+     *         </p>
+     *         <p>
+     *         <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     *         </p>
+     *         <p>
+     *         To list all of the available engine versions for <code>aurora-postgresql</code>, use the following
+     *         command:
+     *         </p>
+     *         <p>
+     *         <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     *         </p>
+     *         <p>
      *         <b>Aurora MySQL</b>
      *         </p>
      *         <p>
-     *         Example: <code>5.6.10a</code>
+     *         Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     *         <code>5.7.mysql_aurora.2.04.5</code>
      *         </p>
      *         <p>
      *         <b>Aurora PostgreSQL</b>
      *         </p>
      *         <p>
-     *         Example: <code>9.6.3</code>
+     *         Example: <code>9.6.3</code>, <code>10.7</code>
      */
 
     public String getEngineVersion() {
@@ -1220,31 +1351,74 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * The version number of the database engine to use.
      * </p>
      * <p>
+     * To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the
+     * following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use
+     * the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
+     * To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:
+     * </p>
+     * <p>
+     * <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     * </p>
+     * <p>
      * <b>Aurora MySQL</b>
      * </p>
      * <p>
-     * Example: <code>5.6.10a</code>
+     * Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     * <code>5.7.mysql_aurora.2.04.5</code>
      * </p>
      * <p>
      * <b>Aurora PostgreSQL</b>
      * </p>
      * <p>
-     * Example: <code>9.6.3</code>
+     * Example: <code>9.6.3</code>, <code>10.7</code>
      * </p>
      * 
      * @param engineVersion
      *        The version number of the database engine to use.</p>
      *        <p>
+     *        To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora),
+     *        use the following command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
+     *        To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible
+     *        Aurora), use the following command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
+     *        To list all of the available engine versions for <code>aurora-postgresql</code>, use the following
+     *        command:
+     *        </p>
+     *        <p>
+     *        <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"</code>
+     *        </p>
+     *        <p>
      *        <b>Aurora MySQL</b>
      *        </p>
      *        <p>
-     *        Example: <code>5.6.10a</code>
+     *        Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.12</code>,
+     *        <code>5.7.mysql_aurora.2.04.5</code>
      *        </p>
      *        <p>
      *        <b>Aurora PostgreSQL</b>
      *        </p>
      *        <p>
-     *        Example: <code>9.6.3</code>
+     *        Example: <code>9.6.3</code>, <code>10.7</code>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -2156,10 +2330,19 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
      * accounts. By default, mapping is disabled.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication</a> in the <i>Amazon Aurora User Guide.</i>
+     * </p>
      * 
      * @param enableIAMDatabaseAuthentication
      *        A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *        database accounts. By default, mapping is disabled.
+     *        database accounts. By default, mapping is disabled.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM
+     *        Database Authentication</a> in the <i>Amazon Aurora User Guide.</i>
      */
 
     public void setEnableIAMDatabaseAuthentication(Boolean enableIAMDatabaseAuthentication) {
@@ -2171,9 +2354,18 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
      * accounts. By default, mapping is disabled.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication</a> in the <i>Amazon Aurora User Guide.</i>
+     * </p>
      * 
      * @return A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *         database accounts. By default, mapping is disabled.
+     *         database accounts. By default, mapping is disabled.</p>
+     *         <p>
+     *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM
+     *         Database Authentication</a> in the <i>Amazon Aurora User Guide.</i>
      */
 
     public Boolean getEnableIAMDatabaseAuthentication() {
@@ -2185,10 +2377,19 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
      * accounts. By default, mapping is disabled.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication</a> in the <i>Amazon Aurora User Guide.</i>
+     * </p>
      * 
      * @param enableIAMDatabaseAuthentication
      *        A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *        database accounts. By default, mapping is disabled.
+     *        database accounts. By default, mapping is disabled.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM
+     *        Database Authentication</a> in the <i>Amazon Aurora User Guide.</i>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -2202,9 +2403,18 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
      * accounts. By default, mapping is disabled.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication</a> in the <i>Amazon Aurora User Guide.</i>
+     * </p>
      * 
      * @return A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *         database accounts. By default, mapping is disabled.
+     *         database accounts. By default, mapping is disabled.</p>
+     *         <p>
+     *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM
+     *         Database Authentication</a> in the <i>Amazon Aurora User Guide.</i>
      */
 
     public Boolean isEnableIAMDatabaseAuthentication() {
@@ -2813,6 +3023,125 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
     }
 
     /**
+     * <p>
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this
+     * operation.
+     * </p>
+     * <p>
+     * For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to
+     * the DB cluster. For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     * Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     * </p>
+     * 
+     * @param domain
+     *        Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior
+     *        to this operation. </p>
+     *        <p>
+     *        For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that
+     *        connect to the DB cluster. For more information, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     *        Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     */
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    /**
+     * <p>
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this
+     * operation.
+     * </p>
+     * <p>
+     * For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to
+     * the DB cluster. For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     * Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     * </p>
+     * 
+     * @return Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior
+     *         to this operation. </p>
+     *         <p>
+     *         For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that
+     *         connect to the DB cluster. For more information, see <a
+     *         href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     *         Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     */
+
+    public String getDomain() {
+        return this.domain;
+    }
+
+    /**
+     * <p>
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this
+     * operation.
+     * </p>
+     * <p>
+     * For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to
+     * the DB cluster. For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     * Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     * </p>
+     * 
+     * @param domain
+     *        Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior
+     *        to this operation. </p>
+     *        <p>
+     *        For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that
+     *        connect to the DB cluster. For more information, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html">Using Kerberos
+     *        Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public RestoreDBClusterFromS3Request withDomain(String domain) {
+        setDomain(domain);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     * </p>
+     * 
+     * @param domainIAMRoleName
+     *        Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+
+    public void setDomainIAMRoleName(String domainIAMRoleName) {
+        this.domainIAMRoleName = domainIAMRoleName;
+    }
+
+    /**
+     * <p>
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     * </p>
+     * 
+     * @return Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+
+    public String getDomainIAMRoleName() {
+        return this.domainIAMRoleName;
+    }
+
+    /**
+     * <p>
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     * </p>
+     * 
+     * @param domainIAMRoleName
+     *        Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public RestoreDBClusterFromS3Request withDomainIAMRoleName(String domainIAMRoleName) {
+        setDomainIAMRoleName(domainIAMRoleName);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -2881,7 +3210,11 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
         if (getDeletionProtection() != null)
             sb.append("DeletionProtection: ").append(getDeletionProtection()).append(",");
         if (getCopyTagsToSnapshot() != null)
-            sb.append("CopyTagsToSnapshot: ").append(getCopyTagsToSnapshot());
+            sb.append("CopyTagsToSnapshot: ").append(getCopyTagsToSnapshot()).append(",");
+        if (getDomain() != null)
+            sb.append("Domain: ").append(getDomain()).append(",");
+        if (getDomainIAMRoleName() != null)
+            sb.append("DomainIAMRoleName: ").append(getDomainIAMRoleName());
         sb.append("}");
         return sb.toString();
     }
@@ -3013,6 +3346,14 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
             return false;
         if (other.getCopyTagsToSnapshot() != null && other.getCopyTagsToSnapshot().equals(this.getCopyTagsToSnapshot()) == false)
             return false;
+        if (other.getDomain() == null ^ this.getDomain() == null)
+            return false;
+        if (other.getDomain() != null && other.getDomain().equals(this.getDomain()) == false)
+            return false;
+        if (other.getDomainIAMRoleName() == null ^ this.getDomainIAMRoleName() == null)
+            return false;
+        if (other.getDomainIAMRoleName() != null && other.getDomainIAMRoleName().equals(this.getDomainIAMRoleName()) == false)
+            return false;
         return true;
     }
 
@@ -3050,6 +3391,8 @@ public class RestoreDBClusterFromS3Request extends com.amazonaws.AmazonWebServic
         hashCode = prime * hashCode + ((getEnableCloudwatchLogsExports() == null) ? 0 : getEnableCloudwatchLogsExports().hashCode());
         hashCode = prime * hashCode + ((getDeletionProtection() == null) ? 0 : getDeletionProtection().hashCode());
         hashCode = prime * hashCode + ((getCopyTagsToSnapshot() == null) ? 0 : getCopyTagsToSnapshot().hashCode());
+        hashCode = prime * hashCode + ((getDomain() == null) ? 0 : getDomain().hashCode());
+        hashCode = prime * hashCode + ((getDomainIAMRoleName() == null) ? 0 : getDomainIAMRoleName().hashCode());
         return hashCode;
     }
 

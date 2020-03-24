@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -77,29 +77,29 @@ public class AmazonKinesisVideoArchivedMediaClient extends AmazonWebServiceClien
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("NotAuthorizedException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.NotAuthorizedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("NotAuthorizedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.NotAuthorizedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidCodecPrivateDataException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.InvalidCodecPrivateDataException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidCodecPrivateDataException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.InvalidCodecPrivateDataExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgumentException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.InvalidArgumentException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgumentException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.InvalidArgumentExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ClientLimitExceededException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.ClientLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ClientLimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.ClientLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("NoDataRetentionException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.NoDataRetentionException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("NoDataRetentionException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.NoDataRetentionExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.ResourceNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.ResourceNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("UnsupportedStreamMediaTypeException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.UnsupportedStreamMediaTypeException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("UnsupportedStreamMediaTypeException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.UnsupportedStreamMediaTypeExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("MissingCodecPrivateDataException").withModeledClass(
-                                    com.amazonaws.services.kinesisvideo.model.MissingCodecPrivateDataException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("MissingCodecPrivateDataException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.kinesisvideo.model.transform.MissingCodecPrivateDataExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.kinesisvideo.model.AmazonKinesisVideoException.class));
 
     public static AmazonKinesisVideoArchivedMediaClientBuilder builder() {
@@ -164,8 +164,8 @@ public class AmazonKinesisVideoArchivedMediaClient extends AmazonWebServiceClien
      * <li>
      * <p>
      * The media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded audio. Specifically,
-     * the codec id of track 1 should be <code>V_MPEG/ISO/AVC</code> (for h.264) or V_MPEGH/ISO/HEVC (for H.265).
-     * Optionally, the codec id of track 2 should be <code>A_AAC</code> (for AAC) or A_MS/ACM (for G.711).
+     * the codec ID of track 1 should be <code>V_MPEG/ISO/AVC</code> (for h.264) or V_MPEGH/ISO/HEVC (for H.265).
+     * Optionally, the codec ID of track 2 should be <code>A_AAC</code> (for AAC) or A_MS/ACM (for G.711).
      * </p>
      * </li>
      * <li>
@@ -224,7 +224,7 @@ public class AmazonKinesisVideoArchivedMediaClient extends AmazonWebServiceClien
      * <li>
      * <p>
      * Provide the URL (containing the encrypted session token) for the MPEG-DASH manifest to a media player that
-     * supports the MPEG-DASH protocol. Kinesis Video Streams makes the initialization fragment, and media fragments
+     * supports the MPEG-DASH protocol. Kinesis Video Streams makes the initialization fragment and media fragments
      * available through the manifest URL. The initialization fragment contains the codec private data for the stream,
      * and other data needed to set up the video or audio decoder and renderer. The media fragments contain encoded
      * video frames or encoded audio samples.
@@ -441,8 +441,8 @@ public class AmazonKinesisVideoArchivedMediaClient extends AmazonWebServiceClien
      * <li>
      * <p>
      * The media must contain h.264 or h.265 encoded video and, optionally, AAC encoded audio. Specifically, the codec
-     * id of track 1 should be <code>V_MPEG/ISO/AVC</code> (for h.264) or <code>V_MPEG/ISO/HEVC</code> (for h.265).
-     * Optionally, the codec id of track 2 should be <code>A_AAC</code>.
+     * ID of track 1 should be <code>V_MPEG/ISO/AVC</code> (for h.264) or <code>V_MPEG/ISO/HEVC</code> (for h.265).
+     * Optionally, the codec ID of track 2 should be <code>A_AAC</code>.
      * </p>
      * </li>
      * <li>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -49,6 +49,8 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </p>
      */
     private String labelingJobArn;
+    /** <p/> */
+    private String autoMLJobArn;
     /**
      * <p>
      * Information about the Amazon S3 location that is configured for storing model artifacts.
@@ -125,6 +127,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </li>
      * <li>
      * <p>
+     * <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.
      * </p>
      * </li>
@@ -157,6 +164,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * <li>
      * <p>
      * <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      * </p>
      * </li>
      * <li>
@@ -257,8 +269,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
     private VpcConfig vpcConfig;
     /**
      * <p>
-     * Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon SageMaker
-     * ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for a spot
+     * instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model
+     * training costs.
      * </p>
      * <p>
      * To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination
@@ -317,11 +330,6 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      */
     private Boolean enableNetworkIsolation;
     /**
@@ -333,6 +341,49 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </p>
      */
     private Boolean enableInterContainerTrafficEncryption;
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     */
+    private Boolean enableManagedSpotTraining;
+
+    private CheckpointConfig checkpointConfig;
+    /**
+     * <p>
+     * The training time in seconds.
+     * </p>
+     */
+    private Integer trainingTimeInSeconds;
+    /**
+     * <p>
+     * The billable time in seconds.
+     * </p>
+     * <p>
+     * You can calculate the savings from using managed spot training using the formula
+     * <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     * <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is 80%.
+     * </p>
+     */
+    private Integer billableTimeInSeconds;
+
+    private DebugHookConfig debugHookConfig;
+
+    private ExperimentConfig experimentConfig;
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     */
+    private java.util.List<DebugRuleConfiguration> debugRuleConfigurations;
+
+    private TensorBoardOutputConfig tensorBoardOutputConfig;
+    /**
+     * <p>
+     * Status about the debug rule evaluation.
+     * </p>
+     */
+    private java.util.List<DebugRuleEvaluationStatus> debugRuleEvaluationStatuses;
 
     /**
      * <p>
@@ -503,6 +554,38 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
 
     public DescribeTrainingJobResult withLabelingJobArn(String labelingJobArn) {
         setLabelingJobArn(labelingJobArn);
+        return this;
+    }
+
+    /**
+     * <p/>
+     * 
+     * @param autoMLJobArn
+     */
+
+    public void setAutoMLJobArn(String autoMLJobArn) {
+        this.autoMLJobArn = autoMLJobArn;
+    }
+
+    /**
+     * <p/>
+     * 
+     * @return
+     */
+
+    public String getAutoMLJobArn() {
+        return this.autoMLJobArn;
+    }
+
+    /**
+     * <p/>
+     * 
+     * @param autoMLJobArn
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withAutoMLJobArn(String autoMLJobArn) {
+        setAutoMLJobArn(autoMLJobArn);
         return this;
     }
 
@@ -903,6 +986,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </li>
      * <li>
      * <p>
+     * <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.
      * </p>
      * </li>
@@ -935,6 +1023,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * <li>
      * <p>
      * <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      * </p>
      * </li>
      * <li>
@@ -1010,6 +1103,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        </li>
      *        <li>
      *        <p>
+     *        <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3
      *        location.
      *        </p>
@@ -1043,6 +1141,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        <li>
      *        <p>
      *        <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      *        </p>
      *        </li>
      *        <li>
@@ -1124,6 +1227,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </li>
      * <li>
      * <p>
+     * <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.
      * </p>
      * </li>
@@ -1156,6 +1264,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * <li>
      * <p>
      * <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      * </p>
      * </li>
      * <li>
@@ -1230,6 +1343,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *         </li>
      *         <li>
      *         <p>
+     *         <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
      *         <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3
      *         location.
      *         </p>
@@ -1263,6 +1381,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *         <li>
      *         <p>
      *         <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      *         </p>
      *         </li>
      *         <li>
@@ -1344,6 +1467,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </li>
      * <li>
      * <p>
+     * <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.
      * </p>
      * </li>
@@ -1376,6 +1504,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * <li>
      * <p>
      * <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      * </p>
      * </li>
      * <li>
@@ -1451,6 +1584,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        </li>
      *        <li>
      *        <p>
+     *        <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3
      *        location.
      *        </p>
@@ -1484,6 +1622,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        <li>
      *        <p>
      *        <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      *        </p>
      *        </li>
      *        <li>
@@ -1567,6 +1710,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </li>
      * <li>
      * <p>
+     * <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.
      * </p>
      * </li>
@@ -1599,6 +1747,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * <li>
      * <p>
      * <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      * </p>
      * </li>
      * <li>
@@ -1674,6 +1827,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        </li>
      *        <li>
      *        <p>
+     *        <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3
      *        location.
      *        </p>
@@ -1707,6 +1865,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      *        <li>
      *        <p>
      *        <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>MaxWaitTmeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.
      *        </p>
      *        </li>
      *        <li>
@@ -1839,6 +2002,13 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         setHyperParameters(hyperParameters);
         return this;
     }
+
+    /**
+     * Add a single HyperParameters entry
+     *
+     * @see DescribeTrainingJobResult#withHyperParameters
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public DescribeTrainingJobResult addHyperParametersEntry(String key, String value) {
         if (null == this.hyperParameters) {
@@ -2151,8 +2321,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
 
     /**
      * <p>
-     * Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon SageMaker
-     * ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for a spot
+     * instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model
+     * training costs.
      * </p>
      * <p>
      * To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination
@@ -2161,8 +2332,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </p>
      * 
      * @param stoppingCondition
-     *        Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon
-     *        SageMaker ends the training job. Use this API to cap model training costs.</p>
+     *        Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for
+     *        a spot instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API
+     *        to cap model training costs.</p>
      *        <p>
      *        To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job
      *        termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the
@@ -2175,8 +2347,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
 
     /**
      * <p>
-     * Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon SageMaker
-     * ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for a spot
+     * instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model
+     * training costs.
      * </p>
      * <p>
      * To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination
@@ -2184,8 +2357,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * training are not lost.
      * </p>
      * 
-     * @return Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon
-     *         SageMaker ends the training job. Use this API to cap model training costs.</p>
+     * @return Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait
+     *         for a spot instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use
+     *         this API to cap model training costs.</p>
      *         <p>
      *         To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job
      *         termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so
@@ -2198,8 +2372,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
 
     /**
      * <p>
-     * Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon SageMaker
-     * ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for a spot
+     * instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model
+     * training costs.
      * </p>
      * <p>
      * To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination
@@ -2208,8 +2383,9 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * </p>
      * 
      * @param stoppingCondition
-     *        Specifies a limit to how long a model training job can run. When the job reaches the time limit, Amazon
-     *        SageMaker ends the training job. Use this API to cap model training costs.</p>
+     *        Specifies a limit to how long a model training job can run. It also specifies the maximum time to wait for
+     *        a spot instance. When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API
+     *        to cap model training costs.</p>
      *        <p>
      *        To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job
      *        termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the
@@ -2573,20 +2749,12 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        If you want to allow inbound or outbound network calls, except for calls between peers within a training
      *        cluster for distributed training, choose <code>True</code>. If you enable network isolation for training
      *        jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model
-     *        artifacts through the specified VPC, but the training container does not have network access.</p> <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public void setEnableNetworkIsolation(Boolean enableNetworkIsolation) {
@@ -2600,19 +2768,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return If you want to allow inbound or outbound network calls, except for calls between peers within a training
      *         cluster for distributed training, choose <code>True</code>. If you enable network isolation for training
      *         jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model
-     *         artifacts through the specified VPC, but the training container does not have network access.</p> <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean getEnableNetworkIsolation() {
@@ -2626,20 +2786,12 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        If you want to allow inbound or outbound network calls, except for calls between peers within a training
      *        cluster for distributed training, choose <code>True</code>. If you enable network isolation for training
      *        jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model
-     *        artifacts through the specified VPC, but the training container does not have network access.</p> <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        artifacts through the specified VPC, but the training container does not have network access.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -2655,19 +2807,11 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return If you want to allow inbound or outbound network calls, except for calls between peers within a training
      *         cluster for distributed training, choose <code>True</code>. If you enable network isolation for training
      *         jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model
-     *         artifacts through the specified VPC, but the training container does not have network access.</p> <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean isEnableNetworkIsolation() {
@@ -2751,6 +2895,416 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
     }
 
     /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *        <code>False</code>).
+     */
+
+    public void setEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        this.enableManagedSpotTraining = enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @return A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *         <code>False</code>).
+     */
+
+    public Boolean getEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *        <code>False</code>).
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        setEnableManagedSpotTraining(enableManagedSpotTraining);
+        return this;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @return A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *         <code>False</code>).
+     */
+
+    public Boolean isEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * @param checkpointConfig
+     */
+
+    public void setCheckpointConfig(CheckpointConfig checkpointConfig) {
+        this.checkpointConfig = checkpointConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public CheckpointConfig getCheckpointConfig() {
+        return this.checkpointConfig;
+    }
+
+    /**
+     * @param checkpointConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withCheckpointConfig(CheckpointConfig checkpointConfig) {
+        setCheckpointConfig(checkpointConfig);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The training time in seconds.
+     * </p>
+     * 
+     * @param trainingTimeInSeconds
+     *        The training time in seconds.
+     */
+
+    public void setTrainingTimeInSeconds(Integer trainingTimeInSeconds) {
+        this.trainingTimeInSeconds = trainingTimeInSeconds;
+    }
+
+    /**
+     * <p>
+     * The training time in seconds.
+     * </p>
+     * 
+     * @return The training time in seconds.
+     */
+
+    public Integer getTrainingTimeInSeconds() {
+        return this.trainingTimeInSeconds;
+    }
+
+    /**
+     * <p>
+     * The training time in seconds.
+     * </p>
+     * 
+     * @param trainingTimeInSeconds
+     *        The training time in seconds.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withTrainingTimeInSeconds(Integer trainingTimeInSeconds) {
+        setTrainingTimeInSeconds(trainingTimeInSeconds);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The billable time in seconds.
+     * </p>
+     * <p>
+     * You can calculate the savings from using managed spot training using the formula
+     * <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     * <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is 80%.
+     * </p>
+     * 
+     * @param billableTimeInSeconds
+     *        The billable time in seconds.</p>
+     *        <p>
+     *        You can calculate the savings from using managed spot training using the formula
+     *        <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     *        <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is
+     *        80%.
+     */
+
+    public void setBillableTimeInSeconds(Integer billableTimeInSeconds) {
+        this.billableTimeInSeconds = billableTimeInSeconds;
+    }
+
+    /**
+     * <p>
+     * The billable time in seconds.
+     * </p>
+     * <p>
+     * You can calculate the savings from using managed spot training using the formula
+     * <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     * <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is 80%.
+     * </p>
+     * 
+     * @return The billable time in seconds.</p>
+     *         <p>
+     *         You can calculate the savings from using managed spot training using the formula
+     *         <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     *         <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is
+     *         80%.
+     */
+
+    public Integer getBillableTimeInSeconds() {
+        return this.billableTimeInSeconds;
+    }
+
+    /**
+     * <p>
+     * The billable time in seconds.
+     * </p>
+     * <p>
+     * You can calculate the savings from using managed spot training using the formula
+     * <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     * <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is 80%.
+     * </p>
+     * 
+     * @param billableTimeInSeconds
+     *        The billable time in seconds.</p>
+     *        <p>
+     *        You can calculate the savings from using managed spot training using the formula
+     *        <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if
+     *        <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is
+     *        80%.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withBillableTimeInSeconds(Integer billableTimeInSeconds) {
+        setBillableTimeInSeconds(billableTimeInSeconds);
+        return this;
+    }
+
+    /**
+     * @param debugHookConfig
+     */
+
+    public void setDebugHookConfig(DebugHookConfig debugHookConfig) {
+        this.debugHookConfig = debugHookConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public DebugHookConfig getDebugHookConfig() {
+        return this.debugHookConfig;
+    }
+
+    /**
+     * @param debugHookConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withDebugHookConfig(DebugHookConfig debugHookConfig) {
+        setDebugHookConfig(debugHookConfig);
+        return this;
+    }
+
+    /**
+     * @param experimentConfig
+     */
+
+    public void setExperimentConfig(ExperimentConfig experimentConfig) {
+        this.experimentConfig = experimentConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public ExperimentConfig getExperimentConfig() {
+        return this.experimentConfig;
+    }
+
+    /**
+     * @param experimentConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withExperimentConfig(ExperimentConfig experimentConfig) {
+        setExperimentConfig(experimentConfig);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @return Configuration information for debugging rules.
+     */
+
+    public java.util.List<DebugRuleConfiguration> getDebugRuleConfigurations() {
+        return debugRuleConfigurations;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     */
+
+    public void setDebugRuleConfigurations(java.util.Collection<DebugRuleConfiguration> debugRuleConfigurations) {
+        if (debugRuleConfigurations == null) {
+            this.debugRuleConfigurations = null;
+            return;
+        }
+
+        this.debugRuleConfigurations = new java.util.ArrayList<DebugRuleConfiguration>(debugRuleConfigurations);
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setDebugRuleConfigurations(java.util.Collection)} or
+     * {@link #withDebugRuleConfigurations(java.util.Collection)} if you want to override the existing values.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withDebugRuleConfigurations(DebugRuleConfiguration... debugRuleConfigurations) {
+        if (this.debugRuleConfigurations == null) {
+            setDebugRuleConfigurations(new java.util.ArrayList<DebugRuleConfiguration>(debugRuleConfigurations.length));
+        }
+        for (DebugRuleConfiguration ele : debugRuleConfigurations) {
+            this.debugRuleConfigurations.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * Configuration information for debugging rules.
+     * </p>
+     * 
+     * @param debugRuleConfigurations
+     *        Configuration information for debugging rules.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withDebugRuleConfigurations(java.util.Collection<DebugRuleConfiguration> debugRuleConfigurations) {
+        setDebugRuleConfigurations(debugRuleConfigurations);
+        return this;
+    }
+
+    /**
+     * @param tensorBoardOutputConfig
+     */
+
+    public void setTensorBoardOutputConfig(TensorBoardOutputConfig tensorBoardOutputConfig) {
+        this.tensorBoardOutputConfig = tensorBoardOutputConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public TensorBoardOutputConfig getTensorBoardOutputConfig() {
+        return this.tensorBoardOutputConfig;
+    }
+
+    /**
+     * @param tensorBoardOutputConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withTensorBoardOutputConfig(TensorBoardOutputConfig tensorBoardOutputConfig) {
+        setTensorBoardOutputConfig(tensorBoardOutputConfig);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Status about the debug rule evaluation.
+     * </p>
+     * 
+     * @return Status about the debug rule evaluation.
+     */
+
+    public java.util.List<DebugRuleEvaluationStatus> getDebugRuleEvaluationStatuses() {
+        return debugRuleEvaluationStatuses;
+    }
+
+    /**
+     * <p>
+     * Status about the debug rule evaluation.
+     * </p>
+     * 
+     * @param debugRuleEvaluationStatuses
+     *        Status about the debug rule evaluation.
+     */
+
+    public void setDebugRuleEvaluationStatuses(java.util.Collection<DebugRuleEvaluationStatus> debugRuleEvaluationStatuses) {
+        if (debugRuleEvaluationStatuses == null) {
+            this.debugRuleEvaluationStatuses = null;
+            return;
+        }
+
+        this.debugRuleEvaluationStatuses = new java.util.ArrayList<DebugRuleEvaluationStatus>(debugRuleEvaluationStatuses);
+    }
+
+    /**
+     * <p>
+     * Status about the debug rule evaluation.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setDebugRuleEvaluationStatuses(java.util.Collection)} or
+     * {@link #withDebugRuleEvaluationStatuses(java.util.Collection)} if you want to override the existing values.
+     * </p>
+     * 
+     * @param debugRuleEvaluationStatuses
+     *        Status about the debug rule evaluation.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withDebugRuleEvaluationStatuses(DebugRuleEvaluationStatus... debugRuleEvaluationStatuses) {
+        if (this.debugRuleEvaluationStatuses == null) {
+            setDebugRuleEvaluationStatuses(new java.util.ArrayList<DebugRuleEvaluationStatus>(debugRuleEvaluationStatuses.length));
+        }
+        for (DebugRuleEvaluationStatus ele : debugRuleEvaluationStatuses) {
+            this.debugRuleEvaluationStatuses.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * Status about the debug rule evaluation.
+     * </p>
+     * 
+     * @param debugRuleEvaluationStatuses
+     *        Status about the debug rule evaluation.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DescribeTrainingJobResult withDebugRuleEvaluationStatuses(java.util.Collection<DebugRuleEvaluationStatus> debugRuleEvaluationStatuses) {
+        setDebugRuleEvaluationStatuses(debugRuleEvaluationStatuses);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -2770,6 +3324,8 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
             sb.append("TuningJobArn: ").append(getTuningJobArn()).append(",");
         if (getLabelingJobArn() != null)
             sb.append("LabelingJobArn: ").append(getLabelingJobArn()).append(",");
+        if (getAutoMLJobArn() != null)
+            sb.append("AutoMLJobArn: ").append(getAutoMLJobArn()).append(",");
         if (getModelArtifacts() != null)
             sb.append("ModelArtifacts: ").append(getModelArtifacts()).append(",");
         if (getTrainingJobStatus() != null)
@@ -2809,7 +3365,25 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         if (getEnableNetworkIsolation() != null)
             sb.append("EnableNetworkIsolation: ").append(getEnableNetworkIsolation()).append(",");
         if (getEnableInterContainerTrafficEncryption() != null)
-            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption());
+            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption()).append(",");
+        if (getEnableManagedSpotTraining() != null)
+            sb.append("EnableManagedSpotTraining: ").append(getEnableManagedSpotTraining()).append(",");
+        if (getCheckpointConfig() != null)
+            sb.append("CheckpointConfig: ").append(getCheckpointConfig()).append(",");
+        if (getTrainingTimeInSeconds() != null)
+            sb.append("TrainingTimeInSeconds: ").append(getTrainingTimeInSeconds()).append(",");
+        if (getBillableTimeInSeconds() != null)
+            sb.append("BillableTimeInSeconds: ").append(getBillableTimeInSeconds()).append(",");
+        if (getDebugHookConfig() != null)
+            sb.append("DebugHookConfig: ").append(getDebugHookConfig()).append(",");
+        if (getExperimentConfig() != null)
+            sb.append("ExperimentConfig: ").append(getExperimentConfig()).append(",");
+        if (getDebugRuleConfigurations() != null)
+            sb.append("DebugRuleConfigurations: ").append(getDebugRuleConfigurations()).append(",");
+        if (getTensorBoardOutputConfig() != null)
+            sb.append("TensorBoardOutputConfig: ").append(getTensorBoardOutputConfig()).append(",");
+        if (getDebugRuleEvaluationStatuses() != null)
+            sb.append("DebugRuleEvaluationStatuses: ").append(getDebugRuleEvaluationStatuses());
         sb.append("}");
         return sb.toString();
     }
@@ -2839,6 +3413,10 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         if (other.getLabelingJobArn() == null ^ this.getLabelingJobArn() == null)
             return false;
         if (other.getLabelingJobArn() != null && other.getLabelingJobArn().equals(this.getLabelingJobArn()) == false)
+            return false;
+        if (other.getAutoMLJobArn() == null ^ this.getAutoMLJobArn() == null)
+            return false;
+        if (other.getAutoMLJobArn() != null && other.getAutoMLJobArn().equals(this.getAutoMLJobArn()) == false)
             return false;
         if (other.getModelArtifacts() == null ^ this.getModelArtifacts() == null)
             return false;
@@ -2921,6 +3499,42 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         if (other.getEnableInterContainerTrafficEncryption() != null
                 && other.getEnableInterContainerTrafficEncryption().equals(this.getEnableInterContainerTrafficEncryption()) == false)
             return false;
+        if (other.getEnableManagedSpotTraining() == null ^ this.getEnableManagedSpotTraining() == null)
+            return false;
+        if (other.getEnableManagedSpotTraining() != null && other.getEnableManagedSpotTraining().equals(this.getEnableManagedSpotTraining()) == false)
+            return false;
+        if (other.getCheckpointConfig() == null ^ this.getCheckpointConfig() == null)
+            return false;
+        if (other.getCheckpointConfig() != null && other.getCheckpointConfig().equals(this.getCheckpointConfig()) == false)
+            return false;
+        if (other.getTrainingTimeInSeconds() == null ^ this.getTrainingTimeInSeconds() == null)
+            return false;
+        if (other.getTrainingTimeInSeconds() != null && other.getTrainingTimeInSeconds().equals(this.getTrainingTimeInSeconds()) == false)
+            return false;
+        if (other.getBillableTimeInSeconds() == null ^ this.getBillableTimeInSeconds() == null)
+            return false;
+        if (other.getBillableTimeInSeconds() != null && other.getBillableTimeInSeconds().equals(this.getBillableTimeInSeconds()) == false)
+            return false;
+        if (other.getDebugHookConfig() == null ^ this.getDebugHookConfig() == null)
+            return false;
+        if (other.getDebugHookConfig() != null && other.getDebugHookConfig().equals(this.getDebugHookConfig()) == false)
+            return false;
+        if (other.getExperimentConfig() == null ^ this.getExperimentConfig() == null)
+            return false;
+        if (other.getExperimentConfig() != null && other.getExperimentConfig().equals(this.getExperimentConfig()) == false)
+            return false;
+        if (other.getDebugRuleConfigurations() == null ^ this.getDebugRuleConfigurations() == null)
+            return false;
+        if (other.getDebugRuleConfigurations() != null && other.getDebugRuleConfigurations().equals(this.getDebugRuleConfigurations()) == false)
+            return false;
+        if (other.getTensorBoardOutputConfig() == null ^ this.getTensorBoardOutputConfig() == null)
+            return false;
+        if (other.getTensorBoardOutputConfig() != null && other.getTensorBoardOutputConfig().equals(this.getTensorBoardOutputConfig()) == false)
+            return false;
+        if (other.getDebugRuleEvaluationStatuses() == null ^ this.getDebugRuleEvaluationStatuses() == null)
+            return false;
+        if (other.getDebugRuleEvaluationStatuses() != null && other.getDebugRuleEvaluationStatuses().equals(this.getDebugRuleEvaluationStatuses()) == false)
+            return false;
         return true;
     }
 
@@ -2933,6 +3547,7 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         hashCode = prime * hashCode + ((getTrainingJobArn() == null) ? 0 : getTrainingJobArn().hashCode());
         hashCode = prime * hashCode + ((getTuningJobArn() == null) ? 0 : getTuningJobArn().hashCode());
         hashCode = prime * hashCode + ((getLabelingJobArn() == null) ? 0 : getLabelingJobArn().hashCode());
+        hashCode = prime * hashCode + ((getAutoMLJobArn() == null) ? 0 : getAutoMLJobArn().hashCode());
         hashCode = prime * hashCode + ((getModelArtifacts() == null) ? 0 : getModelArtifacts().hashCode());
         hashCode = prime * hashCode + ((getTrainingJobStatus() == null) ? 0 : getTrainingJobStatus().hashCode());
         hashCode = prime * hashCode + ((getSecondaryStatus() == null) ? 0 : getSecondaryStatus().hashCode());
@@ -2953,6 +3568,15 @@ public class DescribeTrainingJobResult extends com.amazonaws.AmazonWebServiceRes
         hashCode = prime * hashCode + ((getFinalMetricDataList() == null) ? 0 : getFinalMetricDataList().hashCode());
         hashCode = prime * hashCode + ((getEnableNetworkIsolation() == null) ? 0 : getEnableNetworkIsolation().hashCode());
         hashCode = prime * hashCode + ((getEnableInterContainerTrafficEncryption() == null) ? 0 : getEnableInterContainerTrafficEncryption().hashCode());
+        hashCode = prime * hashCode + ((getEnableManagedSpotTraining() == null) ? 0 : getEnableManagedSpotTraining().hashCode());
+        hashCode = prime * hashCode + ((getCheckpointConfig() == null) ? 0 : getCheckpointConfig().hashCode());
+        hashCode = prime * hashCode + ((getTrainingTimeInSeconds() == null) ? 0 : getTrainingTimeInSeconds().hashCode());
+        hashCode = prime * hashCode + ((getBillableTimeInSeconds() == null) ? 0 : getBillableTimeInSeconds().hashCode());
+        hashCode = prime * hashCode + ((getDebugHookConfig() == null) ? 0 : getDebugHookConfig().hashCode());
+        hashCode = prime * hashCode + ((getExperimentConfig() == null) ? 0 : getExperimentConfig().hashCode());
+        hashCode = prime * hashCode + ((getDebugRuleConfigurations() == null) ? 0 : getDebugRuleConfigurations().hashCode());
+        hashCode = prime * hashCode + ((getTensorBoardOutputConfig() == null) ? 0 : getTensorBoardOutputConfig().hashCode());
+        hashCode = prime * hashCode + ((getDebugRuleEvaluationStatuses() == null) ? 0 : getDebugRuleEvaluationStatuses().hashCode());
         return hashCode;
     }
 

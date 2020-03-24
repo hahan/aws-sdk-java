@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -28,7 +28,8 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint,
-     * your SFTP server isn't accessible over the public internet.
+     * you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet
+     * traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      * </p>
      */
     private EndpointDetails endpointDetails;
@@ -47,10 +48,14 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
      * <important>
      * <p>
      * If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't
-     * update the host key. Accidentally changing a server's host key can be disruptive. For more information, see
-     * <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     * update the host key. Accidentally changing a server's host key can be disruptive.
      * </p>
      * </important>
+     * <p>
+     * For more information, see
+     * "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the <i>AWS
+     * SFTP User Guide.</i>
+     * </p>
      */
     private String hostKey;
     /**
@@ -77,12 +82,15 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint,
-     * your SFTP server isn't accessible over the public internet.
+     * you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet
+     * traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      * </p>
      * 
      * @param endpointDetails
      *        The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC
-     *        endpoint, your SFTP server isn't accessible over the public internet.
+     *        endpoint, you can restrict access to your SFTP server to resources only within your VPC. To control
+     *        incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's
+     *        endpoint.
      */
 
     public void setEndpointDetails(EndpointDetails endpointDetails) {
@@ -92,11 +100,14 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint,
-     * your SFTP server isn't accessible over the public internet.
+     * you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet
+     * traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      * </p>
      * 
      * @return The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC
-     *         endpoint, your SFTP server isn't accessible over the public internet.
+     *         endpoint, you can restrict access to your SFTP server to resources only within your VPC. To control
+     *         incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's
+     *         endpoint.
      */
 
     public EndpointDetails getEndpointDetails() {
@@ -106,12 +117,15 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint,
-     * your SFTP server isn't accessible over the public internet.
+     * you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet
+     * traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      * </p>
      * 
      * @param endpointDetails
      *        The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC
-     *        endpoint, your SFTP server isn't accessible over the public internet.
+     *        endpoint, you can restrict access to your SFTP server to resources only within your VPC. To control
+     *        incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's
+     *        endpoint.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -202,18 +216,26 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
      * <important>
      * <p>
      * If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't
-     * update the host key. Accidentally changing a server's host key can be disruptive. For more information, see
-     * <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     * update the host key. Accidentally changing a server's host key can be disruptive.
      * </p>
      * </important>
+     * <p>
+     * For more information, see
+     * "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the <i>AWS
+     * SFTP User Guide.</i>
+     * </p>
      * 
      * @param hostKey
      *        The RSA private key as generated by <code>ssh-keygen -N "" -f my-new-server-key</code>.</p> <important>
      *        <p>
      *        If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server,
-     *        don't update the host key. Accidentally changing a server's host key can be disruptive. For more
-     *        information, see <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     *        don't update the host key. Accidentally changing a server's host key can be disruptive.
      *        </p>
+     *        </important>
+     *        <p>
+     *        For more information, see
+     *        "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the
+     *        <i>AWS SFTP User Guide.</i>
      */
 
     public void setHostKey(String hostKey) {
@@ -227,17 +249,25 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
      * <important>
      * <p>
      * If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't
-     * update the host key. Accidentally changing a server's host key can be disruptive. For more information, see
-     * <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     * update the host key. Accidentally changing a server's host key can be disruptive.
      * </p>
      * </important>
+     * <p>
+     * For more information, see
+     * "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the <i>AWS
+     * SFTP User Guide.</i>
+     * </p>
      * 
      * @return The RSA private key as generated by <code>ssh-keygen -N "" -f my-new-server-key</code>.</p> <important>
      *         <p>
      *         If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server,
-     *         don't update the host key. Accidentally changing a server's host key can be disruptive. For more
-     *         information, see <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     *         don't update the host key. Accidentally changing a server's host key can be disruptive.
      *         </p>
+     *         </important>
+     *         <p>
+     *         For more information, see
+     *         "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the
+     *         <i>AWS SFTP User Guide.</i>
      */
 
     public String getHostKey() {
@@ -251,18 +281,26 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
      * <important>
      * <p>
      * If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't
-     * update the host key. Accidentally changing a server's host key can be disruptive. For more information, see
-     * <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     * update the host key. Accidentally changing a server's host key can be disruptive.
      * </p>
      * </important>
+     * <p>
+     * For more information, see
+     * "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the <i>AWS
+     * SFTP User Guide.</i>
+     * </p>
      * 
      * @param hostKey
      *        The RSA private key as generated by <code>ssh-keygen -N "" -f my-new-server-key</code>.</p> <important>
      *        <p>
      *        If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server,
-     *        don't update the host key. Accidentally changing a server's host key can be disruptive. For more
-     *        information, see <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i>
+     *        don't update the host key. Accidentally changing a server's host key can be disruptive.
      *        </p>
+     *        </important>
+     *        <p>
+     *        For more information, see
+     *        "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the
+     *        <i>AWS SFTP User Guide.</i>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -420,7 +458,7 @@ public class UpdateServerRequest extends com.amazonaws.AmazonWebServiceRequest i
         if (getEndpointType() != null)
             sb.append("EndpointType: ").append(getEndpointType()).append(",");
         if (getHostKey() != null)
-            sb.append("HostKey: ").append(getHostKey()).append(",");
+            sb.append("HostKey: ").append("***Sensitive Data Redacted***").append(",");
         if (getIdentityProviderDetails() != null)
             sb.append("IdentityProviderDetails: ").append(getIdentityProviderDetails()).append(",");
         if (getLoggingRole() != null)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -35,7 +35,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <ul>
      * <li>
      * <p>
-     * whitespace
+     * white space
      * </p>
      * </li>
      * <li>
@@ -59,6 +59,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      * </li>
      * </ul>
+     * <p>
+     * To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * </p>
      */
     private String name;
     /**
@@ -77,7 +80,37 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
     private String roleArn;
     /**
      * <p>
+     * Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You
+     * cannot update the <code>type</code> of a state machine once it has been created.
+     * </p>
+     */
+    private String type;
+    /**
+     * <p>
+     * Defines what execution history events are logged and where they are logged.
+     * </p>
+     * <note>
+     * <p>
+     * By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     * href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS
+     * Step Functions User Guide.
+     * </p>
+     * </note>
+     */
+    private LoggingConfiguration loggingConfiguration;
+    /**
+     * <p>
      * Tags to be added when creating a state machine.
+     * </p>
+     * <p>
+     * An array of key-value pairs. For more information, see <a
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     * Tags</a>.
+     * </p>
+     * <p>
+     * Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
      * </p>
      */
     private java.util.List<Tag> tags;
@@ -92,7 +125,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <ul>
      * <li>
      * <p>
-     * whitespace
+     * white space
      * </p>
      * </li>
      * <li>
@@ -116,6 +149,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      * </li>
      * </ul>
+     * <p>
+     * To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * </p>
      * 
      * @param name
      *        The name of the state machine. </p>
@@ -125,7 +161,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *        <ul>
      *        <li>
      *        <p>
-     *        whitespace
+     *        white space
      *        </p>
      *        </li>
      *        <li>
@@ -148,6 +184,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *        control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)
      *        </p>
      *        </li>
+     *        </ul>
+     *        <p>
+     *        To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      */
 
     public void setName(String name) {
@@ -164,7 +203,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <ul>
      * <li>
      * <p>
-     * whitespace
+     * white space
      * </p>
      * </li>
      * <li>
@@ -188,6 +227,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      * </li>
      * </ul>
+     * <p>
+     * To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * </p>
      * 
      * @return The name of the state machine. </p>
      *         <p>
@@ -196,7 +238,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *         <ul>
      *         <li>
      *         <p>
-     *         whitespace
+     *         white space
      *         </p>
      *         </li>
      *         <li>
@@ -219,6 +261,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *         control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)
      *         </p>
      *         </li>
+     *         </ul>
+     *         <p>
+     *         To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      */
 
     public String getName() {
@@ -235,7 +280,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <ul>
      * <li>
      * <p>
-     * whitespace
+     * white space
      * </p>
      * </li>
      * <li>
@@ -259,6 +304,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      * </li>
      * </ul>
+     * <p>
+     * To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * </p>
      * 
      * @param name
      *        The name of the state machine. </p>
@@ -268,7 +316,7 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *        <ul>
      *        <li>
      *        <p>
-     *        whitespace
+     *        white space
      *        </p>
      *        </li>
      *        <li>
@@ -291,6 +339,9 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      *        control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)
      *        </p>
      *        </li>
+     *        </ul>
+     *        <p>
+     *        To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -427,10 +478,173 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
 
     /**
      * <p>
-     * Tags to be added when creating a state machine.
+     * Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You
+     * cannot update the <code>type</code> of a state machine once it has been created.
      * </p>
      * 
-     * @return Tags to be added when creating a state machine.
+     * @param type
+     *        Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>.
+     *        You cannot update the <code>type</code> of a state machine once it has been created.
+     * @see StateMachineType
+     */
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * <p>
+     * Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You
+     * cannot update the <code>type</code> of a state machine once it has been created.
+     * </p>
+     * 
+     * @return Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>.
+     *         You cannot update the <code>type</code> of a state machine once it has been created.
+     * @see StateMachineType
+     */
+
+    public String getType() {
+        return this.type;
+    }
+
+    /**
+     * <p>
+     * Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You
+     * cannot update the <code>type</code> of a state machine once it has been created.
+     * </p>
+     * 
+     * @param type
+     *        Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>.
+     *        You cannot update the <code>type</code> of a state machine once it has been created.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see StateMachineType
+     */
+
+    public CreateStateMachineRequest withType(String type) {
+        setType(type);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You
+     * cannot update the <code>type</code> of a state machine once it has been created.
+     * </p>
+     * 
+     * @param type
+     *        Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>.
+     *        You cannot update the <code>type</code> of a state machine once it has been created.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see StateMachineType
+     */
+
+    public CreateStateMachineRequest withType(StateMachineType type) {
+        this.type = type.toString();
+        return this;
+    }
+
+    /**
+     * <p>
+     * Defines what execution history events are logged and where they are logged.
+     * </p>
+     * <note>
+     * <p>
+     * By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     * href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS
+     * Step Functions User Guide.
+     * </p>
+     * </note>
+     * 
+     * @param loggingConfiguration
+     *        Defines what execution history events are logged and where they are logged.</p> <note>
+     *        <p>
+     *        By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     *        href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in
+     *        the AWS Step Functions User Guide.
+     *        </p>
+     */
+
+    public void setLoggingConfiguration(LoggingConfiguration loggingConfiguration) {
+        this.loggingConfiguration = loggingConfiguration;
+    }
+
+    /**
+     * <p>
+     * Defines what execution history events are logged and where they are logged.
+     * </p>
+     * <note>
+     * <p>
+     * By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     * href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS
+     * Step Functions User Guide.
+     * </p>
+     * </note>
+     * 
+     * @return Defines what execution history events are logged and where they are logged.</p> <note>
+     *         <p>
+     *         By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     *         href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in
+     *         the AWS Step Functions User Guide.
+     *         </p>
+     */
+
+    public LoggingConfiguration getLoggingConfiguration() {
+        return this.loggingConfiguration;
+    }
+
+    /**
+     * <p>
+     * Defines what execution history events are logged and where they are logged.
+     * </p>
+     * <note>
+     * <p>
+     * By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     * href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS
+     * Step Functions User Guide.
+     * </p>
+     * </note>
+     * 
+     * @param loggingConfiguration
+     *        Defines what execution history events are logged and where they are logged.</p> <note>
+     *        <p>
+     *        By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a
+     *        href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in
+     *        the AWS Step Functions User Guide.
+     *        </p>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateStateMachineRequest withLoggingConfiguration(LoggingConfiguration loggingConfiguration) {
+        setLoggingConfiguration(loggingConfiguration);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Tags to be added when creating a state machine.
+     * </p>
+     * <p>
+     * An array of key-value pairs. For more information, see <a
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     * Tags</a>.
+     * </p>
+     * <p>
+     * Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
+     * </p>
+     * 
+     * @return Tags to be added when creating a state machine.</p>
+     *         <p>
+     *         An array of key-value pairs. For more information, see <a
+     *         href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost
+     *         Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     *         href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     *         Tags</a>.
+     *         </p>
+     *         <p>
+     *         Tags may only contain Unicode letters, digits, white space, or these symbols:
+     *         <code>_ . : / = + - @</code>.
      */
 
     public java.util.List<Tag> getTags() {
@@ -441,9 +655,28 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <p>
      * Tags to be added when creating a state machine.
      * </p>
+     * <p>
+     * An array of key-value pairs. For more information, see <a
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     * Tags</a>.
+     * </p>
+     * <p>
+     * Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
+     * </p>
      * 
      * @param tags
-     *        Tags to be added when creating a state machine.
+     *        Tags to be added when creating a state machine.</p>
+     *        <p>
+     *        An array of key-value pairs. For more information, see <a
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost
+     *        Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     *        href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     *        Tags</a>.
+     *        </p>
+     *        <p>
+     *        Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
      */
 
     public void setTags(java.util.Collection<Tag> tags) {
@@ -460,13 +693,32 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * Tags to be added when creating a state machine.
      * </p>
      * <p>
+     * An array of key-value pairs. For more information, see <a
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     * Tags</a>.
+     * </p>
+     * <p>
+     * Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
+     * </p>
+     * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
      * existing values.
      * </p>
      * 
      * @param tags
-     *        Tags to be added when creating a state machine.
+     *        Tags to be added when creating a state machine.</p>
+     *        <p>
+     *        An array of key-value pairs. For more information, see <a
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost
+     *        Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     *        href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     *        Tags</a>.
+     *        </p>
+     *        <p>
+     *        Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -484,9 +736,28 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
      * <p>
      * Tags to be added when creating a state machine.
      * </p>
+     * <p>
+     * An array of key-value pairs. For more information, see <a
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     * Tags</a>.
+     * </p>
+     * <p>
+     * Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
+     * </p>
      * 
      * @param tags
-     *        Tags to be added when creating a state machine.
+     *        Tags to be added when creating a state machine.</p>
+     *        <p>
+     *        An array of key-value pairs. For more information, see <a
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost
+     *        Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a
+     *        href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM
+     *        Tags</a>.
+     *        </p>
+     *        <p>
+     *        Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -513,6 +784,10 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
             sb.append("Definition: ").append("***Sensitive Data Redacted***").append(",");
         if (getRoleArn() != null)
             sb.append("RoleArn: ").append(getRoleArn()).append(",");
+        if (getType() != null)
+            sb.append("Type: ").append(getType()).append(",");
+        if (getLoggingConfiguration() != null)
+            sb.append("LoggingConfiguration: ").append(getLoggingConfiguration()).append(",");
         if (getTags() != null)
             sb.append("Tags: ").append(getTags());
         sb.append("}");
@@ -541,6 +816,14 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
             return false;
         if (other.getRoleArn() != null && other.getRoleArn().equals(this.getRoleArn()) == false)
             return false;
+        if (other.getType() == null ^ this.getType() == null)
+            return false;
+        if (other.getType() != null && other.getType().equals(this.getType()) == false)
+            return false;
+        if (other.getLoggingConfiguration() == null ^ this.getLoggingConfiguration() == null)
+            return false;
+        if (other.getLoggingConfiguration() != null && other.getLoggingConfiguration().equals(this.getLoggingConfiguration()) == false)
+            return false;
         if (other.getTags() == null ^ this.getTags() == null)
             return false;
         if (other.getTags() != null && other.getTags().equals(this.getTags()) == false)
@@ -556,6 +839,8 @@ public class CreateStateMachineRequest extends com.amazonaws.AmazonWebServiceReq
         hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode());
         hashCode = prime * hashCode + ((getDefinition() == null) ? 0 : getDefinition().hashCode());
         hashCode = prime * hashCode + ((getRoleArn() == null) ? 0 : getRoleArn().hashCode());
+        hashCode = prime * hashCode + ((getType() == null) ? 0 : getType().hashCode());
+        hashCode = prime * hashCode + ((getLoggingConfiguration() == null) ? 0 : getLoggingConfiguration().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         return hashCode;
     }

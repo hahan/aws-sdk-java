@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -43,12 +43,22 @@ public class AbstractAWSDataSync implements AWSDataSync {
     }
 
     @Override
+    public CreateLocationFsxWindowsResult createLocationFsxWindows(CreateLocationFsxWindowsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public CreateLocationNfsResult createLocationNfs(CreateLocationNfsRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public CreateLocationS3Result createLocationS3(CreateLocationS3Request request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public CreateLocationSmbResult createLocationSmb(CreateLocationSmbRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -83,12 +93,22 @@ public class AbstractAWSDataSync implements AWSDataSync {
     }
 
     @Override
+    public DescribeLocationFsxWindowsResult describeLocationFsxWindows(DescribeLocationFsxWindowsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public DescribeLocationNfsResult describeLocationNfs(DescribeLocationNfsRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public DescribeLocationS3Result describeLocationS3(DescribeLocationS3Request request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public DescribeLocationSmbResult describeLocationSmb(DescribeLocationSmbRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 

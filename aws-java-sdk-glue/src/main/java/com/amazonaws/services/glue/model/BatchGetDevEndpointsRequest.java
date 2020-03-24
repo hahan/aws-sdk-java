@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,18 +27,20 @@ public class BatchGetDevEndpointsRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.
+     * The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     * <code>ListDevEndpoint</code> operation.
      * </p>
      */
     private java.util.List<String> devEndpointNames;
 
     /**
      * <p>
-     * The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.
+     * The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     * <code>ListDevEndpoint</code> operation.
      * </p>
      * 
-     * @return The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code>
-     *         operation.
+     * @return The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     *         <code>ListDevEndpoint</code> operation.
      */
 
     public java.util.List<String> getDevEndpointNames() {
@@ -47,12 +49,13 @@ public class BatchGetDevEndpointsRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.
+     * The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     * <code>ListDevEndpoint</code> operation.
      * </p>
      * 
      * @param devEndpointNames
-     *        The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code>
-     *        operation.
+     *        The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     *        <code>ListDevEndpoint</code> operation.
      */
 
     public void setDevEndpointNames(java.util.Collection<String> devEndpointNames) {
@@ -66,7 +69,8 @@ public class BatchGetDevEndpointsRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.
+     * The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     * <code>ListDevEndpoint</code> operation.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -75,8 +79,8 @@ public class BatchGetDevEndpointsRequest extends com.amazonaws.AmazonWebServiceR
      * </p>
      * 
      * @param devEndpointNames
-     *        The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code>
-     *        operation.
+     *        The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     *        <code>ListDevEndpoint</code> operation.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -92,12 +96,13 @@ public class BatchGetDevEndpointsRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.
+     * The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     * <code>ListDevEndpoint</code> operation.
      * </p>
      * 
      * @param devEndpointNames
-     *        The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code>
-     *        operation.
+     *        The list of <code>DevEndpoint</code> names, which might be the names returned from the
+     *        <code>ListDevEndpoint</code> operation.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

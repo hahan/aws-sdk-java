@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -59,6 +59,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
      * </p>
      * </li>
+     * <li>
+     * <p>
+     * <i>Semantic Segmentation</i>
+     * </p>
+     * <p>
+     * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
+     * </p>
+     * </li>
      * </ul>
      */
     private String labelingJobAlgorithmSpecificationArn;
@@ -107,6 +115,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
      * </p>
      * </li>
+     * <li>
+     * <p>
+     * <i>Semantic Segmentation</i>
+     * </p>
+     * <p>
+     * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
+     * </p>
+     * </li>
      * </ul>
      * 
      * @param labelingJobAlgorithmSpecificationArn
@@ -135,6 +151,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      *        </p>
      *        <p>
      *        <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <i>Semantic Segmentation</i>
+     *        </p>
+     *        <p>
+     *        <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
      *        </p>
      *        </li>
      */
@@ -173,6 +197,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
      * </p>
      * </li>
+     * <li>
+     * <p>
+     * <i>Semantic Segmentation</i>
+     * </p>
+     * <p>
+     * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
+     * </p>
+     * </li>
      * </ul>
      * 
      * @return Specifies the Amazon Resource Name (ARN) of the algorithm used for auto-labeling. You must select one of
@@ -200,6 +232,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      *         </p>
      *         <p>
      *         <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <i>Semantic Segmentation</i>
+     *         </p>
+     *         <p>
+     *         <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
      *         </p>
      *         </li>
      */
@@ -238,6 +278,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
      * </p>
      * </li>
+     * <li>
+     * <p>
+     * <i>Semantic Segmentation</i>
+     * </p>
+     * <p>
+     * <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
+     * </p>
+     * </li>
      * </ul>
      * 
      * @param labelingJobAlgorithmSpecificationArn
@@ -266,6 +314,14 @@ public class LabelingJobAlgorithmsConfig implements Serializable, Cloneable, Str
      *        </p>
      *        <p>
      *        <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/object-detection</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <i>Semantic Segmentation</i>
+     *        </p>
+     *        <p>
+     *        <code>arn:aws:sagemaker:<i>region</i>:027400017018:labeling-job-algorithm-specification/semantic-segmentation</code>
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.

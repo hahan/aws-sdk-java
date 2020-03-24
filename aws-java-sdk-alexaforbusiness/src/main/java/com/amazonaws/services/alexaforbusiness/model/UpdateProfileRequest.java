@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -75,6 +75,12 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
     private String wakeWord;
     /**
      * <p>
+     * The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     * </p>
+     */
+    private String locale;
+    /**
+     * <p>
      * Whether the setup mode of the profile is enabled.
      * </p>
      */
@@ -91,6 +97,12 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
      * </p>
      */
     private Boolean pSTNEnabled;
+    /**
+     * <p>
+     * The updated meeting room settings of a room profile.
+     * </p>
+     */
+    private UpdateMeetingRoomConfiguration meetingRoomConfiguration;
 
     /**
      * <p>
@@ -483,6 +495,47 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
 
     /**
      * <p>
+     * The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     */
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * <p>
+     * The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     * </p>
+     * 
+     * @return The updated locale for the room profile. (This is currently only available to a limited preview
+     *         audience.)
+     */
+
+    public String getLocale() {
+        return this.locale;
+    }
+
+    /**
+     * <p>
+     * The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The updated locale for the room profile. (This is currently only available to a limited preview audience.)
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public UpdateProfileRequest withLocale(String locale) {
+        setLocale(locale);
+        return this;
+    }
+
+    /**
+     * <p>
      * Whether the setup mode of the profile is enabled.
      * </p>
      * 
@@ -626,6 +679,46 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
     }
 
     /**
+     * <p>
+     * The updated meeting room settings of a room profile.
+     * </p>
+     * 
+     * @param meetingRoomConfiguration
+     *        The updated meeting room settings of a room profile.
+     */
+
+    public void setMeetingRoomConfiguration(UpdateMeetingRoomConfiguration meetingRoomConfiguration) {
+        this.meetingRoomConfiguration = meetingRoomConfiguration;
+    }
+
+    /**
+     * <p>
+     * The updated meeting room settings of a room profile.
+     * </p>
+     * 
+     * @return The updated meeting room settings of a room profile.
+     */
+
+    public UpdateMeetingRoomConfiguration getMeetingRoomConfiguration() {
+        return this.meetingRoomConfiguration;
+    }
+
+    /**
+     * <p>
+     * The updated meeting room settings of a room profile.
+     * </p>
+     * 
+     * @param meetingRoomConfiguration
+     *        The updated meeting room settings of a room profile.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public UpdateProfileRequest withMeetingRoomConfiguration(UpdateMeetingRoomConfiguration meetingRoomConfiguration) {
+        setMeetingRoomConfiguration(meetingRoomConfiguration);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -653,12 +746,16 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
             sb.append("TemperatureUnit: ").append(getTemperatureUnit()).append(",");
         if (getWakeWord() != null)
             sb.append("WakeWord: ").append(getWakeWord()).append(",");
+        if (getLocale() != null)
+            sb.append("Locale: ").append(getLocale()).append(",");
         if (getSetupModeDisabled() != null)
             sb.append("SetupModeDisabled: ").append(getSetupModeDisabled()).append(",");
         if (getMaxVolumeLimit() != null)
             sb.append("MaxVolumeLimit: ").append(getMaxVolumeLimit()).append(",");
         if (getPSTNEnabled() != null)
-            sb.append("PSTNEnabled: ").append(getPSTNEnabled());
+            sb.append("PSTNEnabled: ").append(getPSTNEnabled()).append(",");
+        if (getMeetingRoomConfiguration() != null)
+            sb.append("MeetingRoomConfiguration: ").append(getMeetingRoomConfiguration());
         sb.append("}");
         return sb.toString();
     }
@@ -705,6 +802,10 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
             return false;
         if (other.getWakeWord() != null && other.getWakeWord().equals(this.getWakeWord()) == false)
             return false;
+        if (other.getLocale() == null ^ this.getLocale() == null)
+            return false;
+        if (other.getLocale() != null && other.getLocale().equals(this.getLocale()) == false)
+            return false;
         if (other.getSetupModeDisabled() == null ^ this.getSetupModeDisabled() == null)
             return false;
         if (other.getSetupModeDisabled() != null && other.getSetupModeDisabled().equals(this.getSetupModeDisabled()) == false)
@@ -716,6 +817,10 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
         if (other.getPSTNEnabled() == null ^ this.getPSTNEnabled() == null)
             return false;
         if (other.getPSTNEnabled() != null && other.getPSTNEnabled().equals(this.getPSTNEnabled()) == false)
+            return false;
+        if (other.getMeetingRoomConfiguration() == null ^ this.getMeetingRoomConfiguration() == null)
+            return false;
+        if (other.getMeetingRoomConfiguration() != null && other.getMeetingRoomConfiguration().equals(this.getMeetingRoomConfiguration()) == false)
             return false;
         return true;
     }
@@ -733,9 +838,11 @@ public class UpdateProfileRequest extends com.amazonaws.AmazonWebServiceRequest 
         hashCode = prime * hashCode + ((getDistanceUnit() == null) ? 0 : getDistanceUnit().hashCode());
         hashCode = prime * hashCode + ((getTemperatureUnit() == null) ? 0 : getTemperatureUnit().hashCode());
         hashCode = prime * hashCode + ((getWakeWord() == null) ? 0 : getWakeWord().hashCode());
+        hashCode = prime * hashCode + ((getLocale() == null) ? 0 : getLocale().hashCode());
         hashCode = prime * hashCode + ((getSetupModeDisabled() == null) ? 0 : getSetupModeDisabled().hashCode());
         hashCode = prime * hashCode + ((getMaxVolumeLimit() == null) ? 0 : getMaxVolumeLimit().hashCode());
         hashCode = prime * hashCode + ((getPSTNEnabled() == null) ? 0 : getPSTNEnabled().hashCode());
+        hashCode = prime * hashCode + ((getMeetingRoomConfiguration() == null) ? 0 : getMeetingRoomConfiguration().hashCode());
         return hashCode;
     }
 

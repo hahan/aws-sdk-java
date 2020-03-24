@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -79,11 +79,11 @@ public class AWSGreengrassClient extends AmazonWebServiceClient implements AWSGr
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("BadRequestException").withModeledClass(
-                                    com.amazonaws.services.greengrass.model.BadRequestException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("BadRequestException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.greengrass.model.transform.BadRequestExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InternalServerErrorException").withModeledClass(
-                                    com.amazonaws.services.greengrass.model.InternalServerErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InternalServerErrorException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.greengrass.model.transform.InternalServerErrorExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.greengrass.model.AWSGreengrassException.class));
 
     public static AWSGreengrassClientBuilder builder() {
@@ -4195,7 +4195,7 @@ public class AWSGreengrassClient extends AmazonWebServiceClient implements AWSGr
     }
 
     /**
-     * Retrieves the tags for a resource.
+     * Retrieves a list of resource tags for a resource arn.
      * 
      * @param listTagsForResourceRequest
      * @return Result of the ListTagsForResource operation returned by the service.
@@ -4413,9 +4413,12 @@ public class AWSGreengrassClient extends AmazonWebServiceClient implements AWSGr
     }
 
     /**
-     * Add tags to a resource.
+     * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition',
+     * 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and
+     * 'BulkDeployment'.
      * 
      * @param tagResourceRequest
+     *        A map of the key-value pairs for the resource tag.
      * @return Result of the TagResource operation returned by the service.
      * @throws BadRequestException
      *         invalid request
@@ -4466,7 +4469,7 @@ public class AWSGreengrassClient extends AmazonWebServiceClient implements AWSGr
     }
 
     /**
-     * Remove tags with specified keys from a resource.
+     * Remove resource tags from a Greengrass Resource.
      * 
      * @param untagResourceRequest
      * @return Result of the UntagResource operation returned by the service.

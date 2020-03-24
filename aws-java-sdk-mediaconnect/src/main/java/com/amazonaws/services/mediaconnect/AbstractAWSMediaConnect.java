@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -29,6 +29,11 @@ public class AbstractAWSMediaConnect implements AWSMediaConnect {
 
     @Override
     public AddFlowOutputsResult addFlowOutputs(AddFlowOutputsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public AddFlowSourcesResult addFlowSources(AddFlowSourcesRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -73,6 +78,11 @@ public class AbstractAWSMediaConnect implements AWSMediaConnect {
     }
 
     @Override
+    public RemoveFlowSourceResult removeFlowSource(RemoveFlowSourceRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public RevokeFlowEntitlementResult revokeFlowEntitlement(RevokeFlowEntitlementRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -94,6 +104,11 @@ public class AbstractAWSMediaConnect implements AWSMediaConnect {
 
     @Override
     public UntagResourceResult untagResource(UntagResourceRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public UpdateFlowResult updateFlow(UpdateFlowRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
 

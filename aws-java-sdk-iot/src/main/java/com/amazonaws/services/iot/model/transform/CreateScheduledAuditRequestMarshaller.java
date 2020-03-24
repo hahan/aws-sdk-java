@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -36,10 +36,10 @@ public class CreateScheduledAuditRequestMarshaller {
             .marshallLocationName("dayOfWeek").build();
     private static final MarshallingInfo<List> TARGETCHECKNAMES_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("targetCheckNames").build();
-    private static final MarshallingInfo<List> TAGS_BINDING = MarshallingInfo.builder(MarshallingType.LIST).marshallLocation(MarshallLocation.PAYLOAD)
-            .marshallLocationName("tags").build();
     private static final MarshallingInfo<String> SCHEDULEDAUDITNAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PATH).marshallLocationName("scheduledAuditName").build();
+    private static final MarshallingInfo<List> TAGS_BINDING = MarshallingInfo.builder(MarshallingType.LIST).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("tags").build();
 
     private static final CreateScheduledAuditRequestMarshaller instance = new CreateScheduledAuditRequestMarshaller();
 
@@ -61,8 +61,8 @@ public class CreateScheduledAuditRequestMarshaller {
             protocolMarshaller.marshall(createScheduledAuditRequest.getDayOfMonth(), DAYOFMONTH_BINDING);
             protocolMarshaller.marshall(createScheduledAuditRequest.getDayOfWeek(), DAYOFWEEK_BINDING);
             protocolMarshaller.marshall(createScheduledAuditRequest.getTargetCheckNames(), TARGETCHECKNAMES_BINDING);
-            protocolMarshaller.marshall(createScheduledAuditRequest.getTags(), TAGS_BINDING);
             protocolMarshaller.marshall(createScheduledAuditRequest.getScheduledAuditName(), SCHEDULEDAUDITNAME_BINDING);
+            protocolMarshaller.marshall(createScheduledAuditRequest.getTags(), TAGS_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

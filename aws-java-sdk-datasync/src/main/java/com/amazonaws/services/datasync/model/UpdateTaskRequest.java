@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -37,13 +37,24 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
 
     private Options options;
     /**
-     * <p/>
      * <p>
-     * A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     * Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single
+     * filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for
+     * example: <code>"/folder1|/folder2"</code>
+     * </p>
+     * <p>
      * </p>
      */
     private java.util.List<FilterRule> excludes;
+    /**
+     * <p>
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     * configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day
+     * or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     * <a>task-scheduling</a>.
+     * </p>
+     */
+    private TaskSchedule schedule;
     /**
      * <p>
      * The name of the task to update.
@@ -124,15 +135,18 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
     }
 
     /**
-     * <p/>
      * <p>
-     * A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     * Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single
+     * filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for
+     * example: <code>"/folder1|/folder2"</code>
+     * </p>
+     * <p>
      * </p>
      * 
-     * @return <p>
-     *         A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     *         Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * @return A list of filter rules that determines which files to exclude from a task. The list should contain a
+     *         single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that
+     *         is, a pipe), for example: <code>"/folder1|/folder2"</code> </p>
+     *         <p>
      */
 
     public java.util.List<FilterRule> getExcludes() {
@@ -140,16 +154,19 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
     }
 
     /**
-     * <p/>
      * <p>
-     * A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     * Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single
+     * filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for
+     * example: <code>"/folder1|/folder2"</code>
+     * </p>
+     * <p>
      * </p>
      * 
      * @param excludes
+     *        A list of filter rules that determines which files to exclude from a task. The list should contain a
+     *        single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is,
+     *        a pipe), for example: <code>"/folder1|/folder2"</code> </p>
      *        <p>
-     *        A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     *        Transfers all files in the task’s subdirectory, except files that match the filter that is set.
      */
 
     public void setExcludes(java.util.Collection<FilterRule> excludes) {
@@ -162,10 +179,12 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
     }
 
     /**
-     * <p/>
      * <p>
-     * A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     * Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single
+     * filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for
+     * example: <code>"/folder1|/folder2"</code>
+     * </p>
+     * <p>
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -174,9 +193,10 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
      * </p>
      * 
      * @param excludes
+     *        A list of filter rules that determines which files to exclude from a task. The list should contain a
+     *        single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is,
+     *        a pipe), for example: <code>"/folder1|/folder2"</code> </p>
      *        <p>
-     *        A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     *        Transfers all files in the task’s subdirectory, except files that match the filter that is set.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -191,21 +211,82 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
     }
 
     /**
-     * <p/>
      * <p>
-     * A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     * Transfers all files in the task’s subdirectory, except files that match the filter that is set.
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single
+     * filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for
+     * example: <code>"/folder1|/folder2"</code>
+     * </p>
+     * <p>
      * </p>
      * 
      * @param excludes
+     *        A list of filter rules that determines which files to exclude from a task. The list should contain a
+     *        single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is,
+     *        a pipe), for example: <code>"/folder1|/folder2"</code> </p>
      *        <p>
-     *        A filter that determines which files to exclude from a task based on the specified pattern in the filter.
-     *        Transfers all files in the task’s subdirectory, except files that match the filter that is set.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public UpdateTaskRequest withExcludes(java.util.Collection<FilterRule> excludes) {
         setExcludes(excludes);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     * configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day
+     * or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     * <a>task-scheduling</a>.
+     * </p>
+     * 
+     * @param schedule
+     *        Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     *        configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in
+     *        the day or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     *        <a>task-scheduling</a>.
+     */
+
+    public void setSchedule(TaskSchedule schedule) {
+        this.schedule = schedule;
+    }
+
+    /**
+     * <p>
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     * configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day
+     * or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     * <a>task-scheduling</a>.
+     * </p>
+     * 
+     * @return Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     *         configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in
+     *         the day or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     *         <a>task-scheduling</a>.
+     */
+
+    public TaskSchedule getSchedule() {
+        return this.schedule;
+    }
+
+    /**
+     * <p>
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     * configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day
+     * or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     * <a>task-scheduling</a>.
+     * </p>
+     * 
+     * @param schedule
+     *        Specifies a schedule used to periodically transfer files from a source to a destination location. You can
+     *        configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in
+     *        the day or hour you want the task to execute. The time you specify is UTC time. For more information, see
+     *        <a>task-scheduling</a>.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public UpdateTaskRequest withSchedule(TaskSchedule schedule) {
+        setSchedule(schedule);
         return this;
     }
 
@@ -307,6 +388,8 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
             sb.append("Options: ").append(getOptions()).append(",");
         if (getExcludes() != null)
             sb.append("Excludes: ").append(getExcludes()).append(",");
+        if (getSchedule() != null)
+            sb.append("Schedule: ").append(getSchedule()).append(",");
         if (getName() != null)
             sb.append("Name: ").append(getName()).append(",");
         if (getCloudWatchLogGroupArn() != null)
@@ -337,6 +420,10 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
             return false;
         if (other.getExcludes() != null && other.getExcludes().equals(this.getExcludes()) == false)
             return false;
+        if (other.getSchedule() == null ^ this.getSchedule() == null)
+            return false;
+        if (other.getSchedule() != null && other.getSchedule().equals(this.getSchedule()) == false)
+            return false;
         if (other.getName() == null ^ this.getName() == null)
             return false;
         if (other.getName() != null && other.getName().equals(this.getName()) == false)
@@ -356,6 +443,7 @@ public class UpdateTaskRequest extends com.amazonaws.AmazonWebServiceRequest imp
         hashCode = prime * hashCode + ((getTaskArn() == null) ? 0 : getTaskArn().hashCode());
         hashCode = prime * hashCode + ((getOptions() == null) ? 0 : getOptions().hashCode());
         hashCode = prime * hashCode + ((getExcludes() == null) ? 0 : getExcludes().hashCode());
+        hashCode = prime * hashCode + ((getSchedule() == null) ? 0 : getSchedule().hashCode());
         hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode());
         hashCode = prime * hashCode + ((getCloudWatchLogGroupArn() == null) ? 0 : getCloudWatchLogGroupArn().hashCode());
         return hashCode;

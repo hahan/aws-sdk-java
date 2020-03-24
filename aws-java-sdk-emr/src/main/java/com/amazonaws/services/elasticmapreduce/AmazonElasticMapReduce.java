@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -354,6 +354,27 @@ public interface AmazonElasticMapReduce {
 
     /**
      * <p>
+     * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more
+     * information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param getBlockPublicAccessConfigurationRequest
+     * @return Result of the GetBlockPublicAccessConfiguration operation returned by the service.
+     * @throws InternalServerException
+     *         This exception occurs when there is an internal failure in the EMR service.
+     * @throws InvalidRequestException
+     *         This exception occurs when there is something wrong with user input.
+     * @sample AmazonElasticMapReduce.GetBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    GetBlockPublicAccessConfigurationResult getBlockPublicAccessConfiguration(GetBlockPublicAccessConfigurationRequest getBlockPublicAccessConfigurationRequest);
+
+    /**
+     * <p>
      * Provides information about the bootstrap actions associated with a cluster.
      * </p>
      * 
@@ -480,7 +501,8 @@ public interface AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+     * Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the
+     * request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.
      * </p>
      * 
      * @param listStepsRequest
@@ -495,6 +517,23 @@ public interface AmazonElasticMapReduce {
      *      Documentation</a>
      */
     ListStepsResult listSteps(ListStepsRequest listStepsRequest);
+
+    /**
+     * <p>
+     * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+     * </p>
+     * 
+     * @param modifyClusterRequest
+     * @return Result of the ModifyCluster operation returned by the service.
+     * @throws InternalServerErrorException
+     *         Indicates that an error occurred while processing the request and that the request was not completed.
+     * @throws InvalidRequestException
+     *         This exception occurs when there is something wrong with user input.
+     * @sample AmazonElasticMapReduce.ModifyCluster
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyCluster" target="_top">AWS
+     *      API Documentation</a>
+     */
+    ModifyClusterResult modifyCluster(ModifyClusterRequest modifyClusterRequest);
 
     /**
      * <p>
@@ -559,6 +598,27 @@ public interface AmazonElasticMapReduce {
      *      target="_top">AWS API Documentation</a>
      */
     PutAutoScalingPolicyResult putAutoScalingPolicy(PutAutoScalingPolicyRequest putAutoScalingPolicyRequest);
+
+    /**
+     * <p>
+     * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region.
+     * For more information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param putBlockPublicAccessConfigurationRequest
+     * @return Result of the PutBlockPublicAccessConfiguration operation returned by the service.
+     * @throws InternalServerException
+     *         This exception occurs when there is an internal failure in the EMR service.
+     * @throws InvalidRequestException
+     *         This exception occurs when there is something wrong with user input.
+     * @sample AmazonElasticMapReduce.PutBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    PutBlockPublicAccessConfigurationResult putBlockPublicAccessConfiguration(PutBlockPublicAccessConfigurationRequest putBlockPublicAccessConfigurationRequest);
 
     /**
      * <p>
@@ -678,10 +738,13 @@ public interface AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified
-     * clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when
-     * you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers
-     * action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+     * Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users
+     * of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root
+     * user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account
+     * can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only
+     * the IAM user that created the cluster can perform actions. This action works on running clusters. You can
+     * override the default <code>true</code> setting when you create a cluster by using the
+     * <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.
      * </p>
      * 
      * @param setVisibleToAllUsersRequest

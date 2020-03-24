@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -48,8 +48,16 @@ public class CreateCustomerGatewayRequestMarshaller implements Marshaller<Reques
             request.addParameter("IpAddress", StringUtils.fromString(createCustomerGatewayRequest.getPublicIp()));
         }
 
+        if (createCustomerGatewayRequest.getCertificateArn() != null) {
+            request.addParameter("CertificateArn", StringUtils.fromString(createCustomerGatewayRequest.getCertificateArn()));
+        }
+
         if (createCustomerGatewayRequest.getType() != null) {
             request.addParameter("Type", StringUtils.fromString(createCustomerGatewayRequest.getType()));
+        }
+
+        if (createCustomerGatewayRequest.getDeviceName() != null) {
+            request.addParameter("DeviceName", StringUtils.fromString(createCustomerGatewayRequest.getDeviceName()));
         }
 
         return request;

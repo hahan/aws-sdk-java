@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -50,6 +50,8 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
     private String logLevel;
     /** The name of the channel. (user-mutable) */
     private String name;
+    /** Runtime details for the pipelines of a running channel. */
+    private java.util.List<PipelineDetail> pipelineDetails;
     /** The number of currently healthy pipelines. */
     private Integer pipelinesRunningCount;
     /** The Amazon Resource Name (ARN) of the role assumed when running the Channel. */
@@ -519,6 +521,68 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
     }
 
     /**
+     * Runtime details for the pipelines of a running channel.
+     * 
+     * @return Runtime details for the pipelines of a running channel.
+     */
+
+    public java.util.List<PipelineDetail> getPipelineDetails() {
+        return pipelineDetails;
+    }
+
+    /**
+     * Runtime details for the pipelines of a running channel.
+     * 
+     * @param pipelineDetails
+     *        Runtime details for the pipelines of a running channel.
+     */
+
+    public void setPipelineDetails(java.util.Collection<PipelineDetail> pipelineDetails) {
+        if (pipelineDetails == null) {
+            this.pipelineDetails = null;
+            return;
+        }
+
+        this.pipelineDetails = new java.util.ArrayList<PipelineDetail>(pipelineDetails);
+    }
+
+    /**
+     * Runtime details for the pipelines of a running channel.
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setPipelineDetails(java.util.Collection)} or {@link #withPipelineDetails(java.util.Collection)} if you
+     * want to override the existing values.
+     * </p>
+     * 
+     * @param pipelineDetails
+     *        Runtime details for the pipelines of a running channel.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DeleteChannelResult withPipelineDetails(PipelineDetail... pipelineDetails) {
+        if (this.pipelineDetails == null) {
+            setPipelineDetails(new java.util.ArrayList<PipelineDetail>(pipelineDetails.length));
+        }
+        for (PipelineDetail ele : pipelineDetails) {
+            this.pipelineDetails.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * Runtime details for the pipelines of a running channel.
+     * 
+     * @param pipelineDetails
+     *        Runtime details for the pipelines of a running channel.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DeleteChannelResult withPipelineDetails(java.util.Collection<PipelineDetail> pipelineDetails) {
+        setPipelineDetails(pipelineDetails);
+        return this;
+    }
+
+    /**
      * The number of currently healthy pipelines.
      * 
      * @param pipelinesRunningCount
@@ -660,6 +724,13 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
         return this;
     }
 
+    /**
+     * Add a single Tags entry
+     *
+     * @see DeleteChannelResult#withTags
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public DeleteChannelResult addTagsEntry(String key, String value) {
         if (null == this.tags) {
             this.tags = new java.util.HashMap<String, String>();
@@ -713,6 +784,8 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
             sb.append("LogLevel: ").append(getLogLevel()).append(",");
         if (getName() != null)
             sb.append("Name: ").append(getName()).append(",");
+        if (getPipelineDetails() != null)
+            sb.append("PipelineDetails: ").append(getPipelineDetails()).append(",");
         if (getPipelinesRunningCount() != null)
             sb.append("PipelinesRunningCount: ").append(getPipelinesRunningCount()).append(",");
         if (getRoleArn() != null)
@@ -775,6 +848,10 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
             return false;
         if (other.getName() != null && other.getName().equals(this.getName()) == false)
             return false;
+        if (other.getPipelineDetails() == null ^ this.getPipelineDetails() == null)
+            return false;
+        if (other.getPipelineDetails() != null && other.getPipelineDetails().equals(this.getPipelineDetails()) == false)
+            return false;
         if (other.getPipelinesRunningCount() == null ^ this.getPipelinesRunningCount() == null)
             return false;
         if (other.getPipelinesRunningCount() != null && other.getPipelinesRunningCount().equals(this.getPipelinesRunningCount()) == false)
@@ -809,6 +886,7 @@ public class DeleteChannelResult extends com.amazonaws.AmazonWebServiceResult<co
         hashCode = prime * hashCode + ((getInputSpecification() == null) ? 0 : getInputSpecification().hashCode());
         hashCode = prime * hashCode + ((getLogLevel() == null) ? 0 : getLogLevel().hashCode());
         hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode());
+        hashCode = prime * hashCode + ((getPipelineDetails() == null) ? 0 : getPipelineDetails().hashCode());
         hashCode = prime * hashCode + ((getPipelinesRunningCount() == null) ? 0 : getPipelinesRunningCount().hashCode());
         hashCode = prime * hashCode + ((getRoleArn() == null) ? 0 : getRoleArn().hashCode());
         hashCode = prime * hashCode + ((getState() == null) ? 0 : getState().hashCode());

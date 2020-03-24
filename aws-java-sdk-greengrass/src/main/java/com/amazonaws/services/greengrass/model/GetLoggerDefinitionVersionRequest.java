@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,7 +27,12 @@ public class GetLoggerDefinitionVersionRequest extends com.amazonaws.AmazonWebSe
 
     /** The ID of the logger definition. */
     private String loggerDefinitionId;
-    /** The ID of the logger definition version. */
+    /**
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     * ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is
+     * the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property
+     * of the corresponding ''DefinitionInformation'' object.
+     */
     private String loggerDefinitionVersionId;
     /** The token for the next set of results, or ''null'' if there are no additional results. */
     private String nextToken;
@@ -67,10 +72,16 @@ public class GetLoggerDefinitionVersionRequest extends com.amazonaws.AmazonWebSe
     }
 
     /**
-     * The ID of the logger definition version.
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     * ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is
+     * the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property
+     * of the corresponding ''DefinitionInformation'' object.
      * 
      * @param loggerDefinitionVersionId
-     *        The ID of the logger definition version.
+     *        The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     *        ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the
+     *        version is the last one that was associated with a logger definition, the value also maps to the
+     *        ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
 
     public void setLoggerDefinitionVersionId(String loggerDefinitionVersionId) {
@@ -78,9 +89,15 @@ public class GetLoggerDefinitionVersionRequest extends com.amazonaws.AmazonWebSe
     }
 
     /**
-     * The ID of the logger definition version.
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     * ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is
+     * the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property
+     * of the corresponding ''DefinitionInformation'' object.
      * 
-     * @return The ID of the logger definition version.
+     * @return The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     *         ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the
+     *         version is the last one that was associated with a logger definition, the value also maps to the
+     *         ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
 
     public String getLoggerDefinitionVersionId() {
@@ -88,10 +105,16 @@ public class GetLoggerDefinitionVersionRequest extends com.amazonaws.AmazonWebSe
     }
 
     /**
-     * The ID of the logger definition version.
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     * ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is
+     * the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property
+     * of the corresponding ''DefinitionInformation'' object.
      * 
      * @param loggerDefinitionVersionId
-     *        The ID of the logger definition version.
+     *        The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding
+     *        ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the
+     *        version is the last one that was associated with a logger definition, the value also maps to the
+     *        ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

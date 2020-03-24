@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -42,9 +42,9 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     private String flowArn;
     /** The port that the flow will be listening on for incoming content. */
     private Integer ingestPort;
-    /** The smoothing max bitrate for RTP and RTP-FEC streams. */
+    /** The smoothing max bitrate for RIST, RTP, and RTP-FEC streams. */
     private Integer maxBitrate;
-    /** The maximum latency in milliseconds for Zixi-based streams. */
+    /** The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams. */
     private Integer maxLatency;
     /** The protocol that is used by the source. */
     private String protocol;
@@ -54,7 +54,7 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     private String streamId;
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should
-     * in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     private String whitelistCidr;
 
@@ -241,10 +241,10 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      * 
      * @param maxBitrate
-     *        The smoothing max bitrate for RTP and RTP-FEC streams.
+     *        The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      */
 
     public void setMaxBitrate(Integer maxBitrate) {
@@ -252,9 +252,9 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      * 
-     * @return The smoothing max bitrate for RTP and RTP-FEC streams.
+     * @return The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      */
 
     public Integer getMaxBitrate() {
@@ -262,10 +262,10 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      * 
      * @param maxBitrate
-     *        The smoothing max bitrate for RTP and RTP-FEC streams.
+     *        The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -275,10 +275,10 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      * 
      * @param maxLatency
-     *        The maximum latency in milliseconds for Zixi-based streams.
+     *        The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
 
     public void setMaxLatency(Integer maxLatency) {
@@ -286,9 +286,9 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      * 
-     * @return The maximum latency in milliseconds for Zixi-based streams.
+     * @return The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
 
     public Integer getMaxLatency() {
@@ -296,10 +296,10 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      * 
      * @param maxLatency
-     *        The maximum latency in milliseconds for Zixi-based streams.
+     *        The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -429,11 +429,11 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
 
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should
-     * in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      * 
      * @param whitelistCidr
      *        The range of IP addresses that should be allowed to contribute content to your source. These IP addresses
-     *        should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     *        should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
 
     public void setWhitelistCidr(String whitelistCidr) {
@@ -442,10 +442,10 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
 
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should
-     * in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      * 
      * @return The range of IP addresses that should be allowed to contribute content to your source. These IP addresses
-     *         should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     *         should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
 
     public String getWhitelistCidr() {
@@ -454,11 +454,11 @@ public class UpdateFlowSourceRequest extends com.amazonaws.AmazonWebServiceReque
 
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should
-     * in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      * 
      * @param whitelistCidr
      *        The range of IP addresses that should be allowed to contribute content to your source. These IP addresses
-     *        should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     *        should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

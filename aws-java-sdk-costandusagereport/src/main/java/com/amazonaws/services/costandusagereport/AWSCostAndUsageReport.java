@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -145,6 +145,23 @@ public interface AWSCostAndUsageReport {
      *      API Documentation</a>
      */
     DescribeReportDefinitionsResult describeReportDefinitions(DescribeReportDefinitionsRequest describeReportDefinitionsRequest);
+
+    /**
+     * <p>
+     * Allows you to programatically update your report preferences.
+     * </p>
+     * 
+     * @param modifyReportDefinitionRequest
+     * @return Result of the ModifyReportDefinition operation returned by the service.
+     * @throws InternalErrorException
+     *         An error on the server occurred during the processing of your request. Try again later.
+     * @throws ValidationException
+     *         The input fails to satisfy the constraints specified by an AWS service.
+     * @sample AWSCostAndUsageReport.ModifyReportDefinition
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition" target="_top">AWS API
+     *      Documentation</a>
+     */
+    ModifyReportDefinitionResult modifyReportDefinition(ModifyReportDefinitionRequest modifyReportDefinitionRequest);
 
     /**
      * <p>

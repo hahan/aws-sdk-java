@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -180,6 +180,8 @@ public class AwsSecurityFindingFiltersMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("VerificationState").build();
     private static final MarshallingInfo<List> WORKFLOWSTATE_BINDING = MarshallingInfo.builder(MarshallingType.LIST).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("WorkflowState").build();
+    private static final MarshallingInfo<List> WORKFLOWSTATUS_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("WorkflowStatus").build();
     private static final MarshallingInfo<List> RECORDSTATE_BINDING = MarshallingInfo.builder(MarshallingType.LIST).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("RecordState").build();
     private static final MarshallingInfo<List> RELATEDFINDINGSPRODUCTARN_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
@@ -288,6 +290,7 @@ public class AwsSecurityFindingFiltersMarshaller {
             protocolMarshaller.marshall(awsSecurityFindingFilters.getComplianceStatus(), COMPLIANCESTATUS_BINDING);
             protocolMarshaller.marshall(awsSecurityFindingFilters.getVerificationState(), VERIFICATIONSTATE_BINDING);
             protocolMarshaller.marshall(awsSecurityFindingFilters.getWorkflowState(), WORKFLOWSTATE_BINDING);
+            protocolMarshaller.marshall(awsSecurityFindingFilters.getWorkflowStatus(), WORKFLOWSTATUS_BINDING);
             protocolMarshaller.marshall(awsSecurityFindingFilters.getRecordState(), RECORDSTATE_BINDING);
             protocolMarshaller.marshall(awsSecurityFindingFilters.getRelatedFindingsProductArn(), RELATEDFINDINGSPRODUCTARN_BINDING);
             protocolMarshaller.marshall(awsSecurityFindingFilters.getRelatedFindingsId(), RELATEDFINDINGSID_BINDING);

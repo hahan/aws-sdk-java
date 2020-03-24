@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -212,8 +212,49 @@ public interface AmazonConfig {
      *         One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try
      *         again.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @sample AmazonConfig.DeleteConfigRule
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule" target="_top">AWS API
      *      Documentation</a>
@@ -263,6 +304,70 @@ public interface AmazonConfig {
 
     /**
      * <p>
+     * Deletes the specified conformance pack and all the AWS Config rules, remediation actions, and all evaluation
+     * results within that conformance pack.
+     * </p>
+     * <p>
+     * AWS Config sets the conformance pack to <code>DELETE_IN_PROGRESS</code> until the deletion is complete. You
+     * cannot update a conformance pack while it is in this state.
+     * </p>
+     * 
+     * @param deleteConformancePackRequest
+     * @return Result of the DeleteConformancePack operation returned by the service.
+     * @throws NoSuchConformancePackException
+     *         You specified one or more conformance packs that do not exist.
+     * @throws ResourceInUseException
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
+     *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     * @sample AmazonConfig.DeleteConformancePack
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConformancePack" target="_top">AWS
+     *      API Documentation</a>
+     */
+    DeleteConformancePackResult deleteConformancePack(DeleteConformancePackRequest deleteConformancePackRequest);
+
+    /**
+     * <p>
      * Deletes the delivery channel.
      * </p>
      * <p>
@@ -297,8 +402,49 @@ public interface AmazonConfig {
      *         One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try
      *         again.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @sample AmazonConfig.DeleteEvaluationResults
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults" target="_top">AWS
      *      API Documentation</a>
@@ -306,19 +452,146 @@ public interface AmazonConfig {
     DeleteEvaluationResultsResult deleteEvaluationResults(DeleteEvaluationResultsRequest deleteEvaluationResultsRequest);
 
     /**
+     * <p>
+     * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that
+     * organization. Only a master account can delete an organization config rule.
+     * </p>
+     * <p>
+     * AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a
+     * rule while it is in this state.
+     * </p>
+     * 
      * @param deleteOrganizationConfigRuleRequest
      * @return Result of the DeleteOrganizationConfigRule operation returned by the service.
      * @throws NoSuchOrganizationConfigRuleException
+     *         You specified one or more organization config rules that do not exist.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @sample AmazonConfig.DeleteOrganizationConfigRule
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRule"
      *      target="_top">AWS API Documentation</a>
      */
     DeleteOrganizationConfigRuleResult deleteOrganizationConfigRule(DeleteOrganizationConfigRuleRequest deleteOrganizationConfigRuleRequest);
+
+    /**
+     * <p>
+     * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all
+     * member accounts in that organization. Only a master account can delete an organization conformance pack.
+     * </p>
+     * <p>
+     * AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot
+     * update a conformance pack while it is in this state.
+     * </p>
+     * 
+     * @param deleteOrganizationConformancePackRequest
+     * @return Result of the DeleteOrganizationConformancePack operation returned by the service.
+     * @throws NoSuchOrganizationConformancePackException
+     *         AWS Config organization conformance pack that you passed in the filter does not exist.</p>
+     *         <p>
+     *         For DeleteOrganizationConformancePack, you tried to delete an organization conformance pack that does not
+     *         exist.
+     * @throws ResourceInUseException
+     *         You see this exception in the following cases:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
+     *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     * @throws OrganizationAccessDeniedException
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
+     * @sample AmazonConfig.DeleteOrganizationConformancePack
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConformancePack"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DeleteOrganizationConformancePackResult deleteOrganizationConformancePack(DeleteOrganizationConformancePackRequest deleteOrganizationConformancePackRequest);
 
     /**
      * <p>
@@ -345,11 +618,86 @@ public interface AmazonConfig {
      * @throws NoSuchRemediationConfigurationException
      *         You specified an AWS Config rule without a remediation configuration.
      * @throws RemediationInProgressException
+     *         Remediation action is in progress. You can either cancel execution in AWS Systems Manager or wait and try
+     *         again later.
+     * @throws InsufficientPermissionsException
+     *         Indicates one of the following errors:</p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         </li>
      * @sample AmazonConfig.DeleteRemediationConfiguration
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfiguration"
      *      target="_top">AWS API Documentation</a>
      */
     DeleteRemediationConfigurationResult deleteRemediationConfiguration(DeleteRemediationConfigurationRequest deleteRemediationConfigurationRequest);
+
+    /**
+     * <p>
+     * Deletes one or more remediation exceptions mentioned in the resource keys.
+     * </p>
+     * 
+     * @param deleteRemediationExceptionsRequest
+     * @return Result of the DeleteRemediationExceptions operation returned by the service.
+     * @throws NoSuchRemediationExceptionException
+     *         You tried to delete a remediation exception that does not exist.
+     * @sample AmazonConfig.DeleteRemediationExceptions
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationExceptions"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DeleteRemediationExceptionsResult deleteRemediationExceptions(DeleteRemediationExceptionsRequest deleteRemediationExceptionsRequest);
+
+    /**
+     * <p>
+     * Records the configuration state for a custom resource that has been deleted. This API records a new
+     * ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this
+     * resource in your AWS Config History.
+     * </p>
+     * 
+     * @param deleteResourceConfigRequest
+     * @return Result of the DeleteResourceConfig operation returned by the service.
+     * @throws ValidationException
+     *         The requested action is not valid.
+     * @throws NoRunningConfigurationRecorderException
+     *         There is no configuration recorder running.
+     * @sample AmazonConfig.DeleteResourceConfig
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteResourceConfig" target="_top">AWS
+     *      API Documentation</a>
+     */
+    DeleteResourceConfigResult deleteResourceConfig(DeleteResourceConfigRequest deleteResourceConfigRequest);
 
     /**
      * <p>
@@ -415,8 +763,8 @@ public interface AmazonConfig {
      * </p>
      * <note>
      * <p>
-     * The results can return an empty result page, but if you have a nextToken, the results are displayed on the next
-     * page.
+     * The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed
+     * on the next page.
      * </p>
      * </note>
      * 
@@ -742,6 +1090,78 @@ public interface AmazonConfig {
 
     /**
      * <p>
+     * Returns compliance details for each rule in that conformance pack.
+     * </p>
+     * <note>
+     * <p>
+     * You must provide exact rule names.
+     * </p>
+     * </note>
+     * 
+     * @param describeConformancePackComplianceRequest
+     * @return Result of the DescribeConformancePackCompliance operation returned by the service.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+     * @throws NoSuchConfigRuleInConformancePackException
+     *         AWS Config rule that you passed in the filter does not exist.
+     * @throws NoSuchConformancePackException
+     *         You specified one or more conformance packs that do not exist.
+     * @sample AmazonConfig.DescribeConformancePackCompliance
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackCompliance"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeConformancePackComplianceResult describeConformancePackCompliance(DescribeConformancePackComplianceRequest describeConformancePackComplianceRequest);
+
+    /**
+     * <p>
+     * Provides one or more conformance packs deployment status.
+     * </p>
+     * <note>
+     * <p>
+     * If there are no conformance packs then you will see an empty result.
+     * </p>
+     * </note>
+     * 
+     * @param describeConformancePackStatusRequest
+     * @return Result of the DescribeConformancePackStatus operation returned by the service.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @sample AmazonConfig.DescribeConformancePackStatus
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatus"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeConformancePackStatusResult describeConformancePackStatus(DescribeConformancePackStatusRequest describeConformancePackStatusRequest);
+
+    /**
+     * <p>
+     * Returns a list of one or more conformance packs.
+     * </p>
+     * 
+     * @param describeConformancePacksRequest
+     * @return Result of the DescribeConformancePacks operation returned by the service.
+     * @throws NoSuchConformancePackException
+     *         You specified one or more conformance packs that do not exist.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @sample AmazonConfig.DescribeConformancePacks
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacks"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeConformancePacksResult describeConformancePacks(DescribeConformancePacksRequest describeConformancePacksRequest);
+
+    /**
+     * <p>
      * Returns the current status of the specified delivery channel. If a delivery channel is not specified, this action
      * returns the current status of all delivery channels associated with the account.
      * </p>
@@ -799,16 +1219,38 @@ public interface AmazonConfig {
     DescribeDeliveryChannelsResult describeDeliveryChannels();
 
     /**
+     * <p>
+     * Provides organization config rule deployment status for an organization.
+     * </p>
+     * <note>
+     * <p>
+     * The status is not considered successful until organization config rule is successfully deployed in all the member
+     * accounts with an exception of excluded accounts.
+     * </p>
+     * <p>
+     * When you specify the limit and the next token, you receive a paginated response. Limit and next token are not
+     * applicable if you specify organization config rule names. It is only applicable, when you request all the
+     * organization config rules.
+     * </p>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * </note>
+     * 
      * @param describeOrganizationConfigRuleStatusesRequest
      * @return Result of the DescribeOrganizationConfigRuleStatuses operation returned by the service.
      * @throws NoSuchOrganizationConfigRuleException
+     *         You specified one or more organization config rules that do not exist.
      * @throws InvalidLimitException
      *         The specified limit is outside the allowable range.
      * @throws InvalidNextTokenException
      *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
      *         previous response to get the next page of results.
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @sample AmazonConfig.DescribeOrganizationConfigRuleStatuses
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatuses"
      *      target="_top">AWS API Documentation</a>
@@ -817,21 +1259,126 @@ public interface AmazonConfig {
             DescribeOrganizationConfigRuleStatusesRequest describeOrganizationConfigRuleStatusesRequest);
 
     /**
+     * <p>
+     * Returns a list of organization config rules.
+     * </p>
+     * <note>
+     * <p>
+     * When you specify the limit and the next token, you receive a paginated response. Limit and next token are not
+     * applicable if you specify organization config rule names. It is only applicable, when you request all the
+     * organization config rules.
+     * </p>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * </note>
+     * 
      * @param describeOrganizationConfigRulesRequest
      * @return Result of the DescribeOrganizationConfigRules operation returned by the service.
      * @throws NoSuchOrganizationConfigRuleException
+     *         You specified one or more organization config rules that do not exist.
      * @throws InvalidNextTokenException
      *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
      *         previous response to get the next page of results.
      * @throws InvalidLimitException
      *         The specified limit is outside the allowable range.
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @sample AmazonConfig.DescribeOrganizationConfigRules
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRules"
      *      target="_top">AWS API Documentation</a>
      */
     DescribeOrganizationConfigRulesResult describeOrganizationConfigRules(DescribeOrganizationConfigRulesRequest describeOrganizationConfigRulesRequest);
+
+    /**
+     * <p>
+     * Provides organization conformance pack deployment status for an organization.
+     * </p>
+     * <note>
+     * <p>
+     * The status is not considered successful until organization conformance pack is successfully deployed in all the
+     * member accounts with an exception of excluded accounts.
+     * </p>
+     * <p>
+     * When you specify the limit and the next token, you receive a paginated response. Limit and next token are not
+     * applicable if you specify organization conformance pack names. They are only applicable, when you request all the
+     * organization conformance packs.
+     * </p>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * </note>
+     * 
+     * @param describeOrganizationConformancePackStatusesRequest
+     * @return Result of the DescribeOrganizationConformancePackStatuses operation returned by the service.
+     * @throws NoSuchOrganizationConformancePackException
+     *         AWS Config organization conformance pack that you passed in the filter does not exist.</p>
+     *         <p>
+     *         For DeleteOrganizationConformancePack, you tried to delete an organization conformance pack that does not
+     *         exist.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws OrganizationAccessDeniedException
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
+     *         </p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
+     * @sample AmazonConfig.DescribeOrganizationConformancePackStatuses
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePackStatuses"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeOrganizationConformancePackStatusesResult describeOrganizationConformancePackStatuses(
+            DescribeOrganizationConformancePackStatusesRequest describeOrganizationConformancePackStatusesRequest);
+
+    /**
+     * <p>
+     * Returns a list of organization conformance packs.
+     * </p>
+     * <note>
+     * <p>
+     * When you specify the limit and the next token, you receive a paginated response.
+     * </p>
+     * <p>
+     * Limit and next token are not applicable if you specify organization conformance packs names. They are only
+     * applicable, when you request all the organization conformance packs.
+     * </p>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * </note>
+     * 
+     * @param describeOrganizationConformancePacksRequest
+     * @return Result of the DescribeOrganizationConformancePacks operation returned by the service.
+     * @throws NoSuchOrganizationConformancePackException
+     *         AWS Config organization conformance pack that you passed in the filter does not exist.</p>
+     *         <p>
+     *         For DeleteOrganizationConformancePack, you tried to delete an organization conformance pack that does not
+     *         exist.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws OrganizationAccessDeniedException
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
+     *         </p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
+     * @sample AmazonConfig.DescribeOrganizationConformancePacks
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConformancePacks"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeOrganizationConformancePacksResult describeOrganizationConformancePacks(
+            DescribeOrganizationConformancePacksRequest describeOrganizationConformancePacksRequest);
 
     /**
      * <p>
@@ -869,6 +1416,35 @@ public interface AmazonConfig {
 
     /**
      * <p>
+     * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set
+     * of resources that includes an explanation of an exception and the time when the exception will be deleted. When
+     * you specify the limit and the next token, you receive a paginated response.
+     * </p>
+     * <note>
+     * <p>
+     * When you specify the limit and the next token, you receive a paginated response.
+     * </p>
+     * <p>
+     * Limit and next token are not applicable if you request resources in batch. It is only applicable, when you
+     * request all resources.
+     * </p>
+     * </note>
+     * 
+     * @param describeRemediationExceptionsRequest
+     * @return Result of the DescribeRemediationExceptions operation returned by the service.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+     * @sample AmazonConfig.DescribeRemediationExceptions
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExceptions"
+     *      target="_top">AWS API Documentation</a>
+     */
+    DescribeRemediationExceptionsResult describeRemediationExceptions(DescribeRemediationExceptionsRequest describeRemediationExceptionsRequest);
+
+    /**
+     * <p>
      * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when
      * steps for the remediation execution occur, and any error messages for steps that have failed. When you specify
      * the limit and the next token, you receive a paginated response.
@@ -878,6 +1454,9 @@ public interface AmazonConfig {
      * @return Result of the DescribeRemediationExecutionStatus operation returned by the service.
      * @throws NoSuchRemediationConfigurationException
      *         You specified an AWS Config rule without a remediation configuration.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
      * @sample AmazonConfig.DescribeRemediationExecutionStatus
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatus"
      *      target="_top">AWS API Documentation</a>
@@ -919,8 +1498,8 @@ public interface AmazonConfig {
      * </p>
      * <note>
      * <p>
-     * The results can return an empty result page. But if you have a nextToken, the results are displayed on the next
-     * page.
+     * The results can return an empty result page. But if you have a <code>nextToken</code>, the results are displayed
+     * on the next page.
      * </p>
      * </note>
      * 
@@ -1105,6 +1684,53 @@ public interface AmazonConfig {
 
     /**
      * <p>
+     * Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.
+     * </p>
+     * 
+     * @param getConformancePackComplianceDetailsRequest
+     * @return Result of the GetConformancePackComplianceDetails operation returned by the service.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws NoSuchConformancePackException
+     *         You specified one or more conformance packs that do not exist.
+     * @throws NoSuchConfigRuleInConformancePackException
+     *         AWS Config rule that you passed in the filter does not exist.
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+     * @sample AmazonConfig.GetConformancePackComplianceDetails
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceDetails"
+     *      target="_top">AWS API Documentation</a>
+     */
+    GetConformancePackComplianceDetailsResult getConformancePackComplianceDetails(
+            GetConformancePackComplianceDetailsRequest getConformancePackComplianceDetailsRequest);
+
+    /**
+     * <p>
+     * Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules
+     * in that conformance pack.
+     * </p>
+     * 
+     * @param getConformancePackComplianceSummaryRequest
+     * @return Result of the GetConformancePackComplianceSummary operation returned by the service.
+     * @throws NoSuchConformancePackException
+     *         You specified one or more conformance packs that do not exist.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @sample AmazonConfig.GetConformancePackComplianceSummary
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummary"
+     *      target="_top">AWS API Documentation</a>
+     */
+    GetConformancePackComplianceSummaryResult getConformancePackComplianceSummary(
+            GetConformancePackComplianceSummaryRequest getConformancePackComplianceSummaryRequest);
+
+    /**
+     * <p>
      * Returns the resource types, the number of each resource type, and the total number of resources that AWS Config
      * is recording in this region for your AWS account.
      * </p>
@@ -1192,22 +1818,69 @@ public interface AmazonConfig {
     GetDiscoveredResourceCountsResult getDiscoveredResourceCounts(GetDiscoveredResourceCountsRequest getDiscoveredResourceCountsRequest);
 
     /**
+     * <p>
+     * Returns detailed status for each member account within an organization for a given organization config rule.
+     * </p>
+     * <note>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * </note>
+     * 
      * @param getOrganizationConfigRuleDetailedStatusRequest
      * @return Result of the GetOrganizationConfigRuleDetailedStatus operation returned by the service.
      * @throws NoSuchOrganizationConfigRuleException
+     *         You specified one or more organization config rules that do not exist.
      * @throws InvalidLimitException
      *         The specified limit is outside the allowable range.
      * @throws InvalidNextTokenException
      *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
      *         previous response to get the next page of results.
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @sample AmazonConfig.GetOrganizationConfigRuleDetailedStatus
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatus"
      *      target="_top">AWS API Documentation</a>
      */
     GetOrganizationConfigRuleDetailedStatusResult getOrganizationConfigRuleDetailedStatus(
             GetOrganizationConfigRuleDetailedStatusRequest getOrganizationConfigRuleDetailedStatusRequest);
+
+    /**
+     * <p>
+     * Returns detailed status for each member account within an organization for a given organization conformance pack.
+     * </p>
+     * <p>
+     * Only a master account can call this API.
+     * </p>
+     * 
+     * @param getOrganizationConformancePackDetailedStatusRequest
+     * @return Result of the GetOrganizationConformancePackDetailedStatus operation returned by the service.
+     * @throws NoSuchOrganizationConformancePackException
+     *         AWS Config organization conformance pack that you passed in the filter does not exist.</p>
+     *         <p>
+     *         For DeleteOrganizationConformancePack, you tried to delete an organization conformance pack that does not
+     *         exist.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @throws OrganizationAccessDeniedException
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
+     *         </p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
+     * @sample AmazonConfig.GetOrganizationConformancePackDetailedStatus
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConformancePackDetailedStatus"
+     *      target="_top">AWS API Documentation</a>
+     */
+    GetOrganizationConformancePackDetailedStatusResult getOrganizationConformancePackDetailedStatus(
+            GetOrganizationConformancePackDetailedStatusRequest getOrganizationConformancePackDetailedStatusRequest);
 
     /**
      * <p>
@@ -1411,21 +2084,87 @@ public interface AmazonConfig {
      *         Failed to add the AWS Config rule because the account already contains the maximum number of 150 rules.
      *         Consider deleting any deactivated rules before you add new rules.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @throws InsufficientPermissionsException
      *         Indicates one of the following errors:</p>
      *         <ul>
      *         <li>
      *         <p>
-     *         The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the
-     *         config:Put* action.
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         The AWS Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
      *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
      *         </li>
      * @throws NoAvailableConfigurationRecorderException
      *         There are no configuration recorders available to provide the role needed to describe your resources.
@@ -1465,11 +2204,15 @@ public interface AmazonConfig {
      * @throws InvalidRoleException
      *         You have provided a null or empty role ARN.
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
+     *         </p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @throws NoAvailableOrganizationException
-     *         Organization does is no longer available.
+     *         Organization is no longer available.
      * @throws OrganizationAllFeaturesNotEnabledException
-     *         The configuration aggregator cannot be created because organization does not have all features enabled.
+     *         AWS Config resource cannot be created because your organization does not have all features enabled.
      * @sample AmazonConfig.PutConfigurationAggregator
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregator"
      *      target="_top">AWS API Documentation</a>
@@ -1511,6 +2254,122 @@ public interface AmazonConfig {
      *      target="_top">AWS API Documentation</a>
      */
     PutConfigurationRecorderResult putConfigurationRecorder(PutConfigurationRecorderRequest putConfigurationRecorderRequest);
+
+    /**
+     * <p>
+     * Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily
+     * deployed in an account and a region and across AWS Organization.
+     * </p>
+     * <p>
+     * This API creates a service linked role <code>AWSServiceRoleForConfigConforms</code> in your account. The service
+     * linked role is created only when the role does not exist in your account. AWS Config verifies the existence of
+     * role with <code>GetRole</code> action.
+     * </p>
+     * <note>
+     * <p>
+     * You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both.
+     * If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the
+     * <code>TemplateBody</code> parameter.
+     * </p>
+     * </note>
+     * 
+     * @param putConformancePackRequest
+     * @return Result of the PutConformancePack operation returned by the service.
+     * @throws InsufficientPermissionsException
+     *         Indicates one of the following errors:</p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         </li>
+     * @throws ConformancePackTemplateValidationException
+     *         You have specified a template that is not valid or supported.
+     * @throws ResourceInUseException
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
+     *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+     * @throws MaxNumberOfConformancePacksExceededException
+     *         You have reached the limit (6) of the number of conformance packs in an account (6 conformance pack with
+     *         25 AWS Config rules per pack).
+     * @sample AmazonConfig.PutConformancePack
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePack" target="_top">AWS API
+     *      Documentation</a>
+     */
+    PutConformancePackResult putConformancePack(PutConformancePackRequest putConformancePackRequest);
 
     /**
      * <p>
@@ -1578,41 +2437,272 @@ public interface AmazonConfig {
     PutEvaluationsResult putEvaluations(PutEvaluationsRequest putEvaluationsRequest);
 
     /**
+     * <p>
+     * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources
+     * comply with your desired configurations. Only a master account can create or update an organization config rule.
+     * </p>
+     * <p>
+     * This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a
+     * service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your
+     * organization. The service linked role is created only when the role does not exist in the master account. AWS
+     * Config verifies the existence of role with <code>GetRole</code> action.
+     * </p>
+     * <p>
+     * You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a
+     * new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes
+     * to evaluate your resources. When you use the <code>PutOrganizationConfigRule</code> action to add the rule to AWS
+     * Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are
+     * adding an AWS managed Config rule, specify the rule's identifier for the <code>RuleIdentifier</code> key.
+     * </p>
+     * <p>
+     * The maximum number of organization config rules that AWS Config supports is 150.
+     * </p>
+     * <note>
+     * <p>
+     * Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.
+     * </p>
+     * </note>
+     * 
      * @param putOrganizationConfigRuleRequest
      * @return Result of the PutOrganizationConfigRule operation returned by the service.
      * @throws MaxNumberOfOrganizationConfigRulesExceededException
+     *         You have reached the limit of the number of organization config rules you can create.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @throws InvalidParameterValueException
      *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
      * @throws ValidationException
      *         The requested action is not valid.
      * @throws OrganizationAccessDeniedException
-     *         No permission to call the EnableAWSServiceAccess API.
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
      * @throws NoAvailableOrganizationException
-     *         Organization does is no longer available.
+     *         Organization is no longer available.
      * @throws OrganizationAllFeaturesNotEnabledException
-     *         The configuration aggregator cannot be created because organization does not have all features enabled.
+     *         AWS Config resource cannot be created because your organization does not have all features enabled.
      * @throws InsufficientPermissionsException
-     *         Indicates one of the following errors:</p>
+     *         Indicates one of the following errors:
+     *         </p>
      *         <ul>
      *         <li>
      *         <p>
-     *         The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the
-     *         config:Put* action.
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         The AWS Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
      *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
      *         </li>
      * @sample AmazonConfig.PutOrganizationConfigRule
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRule"
      *      target="_top">AWS API Documentation</a>
      */
     PutOrganizationConfigRuleResult putOrganizationConfigRule(PutOrganizationConfigRuleRequest putOrganizationConfigRuleRequest);
+
+    /**
+     * <p>
+     * Deploys conformance packs across member accounts in an AWS Organization.
+     * </p>
+     * <p>
+     * This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the
+     * <code>EnableAWSServiceAccess</code> action and creates a service linked role
+     * <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service
+     * linked role is created only when the role does not exist in the master account. AWS Config verifies the existence
+     * of role with GetRole action.
+     * </p>
+     * <note>
+     * <p>
+     * You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both.
+     * If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the
+     * <code>TemplateBody</code> parameter.
+     * </p>
+     * <p>
+     * AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the confomance
+     * pack is created or updated. You cannot update a conformance pack while it is in this state.
+     * </p>
+     * <p>
+     * You can create 6 conformance packs with 25 AWS Config rules in each pack.
+     * </p>
+     * </note>
+     * 
+     * @param putOrganizationConformancePackRequest
+     * @return Result of the PutOrganizationConformancePack operation returned by the service.
+     * @throws MaxNumberOfOrganizationConformancePacksExceededException
+     *         You have reached the limit (6) of the number of organization conformance packs in an account (6
+     *         conformance pack with 25 AWS Config rules per pack per account).
+     * @throws ResourceInUseException
+     *         You see this exception in the following cases: </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
+     *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     * @throws ValidationException
+     *         The requested action is not valid.
+     * @throws OrganizationAccessDeniedException
+     *         For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
+     *         <p>
+     *         For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if
+     *         APIs are called from member accounts. All APIs must be called from organization master account.
+     * @throws InsufficientPermissionsException
+     *         Indicates one of the following errors:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         </li>
+     * @throws OrganizationConformancePackTemplateValidationException
+     *         You have specified a template that is not valid or supported.
+     * @throws OrganizationAllFeaturesNotEnabledException
+     *         AWS Config resource cannot be created because your organization does not have all features enabled.
+     * @throws NoAvailableOrganizationException
+     *         Organization is no longer available.
+     * @sample AmazonConfig.PutOrganizationConformancePack
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePack"
+     *      target="_top">AWS API Documentation</a>
+     */
+    PutOrganizationConformancePackResult putOrganizationConformancePack(PutOrganizationConformancePackRequest putOrganizationConformancePackRequest);
 
     /**
      * <p>
@@ -1629,14 +2719,39 @@ public interface AmazonConfig {
      *         <ul>
      *         <li>
      *         <p>
-     *         The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the
-     *         config:Put* action.
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         The AWS Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
      *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
      *         </li>
      * @throws InvalidParameterValueException
      *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
@@ -1645,6 +2760,93 @@ public interface AmazonConfig {
      *      target="_top">AWS API Documentation</a>
      */
     PutRemediationConfigurationsResult putRemediationConfigurations(PutRemediationConfigurationsRequest putRemediationConfigurationsRequest);
+
+    /**
+     * <p>
+     * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a
+     * new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule.
+     * </p>
+     * 
+     * @param putRemediationExceptionsRequest
+     * @return Result of the PutRemediationExceptions operation returned by the service.
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+     * @sample AmazonConfig.PutRemediationExceptions
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationExceptions"
+     *      target="_top">AWS API Documentation</a>
+     */
+    PutRemediationExceptionsResult putRemediationExceptions(PutRemediationExceptionsRequest putRemediationExceptionsRequest);
+
+    /**
+     * <p>
+     * Records the configuration state for the resource provided in the request. The configuration state of a resource
+     * is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can
+     * retrieve the list of configuration items for the custom resource type using existing AWS Config APIs.
+     * </p>
+     * <note>
+     * <p>
+     * The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item
+     * registered with AWS CloudFormation.
+     * </p>
+     * <p>
+     * When you call this API, AWS Config only stores configuration state of the resource provided in the request. This
+     * API does not change or remediate the configuration of the resource.
+     * </p>
+     * </note>
+     * 
+     * @param putResourceConfigRequest
+     * @return Result of the PutResourceConfig operation returned by the service.
+     * @throws ValidationException
+     *         The requested action is not valid.
+     * @throws InsufficientPermissionsException
+     *         Indicates one of the following errors:</p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         </li>
+     * @throws NoRunningConfigurationRecorderException
+     *         There is no configuration recorder running.
+     * @throws MaxActiveResourcesExceededException
+     *         You have reached the limit (100,000) of active custom resource types in your account. Delete unused
+     *         resources using <code>DeleteResourceConfig</code>.
+     * @sample AmazonConfig.PutResourceConfig
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutResourceConfig" target="_top">AWS API
+     *      Documentation</a>
+     */
+    PutResourceConfigResult putResourceConfig(PutResourceConfigRequest putResourceConfigRequest);
 
     /**
      * <p>
@@ -1671,6 +2873,35 @@ public interface AmazonConfig {
      *      target="_top">AWS API Documentation</a>
      */
     PutRetentionConfigurationResult putRetentionConfiguration(PutRetentionConfigurationRequest putRetentionConfigurationRequest);
+
+    /**
+     * <p>
+     * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS
+     * resources across multiple accounts and regions, performs the corresponding search, and returns resource
+     * configurations matching the properties.
+     * </p>
+     * <p>
+     * For more information about query components, see the <a
+     * href="https://docs.aws.amazon.com/config/latest/developerguide/query-components.html"> <b>Query Components</b>
+     * </a> section in the AWS Config Developer Guide.
+     * </p>
+     * 
+     * @param selectAggregateResourceConfigRequest
+     * @return Result of the SelectAggregateResourceConfig operation returned by the service.
+     * @throws InvalidExpressionException
+     *         The syntax of the query is incorrect.
+     * @throws NoSuchConfigurationAggregatorException
+     *         You have specified a configuration aggregator that does not exist.
+     * @throws InvalidLimitException
+     *         The specified limit is outside the allowable range.
+     * @throws InvalidNextTokenException
+     *         The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the
+     *         previous response to get the next page of results.
+     * @sample AmazonConfig.SelectAggregateResourceConfig
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectAggregateResourceConfig"
+     *      target="_top">AWS API Documentation</a>
+     */
+    SelectAggregateResourceConfigResult selectAggregateResourceConfig(SelectAggregateResourceConfigRequest selectAggregateResourceConfigRequest);
 
     /**
      * <p>
@@ -1763,8 +2994,50 @@ public interface AmazonConfig {
      *         For <code>PutConfigurationAggregator</code> API, this exception is thrown if the number of accounts and
      *         aggregators exceeds the limit.
      * @throws ResourceInUseException
-     *         The rule is currently being deleted or the rule is deleting your evaluation results. Try your request
+     *         You see this exception in the following cases:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, AWS Config is deleting this rule. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConfigRule, a remediation action is associated with the rule and AWS Config cannot delete this
+     *         rule. Delete the remediation action associated with the rule before deleting the rule and try your
+     *         request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again
+     *         later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request
      *         again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and
+     *         deletion is in progress. Try your request again later.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your
+     *         request again later.
+     *         </p>
+     *         </li>
      * @throws InvalidParameterValueException
      *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
      * @sample AmazonConfig.StartConfigRulesEvaluation
@@ -1807,19 +3080,46 @@ public interface AmazonConfig {
      * 
      * @param startRemediationExecutionRequest
      * @return Result of the StartRemediationExecution operation returned by the service.
+     * @throws InvalidParameterValueException
+     *         One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
      * @throws InsufficientPermissionsException
      *         Indicates one of the following errors:</p>
      *         <ul>
      *         <li>
      *         <p>
-     *         The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the
-     *         config:Put* action.
+     *         For PutConfigRule, the rule cannot be created because the IAM role assigned to AWS Config lacks
+     *         permissions to perform the config:Put* action.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         The AWS Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.
+     *         For PutConfigRule, the AWS Lambda function cannot be invoked. Check the function ARN, and check the
+     *         function's permissions.
      *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutOrganizationConfigRule, organization config rule cannot be created because you do not have
+     *         permissions to call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because
+     *         you do not have permissions:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         To call IAM <code>GetRole</code> action or create a service linked role.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         To read Amazon S3 bucket.
+     *         </p>
+     *         </li>
+     *         </ul>
      *         </li>
      * @throws NoSuchRemediationConfigurationException
      *         You specified an AWS Config rule without a remediation configuration.

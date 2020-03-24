@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -38,7 +38,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     /**
      * <p>
      * Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     * conversation.
+     * conversation. The field is base-64 encoded.
      * </p>
      * <p>
      * Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined
@@ -59,13 +59,23 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     private String sessionAttributes;
     /**
      * <p>
+     * The sentiment expressed in and utterance.
+     * </p>
+     * <p>
+     * When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains
+     * the result of the analysis.
+     * </p>
+     */
+    private String sentimentResponse;
+    /**
+     * <p>
      * The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.
      * </p>
      * <p>
      * If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code>
-     * as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects
-     * an appropriate message from the bot's configuration based on the current interaction context. For example, if
-     * Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
+     * as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and
+     * selects an appropriate message from the bot's configuration based on the current interaction context. For
+     * example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
      * </p>
      * <p>
      * When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex
@@ -193,6 +203,12 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * </p>
      */
     private java.io.InputStream audioStream;
+    /**
+     * <p>
+     * The unique identifier for the session.
+     * </p>
+     */
+    private String sessionId;
 
     /**
      * <p>
@@ -277,7 +293,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     /**
      * <p>
      * Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     * conversation.
+     * conversation. The field is base-64 encoded.
      * </p>
      * <p>
      * Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined
@@ -299,7 +315,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * 
      * @param slots
      *        Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     *        conversation.</p>
+     *        conversation. The field is base-64 encoded.</p>
      *        <p>
      *        Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is
      *        determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated.
@@ -317,7 +333,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     /**
      * <p>
      * Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     * conversation.
+     * conversation. The field is base-64 encoded.
      * </p>
      * <p>
      * Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined
@@ -334,7 +350,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * </p>
      * 
      * @return Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     *         conversation.</p>
+     *         conversation. The field is base-64 encoded.</p>
      *         <p>
      *         Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is
      *         determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated.
@@ -352,7 +368,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     /**
      * <p>
      * Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     * conversation.
+     * conversation. The field is base-64 encoded.
      * </p>
      * <p>
      * Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined
@@ -374,7 +390,7 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * 
      * @param slots
      *        Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the
-     *        conversation.</p>
+     *        conversation. The field is base-64 encoded.</p>
      *        <p>
      *        Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is
      *        determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated.
@@ -453,13 +469,74 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
 
     /**
      * <p>
+     * The sentiment expressed in and utterance.
+     * </p>
+     * <p>
+     * When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains
+     * the result of the analysis.
+     * </p>
+     * 
+     * @param sentimentResponse
+     *        The sentiment expressed in and utterance.</p>
+     *        <p>
+     *        When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field
+     *        contains the result of the analysis.
+     */
+
+    public void setSentimentResponse(String sentimentResponse) {
+        this.sentimentResponse = sentimentResponse;
+    }
+
+    /**
+     * <p>
+     * The sentiment expressed in and utterance.
+     * </p>
+     * <p>
+     * When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains
+     * the result of the analysis.
+     * </p>
+     * 
+     * @return The sentiment expressed in and utterance.</p>
+     *         <p>
+     *         When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field
+     *         contains the result of the analysis.
+     */
+
+    public String getSentimentResponse() {
+        return this.sentimentResponse;
+    }
+
+    /**
+     * <p>
+     * The sentiment expressed in and utterance.
+     * </p>
+     * <p>
+     * When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains
+     * the result of the analysis.
+     * </p>
+     * 
+     * @param sentimentResponse
+     *        The sentiment expressed in and utterance.</p>
+     *        <p>
+     *        When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field
+     *        contains the result of the analysis.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public PostContentResult withSentimentResponse(String sentimentResponse) {
+        setSentimentResponse(sentimentResponse);
+        return this;
+    }
+
+    /**
+     * <p>
      * The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.
      * </p>
      * <p>
      * If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code>
-     * as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects
-     * an appropriate message from the bot's configuration based on the current interaction context. For example, if
-     * Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
+     * as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and
+     * selects an appropriate message from the bot's configuration based on the current interaction context. For
+     * example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
      * </p>
      * <p>
      * When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex
@@ -475,8 +552,8 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      *        function.</p>
      *        <p>
      *        If the intent is not configured with a Lambda function, or if the Lambda function returned
-     *        <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next
-     *        course of action and selects an appropriate message from the bot's configuration based on the current
+     *        <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the
+     *        next course of action and selects an appropriate message from the bot's configuration based on the current
      *        interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a
      *        clarification prompt message.
      *        </p>
@@ -500,9 +577,9 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * </p>
      * <p>
      * If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code>
-     * as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects
-     * an appropriate message from the bot's configuration based on the current interaction context. For example, if
-     * Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
+     * as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and
+     * selects an appropriate message from the bot's configuration based on the current interaction context. For
+     * example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
      * </p>
      * <p>
      * When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex
@@ -517,9 +594,9 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      *         function.</p>
      *         <p>
      *         If the intent is not configured with a Lambda function, or if the Lambda function returned
-     *         <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next
-     *         course of action and selects an appropriate message from the bot's configuration based on the current
-     *         interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a
+     *         <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the
+     *         next course of action and selects an appropriate message from the bot's configuration based on the
+     *         current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a
      *         clarification prompt message.
      *         </p>
      *         <p>
@@ -542,9 +619,9 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      * </p>
      * <p>
      * If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code>
-     * as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects
-     * an appropriate message from the bot's configuration based on the current interaction context. For example, if
-     * Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
+     * as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and
+     * selects an appropriate message from the bot's configuration based on the current interaction context. For
+     * example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.
      * </p>
      * <p>
      * When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex
@@ -560,8 +637,8 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
      *        function.</p>
      *        <p>
      *        If the intent is not configured with a Lambda function, or if the Lambda function returned
-     *        <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next
-     *        course of action and selects an appropriate message from the bot's configuration based on the current
+     *        <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the
+     *        next course of action and selects an appropriate message from the bot's configuration based on the current
      *        interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a
      *        clarification prompt message.
      *        </p>
@@ -1674,6 +1751,46 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
     }
 
     /**
+     * <p>
+     * The unique identifier for the session.
+     * </p>
+     * 
+     * @param sessionId
+     *        The unique identifier for the session.
+     */
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    /**
+     * <p>
+     * The unique identifier for the session.
+     * </p>
+     * 
+     * @return The unique identifier for the session.
+     */
+
+    public String getSessionId() {
+        return this.sessionId;
+    }
+
+    /**
+     * <p>
+     * The unique identifier for the session.
+     * </p>
+     * 
+     * @param sessionId
+     *        The unique identifier for the session.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public PostContentResult withSessionId(String sessionId) {
+        setSessionId(sessionId);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1693,6 +1810,8 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
             sb.append("Slots: ").append(getSlots()).append(",");
         if (getSessionAttributes() != null)
             sb.append("SessionAttributes: ").append(getSessionAttributes()).append(",");
+        if (getSentimentResponse() != null)
+            sb.append("SentimentResponse: ").append(getSentimentResponse()).append(",");
         if (getMessage() != null)
             sb.append("Message: ").append("***Sensitive Data Redacted***").append(",");
         if (getMessageFormat() != null)
@@ -1704,7 +1823,9 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
         if (getInputTranscript() != null)
             sb.append("InputTranscript: ").append(getInputTranscript()).append(",");
         if (getAudioStream() != null)
-            sb.append("AudioStream: ").append(getAudioStream());
+            sb.append("AudioStream: ").append(getAudioStream()).append(",");
+        if (getSessionId() != null)
+            sb.append("SessionId: ").append(getSessionId());
         sb.append("}");
         return sb.toString();
     }
@@ -1735,6 +1856,10 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
             return false;
         if (other.getSessionAttributes() != null && other.getSessionAttributes().equals(this.getSessionAttributes()) == false)
             return false;
+        if (other.getSentimentResponse() == null ^ this.getSentimentResponse() == null)
+            return false;
+        if (other.getSentimentResponse() != null && other.getSentimentResponse().equals(this.getSentimentResponse()) == false)
+            return false;
         if (other.getMessage() == null ^ this.getMessage() == null)
             return false;
         if (other.getMessage() != null && other.getMessage().equals(this.getMessage()) == false)
@@ -1759,6 +1884,10 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
             return false;
         if (other.getAudioStream() != null && other.getAudioStream().equals(this.getAudioStream()) == false)
             return false;
+        if (other.getSessionId() == null ^ this.getSessionId() == null)
+            return false;
+        if (other.getSessionId() != null && other.getSessionId().equals(this.getSessionId()) == false)
+            return false;
         return true;
     }
 
@@ -1771,12 +1900,14 @@ public class PostContentResult extends com.amazonaws.AmazonWebServiceResult<com.
         hashCode = prime * hashCode + ((getIntentName() == null) ? 0 : getIntentName().hashCode());
         hashCode = prime * hashCode + ((getSlots() == null) ? 0 : getSlots().hashCode());
         hashCode = prime * hashCode + ((getSessionAttributes() == null) ? 0 : getSessionAttributes().hashCode());
+        hashCode = prime * hashCode + ((getSentimentResponse() == null) ? 0 : getSentimentResponse().hashCode());
         hashCode = prime * hashCode + ((getMessage() == null) ? 0 : getMessage().hashCode());
         hashCode = prime * hashCode + ((getMessageFormat() == null) ? 0 : getMessageFormat().hashCode());
         hashCode = prime * hashCode + ((getDialogState() == null) ? 0 : getDialogState().hashCode());
         hashCode = prime * hashCode + ((getSlotToElicit() == null) ? 0 : getSlotToElicit().hashCode());
         hashCode = prime * hashCode + ((getInputTranscript() == null) ? 0 : getInputTranscript().hashCode());
         hashCode = prime * hashCode + ((getAudioStream() == null) ? 0 : getAudioStream().hashCode());
+        hashCode = prime * hashCode + ((getSessionId() == null) ? 0 : getSessionId().hashCode());
         return hashCode;
     }
 

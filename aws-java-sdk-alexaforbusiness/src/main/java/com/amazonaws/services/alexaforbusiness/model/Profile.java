@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -78,6 +78,12 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
     private String wakeWord;
     /**
      * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     */
+    private String locale;
+    /**
+     * <p>
      * The setup mode of a room profile.
      * </p>
      */
@@ -100,6 +106,12 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private String addressBookArn;
+    /**
+     * <p>
+     * Meeting room settings of a room profile.
+     * </p>
+     */
+    private MeetingRoomConfiguration meetingRoomConfiguration;
 
     /**
      * <p>
@@ -492,6 +504,46 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The locale of a room profile. (This is currently available only to a limited preview audience.)
+     */
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @return The locale of a room profile. (This is currently available only to a limited preview audience.)
+     */
+
+    public String getLocale() {
+        return this.locale;
+    }
+
+    /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Profile withLocale(String locale) {
+        setLocale(locale);
+        return this;
+    }
+
+    /**
+     * <p>
      * The setup mode of a room profile.
      * </p>
      * 
@@ -675,6 +727,46 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Meeting room settings of a room profile.
+     * </p>
+     * 
+     * @param meetingRoomConfiguration
+     *        Meeting room settings of a room profile.
+     */
+
+    public void setMeetingRoomConfiguration(MeetingRoomConfiguration meetingRoomConfiguration) {
+        this.meetingRoomConfiguration = meetingRoomConfiguration;
+    }
+
+    /**
+     * <p>
+     * Meeting room settings of a room profile.
+     * </p>
+     * 
+     * @return Meeting room settings of a room profile.
+     */
+
+    public MeetingRoomConfiguration getMeetingRoomConfiguration() {
+        return this.meetingRoomConfiguration;
+    }
+
+    /**
+     * <p>
+     * Meeting room settings of a room profile.
+     * </p>
+     * 
+     * @param meetingRoomConfiguration
+     *        Meeting room settings of a room profile.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Profile withMeetingRoomConfiguration(MeetingRoomConfiguration meetingRoomConfiguration) {
+        setMeetingRoomConfiguration(meetingRoomConfiguration);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -702,6 +794,8 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
             sb.append("TemperatureUnit: ").append(getTemperatureUnit()).append(",");
         if (getWakeWord() != null)
             sb.append("WakeWord: ").append(getWakeWord()).append(",");
+        if (getLocale() != null)
+            sb.append("Locale: ").append(getLocale()).append(",");
         if (getSetupModeDisabled() != null)
             sb.append("SetupModeDisabled: ").append(getSetupModeDisabled()).append(",");
         if (getMaxVolumeLimit() != null)
@@ -709,7 +803,9 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
         if (getPSTNEnabled() != null)
             sb.append("PSTNEnabled: ").append(getPSTNEnabled()).append(",");
         if (getAddressBookArn() != null)
-            sb.append("AddressBookArn: ").append(getAddressBookArn());
+            sb.append("AddressBookArn: ").append(getAddressBookArn()).append(",");
+        if (getMeetingRoomConfiguration() != null)
+            sb.append("MeetingRoomConfiguration: ").append(getMeetingRoomConfiguration());
         sb.append("}");
         return sb.toString();
     }
@@ -756,6 +852,10 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getWakeWord() != null && other.getWakeWord().equals(this.getWakeWord()) == false)
             return false;
+        if (other.getLocale() == null ^ this.getLocale() == null)
+            return false;
+        if (other.getLocale() != null && other.getLocale().equals(this.getLocale()) == false)
+            return false;
         if (other.getSetupModeDisabled() == null ^ this.getSetupModeDisabled() == null)
             return false;
         if (other.getSetupModeDisabled() != null && other.getSetupModeDisabled().equals(this.getSetupModeDisabled()) == false)
@@ -771,6 +871,10 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
         if (other.getAddressBookArn() == null ^ this.getAddressBookArn() == null)
             return false;
         if (other.getAddressBookArn() != null && other.getAddressBookArn().equals(this.getAddressBookArn()) == false)
+            return false;
+        if (other.getMeetingRoomConfiguration() == null ^ this.getMeetingRoomConfiguration() == null)
+            return false;
+        if (other.getMeetingRoomConfiguration() != null && other.getMeetingRoomConfiguration().equals(this.getMeetingRoomConfiguration()) == false)
             return false;
         return true;
     }
@@ -788,10 +892,12 @@ public class Profile implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getDistanceUnit() == null) ? 0 : getDistanceUnit().hashCode());
         hashCode = prime * hashCode + ((getTemperatureUnit() == null) ? 0 : getTemperatureUnit().hashCode());
         hashCode = prime * hashCode + ((getWakeWord() == null) ? 0 : getWakeWord().hashCode());
+        hashCode = prime * hashCode + ((getLocale() == null) ? 0 : getLocale().hashCode());
         hashCode = prime * hashCode + ((getSetupModeDisabled() == null) ? 0 : getSetupModeDisabled().hashCode());
         hashCode = prime * hashCode + ((getMaxVolumeLimit() == null) ? 0 : getMaxVolumeLimit().hashCode());
         hashCode = prime * hashCode + ((getPSTNEnabled() == null) ? 0 : getPSTNEnabled().hashCode());
         hashCode = prime * hashCode + ((getAddressBookArn() == null) ? 0 : getAddressBookArn().hashCode());
+        hashCode = prime * hashCode + ((getMeetingRoomConfiguration() == null) ? 0 : getMeetingRoomConfiguration().hashCode());
         return hashCode;
     }
 

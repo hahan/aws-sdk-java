@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -81,7 +81,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
      * Attributes</a>.
      * </p>
      */
@@ -96,7 +96,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
      * Attributes</a>.
      * </p>
      */
@@ -423,14 +423,14 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
      * Attributes</a>.
      * </p>
      * 
      * @return Application-specific information passed between Amazon Lex and a client application.</p>
      *         <p>
      *         For more information, see <a
-     *         href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
+     *         href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
      *         Session Attributes</a>.
      */
 
@@ -444,7 +444,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
      * Attributes</a>.
      * </p>
      * 
@@ -452,7 +452,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      *        Application-specific information passed between Amazon Lex and a client application.</p>
      *        <p>
      *        For more information, see <a
-     *        href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
+     *        href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
      *        Session Attributes</a>.
      */
 
@@ -466,7 +466,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session
      * Attributes</a>.
      * </p>
      * 
@@ -474,7 +474,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      *        Application-specific information passed between Amazon Lex and a client application.</p>
      *        <p>
      *        For more information, see <a
-     *        href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
+     *        href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting
      *        Session Attributes</a>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -483,6 +483,13 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
         setSessionAttributes(sessionAttributes);
         return this;
     }
+
+    /**
+     * Add a single SessionAttributes entry
+     *
+     * @see PostTextRequest#withSessionAttributes
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public PostTextRequest addSessionAttributesEntry(String key, String value) {
         if (null == this.sessionAttributes) {
@@ -515,7 +522,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
      * Attributes</a>.
      * </p>
      * 
@@ -526,7 +533,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      *         </p>
      *         <p>
      *         For more information, see <a
-     *         href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
+     *         href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
      *         Request Attributes</a>.
      */
 
@@ -544,7 +551,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
      * Attributes</a>.
      * </p>
      * 
@@ -556,7 +563,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      *        </p>
      *        <p>
      *        For more information, see <a
-     *        href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
+     *        href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
      *        Request Attributes</a>.
      */
 
@@ -574,7 +581,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
+     * href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request
      * Attributes</a>.
      * </p>
      * 
@@ -586,7 +593,7 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
      *        </p>
      *        <p>
      *        For more information, see <a
-     *        href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
+     *        href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting
      *        Request Attributes</a>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -595,6 +602,13 @@ public class PostTextRequest extends com.amazonaws.AmazonWebServiceRequest imple
         setRequestAttributes(requestAttributes);
         return this;
     }
+
+    /**
+     * Add a single RequestAttributes entry
+     *
+     * @see PostTextRequest#withRequestAttributes
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public PostTextRequest addRequestAttributesEntry(String key, String value) {
         if (null == this.requestAttributes) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -82,17 +82,17 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DuplicateTagKeysException").withModeledClass(
-                                    com.amazonaws.services.directconnect.model.DuplicateTagKeysException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DuplicateTagKeysException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.directconnect.model.transform.DuplicateTagKeysExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withModeledClass(
-                                    com.amazonaws.services.directconnect.model.TooManyTagsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.directconnect.model.transform.TooManyTagsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DirectConnectServerException").withModeledClass(
-                                    com.amazonaws.services.directconnect.model.DirectConnectServerException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DirectConnectServerException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.directconnect.model.transform.DirectConnectServerExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DirectConnectClientException").withModeledClass(
-                                    com.amazonaws.services.directconnect.model.DirectConnectClientException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DirectConnectClientException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.directconnect.model.transform.DirectConnectClientExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.directconnect.model.AmazonDirectConnectException.class));
 
     /**
@@ -2021,8 +2021,8 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
     /**
      * <p>
      * Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to
-     * the Direct Connect gateway and disassociate all virtual private gateways that are associated with the Direct
-     * Connect gateway.
+     * the Direct Connect gateway and disassociate all virtual private gateways associated with the Direct Connect
+     * gateway.
      * </p>
      * 
      * @param deleteDirectConnectGatewayRequest
@@ -2082,6 +2082,11 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
     /**
      * <p>
      * Deletes the association between the specified Direct Connect gateway and virtual private gateway.
+     * </p>
+     * <p>
+     * We recommend that you specify the <code>associationID</code> to delete the association. Alternatively, if you own
+     * virtual gateway and a Direct Connect gateway association, you can specify the <code>virtualGatewayId</code> and
+     * <code>directConnectGatewayId</code> to delete an association.
      * </p>
      * 
      * @param deleteDirectConnectGatewayAssociationRequest

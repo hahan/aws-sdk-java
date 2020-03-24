@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -57,7 +57,7 @@ import com.amazonaws.services.transfer.model.transform.*;
  * authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and
  * partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics,
  * machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no
- * infrastructure to buy and setup.
+ * infrastructure to buy and set up.
  * </p>
  */
 @ThreadSafe
@@ -83,23 +83,29 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidRequestException").withModeledClass(
-                                    com.amazonaws.services.transfer.model.InvalidRequestException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ConflictException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.ConflictExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withModeledClass(
-                                    com.amazonaws.services.transfer.model.ResourceNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidRequestException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.InvalidRequestExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withModeledClass(
-                                    com.amazonaws.services.transfer.model.ServiceUnavailableException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.ResourceNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InternalServiceError").withModeledClass(
-                                    com.amazonaws.services.transfer.model.InternalServiceErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ThrottlingException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.ThrottlingExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceExistsException").withModeledClass(
-                                    com.amazonaws.services.transfer.model.ResourceExistsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.ServiceUnavailableExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidNextTokenException").withModeledClass(
-                                    com.amazonaws.services.transfer.model.InvalidNextTokenException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InternalServiceError").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.InternalServiceErrorExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceExistsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.ResourceExistsExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidNextTokenException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.transfer.model.transform.InvalidNextTokenExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.transfer.model.AWSTransferException.class));
 
     public static AWSTransferClientBuilder builder() {
@@ -150,12 +156,9 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
 
     /**
      * <p>
-     * Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. The call returns
-     * the <code>ServerId</code> property assigned by the service to the newly created server. Reference this
-     * <code>ServerId</code> property when you make updates to your server, or work with users.
-     * </p>
-     * <p>
-     * The response returns the <code>ServerId</code> value for the newly created server.
+     * Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. When you make
+     * updates to your server or when you work with users, use the service-generated <code>ServerId</code> property that
+     * is assigned to the newly created server.
      * </p>
      * 
      * @param createServerRequest
@@ -216,13 +219,12 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
 
     /**
      * <p>
-     * Adds a user and associate them with an existing Secure File Transfer Protocol (SFTP) server. Using parameters for
-     * <code>CreateUser</code>, you can specify the user name, set the home directory, store the user's public key, and
-     * assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy,
-     * and assign metadata with tags that can be used to group and search for users.
-     * </p>
-     * <p>
-     * The response returns the <code>UserName</code> and <code>ServerId</code> values of the new user for that server.
+     * Creates a user and associates them with an existing Secure File Transfer Protocol (SFTP) server. You can only
+     * create and associate users with SFTP servers that have the <code>IdentityProviderType</code> set to
+     * <code>SERVICE_MANAGED</code>. Using parameters for <code>CreateUser</code>, you can specify the user name, set
+     * the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM)
+     * role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group
+     * and search for users.
      * </p>
      * 
      * @param createUserRequest
@@ -285,12 +287,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
 
     /**
      * <p>
-     * Deletes the Secure File Transfer Protocol (SFTP) server that you specify. If you used
-     * <code>SERVICE_MANAGED</code> as your <code>IdentityProviderType</code>, you need to delete all users associated
-     * with this server before deleting the server itself
+     * Deletes the Secure File Transfer Protocol (SFTP) server that you specify.
      * </p>
      * <p>
-     * No response returns from this call.
+     * No response returns from this operation.
      * </p>
      * 
      * @param deleteServerRequest
@@ -354,7 +354,7 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      * Deletes a user's Secure Shell (SSH) public key.
      * </p>
      * <p>
-     * No response is returned from this call.
+     * No response is returned from this operation.
      * </p>
      * 
      * @param deleteSshPublicKeyRequest
@@ -367,6 +367,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when the client submits a malformed request.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.DeleteSshPublicKey
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteSshPublicKey" target="_top">AWS
      *      API Documentation</a>
@@ -418,7 +422,7 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      * Deletes the user belonging to the server you specify.
      * </p>
      * <p>
-     * No response returns from this call.
+     * No response returns from this operation.
      * </p>
      * <note>
      * <p>
@@ -487,7 +491,8 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      * Describes the server that you specify by passing the <code>ServerId</code> parameter.
      * </p>
      * <p>
-     * The response contains a description of the server's properties.
+     * The response contains a description of the server's properties. When you set <code>EndpointType</code> to VPC,
+     * the response will contain the <code>EndpointDetails</code>.
      * </p>
      * 
      * @param describeServerRequest
@@ -633,6 +638,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         The requested resource does not exist.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.ImportSshPublicKey
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKey" target="_top">AWS
      *      API Documentation</a>
@@ -889,6 +898,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when the client submits a malformed request.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.StartServer
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServer" target="_top">AWS API
      *      Documentation</a>
@@ -943,7 +956,7 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      * Transfer Protocol (SFTP) endpoint billing.
      * </p>
      * <p>
-     * The states of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able
+     * The state of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able
      * to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.
      * </p>
      * <p>
@@ -960,6 +973,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when the client submits a malformed request.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.StopServer
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StopServer" target="_top">AWS API
      *      Documentation</a>
@@ -1023,6 +1040,8 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when an error occurs in the AWS Transfer for SFTP service.
      * @throws InvalidRequestException
      *         This exception is thrown when the client submits a malformed request.
+     * @throws ResourceNotFoundException
+     *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
      * @sample AWSTransfer.TagResource
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TagResource" target="_top">AWS API
      *      Documentation</a>
@@ -1072,9 +1091,9 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
     /**
      * <p>
      * If the <code>IdentityProviderType</code> of the server is <code>API_Gateway</code>, tests whether your API
-     * Gateway is set up successfully. We highly recommend that you call this method to test your authentication method
-     * as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to
-     * ensure that your users can successfully use the service.
+     * Gateway is set up successfully. We highly recommend that you call this operation to test your authentication
+     * method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway
+     * integration to ensure that your users can successfully use the service.
      * </p>
      * 
      * @param testIdentityProviderRequest
@@ -1150,6 +1169,8 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when an error occurs in the AWS Transfer for SFTP service.
      * @throws InvalidRequestException
      *         This exception is thrown when the client submits a malformed request.
+     * @throws ResourceNotFoundException
+     *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
      * @sample AWSTransfer.UntagResource
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UntagResource" target="_top">AWS API
      *      Documentation</a>
@@ -1209,12 +1230,21 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      * @return Result of the UpdateServer operation returned by the service.
      * @throws ServiceUnavailableException
      *         The request has failed because the AWS Transfer for SFTP service is not available.
+     * @throws ConflictException
+     *         This exception is thrown when the <code>UpdatServer</code> is called for a server that has VPC as the
+     *         endpoint type and the server's <code>VpcEndpointID</code> is not in the available state.
      * @throws InternalServiceErrorException
      *         This exception is thrown when an error occurs in the AWS Transfer for SFTP service.
      * @throws InvalidRequestException
      *         This exception is thrown when the client submits a malformed request.
+     * @throws ResourceExistsException
+     *         The requested resource does not exist.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.UpdateServer
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServer" target="_top">AWS API
      *      Documentation</a>
@@ -1280,6 +1310,10 @@ public class AWSTransferClient extends AmazonWebServiceClient implements AWSTran
      *         This exception is thrown when the client submits a malformed request.
      * @throws ResourceNotFoundException
      *         This exception is thrown when a resource is not found by the AWS Transfer for SFTP service.
+     * @throws ThrottlingException
+     *         The request was denied due to request throttling.</p>
+     *         <p>
+     *         HTTP Status Code: 400
      * @sample AWSTransfer.UpdateUser
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUser" target="_top">AWS API
      *      Documentation</a>

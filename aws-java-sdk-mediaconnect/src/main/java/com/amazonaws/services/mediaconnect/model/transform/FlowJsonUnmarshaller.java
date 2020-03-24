@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -79,6 +79,14 @@ public class FlowJsonUnmarshaller implements Unmarshaller<Flow, JsonUnmarshaller
                 if (context.testExpression("source", targetDepth)) {
                     context.nextToken();
                     flow.setSource(SourceJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("sourceFailoverConfig", targetDepth)) {
+                    context.nextToken();
+                    flow.setSourceFailoverConfig(FailoverConfigJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("sources", targetDepth)) {
+                    context.nextToken();
+                    flow.setSources(new ListUnmarshaller<Source>(SourceJsonUnmarshaller.getInstance()).unmarshall(context));
                 }
                 if (context.testExpression("status", targetDepth)) {
                     context.nextToken();

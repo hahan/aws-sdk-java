@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -43,7 +43,6 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
     /**
      * <p>
      * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
-     * If this parameter is not specified, we attach a default policy that allows full access to the service.
      * </p>
      */
     private String policyDocument;
@@ -85,7 +84,7 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
     private com.amazonaws.internal.SdkInternalList<String> removeSecurityGroupIds;
     /**
      * <p>
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * </p>
      */
     private Boolean privateDnsEnabled;
@@ -193,13 +192,11 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
     /**
      * <p>
      * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
-     * If this parameter is not specified, we attach a default policy that allows full access to the service.
      * </p>
      * 
      * @param policyDocument
      *        A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON
-     *        format. If this parameter is not specified, we attach a default policy that allows full access to the
-     *        service.
+     *        format.
      */
 
     public void setPolicyDocument(String policyDocument) {
@@ -209,12 +206,10 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
     /**
      * <p>
      * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
-     * If this parameter is not specified, we attach a default policy that allows full access to the service.
      * </p>
      * 
      * @return A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON
-     *         format. If this parameter is not specified, we attach a default policy that allows full access to the
-     *         service.
+     *         format.
      */
 
     public String getPolicyDocument() {
@@ -224,13 +219,11 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
     /**
      * <p>
      * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
-     * If this parameter is not specified, we attach a default policy that allows full access to the service.
      * </p>
      * 
      * @param policyDocument
      *        A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON
-     *        format. If this parameter is not specified, we attach a default policy that allows full access to the
-     *        service.
+     *        format.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -679,11 +672,11 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
 
     /**
      * <p>
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * </p>
      * 
      * @param privateDnsEnabled
-     *        (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     *        (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
 
     public void setPrivateDnsEnabled(Boolean privateDnsEnabled) {
@@ -692,10 +685,10 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
 
     /**
      * <p>
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * </p>
      * 
-     * @return (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * @return (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
 
     public Boolean getPrivateDnsEnabled() {
@@ -704,11 +697,11 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
 
     /**
      * <p>
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * </p>
      * 
      * @param privateDnsEnabled
-     *        (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     *        (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -719,10 +712,10 @@ public class ModifyVpcEndpointRequest extends AmazonWebServiceRequest implements
 
     /**
      * <p>
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      * </p>
      * 
-     * @return (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * @return (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
 
     public Boolean isPrivateDnsEnabled() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -41,23 +41,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * <ul>
      * <li>
      * <p>
-     * <code>service-name</code>: The name of the service.
+     * <code>service-name</code> - The name of the service.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     * <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     * <code>vpc-endpoint-id</code> - The ID of the endpoint.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> |
-     * <code>deleting</code> | <code>deleted</code>)
+     * <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     * <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     * <code>rejected</code> | <code>failed</code>).
      * </p>
      * </li>
      * <li>
@@ -83,7 +84,7 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * subsequent call to get the next set of results.
      * </p>
      * <p>
-     * Constraint: If the value is greater than 1000, we return only 1000 items.
+     * Constraint: If the value is greater than 1,000, we return only 1,000 items.
      * </p>
      */
     private Integer maxResults;
@@ -174,23 +175,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * <ul>
      * <li>
      * <p>
-     * <code>service-name</code>: The name of the service.
+     * <code>service-name</code> - The name of the service.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     * <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     * <code>vpc-endpoint-id</code> - The ID of the endpoint.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> |
-     * <code>deleting</code> | <code>deleted</code>)
+     * <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     * <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     * <code>rejected</code> | <code>failed</code>).
      * </p>
      * </li>
      * <li>
@@ -213,23 +215,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      *         <ul>
      *         <li>
      *         <p>
-     *         <code>service-name</code>: The name of the service.
+     *         <code>service-name</code> - The name of the service.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     *         <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     *         <code>vpc-endpoint-id</code> - The ID of the endpoint.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> |
-     *         <code>available</code> | <code>deleting</code> | <code>deleted</code>)
+     *         <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     *         <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     *         <code>rejected</code> | <code>failed</code>).
      *         </p>
      *         </li>
      *         <li>
@@ -262,23 +265,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * <ul>
      * <li>
      * <p>
-     * <code>service-name</code>: The name of the service.
+     * <code>service-name</code> - The name of the service.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     * <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     * <code>vpc-endpoint-id</code> - The ID of the endpoint.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> |
-     * <code>deleting</code> | <code>deleted</code>)
+     * <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     * <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     * <code>rejected</code> | <code>failed</code>).
      * </p>
      * </li>
      * <li>
@@ -302,23 +306,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      *        <ul>
      *        <li>
      *        <p>
-     *        <code>service-name</code>: The name of the service.
+     *        <code>service-name</code> - The name of the service.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     *        <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     *        <code>vpc-endpoint-id</code> - The ID of the endpoint.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code>
-     *        | <code>deleting</code> | <code>deleted</code>)
+     *        <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     *        <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     *        <code>rejected</code> | <code>failed</code>).
      *        </p>
      *        </li>
      *        <li>
@@ -353,23 +358,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * <ul>
      * <li>
      * <p>
-     * <code>service-name</code>: The name of the service.
+     * <code>service-name</code> - The name of the service.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     * <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     * <code>vpc-endpoint-id</code> - The ID of the endpoint.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> |
-     * <code>deleting</code> | <code>deleted</code>)
+     * <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     * <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     * <code>rejected</code> | <code>failed</code>).
      * </p>
      * </li>
      * <li>
@@ -398,23 +404,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      *        <ul>
      *        <li>
      *        <p>
-     *        <code>service-name</code>: The name of the service.
+     *        <code>service-name</code> - The name of the service.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     *        <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     *        <code>vpc-endpoint-id</code> - The ID of the endpoint.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code>
-     *        | <code>deleting</code> | <code>deleted</code>)
+     *        <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     *        <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     *        <code>rejected</code> | <code>failed</code>).
      *        </p>
      *        </li>
      *        <li>
@@ -451,23 +458,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * <ul>
      * <li>
      * <p>
-     * <code>service-name</code>: The name of the service.
+     * <code>service-name</code> - The name of the service.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     * <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     * <code>vpc-endpoint-id</code> - The ID of the endpoint.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> |
-     * <code>deleting</code> | <code>deleted</code>)
+     * <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     * <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     * <code>rejected</code> | <code>failed</code>).
      * </p>
      * </li>
      * <li>
@@ -491,23 +499,24 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      *        <ul>
      *        <li>
      *        <p>
-     *        <code>service-name</code>: The name of the service.
+     *        <code>service-name</code> - The name of the service.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.
+     *        <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-id</code>: The ID of the endpoint.
+     *        <code>vpc-endpoint-id</code> - The ID of the endpoint.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code>
-     *        | <code>deleting</code> | <code>deleted</code>)
+     *        <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> |
+     *        <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> |
+     *        <code>rejected</code> | <code>failed</code>).
      *        </p>
      *        </li>
      *        <li>
@@ -538,14 +547,14 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * subsequent call to get the next set of results.
      * </p>
      * <p>
-     * Constraint: If the value is greater than 1000, we return only 1000 items.
+     * Constraint: If the value is greater than 1,000, we return only 1,000 items.
      * </p>
      * 
      * @param maxResults
      *        The maximum number of items to return for this request. The request returns a token that you can specify
      *        in a subsequent call to get the next set of results.</p>
      *        <p>
-     *        Constraint: If the value is greater than 1000, we return only 1000 items.
+     *        Constraint: If the value is greater than 1,000, we return only 1,000 items.
      */
 
     public void setMaxResults(Integer maxResults) {
@@ -558,13 +567,13 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * subsequent call to get the next set of results.
      * </p>
      * <p>
-     * Constraint: If the value is greater than 1000, we return only 1000 items.
+     * Constraint: If the value is greater than 1,000, we return only 1,000 items.
      * </p>
      * 
      * @return The maximum number of items to return for this request. The request returns a token that you can specify
      *         in a subsequent call to get the next set of results.</p>
      *         <p>
-     *         Constraint: If the value is greater than 1000, we return only 1000 items.
+     *         Constraint: If the value is greater than 1,000, we return only 1,000 items.
      */
 
     public Integer getMaxResults() {
@@ -577,14 +586,14 @@ public class DescribeVpcEndpointsRequest extends AmazonWebServiceRequest impleme
      * subsequent call to get the next set of results.
      * </p>
      * <p>
-     * Constraint: If the value is greater than 1000, we return only 1000 items.
+     * Constraint: If the value is greater than 1,000, we return only 1,000 items.
      * </p>
      * 
      * @param maxResults
      *        The maximum number of items to return for this request. The request returns a token that you can specify
      *        in a subsequent call to get the next set of results.</p>
      *        <p>
-     *        Constraint: If the value is greater than 1000, we return only 1000 items.
+     *        Constraint: If the value is greater than 1,000, we return only 1,000 items.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

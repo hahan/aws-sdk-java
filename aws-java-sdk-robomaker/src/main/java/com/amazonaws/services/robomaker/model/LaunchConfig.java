@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -46,6 +46,20 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private java.util.Map<String, String> environmentVariables;
+    /**
+     * <p>
+     * The port forwarding configuration.
+     * </p>
+     */
+    private PortForwardingConfig portForwardingConfig;
+    /**
+     * <p>
+     * Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS
+     * RoboMaker will configure a connection so you can interact with your application as it is running in the
+     * simulation. You must configure and luanch the component. It must have a graphical user interface.
+     * </p>
+     */
+    private Boolean streamUI;
 
     /**
      * <p>
@@ -167,6 +181,13 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
         return this;
     }
 
+    /**
+     * Add a single EnvironmentVariables entry
+     *
+     * @see LaunchConfig#withEnvironmentVariables
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public LaunchConfig addEnvironmentVariablesEntry(String key, String value) {
         if (null == this.environmentVariables) {
             this.environmentVariables = new java.util.HashMap<String, String>();
@@ -189,6 +210,118 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * The port forwarding configuration.
+     * </p>
+     * 
+     * @param portForwardingConfig
+     *        The port forwarding configuration.
+     */
+
+    public void setPortForwardingConfig(PortForwardingConfig portForwardingConfig) {
+        this.portForwardingConfig = portForwardingConfig;
+    }
+
+    /**
+     * <p>
+     * The port forwarding configuration.
+     * </p>
+     * 
+     * @return The port forwarding configuration.
+     */
+
+    public PortForwardingConfig getPortForwardingConfig() {
+        return this.portForwardingConfig;
+    }
+
+    /**
+     * <p>
+     * The port forwarding configuration.
+     * </p>
+     * 
+     * @param portForwardingConfig
+     *        The port forwarding configuration.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public LaunchConfig withPortForwardingConfig(PortForwardingConfig portForwardingConfig) {
+        setPortForwardingConfig(portForwardingConfig);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS
+     * RoboMaker will configure a connection so you can interact with your application as it is running in the
+     * simulation. You must configure and luanch the component. It must have a graphical user interface.
+     * </p>
+     * 
+     * @param streamUI
+     *        Boolean indicating whether a streaming session will be configured for the application. If
+     *        <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as
+     *        it is running in the simulation. You must configure and luanch the component. It must have a graphical
+     *        user interface.
+     */
+
+    public void setStreamUI(Boolean streamUI) {
+        this.streamUI = streamUI;
+    }
+
+    /**
+     * <p>
+     * Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS
+     * RoboMaker will configure a connection so you can interact with your application as it is running in the
+     * simulation. You must configure and luanch the component. It must have a graphical user interface.
+     * </p>
+     * 
+     * @return Boolean indicating whether a streaming session will be configured for the application. If
+     *         <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as
+     *         it is running in the simulation. You must configure and luanch the component. It must have a graphical
+     *         user interface.
+     */
+
+    public Boolean getStreamUI() {
+        return this.streamUI;
+    }
+
+    /**
+     * <p>
+     * Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS
+     * RoboMaker will configure a connection so you can interact with your application as it is running in the
+     * simulation. You must configure and luanch the component. It must have a graphical user interface.
+     * </p>
+     * 
+     * @param streamUI
+     *        Boolean indicating whether a streaming session will be configured for the application. If
+     *        <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as
+     *        it is running in the simulation. You must configure and luanch the component. It must have a graphical
+     *        user interface.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public LaunchConfig withStreamUI(Boolean streamUI) {
+        setStreamUI(streamUI);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS
+     * RoboMaker will configure a connection so you can interact with your application as it is running in the
+     * simulation. You must configure and luanch the component. It must have a graphical user interface.
+     * </p>
+     * 
+     * @return Boolean indicating whether a streaming session will be configured for the application. If
+     *         <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as
+     *         it is running in the simulation. You must configure and luanch the component. It must have a graphical
+     *         user interface.
+     */
+
+    public Boolean isStreamUI() {
+        return this.streamUI;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -205,7 +338,11 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
         if (getLaunchFile() != null)
             sb.append("LaunchFile: ").append(getLaunchFile()).append(",");
         if (getEnvironmentVariables() != null)
-            sb.append("EnvironmentVariables: ").append(getEnvironmentVariables());
+            sb.append("EnvironmentVariables: ").append(getEnvironmentVariables()).append(",");
+        if (getPortForwardingConfig() != null)
+            sb.append("PortForwardingConfig: ").append(getPortForwardingConfig()).append(",");
+        if (getStreamUI() != null)
+            sb.append("StreamUI: ").append(getStreamUI());
         sb.append("}");
         return sb.toString();
     }
@@ -232,6 +369,14 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getEnvironmentVariables() != null && other.getEnvironmentVariables().equals(this.getEnvironmentVariables()) == false)
             return false;
+        if (other.getPortForwardingConfig() == null ^ this.getPortForwardingConfig() == null)
+            return false;
+        if (other.getPortForwardingConfig() != null && other.getPortForwardingConfig().equals(this.getPortForwardingConfig()) == false)
+            return false;
+        if (other.getStreamUI() == null ^ this.getStreamUI() == null)
+            return false;
+        if (other.getStreamUI() != null && other.getStreamUI().equals(this.getStreamUI()) == false)
+            return false;
         return true;
     }
 
@@ -243,6 +388,8 @@ public class LaunchConfig implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getPackageName() == null) ? 0 : getPackageName().hashCode());
         hashCode = prime * hashCode + ((getLaunchFile() == null) ? 0 : getLaunchFile().hashCode());
         hashCode = prime * hashCode + ((getEnvironmentVariables() == null) ? 0 : getEnvironmentVariables().hashCode());
+        hashCode = prime * hashCode + ((getPortForwardingConfig() == null) ? 0 : getPortForwardingConfig().hashCode());
+        hashCode = prime * hashCode + ((getStreamUI() == null) ? 0 : getStreamUI().hashCode());
         return hashCode;
     }
 

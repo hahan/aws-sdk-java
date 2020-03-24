@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -33,6 +33,8 @@ public class UpdateGatewayInformationRequestMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("GatewayName").build();
     private static final MarshallingInfo<String> GATEWAYTIMEZONE_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("GatewayTimezone").build();
+    private static final MarshallingInfo<String> CLOUDWATCHLOGGROUPARN_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("CloudWatchLogGroupARN").build();
 
     private static final UpdateGatewayInformationRequestMarshaller instance = new UpdateGatewayInformationRequestMarshaller();
 
@@ -53,6 +55,7 @@ public class UpdateGatewayInformationRequestMarshaller {
             protocolMarshaller.marshall(updateGatewayInformationRequest.getGatewayARN(), GATEWAYARN_BINDING);
             protocolMarshaller.marshall(updateGatewayInformationRequest.getGatewayName(), GATEWAYNAME_BINDING);
             protocolMarshaller.marshall(updateGatewayInformationRequest.getGatewayTimezone(), GATEWAYTIMEZONE_BINDING);
+            protocolMarshaller.marshall(updateGatewayInformationRequest.getCloudWatchLogGroupARN(), CLOUDWATCHLOGGROUPARN_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2011-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -48,6 +48,8 @@ public class SynthesizeSpeechPresignRequest implements Serializable {
     private String voiceId;
 
     private String languageCode;
+
+    private String engine;
 
     /**
      * @return Expiration of the presigned request. Default is {@link AmazonPollyPresigners#SYNTHESIZE_SPEECH_DEFAULT_EXPIRATION_MINUTES}
@@ -381,6 +383,28 @@ public class SynthesizeSpeechPresignRequest implements Serializable {
      */
     public SynthesizeSpeechPresignRequest withLanguageCode(String languageCode) {
         setLanguageCode(languageCode);
+        return this;
+    }
+
+    /**
+     * @see SynthesizeSpeechRequest#getEngine()
+     */
+    public String getEngine() {
+        return engine;
+    }
+
+    /**
+     * @see SynthesizeSpeechRequest#setEngine(String)
+     */
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    /**
+     * @see SynthesizeSpeechRequest#withEngine(String)
+     */
+    public SynthesizeSpeechPresignRequest withEngine(String engine) {
+        setEngine(engine);
         return this;
     }
 }

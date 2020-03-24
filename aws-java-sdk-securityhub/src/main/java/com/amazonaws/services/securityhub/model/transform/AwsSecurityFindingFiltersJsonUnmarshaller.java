@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -411,6 +411,11 @@ public class AwsSecurityFindingFiltersJsonUnmarshaller implements Unmarshaller<A
                 if (context.testExpression("WorkflowState", targetDepth)) {
                     context.nextToken();
                     awsSecurityFindingFilters.setWorkflowState(new ListUnmarshaller<StringFilter>(StringFilterJsonUnmarshaller.getInstance())
+                            .unmarshall(context));
+                }
+                if (context.testExpression("WorkflowStatus", targetDepth)) {
+                    context.nextToken();
+                    awsSecurityFindingFilters.setWorkflowStatus(new ListUnmarshaller<StringFilter>(StringFilterJsonUnmarshaller.getInstance())
                             .unmarshall(context));
                 }
                 if (context.testExpression("RecordState", targetDepth)) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -123,10 +123,15 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
     private Boolean sMBACLEnabled;
     /**
      * <p>
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must
-     * be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to
-     * <code>ActiveDirectory</code>.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These
+     * users can do all file operations as the super-user.
      * </p>
+     * <important>
+     * <p>
+     * Use this option very carefully, because any user in this list can do anything they like on the file share,
+     * regardless of file permissions.
+     * </p>
+     * </important>
      */
     private com.amazonaws.internal.SdkInternalList<String> adminUserList;
     /**
@@ -881,14 +886,22 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
 
     /**
      * <p>
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must
-     * be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to
-     * <code>ActiveDirectory</code>.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These
+     * users can do all file operations as the super-user.
      * </p>
+     * <important>
+     * <p>
+     * Use this option very carefully, because any user in this list can do anything they like on the file share,
+     * regardless of file permissions.
+     * </p>
+     * </important>
      * 
-     * @return A list of users or groups in the Active Directory that have administrator rights to the file share. A
-     *         group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if
-     *         Authentication is set to <code>ActiveDirectory</code>.
+     * @return A list of users in the Active Directory that will be granted administrator privileges on the file share.
+     *         These users can do all file operations as the super-user. </p> <important>
+     *         <p>
+     *         Use this option very carefully, because any user in this list can do anything they like on the file
+     *         share, regardless of file permissions.
+     *         </p>
      */
 
     public java.util.List<String> getAdminUserList() {
@@ -900,15 +913,23 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
 
     /**
      * <p>
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must
-     * be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to
-     * <code>ActiveDirectory</code>.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These
+     * users can do all file operations as the super-user.
      * </p>
+     * <important>
+     * <p>
+     * Use this option very carefully, because any user in this list can do anything they like on the file share,
+     * regardless of file permissions.
+     * </p>
+     * </important>
      * 
      * @param adminUserList
-     *        A list of users or groups in the Active Directory that have administrator rights to the file share. A
-     *        group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if
-     *        Authentication is set to <code>ActiveDirectory</code>.
+     *        A list of users in the Active Directory that will be granted administrator privileges on the file share.
+     *        These users can do all file operations as the super-user. </p> <important>
+     *        <p>
+     *        Use this option very carefully, because any user in this list can do anything they like on the file share,
+     *        regardless of file permissions.
+     *        </p>
      */
 
     public void setAdminUserList(java.util.Collection<String> adminUserList) {
@@ -922,10 +943,15 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
 
     /**
      * <p>
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must
-     * be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to
-     * <code>ActiveDirectory</code>.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These
+     * users can do all file operations as the super-user.
      * </p>
+     * <important>
+     * <p>
+     * Use this option very carefully, because any user in this list can do anything they like on the file share,
+     * regardless of file permissions.
+     * </p>
+     * </important>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setAdminUserList(java.util.Collection)} or {@link #withAdminUserList(java.util.Collection)} if you want
@@ -933,9 +959,12 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      * 
      * @param adminUserList
-     *        A list of users or groups in the Active Directory that have administrator rights to the file share. A
-     *        group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if
-     *        Authentication is set to <code>ActiveDirectory</code>.
+     *        A list of users in the Active Directory that will be granted administrator privileges on the file share.
+     *        These users can do all file operations as the super-user. </p> <important>
+     *        <p>
+     *        Use this option very carefully, because any user in this list can do anything they like on the file share,
+     *        regardless of file permissions.
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -951,15 +980,23 @@ public class CreateSMBFileShareRequest extends com.amazonaws.AmazonWebServiceReq
 
     /**
      * <p>
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must
-     * be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to
-     * <code>ActiveDirectory</code>.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These
+     * users can do all file operations as the super-user.
      * </p>
+     * <important>
+     * <p>
+     * Use this option very carefully, because any user in this list can do anything they like on the file share,
+     * regardless of file permissions.
+     * </p>
+     * </important>
      * 
      * @param adminUserList
-     *        A list of users or groups in the Active Directory that have administrator rights to the file share. A
-     *        group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if
-     *        Authentication is set to <code>ActiveDirectory</code>.
+     *        A list of users in the Active Directory that will be granted administrator privileges on the file share.
+     *        These users can do all file operations as the super-user. </p> <important>
+     *        <p>
+     *        Use this option very carefully, because any user in this list can do anything they like on the file share,
+     *        regardless of file permissions.
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

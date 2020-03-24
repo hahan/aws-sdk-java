@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -89,7 +89,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.
+     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     * contains the JDBC driver to use.
      * </p>
      * </li>
      * <li>
@@ -109,7 +110,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>CONFIG_FILES</code> - (Reserved for future use).
+     * <code>CONFIG_FILES</code> - (Reserved for future use.)
      * </p>
      * </li>
      * <li>
@@ -125,7 +126,31 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * <li>
      * <p>
      * <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with
-     * hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     * hostname matching is enforced for the JDBC connection on the client. The default is false.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses
+     * this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue
+     * only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM
+     * format.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the
+     * Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms
+     * for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key
+     * Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to
+     * skip AWS Glue’s validation of the customer certificate.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     * distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     * <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.
      * </p>
      * </li>
      * </ul>
@@ -403,7 +428,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.
+     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     * contains the JDBC driver to use.
      * </p>
      * </li>
      * <li>
@@ -423,7 +449,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>CONFIG_FILES</code> - (Reserved for future use).
+     * <code>CONFIG_FILES</code> - (Reserved for future use.)
      * </p>
      * </li>
      * <li>
@@ -439,7 +465,31 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * <li>
      * <p>
      * <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with
-     * hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     * hostname matching is enforced for the JDBC connection on the client. The default is false.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses
+     * this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue
+     * only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM
+     * format.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the
+     * Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms
+     * for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key
+     * Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to
+     * skip AWS Glue’s validation of the customer certificate.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     * distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     * <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.
      * </p>
      * </li>
      * </ul>
@@ -478,8 +528,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *         </li>
      *         <li>
      *         <p>
-     *         <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to
-     *         use.
+     *         <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file
+     *         that contains the JDBC driver to use.
      *         </p>
      *         </li>
      *         <li>
@@ -499,7 +549,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *         </li>
      *         <li>
      *         <p>
-     *         <code>CONFIG_FILES</code> - (Reserved for future use).
+     *         <code>CONFIG_FILES</code> - (Reserved for future use.)
      *         </p>
      *         </li>
      *         <li>
@@ -515,8 +565,32 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *         <li>
      *         <p>
      *         <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer
-     *         (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is
-     *         false.
+     *         (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS
+     *         Glue uses this root certificate to validate the customer’s certificate when connecting to the customer
+     *         database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and
+     *         supplied in Base64 encoding PEM format.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue
+     *         validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only
+     *         permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For
+     *         the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this
+     *         property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     *         distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     *         <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the
+     *         <code>hostNameInCertificate</code>.
      *         </p>
      *         </li>
      */
@@ -562,7 +636,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.
+     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     * contains the JDBC driver to use.
      * </p>
      * </li>
      * <li>
@@ -582,7 +657,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>CONFIG_FILES</code> - (Reserved for future use).
+     * <code>CONFIG_FILES</code> - (Reserved for future use.)
      * </p>
      * </li>
      * <li>
@@ -598,7 +673,31 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * <li>
      * <p>
      * <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with
-     * hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     * hostname matching is enforced for the JDBC connection on the client. The default is false.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses
+     * this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue
+     * only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM
+     * format.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the
+     * Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms
+     * for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key
+     * Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to
+     * skip AWS Glue’s validation of the customer certificate.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     * distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     * <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.
      * </p>
      * </li>
      * </ul>
@@ -638,8 +737,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        </li>
      *        <li>
      *        <p>
-     *        <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to
-     *        use.
+     *        <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     *        contains the JDBC driver to use.
      *        </p>
      *        </li>
      *        <li>
@@ -659,7 +758,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        </li>
      *        <li>
      *        <p>
-     *        <code>CONFIG_FILES</code> - (Reserved for future use).
+     *        <code>CONFIG_FILES</code> - (Reserved for future use.)
      *        </p>
      *        </li>
      *        <li>
@@ -675,7 +774,32 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        <li>
      *        <p>
      *        <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer
-     *        (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     *        (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue
+     *        uses this root certificate to validate the customer’s certificate when connecting to the customer
+     *        database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and
+     *        supplied in Base64 encoding PEM format.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates
+     *        the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted
+     *        algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject
+     *        Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to
+     *        <code>true</code> to skip AWS Glue’s validation of the customer certificate.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     *        distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     *        <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the
+     *        <code>hostNameInCertificate</code>.
      *        </p>
      *        </li>
      */
@@ -721,7 +845,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.
+     * <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     * contains the JDBC driver to use.
      * </p>
      * </li>
      * <li>
@@ -741,7 +866,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * </li>
      * <li>
      * <p>
-     * <code>CONFIG_FILES</code> - (Reserved for future use).
+     * <code>CONFIG_FILES</code> - (Reserved for future use.)
      * </p>
      * </li>
      * <li>
@@ -757,7 +882,31 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      * <li>
      * <p>
      * <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with
-     * hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     * hostname matching is enforced for the JDBC connection on the client. The default is false.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses
+     * this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue
+     * only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM
+     * format.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the
+     * Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms
+     * for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key
+     * Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to
+     * skip AWS Glue’s validation of the customer certificate.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     * distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     * <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.
      * </p>
      * </li>
      * </ul>
@@ -797,8 +946,8 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        </li>
      *        <li>
      *        <p>
-     *        <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to
-     *        use.
+     *        <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that
+     *        contains the JDBC driver to use.
      *        </p>
      *        </li>
      *        <li>
@@ -818,7 +967,7 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        </li>
      *        <li>
      *        <p>
-     *        <code>CONFIG_FILES</code> - (Reserved for future use).
+     *        <code>CONFIG_FILES</code> - (Reserved for future use.)
      *        </p>
      *        </li>
      *        <li>
@@ -834,7 +983,32 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
      *        <li>
      *        <p>
      *        <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer
-     *        (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.
+     *        (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue
+     *        uses this root certificate to validate the customer’s certificate when connecting to the customer
+     *        database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and
+     *        supplied in Base64 encoding PEM format.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates
+     *        the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted
+     *        algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject
+     *        Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to
+     *        <code>true</code> to skip AWS Glue’s validation of the customer certificate.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or
+     *        distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the
+     *        <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the
+     *        <code>hostNameInCertificate</code>.
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -844,6 +1018,13 @@ public class Connection implements Serializable, Cloneable, StructuredPojo {
         setConnectionProperties(connectionProperties);
         return this;
     }
+
+    /**
+     * Add a single ConnectionProperties entry
+     *
+     * @see Connection#withConnectionProperties
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public Connection addConnectionPropertiesEntry(String key, String value) {
         if (null == this.connectionProperties) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -28,6 +28,8 @@ import com.amazonaws.annotation.SdkInternalApi;
 @SdkInternalApi
 public class SynthesisTaskMarshaller {
 
+    private static final MarshallingInfo<String> ENGINE_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("Engine").build();
     private static final MarshallingInfo<String> TASKID_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("TaskId").build();
     private static final MarshallingInfo<String> TASKSTATUS_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
@@ -73,6 +75,7 @@ public class SynthesisTaskMarshaller {
         }
 
         try {
+            protocolMarshaller.marshall(synthesisTask.getEngine(), ENGINE_BINDING);
             protocolMarshaller.marshall(synthesisTask.getTaskId(), TASKID_BINDING);
             protocolMarshaller.marshall(synthesisTask.getTaskStatus(), TASKSTATUS_BINDING);
             protocolMarshaller.marshall(synthesisTask.getTaskStatusReason(), TASKSTATUSREASON_BINDING);

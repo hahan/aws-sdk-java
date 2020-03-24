@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -40,7 +40,7 @@ public class StartBulkDeploymentRequest extends com.amazonaws.AmazonWebServiceRe
      * MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
      */
     private String inputFileUri;
-    /** Tag(s) to add to the new resource */
+    /** Tag(s) to add to the new resource. */
     private java.util.Map<String, String> tags;
 
     /**
@@ -176,9 +176,9 @@ public class StartBulkDeploymentRequest extends com.amazonaws.AmazonWebServiceRe
     }
 
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      * 
-     * @return Tag(s) to add to the new resource
+     * @return Tag(s) to add to the new resource.
      */
 
     public java.util.Map<String, String> getTags() {
@@ -186,10 +186,10 @@ public class StartBulkDeploymentRequest extends com.amazonaws.AmazonWebServiceRe
     }
 
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      * 
      * @param tags
-     *        Tag(s) to add to the new resource
+     *        Tag(s) to add to the new resource.
      */
 
     public void setTags(java.util.Map<String, String> tags) {
@@ -197,10 +197,10 @@ public class StartBulkDeploymentRequest extends com.amazonaws.AmazonWebServiceRe
     }
 
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      * 
      * @param tags
-     *        Tag(s) to add to the new resource
+     *        Tag(s) to add to the new resource.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -208,6 +208,13 @@ public class StartBulkDeploymentRequest extends com.amazonaws.AmazonWebServiceRe
         setTags(tags);
         return this;
     }
+
+    /**
+     * Add a single Tags entry
+     *
+     * @see StartBulkDeploymentRequest#withTags
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public StartBulkDeploymentRequest addTagsEntry(String key, String value) {
         if (null == this.tags) {

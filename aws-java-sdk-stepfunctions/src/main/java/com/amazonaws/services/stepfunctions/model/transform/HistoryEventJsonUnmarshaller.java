@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -139,6 +139,26 @@ public class HistoryEventJsonUnmarshaller implements Unmarshaller<HistoryEvent, 
                 if (context.testExpression("executionTimedOutEventDetails", targetDepth)) {
                     context.nextToken();
                     historyEvent.setExecutionTimedOutEventDetails(ExecutionTimedOutEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("mapStateStartedEventDetails", targetDepth)) {
+                    context.nextToken();
+                    historyEvent.setMapStateStartedEventDetails(MapStateStartedEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("mapIterationStartedEventDetails", targetDepth)) {
+                    context.nextToken();
+                    historyEvent.setMapIterationStartedEventDetails(MapIterationEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("mapIterationSucceededEventDetails", targetDepth)) {
+                    context.nextToken();
+                    historyEvent.setMapIterationSucceededEventDetails(MapIterationEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("mapIterationFailedEventDetails", targetDepth)) {
+                    context.nextToken();
+                    historyEvent.setMapIterationFailedEventDetails(MapIterationEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("mapIterationAbortedEventDetails", targetDepth)) {
+                    context.nextToken();
+                    historyEvent.setMapIterationAbortedEventDetails(MapIterationEventDetailsJsonUnmarshaller.getInstance().unmarshall(context));
                 }
                 if (context.testExpression("lambdaFunctionFailedEventDetails", targetDepth)) {
                     context.nextToken();

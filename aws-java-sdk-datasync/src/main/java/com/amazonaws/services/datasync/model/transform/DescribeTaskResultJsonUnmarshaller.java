@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -76,6 +76,15 @@ public class DescribeTaskResultJsonUnmarshaller implements Unmarshaller<Describe
                     context.nextToken();
                     describeTaskResult.setCloudWatchLogGroupArn(context.getUnmarshaller(String.class).unmarshall(context));
                 }
+                if (context.testExpression("SourceNetworkInterfaceArns", targetDepth)) {
+                    context.nextToken();
+                    describeTaskResult.setSourceNetworkInterfaceArns(new ListUnmarshaller<String>(context.getUnmarshaller(String.class)).unmarshall(context));
+                }
+                if (context.testExpression("DestinationNetworkInterfaceArns", targetDepth)) {
+                    context.nextToken();
+                    describeTaskResult.setDestinationNetworkInterfaceArns(new ListUnmarshaller<String>(context.getUnmarshaller(String.class))
+                            .unmarshall(context));
+                }
                 if (context.testExpression("Options", targetDepth)) {
                     context.nextToken();
                     describeTaskResult.setOptions(OptionsJsonUnmarshaller.getInstance().unmarshall(context));
@@ -83,6 +92,10 @@ public class DescribeTaskResultJsonUnmarshaller implements Unmarshaller<Describe
                 if (context.testExpression("Excludes", targetDepth)) {
                     context.nextToken();
                     describeTaskResult.setExcludes(new ListUnmarshaller<FilterRule>(FilterRuleJsonUnmarshaller.getInstance()).unmarshall(context));
+                }
+                if (context.testExpression("Schedule", targetDepth)) {
+                    context.nextToken();
+                    describeTaskResult.setSchedule(TaskScheduleJsonUnmarshaller.getInstance().unmarshall(context));
                 }
                 if (context.testExpression("ErrorCode", targetDepth)) {
                     context.nextToken();

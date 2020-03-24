@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -74,8 +74,44 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
     private java.util.List<String> writeAttributes;
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      */
     private java.util.List<String> explicitAuthFlows;
     /**
@@ -163,26 +199,33 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
     private String defaultRedirectURI;
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
+     * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      * </p>
      */
     private java.util.List<String> allowedOAuthFlows;
     /**
      * <p>
-     * A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     * <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     * <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     * <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * </p>
      */
     private java.util.List<String> allowedOAuthScopes;
     /**
      * <p>
-     * Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user
-     * pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      * </p>
      */
     private Boolean allowedOAuthFlowsUserPoolClient;
@@ -190,8 +233,92 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * <p>
      * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
      * </p>
+     * <note>
+     * <p>
+     * Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     * us-east-1 Region, regardless of the region in which the user pool resides.
+     * </p>
+     * </note>
      */
     private AnalyticsConfigurationType analyticsConfiguration;
+    /**
+     * <p>
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account
+     * confirmation, and password recovery when the user does not exist in the user pool. When set to
+     * <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username
+     * or password was incorrect, and account confirmation and password recovery return a response indicating a code was
+     * sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a
+     * <code>UserNotFoundException</code> exception if the user does not exist in the user pool.
+     * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ENABLED</code> - This prevents user existence-related errors.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not
+     * prevented.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * This setting affects the behavior of following APIs:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <a>AdminInitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>AdminRespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>InitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>RespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmSignUp</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ResendConfirmationCode</a>
+     * </p>
+     * </li>
+     * </ul>
+     * <note>
+     * <p>
+     * After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     * <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     * </p>
+     * </note>
+     */
+    private String preventUserExistenceErrors;
 
     /**
      * <p>
@@ -571,10 +698,82 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      * 
-     * @return The explicit authentication flows.
+     * @return The authentication flows that are supported by the user pool clients. Flow names without the
+     *         <code>ALLOW_</code> prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note
+     *         that values with <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code>
+     *         prefix.</p>
+     *         <p>
+     *         Valid values include:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     *         <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting.
+     *         With this authentication flow, Cognito receives the password in the request instead of using the SRP
+     *         (Secure Remote Password protocol) protocol to verify passwords.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito
+     *         receives the password in the request instead of using the SRP protocol to verify passwords.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     *         </p>
+     *         </li>
      * @see ExplicitAuthFlowsType
      */
 
@@ -584,11 +783,83 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param explicitAuthFlows
-     *        The explicit authentication flows.
+     *        The authentication flows that are supported by the user pool clients. Flow names without the
+     *        <code>ALLOW_</code> prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note
+     *        that values with <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code>
+     *        prefix.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     *        <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting.
+     *        With this authentication flow, Cognito receives the password in the request instead of using the SRP
+     *        (Secure Remote Password protocol) protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito
+     *        receives the password in the request instead of using the SRP protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     *        </p>
+     *        </li>
      * @see ExplicitAuthFlowsType
      */
 
@@ -603,8 +874,44 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setExplicitAuthFlows(java.util.Collection)} or {@link #withExplicitAuthFlows(java.util.Collection)} if
@@ -612,7 +919,43 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * </p>
      * 
      * @param explicitAuthFlows
-     *        The explicit authentication flows.
+     *        The authentication flows that are supported by the user pool clients. Flow names without the
+     *        <code>ALLOW_</code> prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note
+     *        that values with <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code>
+     *        prefix.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     *        <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting.
+     *        With this authentication flow, Cognito receives the password in the request instead of using the SRP
+     *        (Secure Remote Password protocol) protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito
+     *        receives the password in the request instead of using the SRP protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see ExplicitAuthFlowsType
      */
@@ -629,11 +972,83 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param explicitAuthFlows
-     *        The explicit authentication flows.
+     *        The authentication flows that are supported by the user pool clients. Flow names without the
+     *        <code>ALLOW_</code> prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note
+     *        that values with <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code>
+     *        prefix.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     *        <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting.
+     *        With this authentication flow, Cognito receives the password in the request instead of using the SRP
+     *        (Secure Remote Password protocol) protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito
+     *        receives the password in the request instead of using the SRP protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see ExplicitAuthFlowsType
      */
@@ -645,11 +1060,83 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * The explicit authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the <code>ALLOW_</code>
+     * prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note that values with
+     * <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code> prefix.
      * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     * <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting. With
+     * this authentication flow, Cognito receives the password in the request instead of using the SRP (Secure Remote
+     * Password protocol) protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito receives
+     * the password in the request instead of using the SRP protocol to verify passwords.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param explicitAuthFlows
-     *        The explicit authentication flows.
+     *        The authentication flows that are supported by the user pool clients. Flow names without the
+     *        <code>ALLOW_</code> prefix are deprecated in favor of new names with the <code>ALLOW_</code> prefix. Note
+     *        that values with <code>ALLOW_</code> prefix cannot be used along with values without <code>ALLOW_</code>
+     *        prefix.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password authentication flow
+     *        <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces the <code>ADMIN_NO_SRP_AUTH</code> setting.
+     *        With this authentication flow, Cognito receives the password in the request instead of using the SRP
+     *        (Secure Remote Password protocol) protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based authentication. In this flow, Cognito
+     *        receives the password in the request instead of using the SRP protocol to verify passwords.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh tokens.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see ExplicitAuthFlowsType
      */
@@ -1330,19 +1817,34 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
      * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
+     * </p>
      * 
-     * @return Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
-     *         response. This code can be exchanged for access tokens with the token endpoint.</p>
+     * @return The allowed OAuth flows.</p>
      *         <p>
-     *         Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID
+     *         Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
+     *         response. This code can be exchanged for access tokens with the token endpoint.
+     *         </p>
+     *         <p>
+     *         Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID
      *         token, based on scopes) directly.
+     *         </p>
+     *         <p>
+     *         Set to <code>client_credentials</code> to specify that the client should get the access token (and,
+     *         optionally, ID token, based on scopes) from the token endpoint using a combination of client and
+     *         client_secret.
      * @see OAuthFlowType
      */
 
@@ -1352,20 +1854,35 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
+     * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      * </p>
      * 
      * @param allowedOAuthFlows
-     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
-     *        response. This code can be exchanged for access tokens with the token endpoint.</p>
+     *        The allowed OAuth flows.</p>
      *        <p>
-     *        Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID
+     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
+     *        response. This code can be exchanged for access tokens with the token endpoint.
+     *        </p>
+     *        <p>
+     *        Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID
      *        token, based on scopes) directly.
+     *        </p>
+     *        <p>
+     *        Set to <code>client_credentials</code> to specify that the client should get the access token (and,
+     *        optionally, ID token, based on scopes) from the token endpoint using a combination of client and
+     *        client_secret.
      * @see OAuthFlowType
      */
 
@@ -1380,12 +1897,19 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
+     * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -1394,11 +1918,19 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * </p>
      * 
      * @param allowedOAuthFlows
-     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
-     *        response. This code can be exchanged for access tokens with the token endpoint.</p>
+     *        The allowed OAuth flows.</p>
      *        <p>
-     *        Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID
+     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
+     *        response. This code can be exchanged for access tokens with the token endpoint.
+     *        </p>
+     *        <p>
+     *        Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID
      *        token, based on scopes) directly.
+     *        </p>
+     *        <p>
+     *        Set to <code>client_credentials</code> to specify that the client should get the access token (and,
+     *        optionally, ID token, based on scopes) from the token endpoint using a combination of client and
+     *        client_secret.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see OAuthFlowType
      */
@@ -1415,20 +1947,35 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
+     * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      * </p>
      * 
      * @param allowedOAuthFlows
-     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
-     *        response. This code can be exchanged for access tokens with the token endpoint.</p>
+     *        The allowed OAuth flows.</p>
      *        <p>
-     *        Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID
+     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
+     *        response. This code can be exchanged for access tokens with the token endpoint.
+     *        </p>
+     *        <p>
+     *        Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID
      *        token, based on scopes) directly.
+     *        </p>
+     *        <p>
+     *        Set to <code>client_credentials</code> to specify that the client should get the access token (and,
+     *        optionally, ID token, based on scopes) from the token endpoint using a combination of client and
+     *        client_secret.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see OAuthFlowType
      */
@@ -1440,20 +1987,35 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
+     * The allowed OAuth flows.
+     * </p>
+     * <p>
      * Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response.
      * This code can be exchanged for access tokens with the token endpoint.
      * </p>
      * <p>
-     * Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token,
+     * Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token,
      * based on scopes) directly.
+     * </p>
+     * <p>
+     * Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally,
+     * ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      * </p>
      * 
      * @param allowedOAuthFlows
-     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
-     *        response. This code can be exchanged for access tokens with the token endpoint.</p>
+     *        The allowed OAuth flows.</p>
      *        <p>
-     *        Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID
+     *        Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the
+     *        response. This code can be exchanged for access tokens with the token endpoint.
+     *        </p>
+     *        <p>
+     *        Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID
      *        token, based on scopes) directly.
+     *        </p>
+     *        <p>
+     *        Set to <code>client_credentials</code> to specify that the client should get the access token (and,
+     *        optionally, ID token, based on scopes) from the token endpoint using a combination of client and
+     *        client_secret.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see OAuthFlowType
      */
@@ -1473,12 +2035,14 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     * <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     * <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     * <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * </p>
      * 
-     * @return A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     *         <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * @return The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     *         <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     *         <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      */
 
     public java.util.List<String> getAllowedOAuthScopes() {
@@ -1487,13 +2051,15 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     * <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     * <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     * <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * </p>
      * 
      * @param allowedOAuthScopes
-     *        A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     *        <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     *        The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     *        <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     *        <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      */
 
     public void setAllowedOAuthScopes(java.util.Collection<String> allowedOAuthScopes) {
@@ -1507,8 +2073,9 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     * <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     * <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     * <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -1517,8 +2084,9 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * </p>
      * 
      * @param allowedOAuthScopes
-     *        A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     *        <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     *        The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     *        <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     *        <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1534,13 +2102,15 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     * <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     * <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     * <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * </p>
      * 
      * @param allowedOAuthScopes
-     *        A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>,
-     *        <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>.
+     *        The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>,
+     *        <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are:
+     *        <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1551,13 +2121,12 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user
-     * pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      * </p>
      * 
      * @param allowedOAuthFlowsUserPoolClient
-     *        Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with
-     *        Cognito user pools.
+     *        Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user
+     *        pools.
      */
 
     public void setAllowedOAuthFlowsUserPoolClient(Boolean allowedOAuthFlowsUserPoolClient) {
@@ -1566,12 +2135,11 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user
-     * pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      * </p>
      * 
-     * @return Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with
-     *         Cognito user pools.
+     * @return Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user
+     *         pools.
      */
 
     public Boolean getAllowedOAuthFlowsUserPoolClient() {
@@ -1580,13 +2148,12 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user
-     * pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      * </p>
      * 
      * @param allowedOAuthFlowsUserPoolClient
-     *        Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with
-     *        Cognito user pools.
+     *        Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user
+     *        pools.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1597,12 +2164,11 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
 
     /**
      * <p>
-     * Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user
-     * pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      * </p>
      * 
-     * @return Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with
-     *         Cognito user pools.
+     * @return Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user
+     *         pools.
      */
 
     public Boolean isAllowedOAuthFlowsUserPoolClient() {
@@ -1613,9 +2179,19 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * <p>
      * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
      * </p>
+     * <note>
+     * <p>
+     * Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     * us-east-1 Region, regardless of the region in which the user pool resides.
+     * </p>
+     * </note>
      * 
      * @param analyticsConfiguration
-     *        The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
+     *        The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.</p> <note>
+     *        <p>
+     *        Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     *        us-east-1 Region, regardless of the region in which the user pool resides.
+     *        </p>
      */
 
     public void setAnalyticsConfiguration(AnalyticsConfigurationType analyticsConfiguration) {
@@ -1626,8 +2202,18 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * <p>
      * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
      * </p>
+     * <note>
+     * <p>
+     * Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     * us-east-1 Region, regardless of the region in which the user pool resides.
+     * </p>
+     * </note>
      * 
-     * @return The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
+     * @return The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.</p> <note>
+     *         <p>
+     *         Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     *         us-east-1 Region, regardless of the region in which the user pool resides.
+     *         </p>
      */
 
     public AnalyticsConfigurationType getAnalyticsConfiguration() {
@@ -1638,14 +2224,655 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
      * <p>
      * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
      * </p>
+     * <note>
+     * <p>
+     * Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     * us-east-1 Region, regardless of the region in which the user pool resides.
+     * </p>
+     * </note>
      * 
      * @param analyticsConfiguration
-     *        The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
+     *        The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.</p> <note>
+     *        <p>
+     *        Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia)
+     *        us-east-1 Region, regardless of the region in which the user pool resides.
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public CreateUserPoolClientRequest withAnalyticsConfiguration(AnalyticsConfigurationType analyticsConfiguration) {
         setAnalyticsConfiguration(analyticsConfiguration);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account
+     * confirmation, and password recovery when the user does not exist in the user pool. When set to
+     * <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username
+     * or password was incorrect, and account confirmation and password recovery return a response indicating a code was
+     * sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a
+     * <code>UserNotFoundException</code> exception if the user does not exist in the user pool.
+     * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ENABLED</code> - This prevents user existence-related errors.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not
+     * prevented.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * This setting affects the behavior of following APIs:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <a>AdminInitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>AdminRespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>InitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>RespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmSignUp</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ResendConfirmationCode</a>
+     * </p>
+     * </li>
+     * </ul>
+     * <note>
+     * <p>
+     * After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     * <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     * </p>
+     * </note>
+     * 
+     * @param preventUserExistenceErrors
+     *        Use this setting to choose which errors and responses are returned by Cognito APIs during authentication,
+     *        account confirmation, and password recovery when the user does not exist in the user pool. When set to
+     *        <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the
+     *        username or password was incorrect, and account confirmation and password recovery return a response
+     *        indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will
+     *        return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ENABLED</code> - This prevents user existence-related errors.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are
+     *        not prevented.
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <p>
+     *        This setting affects the behavior of following APIs:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <a>AdminInitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>AdminRespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>InitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>RespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmSignUp</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ResendConfirmationCode</a>
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <note>
+     *        <p>
+     *        After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     *        <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     *        </p>
+     * @see PreventUserExistenceErrorTypes
+     */
+
+    public void setPreventUserExistenceErrors(String preventUserExistenceErrors) {
+        this.preventUserExistenceErrors = preventUserExistenceErrors;
+    }
+
+    /**
+     * <p>
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account
+     * confirmation, and password recovery when the user does not exist in the user pool. When set to
+     * <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username
+     * or password was incorrect, and account confirmation and password recovery return a response indicating a code was
+     * sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a
+     * <code>UserNotFoundException</code> exception if the user does not exist in the user pool.
+     * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ENABLED</code> - This prevents user existence-related errors.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not
+     * prevented.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * This setting affects the behavior of following APIs:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <a>AdminInitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>AdminRespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>InitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>RespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmSignUp</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ResendConfirmationCode</a>
+     * </p>
+     * </li>
+     * </ul>
+     * <note>
+     * <p>
+     * After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     * <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     * </p>
+     * </note>
+     * 
+     * @return Use this setting to choose which errors and responses are returned by Cognito APIs during authentication,
+     *         account confirmation, and password recovery when the user does not exist in the user pool. When set to
+     *         <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the
+     *         username or password was incorrect, and account confirmation and password recovery return a response
+     *         indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will
+     *         return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p>
+     *         <p>
+     *         Valid values include:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         <code>ENABLED</code> - This prevents user existence-related errors.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are
+     *         not prevented.
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         <p>
+     *         This setting affects the behavior of following APIs:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         <a>AdminInitiateAuth</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>AdminRespondToAuthChallenge</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>InitiateAuth</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>RespondToAuthChallenge</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>ForgotPassword</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>ConfirmForgotPassword</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>ConfirmSignUp</a>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <a>ResendConfirmationCode</a>
+     *         </p>
+     *         </li>
+     *         </ul>
+     *         <note>
+     *         <p>
+     *         After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     *         <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     *         </p>
+     * @see PreventUserExistenceErrorTypes
+     */
+
+    public String getPreventUserExistenceErrors() {
+        return this.preventUserExistenceErrors;
+    }
+
+    /**
+     * <p>
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account
+     * confirmation, and password recovery when the user does not exist in the user pool. When set to
+     * <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username
+     * or password was incorrect, and account confirmation and password recovery return a response indicating a code was
+     * sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a
+     * <code>UserNotFoundException</code> exception if the user does not exist in the user pool.
+     * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ENABLED</code> - This prevents user existence-related errors.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not
+     * prevented.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * This setting affects the behavior of following APIs:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <a>AdminInitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>AdminRespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>InitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>RespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmSignUp</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ResendConfirmationCode</a>
+     * </p>
+     * </li>
+     * </ul>
+     * <note>
+     * <p>
+     * After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     * <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     * </p>
+     * </note>
+     * 
+     * @param preventUserExistenceErrors
+     *        Use this setting to choose which errors and responses are returned by Cognito APIs during authentication,
+     *        account confirmation, and password recovery when the user does not exist in the user pool. When set to
+     *        <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the
+     *        username or password was incorrect, and account confirmation and password recovery return a response
+     *        indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will
+     *        return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ENABLED</code> - This prevents user existence-related errors.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are
+     *        not prevented.
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <p>
+     *        This setting affects the behavior of following APIs:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <a>AdminInitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>AdminRespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>InitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>RespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmSignUp</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ResendConfirmationCode</a>
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <note>
+     *        <p>
+     *        After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     *        <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     *        </p>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see PreventUserExistenceErrorTypes
+     */
+
+    public CreateUserPoolClientRequest withPreventUserExistenceErrors(String preventUserExistenceErrors) {
+        setPreventUserExistenceErrors(preventUserExistenceErrors);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account
+     * confirmation, and password recovery when the user does not exist in the user pool. When set to
+     * <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username
+     * or password was incorrect, and account confirmation and password recovery return a response indicating a code was
+     * sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a
+     * <code>UserNotFoundException</code> exception if the user does not exist in the user pool.
+     * </p>
+     * <p>
+     * Valid values include:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>ENABLED</code> - This prevents user existence-related errors.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not
+     * prevented.
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * This setting affects the behavior of following APIs:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <a>AdminInitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>AdminRespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>InitiateAuth</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>RespondToAuthChallenge</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmForgotPassword</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ConfirmSignUp</a>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <a>ResendConfirmationCode</a>
+     * </p>
+     * </li>
+     * </ul>
+     * <note>
+     * <p>
+     * After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     * <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     * </p>
+     * </note>
+     * 
+     * @param preventUserExistenceErrors
+     *        Use this setting to choose which errors and responses are returned by Cognito APIs during authentication,
+     *        account confirmation, and password recovery when the user does not exist in the user pool. When set to
+     *        <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the
+     *        username or password was incorrect, and account confirmation and password recovery return a response
+     *        indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will
+     *        return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p>
+     *        <p>
+     *        Valid values include:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>ENABLED</code> - This prevents user existence-related errors.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are
+     *        not prevented.
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <p>
+     *        This setting affects the behavior of following APIs:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <a>AdminInitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>AdminRespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>InitiateAuth</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>RespondToAuthChallenge</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmForgotPassword</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ConfirmSignUp</a>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <a>ResendConfirmationCode</a>
+     *        </p>
+     *        </li>
+     *        </ul>
+     *        <note>
+     *        <p>
+     *        After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to
+     *        <code>ENABLED</code> for newly created user pool clients if no value is provided.
+     *        </p>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see PreventUserExistenceErrorTypes
+     */
+
+    public CreateUserPoolClientRequest withPreventUserExistenceErrors(PreventUserExistenceErrorTypes preventUserExistenceErrors) {
+        this.preventUserExistenceErrors = preventUserExistenceErrors.toString();
         return this;
     }
 
@@ -1690,7 +2917,9 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
         if (getAllowedOAuthFlowsUserPoolClient() != null)
             sb.append("AllowedOAuthFlowsUserPoolClient: ").append(getAllowedOAuthFlowsUserPoolClient()).append(",");
         if (getAnalyticsConfiguration() != null)
-            sb.append("AnalyticsConfiguration: ").append(getAnalyticsConfiguration());
+            sb.append("AnalyticsConfiguration: ").append(getAnalyticsConfiguration()).append(",");
+        if (getPreventUserExistenceErrors() != null)
+            sb.append("PreventUserExistenceErrors: ").append(getPreventUserExistenceErrors());
         sb.append("}");
         return sb.toString();
     }
@@ -1766,6 +2995,10 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
             return false;
         if (other.getAnalyticsConfiguration() != null && other.getAnalyticsConfiguration().equals(this.getAnalyticsConfiguration()) == false)
             return false;
+        if (other.getPreventUserExistenceErrors() == null ^ this.getPreventUserExistenceErrors() == null)
+            return false;
+        if (other.getPreventUserExistenceErrors() != null && other.getPreventUserExistenceErrors().equals(this.getPreventUserExistenceErrors()) == false)
+            return false;
         return true;
     }
 
@@ -1789,6 +3022,7 @@ public class CreateUserPoolClientRequest extends com.amazonaws.AmazonWebServiceR
         hashCode = prime * hashCode + ((getAllowedOAuthScopes() == null) ? 0 : getAllowedOAuthScopes().hashCode());
         hashCode = prime * hashCode + ((getAllowedOAuthFlowsUserPoolClient() == null) ? 0 : getAllowedOAuthFlowsUserPoolClient().hashCode());
         hashCode = prime * hashCode + ((getAnalyticsConfiguration() == null) ? 0 : getAnalyticsConfiguration().hashCode());
+        hashCode = prime * hashCode + ((getPreventUserExistenceErrors() == null) ? 0 : getPreventUserExistenceErrors().hashCode());
         return hashCode;
     }
 

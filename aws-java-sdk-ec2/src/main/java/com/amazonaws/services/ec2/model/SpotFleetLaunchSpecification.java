@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -43,7 +43,7 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
     private String addressingType;
     /**
      * <p>
-     * One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and an
+     * One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and an
      * encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for
      * a volume, it is not blank and its encryption status is used for the volume encryption status.
      * </p>
@@ -127,8 +127,8 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
     private String spotPrice;
     /**
      * <p>
-     * The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using commas;
-     * for example, "subnet-a61dafcf, subnet-65ea5f08".
+     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas;
+     * for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      * </p>
      */
     private String subnetId;
@@ -283,12 +283,12 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and an
+     * One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and an
      * encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for
      * a volume, it is not blank and its encryption status is used for the volume encryption status.
      * </p>
      * 
-     * @return One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and
+     * @return One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and
      *         an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is
      *         the basis for a volume, it is not blank and its encryption status is used for the volume encryption
      *         status.
@@ -303,13 +303,13 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and an
+     * One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and an
      * encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for
      * a volume, it is not blank and its encryption status is used for the volume encryption status.
      * </p>
      * 
      * @param blockDeviceMappings
-     *        One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and
+     *        One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and
      *        an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the
      *        basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      */
@@ -325,7 +325,7 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and an
+     * One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and an
      * encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for
      * a volume, it is not blank and its encryption status is used for the volume encryption status.
      * </p>
@@ -336,7 +336,7 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
      * </p>
      * 
      * @param blockDeviceMappings
-     *        One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and
+     *        One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and
      *        an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the
      *        basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -354,13 +354,13 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and an
+     * One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and an
      * encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for
      * a volume, it is not blank and its encryption status is used for the volume encryption status.
      * </p>
      * 
      * @param blockDeviceMappings
-     *        One or more block devices that are mapped to the Spot instances. You can't specify both a snapshot ID and
+     *        One or more block devices that are mapped to the Spot Instances. You can't specify both a snapshot ID and
      *        an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the
      *        basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -963,13 +963,13 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using commas;
-     * for example, "subnet-a61dafcf, subnet-65ea5f08".
+     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas;
+     * for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      * </p>
      * 
      * @param subnetId
-     *        The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using
-     *        commas; for example, "subnet-a61dafcf, subnet-65ea5f08".
+     *        The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using
+     *        commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      */
 
     public void setSubnetId(String subnetId) {
@@ -978,12 +978,12 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using commas;
-     * for example, "subnet-a61dafcf, subnet-65ea5f08".
+     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas;
+     * for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      * </p>
      * 
-     * @return The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using
-     *         commas; for example, "subnet-a61dafcf, subnet-65ea5f08".
+     * @return The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using
+     *         commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      */
 
     public String getSubnetId() {
@@ -992,13 +992,13 @@ public class SpotFleetLaunchSpecification implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using commas;
-     * for example, "subnet-a61dafcf, subnet-65ea5f08".
+     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas;
+     * for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      * </p>
      * 
      * @param subnetId
-     *        The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using
-     *        commas; for example, "subnet-a61dafcf, subnet-65ea5f08".
+     *        The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using
+     *        commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

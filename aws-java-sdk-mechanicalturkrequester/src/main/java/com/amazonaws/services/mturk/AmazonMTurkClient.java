@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -75,11 +75,11 @@ public class AmazonMTurkClient extends AmazonWebServiceClient implements AmazonM
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServiceFault").withModeledClass(
-                                    com.amazonaws.services.mturk.model.ServiceException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServiceFault").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mturk.model.transform.ServiceExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("RequestError").withModeledClass(
-                                    com.amazonaws.services.mturk.model.RequestErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("RequestError").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mturk.model.transform.RequestErrorExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.mturk.model.AmazonMTurkException.class));
 
     public static AmazonMTurkClientBuilder builder() {

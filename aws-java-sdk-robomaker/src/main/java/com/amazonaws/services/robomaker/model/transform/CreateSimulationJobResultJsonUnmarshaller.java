@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -80,6 +80,10 @@ public class CreateSimulationJobResultJsonUnmarshaller implements Unmarshaller<C
                     context.nextToken();
                     createSimulationJobResult.setOutputLocation(OutputLocationJsonUnmarshaller.getInstance().unmarshall(context));
                 }
+                if (context.testExpression("loggingConfig", targetDepth)) {
+                    context.nextToken();
+                    createSimulationJobResult.setLoggingConfig(LoggingConfigJsonUnmarshaller.getInstance().unmarshall(context));
+                }
                 if (context.testExpression("maxJobDurationInSeconds", targetDepth)) {
                     context.nextToken();
                     createSimulationJobResult.setMaxJobDurationInSeconds(context.getUnmarshaller(Long.class).unmarshall(context));
@@ -101,6 +105,10 @@ public class CreateSimulationJobResultJsonUnmarshaller implements Unmarshaller<C
                     context.nextToken();
                     createSimulationJobResult.setSimulationApplications(new ListUnmarshaller<SimulationApplicationConfig>(
                             SimulationApplicationConfigJsonUnmarshaller.getInstance()).unmarshall(context));
+                }
+                if (context.testExpression("dataSources", targetDepth)) {
+                    context.nextToken();
+                    createSimulationJobResult.setDataSources(new ListUnmarshaller<DataSource>(DataSourceJsonUnmarshaller.getInstance()).unmarshall(context));
                 }
                 if (context.testExpression("tags", targetDepth)) {
                     context.nextToken();

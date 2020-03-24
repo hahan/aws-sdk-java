@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -83,6 +83,12 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
     private java.util.Map<String, String> defaultArguments;
     /**
      * <p>
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     * </p>
+     */
+    private java.util.Map<String, String> nonOverridableArguments;
+    /**
+     * <p>
      * The connections used for this job.
      * </p>
      */
@@ -162,6 +168,20 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
      * </p>
      */
     private NotificationProperty notificationProperty;
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     */
+    private String glueVersion;
     /**
      * <p>
      * The number of workers of a defined <code>workerType</code> that are allocated when a job runs.
@@ -559,6 +579,13 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
         return this;
     }
 
+    /**
+     * Add a single DefaultArguments entry
+     *
+     * @see CreateJobRequest#withDefaultArguments
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public CreateJobRequest addDefaultArgumentsEntry(String key, String value) {
         if (null == this.defaultArguments) {
             this.defaultArguments = new java.util.HashMap<String, String>();
@@ -577,6 +604,74 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
 
     public CreateJobRequest clearDefaultArgumentsEntries() {
         this.defaultArguments = null;
+        return this;
+    }
+
+    /**
+     * <p>
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     * </p>
+     * 
+     * @return Non-overridable arguments for this job, specified as name-value pairs.
+     */
+
+    public java.util.Map<String, String> getNonOverridableArguments() {
+        return nonOverridableArguments;
+    }
+
+    /**
+     * <p>
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     * </p>
+     * 
+     * @param nonOverridableArguments
+     *        Non-overridable arguments for this job, specified as name-value pairs.
+     */
+
+    public void setNonOverridableArguments(java.util.Map<String, String> nonOverridableArguments) {
+        this.nonOverridableArguments = nonOverridableArguments;
+    }
+
+    /**
+     * <p>
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     * </p>
+     * 
+     * @param nonOverridableArguments
+     *        Non-overridable arguments for this job, specified as name-value pairs.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateJobRequest withNonOverridableArguments(java.util.Map<String, String> nonOverridableArguments) {
+        setNonOverridableArguments(nonOverridableArguments);
+        return this;
+    }
+
+    /**
+     * Add a single NonOverridableArguments entry
+     *
+     * @see CreateJobRequest#withNonOverridableArguments
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateJobRequest addNonOverridableArgumentsEntry(String key, String value) {
+        if (null == this.nonOverridableArguments) {
+            this.nonOverridableArguments = new java.util.HashMap<String, String>();
+        }
+        if (this.nonOverridableArguments.containsKey(key))
+            throw new IllegalArgumentException("Duplicated keys (" + key.toString() + ") are provided.");
+        this.nonOverridableArguments.put(key, value);
+        return this;
+    }
+
+    /**
+     * Removes all the entries added into NonOverridableArguments.
+     *
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateJobRequest clearNonOverridableArgumentsEntries() {
+        this.nonOverridableArguments = null;
         return this;
     }
 
@@ -1047,6 +1142,13 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
         return this;
     }
 
+    /**
+     * Add a single Tags entry
+     *
+     * @see CreateJobRequest#withTags
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public CreateJobRequest addTagsEntry(String key, String value) {
         if (null == this.tags) {
             this.tags = new java.util.HashMap<String, String>();
@@ -1105,6 +1207,94 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
 
     public CreateJobRequest withNotificationProperty(NotificationProperty notificationProperty) {
         setNotificationProperty(notificationProperty);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @param glueVersion
+     *        Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     *        indicates the version supported for jobs of type Spark. </p>
+     *        <p>
+     *        For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *        see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *        guide.
+     *        </p>
+     *        <p>
+     *        Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+
+    public void setGlueVersion(String glueVersion) {
+        this.glueVersion = glueVersion;
+    }
+
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @return Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python
+     *         version indicates the version supported for jobs of type Spark. </p>
+     *         <p>
+     *         For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *         see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *         guide.
+     *         </p>
+     *         <p>
+     *         Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+
+    public String getGlueVersion() {
+        return this.glueVersion;
+    }
+
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @param glueVersion
+     *        Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     *        indicates the version supported for jobs of type Spark. </p>
+     *        <p>
+     *        For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *        see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *        guide.
+     *        </p>
+     *        <p>
+     *        Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateJobRequest withGlueVersion(String glueVersion) {
+        setGlueVersion(glueVersion);
         return this;
     }
 
@@ -1210,6 +1400,7 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
      *        and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
      *        </p>
      *        </li>
+     * @see WorkerType
      */
 
     public void setWorkerType(String workerType) {
@@ -1262,6 +1453,7 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
      *         and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
      *         </p>
      *         </li>
+     * @see WorkerType
      */
 
     public String getWorkerType() {
@@ -1316,10 +1508,67 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
+     * @see WorkerType
      */
 
     public CreateJobRequest withWorkerType(String workerType) {
         setWorkerType(workerType);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2
+     * executors per worker.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and
+     * provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and
+     * provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param workerType
+     *        The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or
+     *        G.2X.</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk,
+     *        and 2 executors per worker.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk),
+     *        and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk),
+     *        and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+     *        </p>
+     *        </li>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see WorkerType
+     */
+
+    public CreateJobRequest withWorkerType(WorkerType workerType) {
+        this.workerType = workerType.toString();
         return this;
     }
 
@@ -1349,6 +1598,8 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
             sb.append("Command: ").append(getCommand()).append(",");
         if (getDefaultArguments() != null)
             sb.append("DefaultArguments: ").append(getDefaultArguments()).append(",");
+        if (getNonOverridableArguments() != null)
+            sb.append("NonOverridableArguments: ").append(getNonOverridableArguments()).append(",");
         if (getConnections() != null)
             sb.append("Connections: ").append(getConnections()).append(",");
         if (getMaxRetries() != null)
@@ -1365,6 +1616,8 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
             sb.append("Tags: ").append(getTags()).append(",");
         if (getNotificationProperty() != null)
             sb.append("NotificationProperty: ").append(getNotificationProperty()).append(",");
+        if (getGlueVersion() != null)
+            sb.append("GlueVersion: ").append(getGlueVersion()).append(",");
         if (getNumberOfWorkers() != null)
             sb.append("NumberOfWorkers: ").append(getNumberOfWorkers()).append(",");
         if (getWorkerType() != null)
@@ -1411,6 +1664,10 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
             return false;
         if (other.getDefaultArguments() != null && other.getDefaultArguments().equals(this.getDefaultArguments()) == false)
             return false;
+        if (other.getNonOverridableArguments() == null ^ this.getNonOverridableArguments() == null)
+            return false;
+        if (other.getNonOverridableArguments() != null && other.getNonOverridableArguments().equals(this.getNonOverridableArguments()) == false)
+            return false;
         if (other.getConnections() == null ^ this.getConnections() == null)
             return false;
         if (other.getConnections() != null && other.getConnections().equals(this.getConnections()) == false)
@@ -1443,6 +1700,10 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
             return false;
         if (other.getNotificationProperty() != null && other.getNotificationProperty().equals(this.getNotificationProperty()) == false)
             return false;
+        if (other.getGlueVersion() == null ^ this.getGlueVersion() == null)
+            return false;
+        if (other.getGlueVersion() != null && other.getGlueVersion().equals(this.getGlueVersion()) == false)
+            return false;
         if (other.getNumberOfWorkers() == null ^ this.getNumberOfWorkers() == null)
             return false;
         if (other.getNumberOfWorkers() != null && other.getNumberOfWorkers().equals(this.getNumberOfWorkers()) == false)
@@ -1466,6 +1727,7 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
         hashCode = prime * hashCode + ((getExecutionProperty() == null) ? 0 : getExecutionProperty().hashCode());
         hashCode = prime * hashCode + ((getCommand() == null) ? 0 : getCommand().hashCode());
         hashCode = prime * hashCode + ((getDefaultArguments() == null) ? 0 : getDefaultArguments().hashCode());
+        hashCode = prime * hashCode + ((getNonOverridableArguments() == null) ? 0 : getNonOverridableArguments().hashCode());
         hashCode = prime * hashCode + ((getConnections() == null) ? 0 : getConnections().hashCode());
         hashCode = prime * hashCode + ((getMaxRetries() == null) ? 0 : getMaxRetries().hashCode());
         hashCode = prime * hashCode + ((getAllocatedCapacity() == null) ? 0 : getAllocatedCapacity().hashCode());
@@ -1474,6 +1736,7 @@ public class CreateJobRequest extends com.amazonaws.AmazonWebServiceRequest impl
         hashCode = prime * hashCode + ((getSecurityConfiguration() == null) ? 0 : getSecurityConfiguration().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         hashCode = prime * hashCode + ((getNotificationProperty() == null) ? 0 : getNotificationProperty().hashCode());
+        hashCode = prime * hashCode + ((getGlueVersion() == null) ? 0 : getGlueVersion().hashCode());
         hashCode = prime * hashCode + ((getNumberOfWorkers() == null) ? 0 : getNumberOfWorkers().hashCode());
         hashCode = prime * hashCode + ((getWorkerType() == null) ? 0 : getWorkerType().hashCode());
         return hashCode;

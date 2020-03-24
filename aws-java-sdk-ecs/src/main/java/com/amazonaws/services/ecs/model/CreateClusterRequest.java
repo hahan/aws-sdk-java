@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -35,9 +35,52 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     /**
      * <p>
      * The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key
-     * and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters,
-     * and tag values can have a maximum length of 256 characters.
+     * and an optional value, both of which you define.
      * </p>
+     * <p>
+     * The following basic restrictions apply to tags:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * Maximum number of tags per resource - 50
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For each resource, each tag key must be unique, and each tag key can have only one value.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum key length - 128 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum value length - 256 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * If your tagging schema is used across multiple services and resources, remember that other services may have
+     * restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable
+     * in UTF-8, and the following characters: + - = . _ : / @.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Tag keys and values are case-sensitive.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for
+     * either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this
+     * prefix. Tags with this prefix do not count against your tags per resource limit.
+     * </p>
+     * </li>
+     * </ul>
      */
     private com.amazonaws.internal.SdkInternalList<Tag> tags;
     /**
@@ -48,6 +91,56 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<ClusterSetting> settings;
+    /**
+     * <p>
+     * The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     * cluster.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created
+     * and not already associated with another cluster. New capacity providers can be created with the
+     * <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers
+     * for a cluster after the cluster is created.
+     * </p>
+     */
+    private com.amazonaws.internal.SdkInternalList<String> capacityProviders;
+    /**
+     * <p>
+     * The capacity provider strategy to use by default for the cluster.
+     * </p>
+     * <p>
+     * When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then
+     * the default capacity provider strategy for the cluster is used.
+     * </p>
+     * <p>
+     * A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and
+     * <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a
+     * capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider
+     * with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created.
+     * New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later
+     * with the <a>PutClusterCapacityProviders</a> API operation.
+     * </p>
+     */
+    private com.amazonaws.internal.SdkInternalList<CapacityProviderStrategyItem> defaultCapacityProviderStrategy;
 
     /**
      * <p>
@@ -98,13 +191,98 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     /**
      * <p>
      * The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key
-     * and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters,
-     * and tag values can have a maximum length of 256 characters.
+     * and an optional value, both of which you define.
      * </p>
+     * <p>
+     * The following basic restrictions apply to tags:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * Maximum number of tags per resource - 50
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For each resource, each tag key must be unique, and each tag key can have only one value.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum key length - 128 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum value length - 256 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * If your tagging schema is used across multiple services and resources, remember that other services may have
+     * restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable
+     * in UTF-8, and the following characters: + - = . _ : / @.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Tag keys and values are case-sensitive.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for
+     * either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this
+     * prefix. Tags with this prefix do not count against your tags per resource limit.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @return The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of
-     *         a key and an optional value, both of which you define. Tag keys can have a maximum character length of
-     *         128 characters, and tag values can have a maximum length of 256 characters.
+     *         a key and an optional value, both of which you define.</p>
+     *         <p>
+     *         The following basic restrictions apply to tags:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         Maximum number of tags per resource - 50
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         For each resource, each tag key must be unique, and each tag key can have only one value.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Maximum key length - 128 Unicode characters in UTF-8
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Maximum value length - 256 Unicode characters in UTF-8
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         If your tagging schema is used across multiple services and resources, remember that other services may
+     *         have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces
+     *         representable in UTF-8, and the following characters: + - = . _ : / @.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Tag keys and values are case-sensitive.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a
+     *         prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or
+     *         values with this prefix. Tags with this prefix do not count against your tags per resource limit.
+     *         </p>
+     *         </li>
      */
 
     public java.util.List<Tag> getTags() {
@@ -117,14 +295,99 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     /**
      * <p>
      * The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key
-     * and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters,
-     * and tag values can have a maximum length of 256 characters.
+     * and an optional value, both of which you define.
      * </p>
+     * <p>
+     * The following basic restrictions apply to tags:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * Maximum number of tags per resource - 50
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For each resource, each tag key must be unique, and each tag key can have only one value.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum key length - 128 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum value length - 256 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * If your tagging schema is used across multiple services and resources, remember that other services may have
+     * restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable
+     * in UTF-8, and the following characters: + - = . _ : / @.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Tag keys and values are case-sensitive.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for
+     * either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this
+     * prefix. Tags with this prefix do not count against your tags per resource limit.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param tags
      *        The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of
-     *        a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
-     *        characters, and tag values can have a maximum length of 256 characters.
+     *        a key and an optional value, both of which you define.</p>
+     *        <p>
+     *        The following basic restrictions apply to tags:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        Maximum number of tags per resource - 50
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For each resource, each tag key must be unique, and each tag key can have only one value.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum key length - 128 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum value length - 256 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        If your tagging schema is used across multiple services and resources, remember that other services may
+     *        have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces
+     *        representable in UTF-8, and the following characters: + - = . _ : / @.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Tag keys and values are case-sensitive.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix
+     *        for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with
+     *        this prefix. Tags with this prefix do not count against your tags per resource limit.
+     *        </p>
+     *        </li>
      */
 
     public void setTags(java.util.Collection<Tag> tags) {
@@ -139,9 +402,52 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     /**
      * <p>
      * The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key
-     * and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters,
-     * and tag values can have a maximum length of 256 characters.
+     * and an optional value, both of which you define.
      * </p>
+     * <p>
+     * The following basic restrictions apply to tags:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * Maximum number of tags per resource - 50
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For each resource, each tag key must be unique, and each tag key can have only one value.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum key length - 128 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum value length - 256 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * If your tagging schema is used across multiple services and resources, remember that other services may have
+     * restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable
+     * in UTF-8, and the following characters: + - = . _ : / @.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Tag keys and values are case-sensitive.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for
+     * either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this
+     * prefix. Tags with this prefix do not count against your tags per resource limit.
+     * </p>
+     * </li>
+     * </ul>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
@@ -150,8 +456,50 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
      * 
      * @param tags
      *        The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of
-     *        a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
-     *        characters, and tag values can have a maximum length of 256 characters.
+     *        a key and an optional value, both of which you define.</p>
+     *        <p>
+     *        The following basic restrictions apply to tags:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        Maximum number of tags per resource - 50
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For each resource, each tag key must be unique, and each tag key can have only one value.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum key length - 128 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum value length - 256 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        If your tagging schema is used across multiple services and resources, remember that other services may
+     *        have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces
+     *        representable in UTF-8, and the following characters: + - = . _ : / @.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Tag keys and values are case-sensitive.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix
+     *        for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with
+     *        this prefix. Tags with this prefix do not count against your tags per resource limit.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -168,14 +516,99 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     /**
      * <p>
      * The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key
-     * and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters,
-     * and tag values can have a maximum length of 256 characters.
+     * and an optional value, both of which you define.
      * </p>
+     * <p>
+     * The following basic restrictions apply to tags:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * Maximum number of tags per resource - 50
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For each resource, each tag key must be unique, and each tag key can have only one value.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum key length - 128 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Maximum value length - 256 Unicode characters in UTF-8
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * If your tagging schema is used across multiple services and resources, remember that other services may have
+     * restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable
+     * in UTF-8, and the following characters: + - = . _ : / @.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Tag keys and values are case-sensitive.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for
+     * either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this
+     * prefix. Tags with this prefix do not count against your tags per resource limit.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param tags
      *        The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of
-     *        a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
-     *        characters, and tag values can have a maximum length of 256 characters.
+     *        a key and an optional value, both of which you define.</p>
+     *        <p>
+     *        The following basic restrictions apply to tags:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        Maximum number of tags per resource - 50
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For each resource, each tag key must be unique, and each tag key can have only one value.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum key length - 128 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Maximum value length - 256 Unicode characters in UTF-8
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        If your tagging schema is used across multiple services and resources, remember that other services may
+     *        have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces
+     *        representable in UTF-8, and the following characters: + - = . _ : / @.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Tag keys and values are case-sensitive.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix
+     *        for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with
+     *        this prefix. Tags with this prefix do not count against your tags per resource limit.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -274,6 +707,452 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
     }
 
     /**
+     * <p>
+     * The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     * cluster.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created
+     * and not already associated with another cluster. New capacity providers can be created with the
+     * <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers
+     * for a cluster after the cluster is created.
+     * </p>
+     * 
+     * @return The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     *         cluster.</p>
+     *         <p>
+     *         If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *         created and not already associated with another cluster. New capacity providers can be created with the
+     *         <a>CreateCapacityProvider</a> API operation.
+     *         </p>
+     *         <p>
+     *         To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *         <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *         accounts and only need to be associated with a cluster to be used.
+     *         </p>
+     *         <p>
+     *         The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity
+     *         providers for a cluster after the cluster is created.
+     */
+
+    public java.util.List<String> getCapacityProviders() {
+        if (capacityProviders == null) {
+            capacityProviders = new com.amazonaws.internal.SdkInternalList<String>();
+        }
+        return capacityProviders;
+    }
+
+    /**
+     * <p>
+     * The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     * cluster.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created
+     * and not already associated with another cluster. New capacity providers can be created with the
+     * <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers
+     * for a cluster after the cluster is created.
+     * </p>
+     * 
+     * @param capacityProviders
+     *        The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     *        cluster.</p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created and not already associated with another cluster. New capacity providers can be created with the
+     *        <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity
+     *        providers for a cluster after the cluster is created.
+     */
+
+    public void setCapacityProviders(java.util.Collection<String> capacityProviders) {
+        if (capacityProviders == null) {
+            this.capacityProviders = null;
+            return;
+        }
+
+        this.capacityProviders = new com.amazonaws.internal.SdkInternalList<String>(capacityProviders);
+    }
+
+    /**
+     * <p>
+     * The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     * cluster.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created
+     * and not already associated with another cluster. New capacity providers can be created with the
+     * <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers
+     * for a cluster after the cluster is created.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setCapacityProviders(java.util.Collection)} or {@link #withCapacityProviders(java.util.Collection)} if
+     * you want to override the existing values.
+     * </p>
+     * 
+     * @param capacityProviders
+     *        The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     *        cluster.</p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created and not already associated with another cluster. New capacity providers can be created with the
+     *        <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity
+     *        providers for a cluster after the cluster is created.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateClusterRequest withCapacityProviders(String... capacityProviders) {
+        if (this.capacityProviders == null) {
+            setCapacityProviders(new com.amazonaws.internal.SdkInternalList<String>(capacityProviders.length));
+        }
+        for (String ele : capacityProviders) {
+            this.capacityProviders.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     * cluster.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created
+     * and not already associated with another cluster. New capacity providers can be created with the
+     * <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers
+     * for a cluster after the cluster is created.
+     * </p>
+     * 
+     * @param capacityProviders
+     *        The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the
+     *        cluster.</p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created and not already associated with another cluster. New capacity providers can be created with the
+     *        <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity
+     *        providers for a cluster after the cluster is created.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateClusterRequest withCapacityProviders(java.util.Collection<String> capacityProviders) {
+        setCapacityProviders(capacityProviders);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The capacity provider strategy to use by default for the cluster.
+     * </p>
+     * <p>
+     * When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then
+     * the default capacity provider strategy for the cluster is used.
+     * </p>
+     * <p>
+     * A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and
+     * <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a
+     * capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider
+     * with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created.
+     * New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later
+     * with the <a>PutClusterCapacityProviders</a> API operation.
+     * </p>
+     * 
+     * @return The capacity provider strategy to use by default for the cluster.</p>
+     *         <p>
+     *         When creating a service or running a task on a cluster, if no capacity provider or launch type is
+     *         specified then the default capacity provider strategy for the cluster is used.
+     *         </p>
+     *         <p>
+     *         A capacity provider strategy consists of one or more capacity providers along with the <code>base</code>
+     *         and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be
+     *         used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a
+     *         capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+     *         <code>UPDATING</code> status can be used.
+     *         </p>
+     *         <p>
+     *         If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *         created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     *         </p>
+     *         <p>
+     *         To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *         <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *         accounts and only need to be associated with a cluster to be used.
+     *         </p>
+     *         <p>
+     *         If a default capacity provider strategy is not defined for a cluster during creation, it can be defined
+     *         later with the <a>PutClusterCapacityProviders</a> API operation.
+     */
+
+    public java.util.List<CapacityProviderStrategyItem> getDefaultCapacityProviderStrategy() {
+        if (defaultCapacityProviderStrategy == null) {
+            defaultCapacityProviderStrategy = new com.amazonaws.internal.SdkInternalList<CapacityProviderStrategyItem>();
+        }
+        return defaultCapacityProviderStrategy;
+    }
+
+    /**
+     * <p>
+     * The capacity provider strategy to use by default for the cluster.
+     * </p>
+     * <p>
+     * When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then
+     * the default capacity provider strategy for the cluster is used.
+     * </p>
+     * <p>
+     * A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and
+     * <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a
+     * capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider
+     * with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created.
+     * New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later
+     * with the <a>PutClusterCapacityProviders</a> API operation.
+     * </p>
+     * 
+     * @param defaultCapacityProviderStrategy
+     *        The capacity provider strategy to use by default for the cluster.</p>
+     *        <p>
+     *        When creating a service or running a task on a cluster, if no capacity provider or launch type is
+     *        specified then the default capacity provider strategy for the cluster is used.
+     *        </p>
+     *        <p>
+     *        A capacity provider strategy consists of one or more capacity providers along with the <code>base</code>
+     *        and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be
+     *        used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a
+     *        capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+     *        <code>UPDATING</code> status can be used.
+     *        </p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        If a default capacity provider strategy is not defined for a cluster during creation, it can be defined
+     *        later with the <a>PutClusterCapacityProviders</a> API operation.
+     */
+
+    public void setDefaultCapacityProviderStrategy(java.util.Collection<CapacityProviderStrategyItem> defaultCapacityProviderStrategy) {
+        if (defaultCapacityProviderStrategy == null) {
+            this.defaultCapacityProviderStrategy = null;
+            return;
+        }
+
+        this.defaultCapacityProviderStrategy = new com.amazonaws.internal.SdkInternalList<CapacityProviderStrategyItem>(defaultCapacityProviderStrategy);
+    }
+
+    /**
+     * <p>
+     * The capacity provider strategy to use by default for the cluster.
+     * </p>
+     * <p>
+     * When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then
+     * the default capacity provider strategy for the cluster is used.
+     * </p>
+     * <p>
+     * A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and
+     * <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a
+     * capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider
+     * with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created.
+     * New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later
+     * with the <a>PutClusterCapacityProviders</a> API operation.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setDefaultCapacityProviderStrategy(java.util.Collection)} or
+     * {@link #withDefaultCapacityProviderStrategy(java.util.Collection)} if you want to override the existing values.
+     * </p>
+     * 
+     * @param defaultCapacityProviderStrategy
+     *        The capacity provider strategy to use by default for the cluster.</p>
+     *        <p>
+     *        When creating a service or running a task on a cluster, if no capacity provider or launch type is
+     *        specified then the default capacity provider strategy for the cluster is used.
+     *        </p>
+     *        <p>
+     *        A capacity provider strategy consists of one or more capacity providers along with the <code>base</code>
+     *        and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be
+     *        used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a
+     *        capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+     *        <code>UPDATING</code> status can be used.
+     *        </p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        If a default capacity provider strategy is not defined for a cluster during creation, it can be defined
+     *        later with the <a>PutClusterCapacityProviders</a> API operation.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateClusterRequest withDefaultCapacityProviderStrategy(CapacityProviderStrategyItem... defaultCapacityProviderStrategy) {
+        if (this.defaultCapacityProviderStrategy == null) {
+            setDefaultCapacityProviderStrategy(new com.amazonaws.internal.SdkInternalList<CapacityProviderStrategyItem>(defaultCapacityProviderStrategy.length));
+        }
+        for (CapacityProviderStrategyItem ele : defaultCapacityProviderStrategy) {
+            this.defaultCapacityProviderStrategy.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * The capacity provider strategy to use by default for the cluster.
+     * </p>
+     * <p>
+     * When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then
+     * the default capacity provider strategy for the cluster is used.
+     * </p>
+     * <p>
+     * A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and
+     * <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a
+     * capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider
+     * with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.
+     * </p>
+     * <p>
+     * If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created.
+     * New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     * </p>
+     * <p>
+     * To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code>
+     * capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be
+     * associated with a cluster to be used.
+     * </p>
+     * <p>
+     * If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later
+     * with the <a>PutClusterCapacityProviders</a> API operation.
+     * </p>
+     * 
+     * @param defaultCapacityProviderStrategy
+     *        The capacity provider strategy to use by default for the cluster.</p>
+     *        <p>
+     *        When creating a service or running a task on a cluster, if no capacity provider or launch type is
+     *        specified then the default capacity provider strategy for the cluster is used.
+     *        </p>
+     *        <p>
+     *        A capacity provider strategy consists of one or more capacity providers along with the <code>base</code>
+     *        and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be
+     *        used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a
+     *        capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+     *        <code>UPDATING</code> status can be used.
+     *        </p>
+     *        <p>
+     *        If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be
+     *        created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.
+     *        </p>
+     *        <p>
+     *        To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or
+     *        <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all
+     *        accounts and only need to be associated with a cluster to be used.
+     *        </p>
+     *        <p>
+     *        If a default capacity provider strategy is not defined for a cluster during creation, it can be defined
+     *        later with the <a>PutClusterCapacityProviders</a> API operation.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateClusterRequest withDefaultCapacityProviderStrategy(java.util.Collection<CapacityProviderStrategyItem> defaultCapacityProviderStrategy) {
+        setDefaultCapacityProviderStrategy(defaultCapacityProviderStrategy);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -290,7 +1169,11 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
         if (getTags() != null)
             sb.append("Tags: ").append(getTags()).append(",");
         if (getSettings() != null)
-            sb.append("Settings: ").append(getSettings());
+            sb.append("Settings: ").append(getSettings()).append(",");
+        if (getCapacityProviders() != null)
+            sb.append("CapacityProviders: ").append(getCapacityProviders()).append(",");
+        if (getDefaultCapacityProviderStrategy() != null)
+            sb.append("DefaultCapacityProviderStrategy: ").append(getDefaultCapacityProviderStrategy());
         sb.append("}");
         return sb.toString();
     }
@@ -317,6 +1200,15 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
             return false;
         if (other.getSettings() != null && other.getSettings().equals(this.getSettings()) == false)
             return false;
+        if (other.getCapacityProviders() == null ^ this.getCapacityProviders() == null)
+            return false;
+        if (other.getCapacityProviders() != null && other.getCapacityProviders().equals(this.getCapacityProviders()) == false)
+            return false;
+        if (other.getDefaultCapacityProviderStrategy() == null ^ this.getDefaultCapacityProviderStrategy() == null)
+            return false;
+        if (other.getDefaultCapacityProviderStrategy() != null
+                && other.getDefaultCapacityProviderStrategy().equals(this.getDefaultCapacityProviderStrategy()) == false)
+            return false;
         return true;
     }
 
@@ -328,6 +1220,8 @@ public class CreateClusterRequest extends com.amazonaws.AmazonWebServiceRequest 
         hashCode = prime * hashCode + ((getClusterName() == null) ? 0 : getClusterName().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         hashCode = prime * hashCode + ((getSettings() == null) ? 0 : getSettings().hashCode());
+        hashCode = prime * hashCode + ((getCapacityProviders() == null) ? 0 : getCapacityProviders().hashCode());
+        hashCode = prime * hashCode + ((getDefaultCapacityProviderStrategy() == null) ? 0 : getDefaultCapacityProviderStrategy().hashCode());
         return hashCode;
     }
 

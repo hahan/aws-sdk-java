@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -250,7 +250,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      */
     private java.util.Map<String, String> tags;
@@ -279,6 +279,21 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      * </note>
      */
     private Integer idleDisconnectTimeoutInSeconds;
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls
+     * the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use.
+     * The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials
+     * and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.
+     * </p>
+     * <p>
+     * For more information, see <a href=
+     * "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     * >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     * Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     * </p>
+     */
+    private String iamRoleArn;
 
     /**
      * <p>
@@ -1652,7 +1667,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @return The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example,
@@ -1670,7 +1685,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      *         <p>
      *         For more information, see <a
      *         href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your
-     *         Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     *         Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      */
 
     public java.util.Map<String, String> getTags() {
@@ -1695,7 +1710,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param tags
@@ -1714,7 +1729,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      *        <p>
      *        For more information, see <a
      *        href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your
-     *        Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     *        Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      */
 
     public void setTags(java.util.Map<String, String> tags) {
@@ -1739,7 +1754,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param tags
@@ -1758,7 +1773,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
      *        <p>
      *        For more information, see <a
      *        href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your
-     *        Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     *        Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1766,6 +1781,13 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
         setTags(tags);
         return this;
     }
+
+    /**
+     * Add a single Tags entry
+     *
+     * @see CreateFleetRequest#withTags
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public CreateFleetRequest addTagsEntry(String key, String value) {
         if (null == this.tags) {
@@ -1946,6 +1968,100 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
     }
 
     /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls
+     * the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use.
+     * The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials
+     * and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.
+     * </p>
+     * <p>
+     * For more information, see <a href=
+     * "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     * >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     * Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     * </p>
+     * 
+     * @param iamRoleArn
+     *        The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance
+     *        calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the
+     *        role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+     *        temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the
+     *        instance.</p>
+     *        <p>
+     *        For more information, see <a href=
+     *        "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     *        >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     *        Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     */
+
+    public void setIamRoleArn(String iamRoleArn) {
+        this.iamRoleArn = iamRoleArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls
+     * the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use.
+     * The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials
+     * and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.
+     * </p>
+     * <p>
+     * For more information, see <a href=
+     * "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     * >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     * Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     * </p>
+     * 
+     * @return The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance
+     *         calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of
+     *         the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves
+     *         the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the
+     *         instance.</p>
+     *         <p>
+     *         For more information, see <a href=
+     *         "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     *         >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     *         Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     */
+
+    public String getIamRoleArn() {
+        return this.iamRoleArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls
+     * the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use.
+     * The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials
+     * and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.
+     * </p>
+     * <p>
+     * For more information, see <a href=
+     * "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     * >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     * Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     * </p>
+     * 
+     * @param iamRoleArn
+     *        The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance
+     *        calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the
+     *        role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+     *        temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the
+     *        instance.</p>
+     *        <p>
+     *        For more information, see <a href=
+     *        "https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html"
+     *        >Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+     *        Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateFleetRequest withIamRoleArn(String iamRoleArn) {
+        setIamRoleArn(iamRoleArn);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1986,7 +2102,9 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
         if (getTags() != null)
             sb.append("Tags: ").append(getTags()).append(",");
         if (getIdleDisconnectTimeoutInSeconds() != null)
-            sb.append("IdleDisconnectTimeoutInSeconds: ").append(getIdleDisconnectTimeoutInSeconds());
+            sb.append("IdleDisconnectTimeoutInSeconds: ").append(getIdleDisconnectTimeoutInSeconds()).append(",");
+        if (getIamRoleArn() != null)
+            sb.append("IamRoleArn: ").append(getIamRoleArn());
         sb.append("}");
         return sb.toString();
     }
@@ -2062,6 +2180,10 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
         if (other.getIdleDisconnectTimeoutInSeconds() != null
                 && other.getIdleDisconnectTimeoutInSeconds().equals(this.getIdleDisconnectTimeoutInSeconds()) == false)
             return false;
+        if (other.getIamRoleArn() == null ^ this.getIamRoleArn() == null)
+            return false;
+        if (other.getIamRoleArn() != null && other.getIamRoleArn().equals(this.getIamRoleArn()) == false)
+            return false;
         return true;
     }
 
@@ -2085,6 +2207,7 @@ public class CreateFleetRequest extends com.amazonaws.AmazonWebServiceRequest im
         hashCode = prime * hashCode + ((getDomainJoinInfo() == null) ? 0 : getDomainJoinInfo().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         hashCode = prime * hashCode + ((getIdleDisconnectTimeoutInSeconds() == null) ? 0 : getIdleDisconnectTimeoutInSeconds().hashCode());
+        hashCode = prime * hashCode + ((getIamRoleArn() == null) ? 0 : getIamRoleArn().hashCode());
         return hashCode;
     }
 

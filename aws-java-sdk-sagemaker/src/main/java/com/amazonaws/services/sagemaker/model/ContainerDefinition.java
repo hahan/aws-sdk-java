@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -33,9 +33,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.
      * </p>
      * <p>
-     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter uniquely
+     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter uniquely
      * identifies the container for the purposes of logging and metrics. For information, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
      * to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      * <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically assigned
      * based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a value for the
@@ -58,10 +58,16 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
     private String image;
     /**
      * <p>
+     * Whether the container hosts a single model or multiple models.
+     * </p>
+     */
+    private String mode;
+    /**
+     * <p>
      * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a
      * single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in
      * algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      * Parameters</a>.
      * </p>
      * <p>
@@ -69,7 +75,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you
      * previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      * information, see <a
-     * href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
      * Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      * </p>
      * <important>
@@ -99,9 +105,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.
      * </p>
      * <p>
-     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter uniquely
+     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter uniquely
      * identifies the container for the purposes of logging and metrics. For information, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
      * to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      * <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically assigned
      * based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a value for the
@@ -113,9 +119,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * @param containerHostname
      *        This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.</p>
      *        <p>
-     *        When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter
+     *        When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter
      *        uniquely identifies the container for the purposes of logging and metrics. For information, see <a
-     *        href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
+     *        href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
      *        Metrics to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      *        <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically
      *        assigned based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a
@@ -133,9 +139,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.
      * </p>
      * <p>
-     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter uniquely
+     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter uniquely
      * identifies the container for the purposes of logging and metrics. For information, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
      * to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      * <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically assigned
      * based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a value for the
@@ -146,9 +152,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * 
      * @return This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.</p>
      *         <p>
-     *         When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter
+     *         When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter
      *         uniquely identifies the container for the purposes of logging and metrics. For information, see <a
-     *         href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
+     *         href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
      *         Metrics to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      *         <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically
      *         assigned based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a
@@ -166,9 +172,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.
      * </p>
      * <p>
-     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter uniquely
+     * When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter uniquely
      * identifies the container for the purposes of logging and metrics. For information, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and Metrics
      * to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      * <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically assigned
      * based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a value for the
@@ -180,9 +186,9 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * @param containerHostname
      *        This parameter is ignored for models that contain only a <code>PrimaryContainer</code>.</p>
      *        <p>
-     *        When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of ths parameter
+     *        When a <code>ContainerDefinition</code> is part of an inference pipeline, the value of the parameter
      *        uniquely identifies the container for the purposes of logging and metrics. For information, see <a
-     *        href="http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
+     *        href="https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html">Use Logs and
      *        Metrics to Monitor an Inference Pipeline</a>. If you don't specify a value for this parameter for a
      *        <code>ContainerDefinition</code> that is part of an inference pipeline, a unique name is automatically
      *        assigned based on the position of the <code>ContainerDefinition</code> in the pipeline. If you specify a
@@ -269,10 +275,69 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
 
     /**
      * <p>
+     * Whether the container hosts a single model or multiple models.
+     * </p>
+     * 
+     * @param mode
+     *        Whether the container hosts a single model or multiple models.
+     * @see ContainerMode
+     */
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    /**
+     * <p>
+     * Whether the container hosts a single model or multiple models.
+     * </p>
+     * 
+     * @return Whether the container hosts a single model or multiple models.
+     * @see ContainerMode
+     */
+
+    public String getMode() {
+        return this.mode;
+    }
+
+    /**
+     * <p>
+     * Whether the container hosts a single model or multiple models.
+     * </p>
+     * 
+     * @param mode
+     *        Whether the container hosts a single model or multiple models.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ContainerMode
+     */
+
+    public ContainerDefinition withMode(String mode) {
+        setMode(mode);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Whether the container hosts a single model or multiple models.
+     * </p>
+     * 
+     * @param mode
+     *        Whether the container hosts a single model or multiple models.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ContainerMode
+     */
+
+    public ContainerDefinition withMode(ContainerMode mode) {
+        this.mode = mode.toString();
+        return this;
+    }
+
+    /**
+     * <p>
      * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a
      * single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in
      * algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      * Parameters</a>.
      * </p>
      * <p>
@@ -280,7 +345,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you
      * previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      * information, see <a
-     * href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
      * Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      * </p>
      * <important>
@@ -295,14 +360,14 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      *        to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker
      *        built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms,
      *        see <a
-     *        href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     *        href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      *        Parameters</a>. </p>
      *        <p>
      *        If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download
      *        model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If
      *        you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      *        information, see <a
-     *        href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
+     *        href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
      *        and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      *        </p>
      *        <important>
@@ -321,7 +386,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a
      * single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in
      * algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      * Parameters</a>.
      * </p>
      * <p>
@@ -329,7 +394,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you
      * previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      * information, see <a
-     * href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
      * Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      * </p>
      * <important>
@@ -343,16 +408,16 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      *         to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker
      *         built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms,
      *         see <a
-     *         href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     *         href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      *         Parameters</a>. </p>
      *         <p>
      *         If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download
      *         model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default.
      *         If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For
      *         more information, see <a
-     *         href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
-     *         and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User
-     *         Guide</i>.
+     *         href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html"
+     *         >Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management
+     *         User Guide</i>.
      *         </p>
      *         <important>
      *         <p>
@@ -370,7 +435,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a
      * single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in
      * algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see <a
-     * href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      * Parameters</a>.
      * </p>
      * <p>
@@ -378,7 +443,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      * artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you
      * previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      * information, see <a
-     * href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
+     * href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
      * Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      * </p>
      * <important>
@@ -393,14 +458,14 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
      *        to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker
      *        built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms,
      *        see <a
-     *        href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
+     *        href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html">Common
      *        Parameters</a>. </p>
      *        <p>
      *        If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download
      *        model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If
      *        you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more
      *        information, see <a
-     *        href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
+     *        href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
      *        and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.
      *        </p>
      *        <important>
@@ -464,6 +529,13 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
         setEnvironment(environment);
         return this;
     }
+
+    /**
+     * Add a single Environment entry
+     *
+     * @see ContainerDefinition#withEnvironment
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public ContainerDefinition addEnvironmentEntry(String key, String value) {
         if (null == this.environment) {
@@ -542,6 +614,8 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
             sb.append("ContainerHostname: ").append(getContainerHostname()).append(",");
         if (getImage() != null)
             sb.append("Image: ").append(getImage()).append(",");
+        if (getMode() != null)
+            sb.append("Mode: ").append(getMode()).append(",");
         if (getModelDataUrl() != null)
             sb.append("ModelDataUrl: ").append(getModelDataUrl()).append(",");
         if (getEnvironment() != null)
@@ -570,6 +644,10 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
             return false;
         if (other.getImage() != null && other.getImage().equals(this.getImage()) == false)
             return false;
+        if (other.getMode() == null ^ this.getMode() == null)
+            return false;
+        if (other.getMode() != null && other.getMode().equals(this.getMode()) == false)
+            return false;
         if (other.getModelDataUrl() == null ^ this.getModelDataUrl() == null)
             return false;
         if (other.getModelDataUrl() != null && other.getModelDataUrl().equals(this.getModelDataUrl()) == false)
@@ -592,6 +670,7 @@ public class ContainerDefinition implements Serializable, Cloneable, StructuredP
 
         hashCode = prime * hashCode + ((getContainerHostname() == null) ? 0 : getContainerHostname().hashCode());
         hashCode = prime * hashCode + ((getImage() == null) ? 0 : getImage().hashCode());
+        hashCode = prime * hashCode + ((getMode() == null) ? 0 : getMode().hashCode());
         hashCode = prime * hashCode + ((getModelDataUrl() == null) ? 0 : getModelDataUrl().hashCode());
         hashCode = prime * hashCode + ((getEnvironment() == null) ? 0 : getEnvironment().hashCode());
         hashCode = prime * hashCode + ((getModelPackageName() == null) ? 0 : getModelPackageName().hashCode());

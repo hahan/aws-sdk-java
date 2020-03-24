@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2019 Amazon Technologies, Inc.
+ * Copyright 2013-2020 Amazon Technologies, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,9 @@ public enum Regions {
     SA_EAST_1("sa-east-1", "South America (Sao Paulo)"),
     CN_NORTH_1("cn-north-1", "China (Beijing)"),
     CN_NORTHWEST_1("cn-northwest-1", "China (Ningxia)"),
-    CA_CENTRAL_1("ca-central-1", "Canada (Central)");
+    CA_CENTRAL_1("ca-central-1", "Canada (Central)"),
+    ME_SOUTH_1("me-south-1", "Middle East (Bahrain)")
+    ;
 
     /**
      * The default region that new customers in the US are encouraged to use

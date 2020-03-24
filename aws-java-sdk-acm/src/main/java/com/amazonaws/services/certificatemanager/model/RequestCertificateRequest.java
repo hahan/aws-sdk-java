@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -32,7 +32,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * *.example.com protects www.example.com, site.example.com, and images.example.com.
      * </p>
      * <p>
-     * The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject Alternative
+     * The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject Alternative
      * Name (SAN), however, can be up to 253 octets in length.
      * </p>
      */
@@ -51,9 +51,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example,
      * add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if
      * users can reach your site by using either name. The maximum number of domain names that you can add to an ACM
-     * certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must
-     * request a limit increase. For more information, see <a
-     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.
+     * certificate is 100. However, the initial quota is 10 domain names. If you need more than 10 names, you must
+     * request a quota increase. For more information, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.
      * </p>
      * <p>
      * The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods.
@@ -121,6 +121,12 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * </p>
      */
     private String certificateAuthorityArn;
+    /**
+     * <p>
+     * One or more resource tags to associate with the certificate.
+     * </p>
+     */
+    private java.util.List<Tag> tags;
 
     /**
      * <p>
@@ -129,7 +135,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * *.example.com protects www.example.com, site.example.com, and images.example.com.
      * </p>
      * <p>
-     * The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject Alternative
+     * The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject Alternative
      * Name (SAN), however, can be up to 253 octets in length.
      * </p>
      * 
@@ -139,7 +145,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *        domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.
      *        </p>
      *        <p>
-     *        The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject
+     *        The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject
      *        Alternative Name (SAN), however, can be up to 253 octets in length.
      */
 
@@ -154,7 +160,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * *.example.com protects www.example.com, site.example.com, and images.example.com.
      * </p>
      * <p>
-     * The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject Alternative
+     * The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject Alternative
      * Name (SAN), however, can be up to 253 octets in length.
      * </p>
      * 
@@ -163,7 +169,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *         domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.
      *         </p>
      *         <p>
-     *         The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject
+     *         The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject
      *         Alternative Name (SAN), however, can be up to 253 octets in length.
      */
 
@@ -178,7 +184,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * *.example.com protects www.example.com, site.example.com, and images.example.com.
      * </p>
      * <p>
-     * The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject Alternative
+     * The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject Alternative
      * Name (SAN), however, can be up to 253 octets in length.
      * </p>
      * 
@@ -188,7 +194,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *        domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.
      *        </p>
      *        <p>
-     *        The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject
+     *        The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject
      *        Alternative Name (SAN), however, can be up to 253 octets in length.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -290,9 +296,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example,
      * add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if
      * users can reach your site by using either name. The maximum number of domain names that you can add to an ACM
-     * certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must
-     * request a limit increase. For more information, see <a
-     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.
+     * certificate is 100. However, the initial quota is 10 domain names. If you need more than 10 names, you must
+     * request a quota increase. For more information, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.
      * </p>
      * <p>
      * The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods.
@@ -322,9 +328,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * @return Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For
      *         example, add the name www.example.net to a certificate for which the <code>DomainName</code> field is
      *         www.example.com if users can reach your site by using either name. The maximum number of domain names
-     *         that you can add to an ACM certificate is 100. However, the initial limit is 10 domain names. If you need
-     *         more than 10 names, you must request a limit increase. For more information, see <a
-     *         href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.</p>
+     *         that you can add to an ACM certificate is 100. However, the initial quota is 10 domain names. If you need
+     *         more than 10 names, you must request a quota increase. For more information, see <a
+     *         href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.</p>
      *         <p>
      *         The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by
      *         periods. No label can be longer than 63 octets. Consider the following examples:
@@ -359,9 +365,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example,
      * add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if
      * users can reach your site by using either name. The maximum number of domain names that you can add to an ACM
-     * certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must
-     * request a limit increase. For more information, see <a
-     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.
+     * certificate is 100. However, the initial quota is 10 domain names. If you need more than 10 names, you must
+     * request a quota increase. For more information, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.
      * </p>
      * <p>
      * The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods.
@@ -392,9 +398,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *        Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For
      *        example, add the name www.example.net to a certificate for which the <code>DomainName</code> field is
      *        www.example.com if users can reach your site by using either name. The maximum number of domain names that
-     *        you can add to an ACM certificate is 100. However, the initial limit is 10 domain names. If you need more
-     *        than 10 names, you must request a limit increase. For more information, see <a
-     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.</p>
+     *        you can add to an ACM certificate is 100. However, the initial quota is 10 domain names. If you need more
+     *        than 10 names, you must request a quota increase. For more information, see <a
+     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.</p>
      *        <p>
      *        The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by
      *        periods. No label can be longer than 63 octets. Consider the following examples:
@@ -434,9 +440,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example,
      * add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if
      * users can reach your site by using either name. The maximum number of domain names that you can add to an ACM
-     * certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must
-     * request a limit increase. For more information, see <a
-     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.
+     * certificate is 100. However, the initial quota is 10 domain names. If you need more than 10 names, you must
+     * request a quota increase. For more information, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.
      * </p>
      * <p>
      * The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods.
@@ -472,9 +478,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *        Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For
      *        example, add the name www.example.net to a certificate for which the <code>DomainName</code> field is
      *        www.example.com if users can reach your site by using either name. The maximum number of domain names that
-     *        you can add to an ACM certificate is 100. However, the initial limit is 10 domain names. If you need more
-     *        than 10 names, you must request a limit increase. For more information, see <a
-     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.</p>
+     *        you can add to an ACM certificate is 100. However, the initial quota is 10 domain names. If you need more
+     *        than 10 names, you must request a quota increase. For more information, see <a
+     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.</p>
      *        <p>
      *        The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by
      *        periods. No label can be longer than 63 octets. Consider the following examples:
@@ -516,9 +522,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      * Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example,
      * add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if
      * users can reach your site by using either name. The maximum number of domain names that you can add to an ACM
-     * certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must
-     * request a limit increase. For more information, see <a
-     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.
+     * certificate is 100. However, the initial quota is 10 domain names. If you need more than 10 names, you must
+     * request a quota increase. For more information, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.
      * </p>
      * <p>
      * The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods.
@@ -549,9 +555,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
      *        Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For
      *        example, add the name www.example.net to a certificate for which the <code>DomainName</code> field is
      *        www.example.com if users can reach your site by using either name. The maximum number of domain names that
-     *        you can add to an ACM certificate is 100. However, the initial limit is 10 domain names. If you need more
-     *        than 10 names, you must request a limit increase. For more information, see <a
-     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.</p>
+     *        you can add to an ACM certificate is 100. However, the initial quota is 10 domain names. If you need more
+     *        than 10 names, you must request a quota increase. For more information, see <a
+     *        href="https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Quotas</a>.</p>
      *        <p>
      *        The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by
      *        periods. No label can be longer than 63 octets. Consider the following examples:
@@ -867,6 +873,76 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
     }
 
     /**
+     * <p>
+     * One or more resource tags to associate with the certificate.
+     * </p>
+     * 
+     * @return One or more resource tags to associate with the certificate.
+     */
+
+    public java.util.List<Tag> getTags() {
+        return tags;
+    }
+
+    /**
+     * <p>
+     * One or more resource tags to associate with the certificate.
+     * </p>
+     * 
+     * @param tags
+     *        One or more resource tags to associate with the certificate.
+     */
+
+    public void setTags(java.util.Collection<Tag> tags) {
+        if (tags == null) {
+            this.tags = null;
+            return;
+        }
+
+        this.tags = new java.util.ArrayList<Tag>(tags);
+    }
+
+    /**
+     * <p>
+     * One or more resource tags to associate with the certificate.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
+     * existing values.
+     * </p>
+     * 
+     * @param tags
+     *        One or more resource tags to associate with the certificate.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public RequestCertificateRequest withTags(Tag... tags) {
+        if (this.tags == null) {
+            setTags(new java.util.ArrayList<Tag>(tags.length));
+        }
+        for (Tag ele : tags) {
+            this.tags.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * One or more resource tags to associate with the certificate.
+     * </p>
+     * 
+     * @param tags
+     *        One or more resource tags to associate with the certificate.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public RequestCertificateRequest withTags(java.util.Collection<Tag> tags) {
+        setTags(tags);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -891,7 +967,9 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
         if (getOptions() != null)
             sb.append("Options: ").append(getOptions()).append(",");
         if (getCertificateAuthorityArn() != null)
-            sb.append("CertificateAuthorityArn: ").append(getCertificateAuthorityArn());
+            sb.append("CertificateAuthorityArn: ").append(getCertificateAuthorityArn()).append(",");
+        if (getTags() != null)
+            sb.append("Tags: ").append(getTags());
         sb.append("}");
         return sb.toString();
     }
@@ -934,6 +1012,10 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
             return false;
         if (other.getCertificateAuthorityArn() != null && other.getCertificateAuthorityArn().equals(this.getCertificateAuthorityArn()) == false)
             return false;
+        if (other.getTags() == null ^ this.getTags() == null)
+            return false;
+        if (other.getTags() != null && other.getTags().equals(this.getTags()) == false)
+            return false;
         return true;
     }
 
@@ -949,6 +1031,7 @@ public class RequestCertificateRequest extends com.amazonaws.AmazonWebServiceReq
         hashCode = prime * hashCode + ((getDomainValidationOptions() == null) ? 0 : getDomainValidationOptions().hashCode());
         hashCode = prime * hashCode + ((getOptions() == null) ? 0 : getOptions().hashCode());
         hashCode = prime * hashCode + ((getCertificateAuthorityArn() == null) ? 0 : getCertificateAuthorityArn().hashCode());
+        hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         return hashCode;
     }
 

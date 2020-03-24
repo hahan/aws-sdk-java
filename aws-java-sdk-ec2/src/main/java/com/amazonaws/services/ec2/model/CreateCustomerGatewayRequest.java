@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -45,10 +45,25 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
     private String publicIp;
     /**
      * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     */
+    private String certificateArn;
+    /**
+     * <p>
      * The type of VPN connection that this customer gateway supports (<code>ipsec.1</code>).
      * </p>
      */
     private String type;
+    /**
+     * <p>
+     * A name for the customer gateway device.
+     * </p>
+     * <p>
+     * Length Constraints: Up to 255 characters.
+     * </p>
+     */
+    private String deviceName;
 
     /**
      * Default constructor for CreateCustomerGatewayRequest object. Callers should use the setter or fluent setter
@@ -193,6 +208,46 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
 
     /**
      * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @param certificateArn
+     *        The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+
+    public void setCertificateArn(String certificateArn) {
+        this.certificateArn = certificateArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @return The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+
+    public String getCertificateArn() {
+        return this.certificateArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * </p>
+     * 
+     * @param certificateArn
+     *        The Amazon Resource Name (ARN) for the customer gateway certificate.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateCustomerGatewayRequest withCertificateArn(String certificateArn) {
+        setCertificateArn(certificateArn);
+        return this;
+    }
+
+    /**
+     * <p>
      * The type of VPN connection that this customer gateway supports (<code>ipsec.1</code>).
      * </p>
      * 
@@ -265,6 +320,61 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
     }
 
     /**
+     * <p>
+     * A name for the customer gateway device.
+     * </p>
+     * <p>
+     * Length Constraints: Up to 255 characters.
+     * </p>
+     * 
+     * @param deviceName
+     *        A name for the customer gateway device.</p>
+     *        <p>
+     *        Length Constraints: Up to 255 characters.
+     */
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    /**
+     * <p>
+     * A name for the customer gateway device.
+     * </p>
+     * <p>
+     * Length Constraints: Up to 255 characters.
+     * </p>
+     * 
+     * @return A name for the customer gateway device.</p>
+     *         <p>
+     *         Length Constraints: Up to 255 characters.
+     */
+
+    public String getDeviceName() {
+        return this.deviceName;
+    }
+
+    /**
+     * <p>
+     * A name for the customer gateway device.
+     * </p>
+     * <p>
+     * Length Constraints: Up to 255 characters.
+     * </p>
+     * 
+     * @param deviceName
+     *        A name for the customer gateway device.</p>
+     *        <p>
+     *        Length Constraints: Up to 255 characters.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateCustomerGatewayRequest withDeviceName(String deviceName) {
+        setDeviceName(deviceName);
+        return this;
+    }
+
+    /**
      * This method is intended for internal use only. Returns the marshaled request configured with additional
      * parameters to enable operation dry-run.
      */
@@ -291,8 +401,12 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
             sb.append("BgpAsn: ").append(getBgpAsn()).append(",");
         if (getPublicIp() != null)
             sb.append("PublicIp: ").append(getPublicIp()).append(",");
+        if (getCertificateArn() != null)
+            sb.append("CertificateArn: ").append(getCertificateArn()).append(",");
         if (getType() != null)
-            sb.append("Type: ").append(getType());
+            sb.append("Type: ").append(getType()).append(",");
+        if (getDeviceName() != null)
+            sb.append("DeviceName: ").append(getDeviceName());
         sb.append("}");
         return sb.toString();
     }
@@ -315,9 +429,17 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
             return false;
         if (other.getPublicIp() != null && other.getPublicIp().equals(this.getPublicIp()) == false)
             return false;
+        if (other.getCertificateArn() == null ^ this.getCertificateArn() == null)
+            return false;
+        if (other.getCertificateArn() != null && other.getCertificateArn().equals(this.getCertificateArn()) == false)
+            return false;
         if (other.getType() == null ^ this.getType() == null)
             return false;
         if (other.getType() != null && other.getType().equals(this.getType()) == false)
+            return false;
+        if (other.getDeviceName() == null ^ this.getDeviceName() == null)
+            return false;
+        if (other.getDeviceName() != null && other.getDeviceName().equals(this.getDeviceName()) == false)
             return false;
         return true;
     }
@@ -329,7 +451,9 @@ public class CreateCustomerGatewayRequest extends AmazonWebServiceRequest implem
 
         hashCode = prime * hashCode + ((getBgpAsn() == null) ? 0 : getBgpAsn().hashCode());
         hashCode = prime * hashCode + ((getPublicIp() == null) ? 0 : getPublicIp().hashCode());
+        hashCode = prime * hashCode + ((getCertificateArn() == null) ? 0 : getCertificateArn().hashCode());
         hashCode = prime * hashCode + ((getType() == null) ? 0 : getType().hashCode());
+        hashCode = prime * hashCode + ((getDeviceName() == null) ? 0 : getDeviceName().hashCode());
         return hashCode;
     }
 

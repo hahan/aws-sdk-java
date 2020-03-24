@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -33,8 +33,29 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
      * </p>
      */
     private String repositoryName;
-    /** <p/> */
+    /**
+     * <p>
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a
+     * key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
+     * characters, and tag values can have a maximum length of 256 characters.
+     * </p>
+     */
     private java.util.List<Tag> tags;
+    /**
+     * <p>
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     * <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is
+     * specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     * </p>
+     */
+    private String imageTagMutability;
+    /**
+     * <p>
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known
+     * vulnerabilities after being pushed to the repository.
+     * </p>
+     */
+    private ImageScanningConfiguration imageScanningConfiguration;
 
     /**
      * <p>
@@ -89,9 +110,15 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * <p/>
+     * <p>
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a
+     * key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
+     * characters, and tag values can have a maximum length of 256 characters.
+     * </p>
      * 
-     * @return
+     * @return The metadata that you apply to the repository to help you categorize and organize them. Each tag consists
+     *         of a key and an optional value, both of which you define. Tag keys can have a maximum character length of
+     *         128 characters, and tag values can have a maximum length of 256 characters.
      */
 
     public java.util.List<Tag> getTags() {
@@ -99,9 +126,16 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * <p/>
+     * <p>
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a
+     * key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
+     * characters, and tag values can have a maximum length of 256 characters.
+     * </p>
      * 
      * @param tags
+     *        The metadata that you apply to the repository to help you categorize and organize them. Each tag consists
+     *        of a key and an optional value, both of which you define. Tag keys can have a maximum character length of
+     *        128 characters, and tag values can have a maximum length of 256 characters.
      */
 
     public void setTags(java.util.Collection<Tag> tags) {
@@ -114,7 +148,11 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * <p/>
+     * <p>
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a
+     * key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
+     * characters, and tag values can have a maximum length of 256 characters.
+     * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
@@ -122,6 +160,9 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
      * </p>
      * 
      * @param tags
+     *        The metadata that you apply to the repository to help you categorize and organize them. Each tag consists
+     *        of a key and an optional value, both of which you define. Tag keys can have a maximum character length of
+     *        128 characters, and tag values can have a maximum length of 256 characters.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -136,14 +177,146 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
     }
 
     /**
-     * <p/>
+     * <p>
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a
+     * key and an optional value, both of which you define. Tag keys can have a maximum character length of 128
+     * characters, and tag values can have a maximum length of 256 characters.
+     * </p>
      * 
      * @param tags
+     *        The metadata that you apply to the repository to help you categorize and organize them. Each tag consists
+     *        of a key and an optional value, both of which you define. Tag keys can have a maximum character length of
+     *        128 characters, and tag values can have a maximum length of 256 characters.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public CreateRepositoryRequest withTags(java.util.Collection<Tag> tags) {
         setTags(tags);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     * <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is
+     * specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     *        <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code>
+     *        is specified, all image tags within the repository will be immutable which will prevent them from being
+     *        overwritten.
+     * @see ImageTagMutability
+     */
+
+    public void setImageTagMutability(String imageTagMutability) {
+        this.imageTagMutability = imageTagMutability;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     * <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is
+     * specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     * </p>
+     * 
+     * @return The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     *         <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If
+     *         <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will
+     *         prevent them from being overwritten.
+     * @see ImageTagMutability
+     */
+
+    public String getImageTagMutability() {
+        return this.imageTagMutability;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     * <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is
+     * specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     *        <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code>
+     *        is specified, all image tags within the repository will be immutable which will prevent them from being
+     *        overwritten.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ImageTagMutability
+     */
+
+    public CreateRepositoryRequest withImageTagMutability(String imageTagMutability) {
+        setImageTagMutability(imageTagMutability);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     * <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is
+     * specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     * </p>
+     * 
+     * @param imageTagMutability
+     *        The tag mutability setting for the repository. If this parameter is omitted, the default setting of
+     *        <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code>
+     *        is specified, all image tags within the repository will be immutable which will prevent them from being
+     *        overwritten.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see ImageTagMutability
+     */
+
+    public CreateRepositoryRequest withImageTagMutability(ImageTagMutability imageTagMutability) {
+        this.imageTagMutability = imageTagMutability.toString();
+        return this;
+    }
+
+    /**
+     * <p>
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known
+     * vulnerabilities after being pushed to the repository.
+     * </p>
+     * 
+     * @param imageScanningConfiguration
+     *        The image scanning configuration for the repository. This setting determines whether images are scanned
+     *        for known vulnerabilities after being pushed to the repository.
+     */
+
+    public void setImageScanningConfiguration(ImageScanningConfiguration imageScanningConfiguration) {
+        this.imageScanningConfiguration = imageScanningConfiguration;
+    }
+
+    /**
+     * <p>
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known
+     * vulnerabilities after being pushed to the repository.
+     * </p>
+     * 
+     * @return The image scanning configuration for the repository. This setting determines whether images are scanned
+     *         for known vulnerabilities after being pushed to the repository.
+     */
+
+    public ImageScanningConfiguration getImageScanningConfiguration() {
+        return this.imageScanningConfiguration;
+    }
+
+    /**
+     * <p>
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known
+     * vulnerabilities after being pushed to the repository.
+     * </p>
+     * 
+     * @param imageScanningConfiguration
+     *        The image scanning configuration for the repository. This setting determines whether images are scanned
+     *        for known vulnerabilities after being pushed to the repository.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateRepositoryRequest withImageScanningConfiguration(ImageScanningConfiguration imageScanningConfiguration) {
+        setImageScanningConfiguration(imageScanningConfiguration);
         return this;
     }
 
@@ -162,7 +335,11 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
         if (getRepositoryName() != null)
             sb.append("RepositoryName: ").append(getRepositoryName()).append(",");
         if (getTags() != null)
-            sb.append("Tags: ").append(getTags());
+            sb.append("Tags: ").append(getTags()).append(",");
+        if (getImageTagMutability() != null)
+            sb.append("ImageTagMutability: ").append(getImageTagMutability()).append(",");
+        if (getImageScanningConfiguration() != null)
+            sb.append("ImageScanningConfiguration: ").append(getImageScanningConfiguration());
         sb.append("}");
         return sb.toString();
     }
@@ -185,6 +362,14 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
             return false;
         if (other.getTags() != null && other.getTags().equals(this.getTags()) == false)
             return false;
+        if (other.getImageTagMutability() == null ^ this.getImageTagMutability() == null)
+            return false;
+        if (other.getImageTagMutability() != null && other.getImageTagMutability().equals(this.getImageTagMutability()) == false)
+            return false;
+        if (other.getImageScanningConfiguration() == null ^ this.getImageScanningConfiguration() == null)
+            return false;
+        if (other.getImageScanningConfiguration() != null && other.getImageScanningConfiguration().equals(this.getImageScanningConfiguration()) == false)
+            return false;
         return true;
     }
 
@@ -195,6 +380,8 @@ public class CreateRepositoryRequest extends com.amazonaws.AmazonWebServiceReque
 
         hashCode = prime * hashCode + ((getRepositoryName() == null) ? 0 : getRepositoryName().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
+        hashCode = prime * hashCode + ((getImageTagMutability() == null) ? 0 : getImageTagMutability().hashCode());
+        hashCode = prime * hashCode + ((getImageScanningConfiguration() == null) ? 0 : getImageScanningConfiguration().hashCode());
         return hashCode;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -83,7 +83,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * in the <i>Amazon RDS User Guide.</i>
      * </p>
      * <p>
-     * Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     * Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      * </p>
      */
     private String dBInstanceClass;
@@ -212,8 +212,11 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     private String preferredMaintenanceWindow;
     /**
      * <p>
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default
-     * parameter group for the specified engine is used.
+     * The name of the DB parameter group to associate with this DB instance.
+     * </p>
+     * <p>
+     * If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     * <code>DBParameterGroup</code> for the specified DB engine is used.
      * </p>
      */
     private String dBParameterGroupName;
@@ -304,7 +307,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance.
-     * For information about valid Iops values, see see <a
+     * For information about valid Iops values, see <a
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS Provisioned
      * IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
@@ -321,8 +324,8 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * <p>
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      * accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP
-     * address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that
-     * resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
+     * address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves
+     * to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * </p>
      */
     private Boolean publiclyAccessible;
@@ -413,7 +416,13 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
-     * accounts. By default, mapping is disabled.
+     * accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     * <a>CreateDBInstance</a>.
+     * </p>
+     * <p>
+     * For more information about IAM database authentication, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      */
     private Boolean enableIAMDatabaseAuthentication;
@@ -819,7 +828,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * in the <i>Amazon RDS User Guide.</i>
      * </p>
      * <p>
-     * Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     * Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      * </p>
      * 
      * @param dBInstanceClass
@@ -829,7 +838,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html">DB Instance
      *        Class</a> in the <i>Amazon RDS User Guide.</i> </p>
      *        <p>
-     *        Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     *        Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      */
 
     public void setDBInstanceClass(String dBInstanceClass) {
@@ -845,7 +854,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * in the <i>Amazon RDS User Guide.</i>
      * </p>
      * <p>
-     * Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     * Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      * </p>
      * 
      * @return The compute and memory capacity of the DB instance, for example, <code>db.m4.large</code>. Not all DB
@@ -854,7 +863,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      *         href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html">DB Instance
      *         Class</a> in the <i>Amazon RDS User Guide.</i> </p>
      *         <p>
-     *         Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     *         Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      */
 
     public String getDBInstanceClass() {
@@ -870,7 +879,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * in the <i>Amazon RDS User Guide.</i>
      * </p>
      * <p>
-     * Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     * Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      * </p>
      * 
      * @param dBInstanceClass
@@ -880,7 +889,7 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html">DB Instance
      *        Class</a> in the <i>Amazon RDS User Guide.</i> </p>
      *        <p>
-     *        Importing from Amazon S3 is not supported on the db.t2.micro DB instance class.
+     *        Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1720,13 +1729,18 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default
-     * parameter group for the specified engine is used.
+     * The name of the DB parameter group to associate with this DB instance.
+     * </p>
+     * <p>
+     * If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     * <code>DBParameterGroup</code> for the specified DB engine is used.
      * </p>
      * 
      * @param dBParameterGroupName
-     *        The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the
-     *        default parameter group for the specified engine is used.
+     *        The name of the DB parameter group to associate with this DB instance.</p>
+     *        <p>
+     *        If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     *        <code>DBParameterGroup</code> for the specified DB engine is used.
      */
 
     public void setDBParameterGroupName(String dBParameterGroupName) {
@@ -1735,12 +1749,17 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default
-     * parameter group for the specified engine is used.
+     * The name of the DB parameter group to associate with this DB instance.
+     * </p>
+     * <p>
+     * If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     * <code>DBParameterGroup</code> for the specified DB engine is used.
      * </p>
      * 
-     * @return The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the
-     *         default parameter group for the specified engine is used.
+     * @return The name of the DB parameter group to associate with this DB instance.</p>
+     *         <p>
+     *         If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     *         <code>DBParameterGroup</code> for the specified DB engine is used.
      */
 
     public String getDBParameterGroupName() {
@@ -1749,13 +1768,18 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default
-     * parameter group for the specified engine is used.
+     * The name of the DB parameter group to associate with this DB instance.
+     * </p>
+     * <p>
+     * If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     * <code>DBParameterGroup</code> for the specified DB engine is used.
      * </p>
      * 
      * @param dBParameterGroupName
-     *        The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the
-     *        default parameter group for the specified engine is used.
+     *        The name of the DB parameter group to associate with this DB instance.</p>
+     *        <p>
+     *        If you do not specify a value for <code>DBParameterGroupName</code>, then the default
+     *        <code>DBParameterGroup</code> for the specified DB engine is used.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -2321,14 +2345,14 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance.
-     * For information about valid Iops values, see see <a
+     * For information about valid Iops values, see <a
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS Provisioned
      * IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @param iops
      *        The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB
-     *        instance. For information about valid Iops values, see see <a
+     *        instance. For information about valid Iops values, see <a
      *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS
      *        Provisioned IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      */
@@ -2340,13 +2364,13 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance.
-     * For information about valid Iops values, see see <a
+     * For information about valid Iops values, see <a
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS Provisioned
      * IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @return The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB
-     *         instance. For information about valid Iops values, see see <a
+     *         instance. For information about valid Iops values, see <a
      *         href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS
      *         Provisioned IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      */
@@ -2358,14 +2382,14 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance.
-     * For information about valid Iops values, see see <a
+     * For information about valid Iops values, see <a
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS Provisioned
      * IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @param iops
      *        The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB
-     *        instance. For information about valid Iops values, see see <a
+     *        instance. For information about valid Iops values, see <a
      *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS
      *        Provisioned IOPS Storage to Improve Performance</a> in the <i>Amazon RDS User Guide.</i>
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -2426,14 +2450,14 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * <p>
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      * accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP
-     * address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that
-     * resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
+     * address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves
+     * to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * </p>
      * 
      * @param publiclyAccessible
      *        A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      *        accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a
-     *        public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS
+     *        public IP address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS
      *        name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
      */
 
@@ -2445,13 +2469,13 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * <p>
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      * accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP
-     * address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that
-     * resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
+     * address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves
+     * to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * </p>
      * 
      * @return A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      *         accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a
-     *         public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS
+     *         public IP address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS
      *         name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
      */
 
@@ -2463,14 +2487,14 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * <p>
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      * accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP
-     * address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that
-     * resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
+     * address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves
+     * to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * </p>
      * 
      * @param publiclyAccessible
      *        A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      *        accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a
-     *        public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS
+     *        public IP address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS
      *        name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -2484,13 +2508,13 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
      * <p>
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      * accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP
-     * address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that
-     * resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
+     * address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves
+     * to a private IP address. For more information, see <a>CreateDBInstance</a>.
      * </p>
      * 
      * @return A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly
      *         accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a
-     *         public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS
+     *         public IP address. When the DB instance isn't publicly accessible, it is an internal instance with a DNS
      *         name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.
      */
 
@@ -3084,12 +3108,23 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
-     * accounts. By default, mapping is disabled.
+     * accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     * <a>CreateDBInstance</a>.
+     * </p>
+     * <p>
+     * For more information about IAM database authentication, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @param enableIAMDatabaseAuthentication
      *        A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *        database accounts. By default, mapping is disabled.
+     *        database accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     *        <a>CreateDBInstance</a>.</p>
+     *        <p>
+     *        For more information about IAM database authentication, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     *        Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      */
 
     public void setEnableIAMDatabaseAuthentication(Boolean enableIAMDatabaseAuthentication) {
@@ -3099,11 +3134,22 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
-     * accounts. By default, mapping is disabled.
+     * accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     * <a>CreateDBInstance</a>.
+     * </p>
+     * <p>
+     * For more information about IAM database authentication, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @return A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *         database accounts. By default, mapping is disabled.
+     *         database accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     *         <a>CreateDBInstance</a>.</p>
+     *         <p>
+     *         For more information about IAM database authentication, see <a
+     *         href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     *         Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      */
 
     public Boolean getEnableIAMDatabaseAuthentication() {
@@ -3113,12 +3159,23 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
-     * accounts. By default, mapping is disabled.
+     * accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     * <a>CreateDBInstance</a>.
+     * </p>
+     * <p>
+     * For more information about IAM database authentication, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @param enableIAMDatabaseAuthentication
      *        A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *        database accounts. By default, mapping is disabled.
+     *        database accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     *        <a>CreateDBInstance</a>.</p>
+     *        <p>
+     *        For more information about IAM database authentication, see <a
+     *        href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     *        Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -3130,11 +3187,22 @@ public class RestoreDBInstanceFromS3Request extends com.amazonaws.AmazonWebServi
     /**
      * <p>
      * A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database
-     * accounts. By default, mapping is disabled.
+     * accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     * <a>CreateDBInstance</a>.
+     * </p>
+     * <p>
+     * For more information about IAM database authentication, see <a
+     * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     * Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      * </p>
      * 
      * @return A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to
-     *         database accounts. By default, mapping is disabled.
+     *         database accounts. By default, mapping is disabled. For information about the supported DB engines, see
+     *         <a>CreateDBInstance</a>.</p>
+     *         <p>
+     *         For more information about IAM database authentication, see <a
+     *         href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database
+     *         Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>
      */
 
     public Boolean isEnableIAMDatabaseAuthentication() {

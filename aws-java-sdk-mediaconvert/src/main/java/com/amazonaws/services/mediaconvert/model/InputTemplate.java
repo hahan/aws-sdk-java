@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -42,6 +42,12 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
      */
     private java.util.Map<String, CaptionSelector> captionSelectors;
     /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
+     * If you specify a value here, it will override any value that you specify in the output setting Cropping selection
+     * (crop).
+     */
+    private Rectangle crop;
+    /**
      * Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully
      * controllable for MPEG2 and uncompressed video inputs.
      */
@@ -78,6 +84,14 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
      */
     private java.util.List<InputClipping> inputClippings;
     /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     * rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     * specify in the output setting Selection placement (position). If you specify a value here, this will override any
+     * AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a
+     * value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     */
+    private Rectangle position;
+    /**
      * Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that
      * Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you
      * specify doesn't exist, the transcoding service will use this default.
@@ -89,13 +103,22 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
      */
     private String psiControl;
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a
-     * single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to
-     * specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first
-     * frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame
-     * number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the
+     * service counts input video frames. This input frame count affects only the behavior of features that apply to a
+     * single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED)
+     * to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero.
+     * Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting
+     * Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by
+     * default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      */
     private String timecodeSource;
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you
+     * must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start
+     * (SPECIFIEDSTART). For more information about timecodes, see
+     * https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     */
+    private String timecodeStart;
     /** Selector for video. */
     private VideoSelector videoSelector;
 
@@ -138,6 +161,13 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
         setAudioSelectorGroups(audioSelectorGroups);
         return this;
     }
+
+    /**
+     * Add a single AudioSelectorGroups entry
+     *
+     * @see InputTemplate#withAudioSelectorGroups
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public InputTemplate addAudioSelectorGroupsEntry(String key, AudioSelectorGroup value) {
         if (null == this.audioSelectorGroups) {
@@ -200,6 +230,13 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
         return this;
     }
 
+    /**
+     * Add a single AudioSelectors entry
+     *
+     * @see InputTemplate#withAudioSelectors
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public InputTemplate addAudioSelectorsEntry(String key, AudioSelector value) {
         if (null == this.audioSelectors) {
             this.audioSelectors = new java.util.HashMap<String, AudioSelector>();
@@ -261,6 +298,13 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
         return this;
     }
 
+    /**
+     * Add a single CaptionSelectors entry
+     *
+     * @see InputTemplate#withCaptionSelectors
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public InputTemplate addCaptionSelectorsEntry(String key, CaptionSelector value) {
         if (null == this.captionSelectors) {
             this.captionSelectors = new java.util.HashMap<String, CaptionSelector>();
@@ -279,6 +323,52 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
 
     public InputTemplate clearCaptionSelectorsEntries() {
         this.captionSelectors = null;
+        return this;
+    }
+
+    /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
+     * If you specify a value here, it will override any value that you specify in the output setting Cropping selection
+     * (crop).
+     * 
+     * @param crop
+     *        Use Cropping selection (crop) to specify the video area that the service will include in the output video
+     *        frame. If you specify a value here, it will override any value that you specify in the output setting
+     *        Cropping selection (crop).
+     */
+
+    public void setCrop(Rectangle crop) {
+        this.crop = crop;
+    }
+
+    /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
+     * If you specify a value here, it will override any value that you specify in the output setting Cropping selection
+     * (crop).
+     * 
+     * @return Use Cropping selection (crop) to specify the video area that the service will include in the output video
+     *         frame. If you specify a value here, it will override any value that you specify in the output setting
+     *         Cropping selection (crop).
+     */
+
+    public Rectangle getCrop() {
+        return this.crop;
+    }
+
+    /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
+     * If you specify a value here, it will override any value that you specify in the output setting Cropping selection
+     * (crop).
+     * 
+     * @param crop
+     *        Use Cropping selection (crop) to specify the video area that the service will include in the output video
+     *        frame. If you specify a value here, it will override any value that you specify in the output setting
+     *        Cropping selection (crop).
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public InputTemplate withCrop(Rectangle crop) {
+        setCrop(crop);
         return this;
     }
 
@@ -662,6 +752,67 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     * rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     * specify in the output setting Selection placement (position). If you specify a value here, this will override any
+     * AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a
+     * value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     * 
+     * @param position
+     *        Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     *        rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     *        specify in the output setting Selection placement (position). If you specify a value here, this will
+     *        override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND).
+     *        If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior
+     *        (scalingBehavior).
+     */
+
+    public void setPosition(Rectangle position) {
+        this.position = position;
+    }
+
+    /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     * rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     * specify in the output setting Selection placement (position). If you specify a value here, this will override any
+     * AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a
+     * value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     * 
+     * @return Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     *         rectangle that you specify here is black. If you specify a value here, it will override any value that
+     *         you specify in the output setting Selection placement (position). If you specify a value here, this will
+     *         override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond
+     *         (RESPOND). If you specify a value here, this will ignore anything that you specify for the setting
+     *         Scaling Behavior (scalingBehavior).
+     */
+
+    public Rectangle getPosition() {
+        return this.position;
+    }
+
+    /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     * rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     * specify in the output setting Selection placement (position). If you specify a value here, this will override any
+     * AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a
+     * value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     * 
+     * @param position
+     *        Use Selection placement (position) to define the video area in your output frame. The area outside of the
+     *        rectangle that you specify here is black. If you specify a value here, it will override any value that you
+     *        specify in the output setting Selection placement (position). If you specify a value here, this will
+     *        override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND).
+     *        If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior
+     *        (scalingBehavior).
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public InputTemplate withPosition(Rectangle position) {
+        setPosition(position);
+        return this;
+    }
+
+    /**
      * Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that
      * Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you
      * specify doesn't exist, the transcoding service will use this default.
@@ -767,19 +918,23 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a
-     * single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to
-     * specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first
-     * frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame
-     * number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the
+     * service counts input video frames. This input frame count affects only the behavior of features that apply to a
+     * single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED)
+     * to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero.
+     * Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting
+     * Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by
+     * default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * 
      * @param timecodeSource
-     *        Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that
-     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use
-     *        this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or
-     *        by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or
-     *        HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded
-     *        timecodes.
+     *        Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how
+     *        the service counts input video frames. This input frame count affects only the behavior of features that
+     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose
+     *        Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start
+     *        the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode
+     *        that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode
+     *        source, the service will use Embedded by default. For more information about timecodes, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * @see InputTimecodeSource
      */
 
@@ -788,18 +943,22 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a
-     * single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to
-     * specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first
-     * frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame
-     * number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the
+     * service counts input video frames. This input frame count affects only the behavior of features that apply to a
+     * single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED)
+     * to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero.
+     * Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting
+     * Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by
+     * default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * 
-     * @return Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that
-     *         apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use
-     *         this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED)
-     *         or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or
-     *         HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded
-     *         timecodes.
+     * @return Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how
+     *         the service counts input video frames. This input frame count affects only the behavior of features that
+     *         apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose
+     *         Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start
+     *         the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode
+     *         that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode
+     *         source, the service will use Embedded by default. For more information about timecodes, see
+     *         https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * @see InputTimecodeSource
      */
 
@@ -808,19 +967,23 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a
-     * single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to
-     * specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first
-     * frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame
-     * number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the
+     * service counts input video frames. This input frame count affects only the behavior of features that apply to a
+     * single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED)
+     * to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero.
+     * Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting
+     * Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by
+     * default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * 
      * @param timecodeSource
-     *        Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that
-     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use
-     *        this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or
-     *        by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or
-     *        HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded
-     *        timecodes.
+     *        Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how
+     *        the service counts input video frames. This input frame count affects only the behavior of features that
+     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose
+     *        Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start
+     *        the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode
+     *        that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode
+     *        source, the service will use Embedded by default. For more information about timecodes, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see InputTimecodeSource
      */
@@ -831,25 +994,81 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a
-     * single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to
-     * specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first
-     * frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame
-     * number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the
+     * service counts input video frames. This input frame count affects only the behavior of features that apply to a
+     * single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED)
+     * to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero.
+     * Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting
+     * Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by
+     * default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * 
      * @param timecodeSource
-     *        Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that
-     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use
-     *        this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or
-     *        by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or
-     *        HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded
-     *        timecodes.
+     *        Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how
+     *        the service counts input video frames. This input frame count affects only the behavior of features that
+     *        apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose
+     *        Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start
+     *        the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode
+     *        that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode
+     *        source, the service will use Embedded by default. For more information about timecodes, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/timecode.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see InputTimecodeSource
      */
 
     public InputTemplate withTimecodeSource(InputTimecodeSource timecodeSource) {
         this.timecodeSource = timecodeSource.toString();
+        return this;
+    }
+
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you
+     * must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start
+     * (SPECIFIEDSTART). For more information about timecodes, see
+     * https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     * 
+     * @param timecodeStart
+     *        Specify the timecode that you want the service to use for this input's initial frame. To use this setting,
+     *        you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to
+     *        Specified start (SPECIFIEDSTART). For more information about timecodes, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     */
+
+    public void setTimecodeStart(String timecodeStart) {
+        this.timecodeStart = timecodeStart;
+    }
+
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you
+     * must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start
+     * (SPECIFIEDSTART). For more information about timecodes, see
+     * https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     * 
+     * @return Specify the timecode that you want the service to use for this input's initial frame. To use this
+     *         setting, you must set the Timecode source setting, located under the input settings
+     *         (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more information about timecodes, see
+     *         https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     */
+
+    public String getTimecodeStart() {
+        return this.timecodeStart;
+    }
+
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you
+     * must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start
+     * (SPECIFIEDSTART). For more information about timecodes, see
+     * https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     * 
+     * @param timecodeStart
+     *        Specify the timecode that you want the service to use for this input's initial frame. To use this setting,
+     *        you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to
+     *        Specified start (SPECIFIEDSTART). For more information about timecodes, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public InputTemplate withTimecodeStart(String timecodeStart) {
+        setTimecodeStart(timecodeStart);
         return this;
     }
 
@@ -905,6 +1124,8 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
             sb.append("AudioSelectors: ").append(getAudioSelectors()).append(",");
         if (getCaptionSelectors() != null)
             sb.append("CaptionSelectors: ").append(getCaptionSelectors()).append(",");
+        if (getCrop() != null)
+            sb.append("Crop: ").append(getCrop()).append(",");
         if (getDeblockFilter() != null)
             sb.append("DeblockFilter: ").append(getDeblockFilter()).append(",");
         if (getDenoiseFilter() != null)
@@ -917,12 +1138,16 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
             sb.append("ImageInserter: ").append(getImageInserter()).append(",");
         if (getInputClippings() != null)
             sb.append("InputClippings: ").append(getInputClippings()).append(",");
+        if (getPosition() != null)
+            sb.append("Position: ").append(getPosition()).append(",");
         if (getProgramNumber() != null)
             sb.append("ProgramNumber: ").append(getProgramNumber()).append(",");
         if (getPsiControl() != null)
             sb.append("PsiControl: ").append(getPsiControl()).append(",");
         if (getTimecodeSource() != null)
             sb.append("TimecodeSource: ").append(getTimecodeSource()).append(",");
+        if (getTimecodeStart() != null)
+            sb.append("TimecodeStart: ").append(getTimecodeStart()).append(",");
         if (getVideoSelector() != null)
             sb.append("VideoSelector: ").append(getVideoSelector());
         sb.append("}");
@@ -951,6 +1176,10 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getCaptionSelectors() != null && other.getCaptionSelectors().equals(this.getCaptionSelectors()) == false)
             return false;
+        if (other.getCrop() == null ^ this.getCrop() == null)
+            return false;
+        if (other.getCrop() != null && other.getCrop().equals(this.getCrop()) == false)
+            return false;
         if (other.getDeblockFilter() == null ^ this.getDeblockFilter() == null)
             return false;
         if (other.getDeblockFilter() != null && other.getDeblockFilter().equals(this.getDeblockFilter()) == false)
@@ -975,6 +1204,10 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getInputClippings() != null && other.getInputClippings().equals(this.getInputClippings()) == false)
             return false;
+        if (other.getPosition() == null ^ this.getPosition() == null)
+            return false;
+        if (other.getPosition() != null && other.getPosition().equals(this.getPosition()) == false)
+            return false;
         if (other.getProgramNumber() == null ^ this.getProgramNumber() == null)
             return false;
         if (other.getProgramNumber() != null && other.getProgramNumber().equals(this.getProgramNumber()) == false)
@@ -986,6 +1219,10 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
         if (other.getTimecodeSource() == null ^ this.getTimecodeSource() == null)
             return false;
         if (other.getTimecodeSource() != null && other.getTimecodeSource().equals(this.getTimecodeSource()) == false)
+            return false;
+        if (other.getTimecodeStart() == null ^ this.getTimecodeStart() == null)
+            return false;
+        if (other.getTimecodeStart() != null && other.getTimecodeStart().equals(this.getTimecodeStart()) == false)
             return false;
         if (other.getVideoSelector() == null ^ this.getVideoSelector() == null)
             return false;
@@ -1002,15 +1239,18 @@ public class InputTemplate implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getAudioSelectorGroups() == null) ? 0 : getAudioSelectorGroups().hashCode());
         hashCode = prime * hashCode + ((getAudioSelectors() == null) ? 0 : getAudioSelectors().hashCode());
         hashCode = prime * hashCode + ((getCaptionSelectors() == null) ? 0 : getCaptionSelectors().hashCode());
+        hashCode = prime * hashCode + ((getCrop() == null) ? 0 : getCrop().hashCode());
         hashCode = prime * hashCode + ((getDeblockFilter() == null) ? 0 : getDeblockFilter().hashCode());
         hashCode = prime * hashCode + ((getDenoiseFilter() == null) ? 0 : getDenoiseFilter().hashCode());
         hashCode = prime * hashCode + ((getFilterEnable() == null) ? 0 : getFilterEnable().hashCode());
         hashCode = prime * hashCode + ((getFilterStrength() == null) ? 0 : getFilterStrength().hashCode());
         hashCode = prime * hashCode + ((getImageInserter() == null) ? 0 : getImageInserter().hashCode());
         hashCode = prime * hashCode + ((getInputClippings() == null) ? 0 : getInputClippings().hashCode());
+        hashCode = prime * hashCode + ((getPosition() == null) ? 0 : getPosition().hashCode());
         hashCode = prime * hashCode + ((getProgramNumber() == null) ? 0 : getProgramNumber().hashCode());
         hashCode = prime * hashCode + ((getPsiControl() == null) ? 0 : getPsiControl().hashCode());
         hashCode = prime * hashCode + ((getTimecodeSource() == null) ? 0 : getTimecodeSource().hashCode());
+        hashCode = prime * hashCode + ((getTimecodeStart() == null) ? 0 : getTimecodeStart().hashCode());
         hashCode = prime * hashCode + ((getVideoSelector() == null) ? 0 : getVideoSelector().hashCode());
         return hashCode;
     }

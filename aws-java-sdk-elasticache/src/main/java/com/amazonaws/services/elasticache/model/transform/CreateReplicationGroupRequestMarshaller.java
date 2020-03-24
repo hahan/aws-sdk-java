@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -46,6 +46,10 @@ public class CreateReplicationGroupRequestMarshaller implements Marshaller<Reque
 
         if (createReplicationGroupRequest.getReplicationGroupDescription() != null) {
             request.addParameter("ReplicationGroupDescription", StringUtils.fromString(createReplicationGroupRequest.getReplicationGroupDescription()));
+        }
+
+        if (createReplicationGroupRequest.getGlobalReplicationGroupId() != null) {
+            request.addParameter("GlobalReplicationGroupId", StringUtils.fromString(createReplicationGroupRequest.getGlobalReplicationGroupId()));
         }
 
         if (createReplicationGroupRequest.getPrimaryClusterId() != null) {
@@ -250,6 +254,10 @@ public class CreateReplicationGroupRequestMarshaller implements Marshaller<Reque
 
         if (createReplicationGroupRequest.getAtRestEncryptionEnabled() != null) {
             request.addParameter("AtRestEncryptionEnabled", StringUtils.fromBoolean(createReplicationGroupRequest.getAtRestEncryptionEnabled()));
+        }
+
+        if (createReplicationGroupRequest.getKmsKeyId() != null) {
+            request.addParameter("KmsKeyId", StringUtils.fromString(createReplicationGroupRequest.getKmsKeyId()));
         }
 
         return request;

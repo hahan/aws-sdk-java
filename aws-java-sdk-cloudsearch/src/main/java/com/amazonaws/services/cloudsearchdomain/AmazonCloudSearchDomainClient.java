@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -88,11 +88,11 @@ public class AmazonCloudSearchDomainClient extends AmazonWebServiceClient implem
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("SearchException").withModeledClass(
-                                    com.amazonaws.services.cloudsearchdomain.model.SearchException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("SearchException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.cloudsearchdomain.model.transform.SearchExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DocumentServiceException").withModeledClass(
-                                    com.amazonaws.services.cloudsearchdomain.model.DocumentServiceException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DocumentServiceException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.cloudsearchdomain.model.transform.DocumentServiceExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.cloudsearchdomain.model.AmazonCloudSearchDomainException.class));
 
     /**

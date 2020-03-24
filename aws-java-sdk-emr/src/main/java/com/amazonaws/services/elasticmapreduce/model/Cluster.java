@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -87,11 +87,11 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * The Amazon EMR release label, which determines the version of open-source application packages installed on the
-     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for
-     * example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
+     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such
+     * as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
      * versions and features, see <a
      * href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.
-     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later.
+     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later.
      * Earlier versions use <code>AmiVersion</code>.
      * </p>
      */
@@ -111,10 +111,12 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     private Boolean terminationProtected;
     /**
      * <p>
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this
-     * value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have
-     * the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the
-     * cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The
+     * default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if
+     * they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created
+     * the cluster can perform actions. This value can be changed on a running cluster by using the
+     * <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a
+     * cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.
      * </p>
      */
     private Boolean visibleToAllUsers;
@@ -215,6 +217,24 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private KerberosAttributes kerberosAttributes;
+    /**
+     * <p>
+     * The Amazon Resource Name of the cluster.
+     * </p>
+     */
+    private String clusterArn;
+    /**
+     * <p>
+     * Specifies the number of steps that can be executed concurrently.
+     * </p>
+     */
+    private Integer stepConcurrencyLevel;
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     * </p>
+     */
+    private String outpostArn;
 
     /**
      * <p>
@@ -653,22 +673,22 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * The Amazon EMR release label, which determines the version of open-source application packages installed on the
-     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for
-     * example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
+     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such
+     * as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
      * versions and features, see <a
      * href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.
-     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later.
+     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later.
      * Earlier versions use <code>AmiVersion</code>.
      * </p>
      * 
      * @param releaseLabel
      *        The Amazon EMR release label, which determines the version of open-source application packages installed
      *        on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR
-     *        release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release
-     *        versions and included application versions and features, see <a
+     *        release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions
+     *        and included application versions and features, see <a
      *        href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/"
      *        >https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR
-     *        releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.
+     *        releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.
      */
 
     public void setReleaseLabel(String releaseLabel) {
@@ -678,21 +698,21 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * The Amazon EMR release label, which determines the version of open-source application packages installed on the
-     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for
-     * example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
+     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such
+     * as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
      * versions and features, see <a
      * href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.
-     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later.
+     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later.
      * Earlier versions use <code>AmiVersion</code>.
      * </p>
      * 
      * @return The Amazon EMR release label, which determines the version of open-source application packages installed
      *         on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR
-     *         release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release
-     *         versions and included application versions and features, see <a
+     *         release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions
+     *         and included application versions and features, see <a
      *         href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/"
      *         >https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR
-     *         releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.
+     *         releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.
      */
 
     public String getReleaseLabel() {
@@ -702,22 +722,22 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * The Amazon EMR release label, which determines the version of open-source application packages installed on the
-     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for
-     * example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
+     * cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such
+     * as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
      * versions and features, see <a
      * href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.
-     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later.
+     * com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later.
      * Earlier versions use <code>AmiVersion</code>.
      * </p>
      * 
      * @param releaseLabel
      *        The Amazon EMR release label, which determines the version of open-source application packages installed
      *        on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR
-     *        release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release
-     *        versions and included application versions and features, see <a
+     *        release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions
+     *        and included application versions and features, see <a
      *        href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/"
      *        >https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR
-     *        releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.
+     *        releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -840,18 +860,22 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this
-     * value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have
-     * the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the
-     * cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The
+     * default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if
+     * they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created
+     * the cluster can perform actions. This value can be changed on a running cluster by using the
+     * <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a
+     * cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.
      * </p>
      * 
      * @param visibleToAllUsers
      *        Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster.
-     *        If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the
-     *        cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM
-     *        user that created the cluster can view and manage it. This value can be changed using the
-     *        <a>SetVisibleToAllUsers</a> action.
+     *        The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster
+     *        actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM
+     *        user that created the cluster can perform actions. This value can be changed on a running cluster by using
+     *        the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you
+     *        create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code>
+     *        action.
      */
 
     public void setVisibleToAllUsers(Boolean visibleToAllUsers) {
@@ -860,17 +884,21 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this
-     * value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have
-     * the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the
-     * cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The
+     * default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if
+     * they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created
+     * the cluster can perform actions. This value can be changed on a running cluster by using the
+     * <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a
+     * cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.
      * </p>
      * 
      * @return Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster.
-     *         If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the
-     *         cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM
-     *         user that created the cluster can view and manage it. This value can be changed using the
-     *         <a>SetVisibleToAllUsers</a> action.
+     *         The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster
+     *         actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM
+     *         user that created the cluster can perform actions. This value can be changed on a running cluster by
+     *         using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code>
+     *         when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the
+     *         <code>RunJobFlow</code> action.
      */
 
     public Boolean getVisibleToAllUsers() {
@@ -879,18 +907,22 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this
-     * value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have
-     * the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the
-     * cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The
+     * default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if
+     * they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created
+     * the cluster can perform actions. This value can be changed on a running cluster by using the
+     * <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a
+     * cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.
      * </p>
      * 
      * @param visibleToAllUsers
      *        Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster.
-     *        If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the
-     *        cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM
-     *        user that created the cluster can view and manage it. This value can be changed using the
-     *        <a>SetVisibleToAllUsers</a> action.
+     *        The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster
+     *        actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM
+     *        user that created the cluster can perform actions. This value can be changed on a running cluster by using
+     *        the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you
+     *        create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code>
+     *        action.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -901,17 +933,21 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this
-     * value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have
-     * the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the
-     * cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The
+     * default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if
+     * they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created
+     * the cluster can perform actions. This value can be changed on a running cluster by using the
+     * <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a
+     * cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.
      * </p>
      * 
      * @return Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster.
-     *         If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the
-     *         cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM
-     *         user that created the cluster can view and manage it. This value can be changed using the
-     *         <a>SetVisibleToAllUsers</a> action.
+     *         The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster
+     *         actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM
+     *         user that created the cluster can perform actions. This value can be changed on a running cluster by
+     *         using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code>
+     *         when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the
+     *         <code>RunJobFlow</code> action.
      */
 
     public Boolean isVisibleToAllUsers() {
@@ -1763,6 +1799,126 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * The Amazon Resource Name of the cluster.
+     * </p>
+     * 
+     * @param clusterArn
+     *        The Amazon Resource Name of the cluster.
+     */
+
+    public void setClusterArn(String clusterArn) {
+        this.clusterArn = clusterArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name of the cluster.
+     * </p>
+     * 
+     * @return The Amazon Resource Name of the cluster.
+     */
+
+    public String getClusterArn() {
+        return this.clusterArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name of the cluster.
+     * </p>
+     * 
+     * @param clusterArn
+     *        The Amazon Resource Name of the cluster.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withClusterArn(String clusterArn) {
+        setClusterArn(clusterArn);
+        return this;
+    }
+
+    /**
+     * <p>
+     * Specifies the number of steps that can be executed concurrently.
+     * </p>
+     * 
+     * @param stepConcurrencyLevel
+     *        Specifies the number of steps that can be executed concurrently.
+     */
+
+    public void setStepConcurrencyLevel(Integer stepConcurrencyLevel) {
+        this.stepConcurrencyLevel = stepConcurrencyLevel;
+    }
+
+    /**
+     * <p>
+     * Specifies the number of steps that can be executed concurrently.
+     * </p>
+     * 
+     * @return Specifies the number of steps that can be executed concurrently.
+     */
+
+    public Integer getStepConcurrencyLevel() {
+        return this.stepConcurrencyLevel;
+    }
+
+    /**
+     * <p>
+     * Specifies the number of steps that can be executed concurrently.
+     * </p>
+     * 
+     * @param stepConcurrencyLevel
+     *        Specifies the number of steps that can be executed concurrently.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withStepConcurrencyLevel(Integer stepConcurrencyLevel) {
+        setStepConcurrencyLevel(stepConcurrencyLevel);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     * </p>
+     * 
+     * @param outpostArn
+     *        The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     */
+
+    public void setOutpostArn(String outpostArn) {
+        this.outpostArn = outpostArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     * </p>
+     * 
+     * @return The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     */
+
+    public String getOutpostArn() {
+        return this.outpostArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     * </p>
+     * 
+     * @param outpostArn
+     *        The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Cluster withOutpostArn(String outpostArn) {
+        setOutpostArn(outpostArn);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1823,7 +1979,13 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
         if (getRepoUpgradeOnBoot() != null)
             sb.append("RepoUpgradeOnBoot: ").append(getRepoUpgradeOnBoot()).append(",");
         if (getKerberosAttributes() != null)
-            sb.append("KerberosAttributes: ").append(getKerberosAttributes());
+            sb.append("KerberosAttributes: ").append(getKerberosAttributes()).append(",");
+        if (getClusterArn() != null)
+            sb.append("ClusterArn: ").append(getClusterArn()).append(",");
+        if (getStepConcurrencyLevel() != null)
+            sb.append("StepConcurrencyLevel: ").append(getStepConcurrencyLevel()).append(",");
+        if (getOutpostArn() != null)
+            sb.append("OutpostArn: ").append(getOutpostArn());
         sb.append("}");
         return sb.toString();
     }
@@ -1938,6 +2100,18 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getKerberosAttributes() != null && other.getKerberosAttributes().equals(this.getKerberosAttributes()) == false)
             return false;
+        if (other.getClusterArn() == null ^ this.getClusterArn() == null)
+            return false;
+        if (other.getClusterArn() != null && other.getClusterArn().equals(this.getClusterArn()) == false)
+            return false;
+        if (other.getStepConcurrencyLevel() == null ^ this.getStepConcurrencyLevel() == null)
+            return false;
+        if (other.getStepConcurrencyLevel() != null && other.getStepConcurrencyLevel().equals(this.getStepConcurrencyLevel()) == false)
+            return false;
+        if (other.getOutpostArn() == null ^ this.getOutpostArn() == null)
+            return false;
+        if (other.getOutpostArn() != null && other.getOutpostArn().equals(this.getOutpostArn()) == false)
+            return false;
         return true;
     }
 
@@ -1971,6 +2145,9 @@ public class Cluster implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getEbsRootVolumeSize() == null) ? 0 : getEbsRootVolumeSize().hashCode());
         hashCode = prime * hashCode + ((getRepoUpgradeOnBoot() == null) ? 0 : getRepoUpgradeOnBoot().hashCode());
         hashCode = prime * hashCode + ((getKerberosAttributes() == null) ? 0 : getKerberosAttributes().hashCode());
+        hashCode = prime * hashCode + ((getClusterArn() == null) ? 0 : getClusterArn().hashCode());
+        hashCode = prime * hashCode + ((getStepConcurrencyLevel() == null) ? 0 : getStepConcurrencyLevel().hashCode());
+        hashCode = prime * hashCode + ((getOutpostArn() == null) ? 0 : getOutpostArn().hashCode());
         return hashCode;
     }
 

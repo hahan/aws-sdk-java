@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -47,35 +47,35 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      */
     private java.util.List<String> additionalMetricsToRetain;
     /**
      * <p>
      * If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are
-     * defined in the current invocation an exception occurs.
+     * defined in the current invocation, an exception occurs.
      * </p>
      */
     private Boolean deleteBehaviors;
     /**
      * <p>
      * If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code>
-     * are defined in the current invocation an exception occurs.
+     * are defined in the current invocation, an exception occurs.
      * </p>
      */
     private Boolean deleteAlertTargets;
     /**
      * <p>
      * If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     * <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     * <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * </p>
      */
     private Boolean deleteAdditionalMetricsToRetain;
     /**
      * <p>
      * The expected version of the security profile. A new version is generated whenever the security profile is
-     * updated. If you specify a value that is different than the actual version, a
+     * updated. If you specify a value that is different from the actual version, a
      * <code>VersionConflictException</code> is thrown.
      * </p>
      */
@@ -271,6 +271,13 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
         return this;
     }
 
+    /**
+     * Add a single AlertTargets entry
+     *
+     * @see UpdateSecurityProfileRequest#withAlertTargets
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public UpdateSecurityProfileRequest addAlertTargetsEntry(String key, AlertTarget value) {
         if (null == this.alertTargets) {
             this.alertTargets = new java.util.HashMap<String, AlertTarget>();
@@ -295,11 +302,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @return A list of metrics whose data is retained (stored). By default, data is retained for any metric used in
-     *         the profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *         the profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      */
 
     public java.util.List<String> getAdditionalMetricsToRetain() {
@@ -309,12 +316,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      */
 
     public void setAdditionalMetricsToRetain(java.util.Collection<String> additionalMetricsToRetain) {
@@ -329,7 +336,7 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -339,7 +346,7 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -356,12 +363,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -373,12 +380,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are
-     * defined in the current invocation an exception occurs.
+     * defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteBehaviors
      *        If true, delete all <code>behaviors</code> defined for this security profile. If any
-     *        <code>behaviors</code> are defined in the current invocation an exception occurs.
+     *        <code>behaviors</code> are defined in the current invocation, an exception occurs.
      */
 
     public void setDeleteBehaviors(Boolean deleteBehaviors) {
@@ -388,11 +395,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are
-     * defined in the current invocation an exception occurs.
+     * defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>behaviors</code> defined for this security profile. If any
-     *         <code>behaviors</code> are defined in the current invocation an exception occurs.
+     *         <code>behaviors</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean getDeleteBehaviors() {
@@ -402,12 +409,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are
-     * defined in the current invocation an exception occurs.
+     * defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteBehaviors
      *        If true, delete all <code>behaviors</code> defined for this security profile. If any
-     *        <code>behaviors</code> are defined in the current invocation an exception occurs.
+     *        <code>behaviors</code> are defined in the current invocation, an exception occurs.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -419,11 +426,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are
-     * defined in the current invocation an exception occurs.
+     * defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>behaviors</code> defined for this security profile. If any
-     *         <code>behaviors</code> are defined in the current invocation an exception occurs.
+     *         <code>behaviors</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean isDeleteBehaviors() {
@@ -433,12 +440,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code>
-     * are defined in the current invocation an exception occurs.
+     * are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteAlertTargets
      *        If true, delete all <code>alertTargets</code> defined for this security profile. If any
-     *        <code>alertTargets</code> are defined in the current invocation an exception occurs.
+     *        <code>alertTargets</code> are defined in the current invocation, an exception occurs.
      */
 
     public void setDeleteAlertTargets(Boolean deleteAlertTargets) {
@@ -448,11 +455,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code>
-     * are defined in the current invocation an exception occurs.
+     * are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>alertTargets</code> defined for this security profile. If any
-     *         <code>alertTargets</code> are defined in the current invocation an exception occurs.
+     *         <code>alertTargets</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean getDeleteAlertTargets() {
@@ -462,12 +469,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code>
-     * are defined in the current invocation an exception occurs.
+     * are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteAlertTargets
      *        If true, delete all <code>alertTargets</code> defined for this security profile. If any
-     *        <code>alertTargets</code> are defined in the current invocation an exception occurs.
+     *        <code>alertTargets</code> are defined in the current invocation, an exception occurs.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -479,11 +486,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code>
-     * are defined in the current invocation an exception occurs.
+     * are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>alertTargets</code> defined for this security profile. If any
-     *         <code>alertTargets</code> are defined in the current invocation an exception occurs.
+     *         <code>alertTargets</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean isDeleteAlertTargets() {
@@ -493,12 +500,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     * <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     * <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteAdditionalMetricsToRetain
      *        If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     *        <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     *        <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      */
 
     public void setDeleteAdditionalMetricsToRetain(Boolean deleteAdditionalMetricsToRetain) {
@@ -508,11 +515,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     * <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     * <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     *         <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     *         <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean getDeleteAdditionalMetricsToRetain() {
@@ -522,12 +529,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     * <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     * <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @param deleteAdditionalMetricsToRetain
      *        If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     *        <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     *        <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -539,11 +546,11 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     * <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     * <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      * </p>
      * 
      * @return If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any
-     *         <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.
+     *         <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.
      */
 
     public Boolean isDeleteAdditionalMetricsToRetain() {
@@ -553,13 +560,13 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The expected version of the security profile. A new version is generated whenever the security profile is
-     * updated. If you specify a value that is different than the actual version, a
+     * updated. If you specify a value that is different from the actual version, a
      * <code>VersionConflictException</code> is thrown.
      * </p>
      * 
      * @param expectedVersion
      *        The expected version of the security profile. A new version is generated whenever the security profile is
-     *        updated. If you specify a value that is different than the actual version, a
+     *        updated. If you specify a value that is different from the actual version, a
      *        <code>VersionConflictException</code> is thrown.
      */
 
@@ -570,12 +577,12 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The expected version of the security profile. A new version is generated whenever the security profile is
-     * updated. If you specify a value that is different than the actual version, a
+     * updated. If you specify a value that is different from the actual version, a
      * <code>VersionConflictException</code> is thrown.
      * </p>
      * 
      * @return The expected version of the security profile. A new version is generated whenever the security profile is
-     *         updated. If you specify a value that is different than the actual version, a
+     *         updated. If you specify a value that is different from the actual version, a
      *         <code>VersionConflictException</code> is thrown.
      */
 
@@ -586,13 +593,13 @@ public class UpdateSecurityProfileRequest extends com.amazonaws.AmazonWebService
     /**
      * <p>
      * The expected version of the security profile. A new version is generated whenever the security profile is
-     * updated. If you specify a value that is different than the actual version, a
+     * updated. If you specify a value that is different from the actual version, a
      * <code>VersionConflictException</code> is thrown.
      * </p>
      * 
      * @param expectedVersion
      *        The expected version of the security profile. A new version is generated whenever the security profile is
-     *        updated. If you specify a value that is different than the actual version, a
+     *        updated. If you specify a value that is different from the actual version, a
      *        <code>VersionConflictException</code> is thrown.
      * @return Returns a reference to this object so that method calls can be chained together.
      */

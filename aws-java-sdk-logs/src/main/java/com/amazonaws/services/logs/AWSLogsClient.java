@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -109,38 +109,38 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidParameterException").withModeledClass(
-                                    com.amazonaws.services.logs.model.InvalidParameterException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidParameterException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.InvalidParameterExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidOperationException").withModeledClass(
-                                    com.amazonaws.services.logs.model.InvalidOperationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidOperationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.InvalidOperationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("OperationAbortedException").withModeledClass(
-                                    com.amazonaws.services.logs.model.OperationAbortedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("OperationAbortedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.OperationAbortedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.logs.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("UnrecognizedClientException").withModeledClass(
-                                    com.amazonaws.services.logs.model.UnrecognizedClientException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("UnrecognizedClientException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.UnrecognizedClientExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("MalformedQueryException").withModeledClass(
-                                    com.amazonaws.services.logs.model.MalformedQueryException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("MalformedQueryException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.MalformedQueryExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withModeledClass(
-                                    com.amazonaws.services.logs.model.ResourceNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.ResourceNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DataAlreadyAcceptedException").withModeledClass(
-                                    com.amazonaws.services.logs.model.DataAlreadyAcceptedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DataAlreadyAcceptedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.DataAlreadyAcceptedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidSequenceTokenException").withModeledClass(
-                                    com.amazonaws.services.logs.model.InvalidSequenceTokenException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidSequenceTokenException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.InvalidSequenceTokenExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withModeledClass(
-                                    com.amazonaws.services.logs.model.ServiceUnavailableException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.ServiceUnavailableExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceAlreadyExistsException").withModeledClass(
-                                    com.amazonaws.services.logs.model.ResourceAlreadyExistsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceAlreadyExistsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.logs.model.transform.ResourceAlreadyExistsExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.logs.model.AWSLogsException.class));
 
     /**
@@ -353,6 +353,14 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs.
      * This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested.
      * </p>
+     * <note>
+     * <p>
+     * <b>Important:</b> CloudWatch Logs supports only symmetric CMKs. Do not use an associate an asymmetric CMK with
+     * your log group. For more information, see <a
+     * href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
+     * Asymmetric Keys</a>.
+     * </p>
+     * </note>
      * <p>
      * Note that it can take up to 5 minutes for this operation to take effect.
      * </p>
@@ -496,6 +504,10 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported
      * objects.
      * </p>
+     * <p>
+     * Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with
+     * SSE-KMS is not supported.
+     * </p>
      * 
      * @param createExportTaskRequest
      * @return Result of the CreateExportTask operation returned by the service.
@@ -562,7 +574,7 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * Creates a log group with the specified name.
      * </p>
      * <p>
-     * You can create up to 5000 log groups per account.
+     * You can create up to 20,000 log groups per account.
      * </p>
      * <p>
      * You must use the following guidelines when naming a log group:
@@ -581,7 +593,7 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * <li>
      * <p>
      * Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward
-     * slash), and '.' (period).
+     * slash), '.' (period), and '#' (number sign)
      * </p>
      * </li>
      * </ul>
@@ -594,6 +606,14 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will
      * receive an <code>InvalidParameterException</code> error.
      * </p>
+     * <note>
+     * <p>
+     * <b>Important:</b> CloudWatch Logs supports only symmetric CMKs. Do not associate an asymmetric CMK with your log
+     * group. For more information, see <a
+     * href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
+     * Asymmetric Keys</a>.
+     * </p>
+     * </note>
      * 
      * @param createLogGroupRequest
      * @return Result of the CreateLogGroup operation returned by the service.
@@ -658,7 +678,8 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * Creates a log stream for the specified log group.
      * </p>
      * <p>
-     * There is no limit on the number of log streams that you can create for a log group.
+     * There is no limit on the number of log streams that you can create for a log group. There is a limit of 50 TPS on
+     * <code>CreateLogStream</code> operations, after which transactions are throttled.
      * </p>
      * <p>
      * You must use the following guidelines when naming a log stream:
@@ -1996,8 +2017,7 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
 
     /**
      * <p>
-     * Returns the results from the specified query. If the query is in progress, partial results of that current
-     * execution are returned.
+     * Returns the results from the specified query.
      * </p>
      * <p>
      * Only the fields requested in the query are returned, along with a <code>@ptr</code> field which is the identifier
@@ -2005,6 +2025,11 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * </p>
      * <p>
      * <code>GetQueryResults</code> does not start a query execution. To run a query, use .
+     * </p>
+     * <p>
+     * If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation returns only
+     * partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, you can
+     * retry the operation later to see the final results.
      * </p>
      * 
      * @param getQueryResultsRequest
@@ -2120,16 +2145,18 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
 
     /**
      * <p>
-     * Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis
-     * stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using
-     * <a>PutLogEvents</a>. Currently, the only supported physical resource is a Kinesis stream belonging to the same
-     * account as the destination.
+     * Creates or updates a destination. This operation is used only to create destinations for cross-account
+     * subscriptions.
      * </p>
      * <p>
-     * Through an access policy, a destination controls what is written to its Kinesis stream. By default,
-     * <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user
-     * cannot call <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must
-     * call <a>PutDestinationPolicy</a> after <code>PutDestination</code>.
+     * A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to
+     * a real-time stream of log events for a different account, ingested using <a>PutLogEvents</a>.
+     * </p>
+     * <p>
+     * Through an access policy, a destination controls what is written to it. By default, <code>PutDestination</code>
+     * does not set any access policy with the destination, which means a cross-account user cannot call
+     * <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call
+     * <a>PutDestinationPolicy</a> after <code>PutDestination</code>.
      * </p>
      * 
      * @param putDestinationRequest
@@ -2253,9 +2280,10 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * </p>
      * <p>
      * You must include the sequence token obtained from the response of the previous call. An upload in a newly created
-     * log stream does not require a sequence token. You can also get the sequence token using
-     * <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same
-     * value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.
+     * log stream does not require a sequence token. You can also get the sequence token in the
+     * <code>expectedSequenceToken</code> field from <code>InvalidSequenceTokenException</code>. If you call
+     * <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>,
+     * both calls may be successful, or one may be rejected.
      * </p>
      * <p>
      * The batch of events must satisfy the following constraints:
@@ -2288,12 +2316,18 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * </li>
      * <li>
      * <p>
+     * A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * The maximum number of log events in a batch is 10,000.
      * </p>
      * </li>
      * <li>
      * <p>
-     * A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.
+     * There is a quota of 5 requests per second per log stream. Additional requests are throttled. This quota can't be
+     * changed.
      * </p>
      * </li>
      * </ul>
@@ -2307,7 +2341,8 @@ public class AWSLogsClient extends AmazonWebServiceClient implements AWSLogs {
      * @throws InvalidParameterException
      *         A parameter is specified incorrectly.
      * @throws InvalidSequenceTokenException
-     *         The sequence token is not valid.
+     *         The sequence token is not valid. You can get the correct sequence token in the
+     *         <code>expectedSequenceToken</code> field in the <code>InvalidSequenceTokenException</code> message.
      * @throws DataAlreadyAcceptedException
      *         The event was already logged.
      * @throws ResourceNotFoundException

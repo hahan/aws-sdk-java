@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -33,6 +33,11 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS
      * source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.
      * </p>
+     * <note>
+     * <p>
+     * <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.
+     * </p>
+     * </note>
      */
     private String subdirectory;
     /**
@@ -65,9 +70,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * (CIDR range) or security group.
      * </p>
      * <p>
-     * For information about security groups and mount targets, see
-     * "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups for
-     * Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     * For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount
+     * Targets in the <i>Amazon EFS User Guide.</i>
      * </p>
      * </li>
      * </ul>
@@ -87,11 +91,20 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS
      * source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.
      * </p>
+     * <note>
+     * <p>
+     * <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.
+     * </p>
+     * </note>
      * 
      * @param subdirectory
      *        A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from
      *        the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root
-     *        directory.
+     *        directory.</p> <note>
+     *        <p>
+     *        <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>
+     *        .
+     *        </p>
      */
 
     public void setSubdirectory(String subdirectory) {
@@ -103,10 +116,19 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS
      * source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.
      * </p>
+     * <note>
+     * <p>
+     * <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.
+     * </p>
+     * </note>
      * 
      * @return A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from
      *         the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root
-     *         directory.
+     *         directory.</p> <note>
+     *         <p>
+     *         <code>Subdirectory</code> must be specified with forward slashes. For example
+     *         <code>/path/to/folder</code>.
+     *         </p>
      */
 
     public String getSubdirectory() {
@@ -118,11 +140,20 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS
      * source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.
      * </p>
+     * <note>
+     * <p>
+     * <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.
+     * </p>
+     * </note>
      * 
      * @param subdirectory
      *        A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from
      *        the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root
-     *        directory.
+     *        directory.</p> <note>
+     *        <p>
+     *        <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>
+     *        .
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -195,9 +226,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * (CIDR range) or security group.
      * </p>
      * <p>
-     * For information about security groups and mount targets, see
-     * "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups for
-     * Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     * For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount
+     * Targets in the <i>Amazon EFS User Guide.</i>
      * </p>
      * </li>
      * </ul>
@@ -224,9 +254,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      *        IP address (CIDR range) or security group.
      *        </p>
      *        <p>
-     *        For information about security groups and mount targets, see
-     *        "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups
-     *        for Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     *        For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and
+     *        Mount Targets in the <i>Amazon EFS User Guide.</i>
      *        </p>
      *        </li>
      */
@@ -259,9 +288,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * (CIDR range) or security group.
      * </p>
      * <p>
-     * For information about security groups and mount targets, see
-     * "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups for
-     * Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     * For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount
+     * Targets in the <i>Amazon EFS User Guide.</i>
      * </p>
      * </li>
      * </ul>
@@ -287,9 +315,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      *         connections either by IP address (CIDR range) or security group.
      *         </p>
      *         <p>
-     *         For information about security groups and mount targets, see
-     *         "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups
-     *         for Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     *         For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and
+     *         Mount Targets in the <i>Amazon EFS User Guide.</i>
      *         </p>
      *         </li>
      */
@@ -322,9 +349,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      * (CIDR range) or security group.
      * </p>
      * <p>
-     * For information about security groups and mount targets, see
-     * "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups for
-     * Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     * For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount
+     * Targets in the <i>Amazon EFS User Guide.</i>
      * </p>
      * </li>
      * </ul>
@@ -351,9 +377,8 @@ public class CreateLocationEfsRequest extends com.amazonaws.AmazonWebServiceRequ
      *        IP address (CIDR range) or security group.
      *        </p>
      *        <p>
-     *        For information about security groups and mount targets, see
-     *        "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups
-     *        for Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.
+     *        For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and
+     *        Mount Targets in the <i>Amazon EFS User Guide.</i>
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.

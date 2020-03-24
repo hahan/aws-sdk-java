@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -19,10 +19,12 @@ import com.amazonaws.protocol.ProtocolMarshaller;
 
 /**
  * <p>
- * The data structure used to combine the input data and transformed data from the batch transform output into a joined
- * dataset and to store it in an output file. It also contains information on how to filter the input data and the
- * joined dataset. For more information, see <a
- * href="http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html">Batch Transform I/O Join</a>.
+ * The data structure used to specify the data to be used for inference in a batch transform job and to associate the
+ * data that is relevant to the prediction results in the output. The input filter provided allows you to exclude input
+ * data that is not needed for inference in a batch transform job. The output filter provided allows you to include
+ * input data relevant to interpreting the predictions in the output from the job. For more information, see <a
+ * href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html">Associate Prediction
+ * Results with their Corresponding Input Records</a>.
  * </p>
  * 
  * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing" target="_top">AWS API
@@ -33,7 +35,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      * <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want Amazon
      * SageMaker to pass the entire input dataset to the algorithm, accept the default value <code>$</code>.
      * </p>
@@ -44,25 +48,24 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
     private String inputFilter;
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the joined dataset to save in the output file for a batch
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a batch
      * transform job. If you want Amazon SageMaker to store the entire input dataset in the output file, leave the
      * default value, <code>$</code>. If you specify indexes that aren't within the dimension size of the joined
      * dataset, you get an error.
      * </p>
      * <p>
-     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      * </p>
      */
     private String outputFilter;
     /**
      * <p>
      * Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and
-     * <code>Input</code> The default value is <code>None</code> which specifies not to join the input with the
+     * <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the
      * transformed data. If you want the batch transform job to join the original input data with the transformed data,
-     * set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch transform job must satisfy
-     * the <a href=
-     * "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     * >Requirements for Using Batch Transform I/O Join</a>.
+     * set <code>JoinSource</code> to <code>Input</code>.
      * </p>
      * <p>
      * For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON
@@ -81,7 +84,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      * <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want Amazon
      * SageMaker to pass the entire input dataset to the algorithm, accept the default value <code>$</code>.
      * </p>
@@ -90,7 +95,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * </p>
      * 
      * @param inputFilter
-     *        A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     *        A <a href=
+     *        "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *        >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      *        <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want
      *        Amazon SageMaker to pass the entire input dataset to the algorithm, accept the default value
      *        <code>$</code>.</p>
@@ -104,7 +111,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      * <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want Amazon
      * SageMaker to pass the entire input dataset to the algorithm, accept the default value <code>$</code>.
      * </p>
@@ -112,7 +121,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * Examples: <code>"$"</code>, <code>"$[1:]"</code>, <code>"$.features"</code>
      * </p>
      * 
-     * @return A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     * @return A <a href=
+     *         "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *         >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      *         <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want
      *         Amazon SageMaker to pass the entire input dataset to the algorithm, accept the default value
      *         <code>$</code>.</p>
@@ -126,7 +137,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      * <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want Amazon
      * SageMaker to pass the entire input dataset to the algorithm, accept the default value <code>$</code>.
      * </p>
@@ -135,7 +148,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * </p>
      * 
      * @param inputFilter
-     *        A JSONPath expression used to select a portion of the input data to pass to the algorithm. Use the
+     *        A <a href=
+     *        "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *        >JSONPath</a> expression used to select a portion of the input data to pass to the algorithm. Use the
      *        <code>InputFilter</code> parameter to exclude fields, such as an ID column, from the input. If you want
      *        Amazon SageMaker to pass the entire input dataset to the algorithm, accept the default value
      *        <code>$</code>.</p>
@@ -151,22 +166,26 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the joined dataset to save in the output file for a batch
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a batch
      * transform job. If you want Amazon SageMaker to store the entire input dataset in the output file, leave the
      * default value, <code>$</code>. If you specify indexes that aren't within the dimension size of the joined
      * dataset, you get an error.
      * </p>
      * <p>
-     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      * </p>
      * 
      * @param outputFilter
-     *        A JSONPath expression used to select a portion of the joined dataset to save in the output file for a
+     *        A <a href=
+     *        "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *        >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a
      *        batch transform job. If you want Amazon SageMaker to store the entire input dataset in the output file,
      *        leave the default value, <code>$</code>. If you specify indexes that aren't within the dimension size of
      *        the joined dataset, you get an error.</p>
      *        <p>
-     *        Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     *        Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      */
 
     public void setOutputFilter(String outputFilter) {
@@ -175,21 +194,25 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the joined dataset to save in the output file for a batch
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a batch
      * transform job. If you want Amazon SageMaker to store the entire input dataset in the output file, leave the
      * default value, <code>$</code>. If you specify indexes that aren't within the dimension size of the joined
      * dataset, you get an error.
      * </p>
      * <p>
-     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      * </p>
      * 
-     * @return A JSONPath expression used to select a portion of the joined dataset to save in the output file for a
+     * @return A <a href=
+     *         "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *         >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a
      *         batch transform job. If you want Amazon SageMaker to store the entire input dataset in the output file,
      *         leave the default value, <code>$</code>. If you specify indexes that aren't within the dimension size of
      *         the joined dataset, you get an error.</p>
      *         <p>
-     *         Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     *         Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      */
 
     public String getOutputFilter() {
@@ -198,22 +221,26 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * A JSONPath expression used to select a portion of the joined dataset to save in the output file for a batch
+     * A <a href=
+     * "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     * >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a batch
      * transform job. If you want Amazon SageMaker to store the entire input dataset in the output file, leave the
      * default value, <code>$</code>. If you specify indexes that aren't within the dimension size of the joined
      * dataset, you get an error.
      * </p>
      * <p>
-     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     * Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      * </p>
      * 
      * @param outputFilter
-     *        A JSONPath expression used to select a portion of the joined dataset to save in the output file for a
+     *        A <a href=
+     *        "https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators"
+     *        >JSONPath</a> expression used to select a portion of the joined dataset to save in the output file for a
      *        batch transform job. If you want Amazon SageMaker to store the entire input dataset in the output file,
      *        leave the default value, <code>$</code>. If you specify indexes that aren't within the dimension size of
      *        the joined dataset, you get an error.</p>
      *        <p>
-     *        Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$.['id','SageMakerOutput']"</code>
+     *        Examples: <code>"$"</code>, <code>"$[0,5:]"</code>, <code>"$['id','SageMakerOutput']"</code>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -225,12 +252,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and
-     * <code>Input</code> The default value is <code>None</code> which specifies not to join the input with the
+     * <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the
      * transformed data. If you want the batch transform job to join the original input data with the transformed data,
-     * set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch transform job must satisfy
-     * the <a href=
-     * "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     * >Requirements for Using Batch Transform I/O Join</a>.
+     * set <code>JoinSource</code> to <code>Input</code>.
      * </p>
      * <p>
      * For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON
@@ -247,12 +271,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * 
      * @param joinSource
      *        Specifies the source of the data to join with the transformed data. The valid values are <code>None</code>
-     *        and <code>Input</code> The default value is <code>None</code> which specifies not to join the input with
+     *        and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with
      *        the transformed data. If you want the batch transform job to join the original input data with the
-     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch
-     *        transform job must satisfy the <a href=
-     *        "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     *        >Requirements for Using Batch Transform I/O Join</a>.</p>
+     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. </p>
      *        <p>
      *        For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the
      *        input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be
@@ -274,12 +295,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and
-     * <code>Input</code> The default value is <code>None</code> which specifies not to join the input with the
+     * <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the
      * transformed data. If you want the batch transform job to join the original input data with the transformed data,
-     * set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch transform job must satisfy
-     * the <a href=
-     * "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     * >Requirements for Using Batch Transform I/O Join</a>.
+     * set <code>JoinSource</code> to <code>Input</code>.
      * </p>
      * <p>
      * For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON
@@ -295,12 +313,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * </p>
      * 
      * @return Specifies the source of the data to join with the transformed data. The valid values are
-     *         <code>None</code> and <code>Input</code> The default value is <code>None</code> which specifies not to
+     *         <code>None</code> and <code>Input</code>. The default value is <code>None</code>, which specifies not to
      *         join the input with the transformed data. If you want the batch transform job to join the original input
-     *         data with the transformed data, set <code>JoinSource</code> to <code>Input</code>. To join input and
-     *         output, the batch transform job must satisfy the <a href=
-     *         "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     *         >Requirements for Using Batch Transform I/O Join</a>.</p>
+     *         data with the transformed data, set <code>JoinSource</code> to <code>Input</code>. </p>
      *         <p>
      *         For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the
      *         input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be
@@ -322,12 +337,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and
-     * <code>Input</code> The default value is <code>None</code> which specifies not to join the input with the
+     * <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the
      * transformed data. If you want the batch transform job to join the original input data with the transformed data,
-     * set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch transform job must satisfy
-     * the <a href=
-     * "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     * >Requirements for Using Batch Transform I/O Join</a>.
+     * set <code>JoinSource</code> to <code>Input</code>.
      * </p>
      * <p>
      * For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON
@@ -344,12 +356,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * 
      * @param joinSource
      *        Specifies the source of the data to join with the transformed data. The valid values are <code>None</code>
-     *        and <code>Input</code> The default value is <code>None</code> which specifies not to join the input with
+     *        and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with
      *        the transformed data. If you want the batch transform job to join the original input data with the
-     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch
-     *        transform job must satisfy the <a href=
-     *        "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     *        >Requirements for Using Batch Transform I/O Join</a>.</p>
+     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. </p>
      *        <p>
      *        For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the
      *        input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be
@@ -373,12 +382,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
     /**
      * <p>
      * Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and
-     * <code>Input</code> The default value is <code>None</code> which specifies not to join the input with the
+     * <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the
      * transformed data. If you want the batch transform job to join the original input data with the transformed data,
-     * set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch transform job must satisfy
-     * the <a href=
-     * "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     * >Requirements for Using Batch Transform I/O Join</a>.
+     * set <code>JoinSource</code> to <code>Input</code>.
      * </p>
      * <p>
      * For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON
@@ -395,12 +401,9 @@ public class DataProcessing implements Serializable, Cloneable, StructuredPojo {
      * 
      * @param joinSource
      *        Specifies the source of the data to join with the transformed data. The valid values are <code>None</code>
-     *        and <code>Input</code> The default value is <code>None</code> which specifies not to join the input with
+     *        and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with
      *        the transformed data. If you want the batch transform job to join the original input data with the
-     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. To join input and output, the batch
-     *        transform job must satisfy the <a href=
-     *        "http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements"
-     *        >Requirements for Using Batch Transform I/O Join</a>.</p>
+     *        transformed data, set <code>JoinSource</code> to <code>Input</code>. </p>
      *        <p>
      *        For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the
      *        input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be

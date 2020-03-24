@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -75,8 +75,9 @@ public class AWSMarketplaceCommerceAnalyticsClient extends AmazonWebServiceClien
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("MarketplaceCommerceAnalyticsException").withModeledClass(
-                                    com.amazonaws.services.marketplacecommerceanalytics.model.MarketplaceCommerceAnalyticsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("MarketplaceCommerceAnalyticsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.marketplacecommerceanalytics.model.transform.MarketplaceCommerceAnalyticsExceptionUnmarshaller
+                                            .getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.marketplacecommerceanalytics.model.AWSMarketplaceCommerceAnalyticsException.class));
 
     /**

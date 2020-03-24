@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -34,7 +34,7 @@ public class DescribeUserRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the
-     * AWS Transfer service and perform file transfer tasks.
+     * AWS Transfer for SFTP service and perform file transfer tasks.
      * </p>
      */
     private String userName;
@@ -82,12 +82,12 @@ public class DescribeUserRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the
-     * AWS Transfer service and perform file transfer tasks.
+     * AWS Transfer for SFTP service and perform file transfer tasks.
      * </p>
      * 
      * @param userName
      *        The name of the user assigned to one or more servers. User names are part of the sign-in credentials to
-     *        use the AWS Transfer service and perform file transfer tasks.
+     *        use the AWS Transfer for SFTP service and perform file transfer tasks.
      */
 
     public void setUserName(String userName) {
@@ -97,11 +97,11 @@ public class DescribeUserRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the
-     * AWS Transfer service and perform file transfer tasks.
+     * AWS Transfer for SFTP service and perform file transfer tasks.
      * </p>
      * 
      * @return The name of the user assigned to one or more servers. User names are part of the sign-in credentials to
-     *         use the AWS Transfer service and perform file transfer tasks.
+     *         use the AWS Transfer for SFTP service and perform file transfer tasks.
      */
 
     public String getUserName() {
@@ -111,12 +111,12 @@ public class DescribeUserRequest extends com.amazonaws.AmazonWebServiceRequest i
     /**
      * <p>
      * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the
-     * AWS Transfer service and perform file transfer tasks.
+     * AWS Transfer for SFTP service and perform file transfer tasks.
      * </p>
      * 
      * @param userName
      *        The name of the user assigned to one or more servers. User names are part of the sign-in credentials to
-     *        use the AWS Transfer service and perform file transfer tasks.
+     *        use the AWS Transfer for SFTP service and perform file transfer tasks.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

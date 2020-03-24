@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -36,20 +36,17 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request,
      * you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      * </p>
-     * <note>
-     * <p>
-     * To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     * <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you
-     * have previously enabled the collection of group metrics, you can disable it using
-     * <a>DisableMetricsCollection</a>.
-     * </p>
-     * </note>
      */
     private String launchConfigurationName;
     /**
      * <p>
      * The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code> in your
      * update request, you can't specify <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * </p>
      */
     private LaunchTemplateSpecification launchTemplate;
@@ -63,6 +60,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -121,8 +120,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * instance that has come into service. The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -182,6 +182,20 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      */
     private String serviceLinkedRoleARN;
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     */
+    private Integer maxInstanceLifetime;
 
     /**
      * <p>
@@ -228,24 +242,10 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request,
      * you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      * </p>
-     * <note>
-     * <p>
-     * To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     * <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you
-     * have previously enabled the collection of group metrics, you can disable it using
-     * <a>DisableMetricsCollection</a>.
-     * </p>
-     * </note>
      * 
      * @param launchConfigurationName
      *        The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update
-     *        request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p> <note>
-     *        <p>
-     *        To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     *        <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error.
-     *        If you have previously enabled the collection of group metrics, you can disable it using
-     *        <a>DisableMetricsCollection</a>.
-     *        </p>
+     *        request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      */
 
     public void setLaunchConfigurationName(String launchConfigurationName) {
@@ -257,23 +257,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request,
      * you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      * </p>
-     * <note>
-     * <p>
-     * To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     * <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you
-     * have previously enabled the collection of group metrics, you can disable it using
-     * <a>DisableMetricsCollection</a>.
-     * </p>
-     * </note>
      * 
      * @return The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update
-     *         request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p> <note>
-     *         <p>
-     *         To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     *         <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error.
-     *         If you have previously enabled the collection of group metrics, you can disable it using
-     *         <a>DisableMetricsCollection</a>.
-     *         </p>
+     *         request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      */
 
     public String getLaunchConfigurationName() {
@@ -285,24 +271,10 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request,
      * you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      * </p>
-     * <note>
-     * <p>
-     * To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     * <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you
-     * have previously enabled the collection of group metrics, you can disable it using
-     * <a>DisableMetricsCollection</a>.
-     * </p>
-     * </note>
      * 
      * @param launchConfigurationName
      *        The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update
-     *        request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p> <note>
-     *        <p>
-     *        To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to
-     *        <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error.
-     *        If you have previously enabled the collection of group metrics, you can disable it using
-     *        <a>DisableMetricsCollection</a>.
-     *        </p>
+     *        request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -316,11 +288,20 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code> in your
      * update request, you can't specify <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
+     * </p>
      * 
      * @param launchTemplate
      *        The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code>
      *        in your update request, you can't specify <code>LaunchConfigurationName</code> or
-     *        <code>MixedInstancesPolicy</code>.
+     *        <code>MixedInstancesPolicy</code>.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *        >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      */
 
     public void setLaunchTemplate(LaunchTemplateSpecification launchTemplate) {
@@ -332,10 +313,19 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code> in your
      * update request, you can't specify <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
+     * </p>
      * 
      * @return The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code>
      *         in your update request, you can't specify <code>LaunchConfigurationName</code> or
-     *         <code>MixedInstancesPolicy</code>.
+     *         <code>MixedInstancesPolicy</code>.</p>
+     *         <p>
+     *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *         >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      */
 
     public LaunchTemplateSpecification getLaunchTemplate() {
@@ -347,11 +337,20 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code> in your
      * update request, you can't specify <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.
      * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
+     * </p>
      * 
      * @param launchTemplate
      *        The launch template and version to use to specify the updates. If you specify <code>LaunchTemplate</code>
      *        in your update request, you can't specify <code>LaunchConfigurationName</code> or
-     *        <code>MixedInstancesPolicy</code>.
+     *        <code>MixedInstancesPolicy</code>.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *        >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -370,6 +369,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -382,6 +383,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        </p>
      *        <p>
      *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *        >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups
      *        with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      */
@@ -400,6 +403,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -411,6 +416,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *         </p>
      *         <p>
      *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *         >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling
      *         Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User
      *         Guide</i>.
@@ -430,6 +437,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -442,6 +451,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        </p>
      *        <p>
      *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *        >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups
      *        with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -794,8 +805,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * instance that has come into service. The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -806,8 +818,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        EC2 instance that has come into service. The default value is <code>0</code>.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *        Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *        >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
      *        <p>
      *        Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -823,8 +835,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * instance that has come into service. The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -834,8 +847,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *         an EC2 instance that has come into service. The default value is <code>0</code>.</p>
      *         <p>
      *         For more information, see <a
-     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *         Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *         >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *         </p>
      *         <p>
      *         Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -851,8 +864,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * instance that has come into service. The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -863,8 +877,8 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        EC2 instance that has come into service. The default value is <code>0</code>.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *        Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *        >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
      *        <p>
      *        Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1277,6 +1291,92 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
     }
 
     /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @param maxInstanceLifetime
+     *        The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     *        Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        </p>
+     *        <p>
+     *        Valid Range: Minimum value of 604800.
+     */
+
+    public void setMaxInstanceLifetime(Integer maxInstanceLifetime) {
+        this.maxInstanceLifetime = maxInstanceLifetime;
+    }
+
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @return The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *         <p>
+     *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing
+     *         Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User
+     *         Guide</i>.
+     *         </p>
+     *         <p>
+     *         Valid Range: Minimum value of 604800.
+     */
+
+    public Integer getMaxInstanceLifetime() {
+        return this.maxInstanceLifetime;
+    }
+
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @param maxInstanceLifetime
+     *        The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     *        Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        </p>
+     *        <p>
+     *        Valid Range: Minimum value of 604800.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public UpdateAutoScalingGroupRequest withMaxInstanceLifetime(Integer maxInstanceLifetime) {
+        setMaxInstanceLifetime(maxInstanceLifetime);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1319,7 +1419,9 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
         if (getNewInstancesProtectedFromScaleIn() != null)
             sb.append("NewInstancesProtectedFromScaleIn: ").append(getNewInstancesProtectedFromScaleIn()).append(",");
         if (getServiceLinkedRoleARN() != null)
-            sb.append("ServiceLinkedRoleARN: ").append(getServiceLinkedRoleARN());
+            sb.append("ServiceLinkedRoleARN: ").append(getServiceLinkedRoleARN()).append(",");
+        if (getMaxInstanceLifetime() != null)
+            sb.append("MaxInstanceLifetime: ").append(getMaxInstanceLifetime());
         sb.append("}");
         return sb.toString();
     }
@@ -1399,6 +1501,10 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
             return false;
         if (other.getServiceLinkedRoleARN() != null && other.getServiceLinkedRoleARN().equals(this.getServiceLinkedRoleARN()) == false)
             return false;
+        if (other.getMaxInstanceLifetime() == null ^ this.getMaxInstanceLifetime() == null)
+            return false;
+        if (other.getMaxInstanceLifetime() != null && other.getMaxInstanceLifetime().equals(this.getMaxInstanceLifetime()) == false)
+            return false;
         return true;
     }
 
@@ -1423,6 +1529,7 @@ public class UpdateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
         hashCode = prime * hashCode + ((getTerminationPolicies() == null) ? 0 : getTerminationPolicies().hashCode());
         hashCode = prime * hashCode + ((getNewInstancesProtectedFromScaleIn() == null) ? 0 : getNewInstancesProtectedFromScaleIn().hashCode());
         hashCode = prime * hashCode + ((getServiceLinkedRoleARN() == null) ? 0 : getServiceLinkedRoleARN().hashCode());
+        hashCode = prime * hashCode + ((getMaxInstanceLifetime() == null) ? 0 : getMaxInstanceLifetime().hashCode());
         return hashCode;
     }
 

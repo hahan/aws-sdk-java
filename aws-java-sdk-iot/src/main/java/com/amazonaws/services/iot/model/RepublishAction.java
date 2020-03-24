@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -37,6 +37,12 @@ public class RepublishAction implements Serializable, Cloneable, StructuredPojo 
      * </p>
      */
     private String topic;
+    /**
+     * <p>
+     * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     * </p>
+     */
+    private Integer qos;
 
     /**
      * <p>
@@ -119,6 +125,46 @@ public class RepublishAction implements Serializable, Cloneable, StructuredPojo 
     }
 
     /**
+     * <p>
+     * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     * </p>
+     * 
+     * @param qos
+     *        The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     */
+
+    public void setQos(Integer qos) {
+        this.qos = qos;
+    }
+
+    /**
+     * <p>
+     * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     * </p>
+     * 
+     * @return The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     */
+
+    public Integer getQos() {
+        return this.qos;
+    }
+
+    /**
+     * <p>
+     * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     * </p>
+     * 
+     * @param qos
+     *        The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public RepublishAction withQos(Integer qos) {
+        setQos(qos);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -133,7 +179,9 @@ public class RepublishAction implements Serializable, Cloneable, StructuredPojo 
         if (getRoleArn() != null)
             sb.append("RoleArn: ").append(getRoleArn()).append(",");
         if (getTopic() != null)
-            sb.append("Topic: ").append(getTopic());
+            sb.append("Topic: ").append(getTopic()).append(",");
+        if (getQos() != null)
+            sb.append("Qos: ").append(getQos());
         sb.append("}");
         return sb.toString();
     }
@@ -156,6 +204,10 @@ public class RepublishAction implements Serializable, Cloneable, StructuredPojo 
             return false;
         if (other.getTopic() != null && other.getTopic().equals(this.getTopic()) == false)
             return false;
+        if (other.getQos() == null ^ this.getQos() == null)
+            return false;
+        if (other.getQos() != null && other.getQos().equals(this.getQos()) == false)
+            return false;
         return true;
     }
 
@@ -166,6 +218,7 @@ public class RepublishAction implements Serializable, Cloneable, StructuredPojo 
 
         hashCode = prime * hashCode + ((getRoleArn() == null) ? 0 : getRoleArn().hashCode());
         hashCode = prime * hashCode + ((getTopic() == null) ? 0 : getTopic().hashCode());
+        hashCode = prime * hashCode + ((getQos() == null) ? 0 : getQos().hashCode());
         return hashCode;
     }
 

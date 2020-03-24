@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -78,23 +78,23 @@ public class AWSMediaStoreClient extends AmazonWebServiceClient implements AWSMe
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ContainerNotFoundException").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.ContainerNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ContainerNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.ContainerNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ContainerInUseException").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.ContainerInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ContainerInUseException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.ContainerInUseExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("PolicyNotFoundException").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.PolicyNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("PolicyNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.PolicyNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("CorsPolicyNotFoundException").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.CorsPolicyNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("CorsPolicyNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.CorsPolicyNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InternalServerError").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.InternalServerErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InternalServerError").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.InternalServerErrorExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.mediastore.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.mediastore.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.mediastore.model.AWSMediaStoreException.class));
 
     public static AWSMediaStoreClientBuilder builder() {
@@ -1155,7 +1155,7 @@ public class AWSMediaStoreClient extends AmazonWebServiceClient implements AWSMe
      * with AWS resources. For example, the tag key might be "customer" and the tag value might be "companyA." You can
      * specify one or more tags to add to each container. You can add up to 50 tags to each container. For more
      * information about tagging, including naming and usage conventions, see <a
-     * href="https://aws.amazon.com/documentation/mediastore/tagging">Tagging Resources in MediaStore</a>.
+     * href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.
      * </p>
      * 
      * @param tagResourceRequest

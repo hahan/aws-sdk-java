@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -51,7 +51,7 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      */
     private java.util.List<String> additionalMetricsToRetain;
@@ -304,6 +304,13 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
         return this;
     }
 
+    /**
+     * Add a single AlertTargets entry
+     *
+     * @see UpdateSecurityProfileResult#withAlertTargets
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public UpdateSecurityProfileResult addAlertTargetsEntry(String key, AlertTarget value) {
         if (null == this.alertTargets) {
             this.alertTargets = new java.util.HashMap<String, AlertTarget>();
@@ -328,11 +335,11 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @return A list of metrics whose data is retained (stored). By default, data is retained for any metric used in
-     *         the security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *         the security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      */
 
     public java.util.List<String> getAdditionalMetricsToRetain() {
@@ -342,12 +349,12 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      */
 
     public void setAdditionalMetricsToRetain(java.util.Collection<String> additionalMetricsToRetain) {
@@ -362,7 +369,7 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -372,7 +379,7 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -389,12 +396,12 @@ public class UpdateSecurityProfileResult extends com.amazonaws.AmazonWebServiceR
     /**
      * <p>
      * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     * security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     * security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * </p>
      * 
      * @param additionalMetricsToRetain
      *        A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the
-     *        security profile's <code>behaviors</code> but it is also retained for any metric specified here.
+     *        security profile's <code>behaviors</code>, but it is also retained for any metric specified here.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

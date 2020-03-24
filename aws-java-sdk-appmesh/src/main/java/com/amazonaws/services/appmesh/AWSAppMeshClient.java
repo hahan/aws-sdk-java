@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -95,35 +95,35 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.ResourceInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.ResourceInUseExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("NotFoundException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.NotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("NotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.NotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ConflictException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.ConflictException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ConflictException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.ConflictExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.TooManyTagsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.TooManyTagsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.ServiceUnavailableException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.ServiceUnavailableExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ForbiddenException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.ForbiddenException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ForbiddenException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.ForbiddenExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyRequestsException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.TooManyRequestsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyRequestsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.TooManyRequestsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("BadRequestException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.BadRequestException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("BadRequestException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.BadRequestExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InternalServerErrorException").withModeledClass(
-                                    com.amazonaws.services.appmesh.model.InternalServerErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InternalServerErrorException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.appmesh.model.transform.InternalServerErrorExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.appmesh.model.AWSAppMeshException.class));
 
     public static AWSAppMeshClientBuilder builder() {
@@ -263,6 +263,10 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * If your route matches a request, you can distribute traffic to one or more target virtual nodes with relative
      * weighting.
      * </p>
+     * <p>
+     * For more information about routes, see <a
+     * href="https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html">Routes</a>.
+     * </p>
      * 
      * @param createRouteRequest
      * @return Result of the CreateRoute operation returned by the service.
@@ -359,6 +363,10 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.
      * </p>
      * </note>
+     * <p>
+     * For more information about virtual nodes, see <a
+     * href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual Nodes</a>.
+     * </p>
      * 
      * @param createVirtualNodeRequest
      * @return Result of the CreateVirtualNode operation returned by the service.
@@ -440,6 +448,10 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * router, create and associate routes for your virtual router that direct incoming requests to different virtual
      * nodes.
      * </p>
+     * <p>
+     * For more information about virtual routers, see <a
+     * href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html">Virtual Routers</a>.
+     * </p>
      * 
      * @param createVirtualRouterRequest
      * @return Result of the CreateVirtualRouter operation returned by the service.
@@ -518,6 +530,10 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * by means of a virtual router. Dependent services call your virtual service by its <code>virtualServiceName</code>
      * , and those requests are routed to the virtual node or virtual router that is specified as the provider for the
      * virtual service.
+     * </p>
+     * <p>
+     * For more information about virtual services, see <a
+     * href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html">Virtual Services</a>.
      * </p>
      * 
      * @param createVirtualServiceRequest
@@ -1410,12 +1426,17 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * @return Result of the ListTagsForResource operation returned by the service.
      * @throws BadRequestException
      *         The request syntax was malformed. Check your request syntax and try again.
+     * @throws ForbiddenException
+     *         You don't have permissions to perform this action.
      * @throws InternalServerErrorException
      *         The request processing has failed because of an unknown error, exception, or failure.
      * @throws NotFoundException
      *         The specified resource doesn't exist. Check your request syntax and try again.
      * @throws ServiceUnavailableException
      *         The request has failed due to a temporary failure of the service.
+     * @throws TooManyRequestsException
+     *         The maximum request rate permitted by the App Mesh APIs has been exceeded for your account. For best
+     *         results, use an increasing or variable sleep interval between requests.
      * @sample AWSAppMesh.ListTagsForResource
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResource" target="_top">AWS
      *      API Documentation</a>
@@ -1671,12 +1692,17 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * @return Result of the TagResource operation returned by the service.
      * @throws BadRequestException
      *         The request syntax was malformed. Check your request syntax and try again.
+     * @throws ForbiddenException
+     *         You don't have permissions to perform this action.
      * @throws InternalServerErrorException
      *         The request processing has failed because of an unknown error, exception, or failure.
      * @throws NotFoundException
      *         The specified resource doesn't exist. Check your request syntax and try again.
      * @throws ServiceUnavailableException
      *         The request has failed due to a temporary failure of the service.
+     * @throws TooManyRequestsException
+     *         The maximum request rate permitted by the App Mesh APIs has been exceeded for your account. For best
+     *         results, use an increasing or variable sleep interval between requests.
      * @throws TooManyTagsException
      *         The request exceeds the maximum allowed number of tags allowed per resource. The current limit is 50 user
      *         tags per resource. You must reduce the number of tags in the request. None of the tags in this request
@@ -1736,12 +1762,17 @@ public class AWSAppMeshClient extends AmazonWebServiceClient implements AWSAppMe
      * @return Result of the UntagResource operation returned by the service.
      * @throws BadRequestException
      *         The request syntax was malformed. Check your request syntax and try again.
+     * @throws ForbiddenException
+     *         You don't have permissions to perform this action.
      * @throws InternalServerErrorException
      *         The request processing has failed because of an unknown error, exception, or failure.
      * @throws NotFoundException
      *         The specified resource doesn't exist. Check your request syntax and try again.
      * @throws ServiceUnavailableException
      *         The request has failed due to a temporary failure of the service.
+     * @throws TooManyRequestsException
+     *         The maximum request rate permitted by the App Mesh APIs has been exceeded for your account. For best
+     *         results, use an increasing or variable sleep interval between requests.
      * @sample AWSAppMesh.UntagResource
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResource" target="_top">AWS API
      *      Documentation</a>

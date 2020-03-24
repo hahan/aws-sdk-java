@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -36,13 +36,13 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
     private java.util.List<String> values;
     /**
      * <p>
-     * The name of the catalog database where the table in question is located.
+     * The name of the catalog database in which to create the partition.
      * </p>
      */
     private String databaseName;
     /**
      * <p>
-     * The name of the table in question.
+     * The name of the database table in which to create the partition.
      * </p>
      */
     private String tableName;
@@ -149,11 +149,11 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the catalog database where the table in question is located.
+     * The name of the catalog database in which to create the partition.
      * </p>
      * 
      * @param databaseName
-     *        The name of the catalog database where the table in question is located.
+     *        The name of the catalog database in which to create the partition.
      */
 
     public void setDatabaseName(String databaseName) {
@@ -162,10 +162,10 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the catalog database where the table in question is located.
+     * The name of the catalog database in which to create the partition.
      * </p>
      * 
-     * @return The name of the catalog database where the table in question is located.
+     * @return The name of the catalog database in which to create the partition.
      */
 
     public String getDatabaseName() {
@@ -174,11 +174,11 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the catalog database where the table in question is located.
+     * The name of the catalog database in which to create the partition.
      * </p>
      * 
      * @param databaseName
-     *        The name of the catalog database where the table in question is located.
+     *        The name of the catalog database in which to create the partition.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -189,11 +189,11 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the table in question.
+     * The name of the database table in which to create the partition.
      * </p>
      * 
      * @param tableName
-     *        The name of the table in question.
+     *        The name of the database table in which to create the partition.
      */
 
     public void setTableName(String tableName) {
@@ -202,10 +202,10 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the table in question.
+     * The name of the database table in which to create the partition.
      * </p>
      * 
-     * @return The name of the table in question.
+     * @return The name of the database table in which to create the partition.
      */
 
     public String getTableName() {
@@ -214,11 +214,11 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The name of the table in question.
+     * The name of the database table in which to create the partition.
      * </p>
      * 
      * @param tableName
-     *        The name of the table in question.
+     *        The name of the database table in which to create the partition.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -386,6 +386,13 @@ public class Partition implements Serializable, Cloneable, StructuredPojo {
         setParameters(parameters);
         return this;
     }
+
+    /**
+     * Add a single Parameters entry
+     *
+     * @see Partition#withParameters
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public Partition addParametersEntry(String key, String value) {
         if (null == this.parameters) {

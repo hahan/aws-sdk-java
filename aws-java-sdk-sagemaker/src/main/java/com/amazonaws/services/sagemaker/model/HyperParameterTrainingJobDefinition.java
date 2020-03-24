@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -28,6 +28,16 @@ import com.amazonaws.protocol.ProtocolMarshaller;
 @Generated("com.amazonaws:aws-java-sdk-code-generator")
 public class HyperParameterTrainingJobDefinition implements Serializable, Cloneable, StructuredPojo {
 
+    /**
+     * <p>
+     * The job definition name.
+     * </p>
+     */
+    private String definitionName;
+
+    private HyperParameterTuningJobObjective tuningObjective;
+
+    private ParameterRanges hyperParameterRanges;
     /**
      * <p>
      * Specifies the values of hyperparameters that do not change for the tuning job.
@@ -84,8 +94,9 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
     private ResourceConfig resourceConfig;
     /**
      * <p>
-     * Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time limit,
-     * Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you are
+     * willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon SageMaker
+     * ends the training job. Use this API to cap model training costs.
      * </p>
      */
     private StoppingCondition stoppingCondition;
@@ -96,11 +107,6 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      */
     private Boolean enableNetworkIsolation;
     /**
@@ -112,6 +118,106 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * </p>
      */
     private Boolean enableInterContainerTrafficEncryption;
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     */
+    private Boolean enableManagedSpotTraining;
+
+    private CheckpointConfig checkpointConfig;
+
+    /**
+     * <p>
+     * The job definition name.
+     * </p>
+     * 
+     * @param definitionName
+     *        The job definition name.
+     */
+
+    public void setDefinitionName(String definitionName) {
+        this.definitionName = definitionName;
+    }
+
+    /**
+     * <p>
+     * The job definition name.
+     * </p>
+     * 
+     * @return The job definition name.
+     */
+
+    public String getDefinitionName() {
+        return this.definitionName;
+    }
+
+    /**
+     * <p>
+     * The job definition name.
+     * </p>
+     * 
+     * @param definitionName
+     *        The job definition name.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public HyperParameterTrainingJobDefinition withDefinitionName(String definitionName) {
+        setDefinitionName(definitionName);
+        return this;
+    }
+
+    /**
+     * @param tuningObjective
+     */
+
+    public void setTuningObjective(HyperParameterTuningJobObjective tuningObjective) {
+        this.tuningObjective = tuningObjective;
+    }
+
+    /**
+     * @return
+     */
+
+    public HyperParameterTuningJobObjective getTuningObjective() {
+        return this.tuningObjective;
+    }
+
+    /**
+     * @param tuningObjective
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public HyperParameterTrainingJobDefinition withTuningObjective(HyperParameterTuningJobObjective tuningObjective) {
+        setTuningObjective(tuningObjective);
+        return this;
+    }
+
+    /**
+     * @param hyperParameterRanges
+     */
+
+    public void setHyperParameterRanges(ParameterRanges hyperParameterRanges) {
+        this.hyperParameterRanges = hyperParameterRanges;
+    }
+
+    /**
+     * @return
+     */
+
+    public ParameterRanges getHyperParameterRanges() {
+        return this.hyperParameterRanges;
+    }
+
+    /**
+     * @param hyperParameterRanges
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public HyperParameterTrainingJobDefinition withHyperParameterRanges(ParameterRanges hyperParameterRanges) {
+        setHyperParameterRanges(hyperParameterRanges);
+        return this;
+    }
 
     /**
      * <p>
@@ -152,6 +258,13 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         setStaticHyperParameters(staticHyperParameters);
         return this;
     }
+
+    /**
+     * Add a single StaticHyperParameters entry
+     *
+     * @see HyperParameterTrainingJobDefinition#withStaticHyperParameters
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public HyperParameterTrainingJobDefinition addStaticHyperParametersEntry(String key, String value) {
         if (null == this.staticHyperParameters) {
@@ -525,13 +638,15 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
 
     /**
      * <p>
-     * Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time limit,
-     * Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you are
+     * willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon SageMaker
+     * ends the training job. Use this API to cap model training costs.
      * </p>
      * 
      * @param stoppingCondition
-     *        Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time
-     *        limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     *        Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you
+     *        are willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon
+     *        SageMaker ends the training job. Use this API to cap model training costs.
      */
 
     public void setStoppingCondition(StoppingCondition stoppingCondition) {
@@ -540,12 +655,14 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
 
     /**
      * <p>
-     * Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time limit,
-     * Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you are
+     * willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon SageMaker
+     * ends the training job. Use this API to cap model training costs.
      * </p>
      * 
-     * @return Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time
-     *         limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     * @return Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you
+     *         are willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon
+     *         SageMaker ends the training job. Use this API to cap model training costs.
      */
 
     public StoppingCondition getStoppingCondition() {
@@ -554,13 +671,15 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
 
     /**
      * <p>
-     * Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time limit,
-     * Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you are
+     * willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon SageMaker
+     * ends the training job. Use this API to cap model training costs.
      * </p>
      * 
      * @param stoppingCondition
-     *        Specifies a limit to how long a model hyperparameter training job can run. When the job reaches the time
-     *        limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.
+     *        Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you
+     *        are willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon
+     *        SageMaker ends the training job. Use this API to cap model training costs.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -576,21 +695,12 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *        between peers within a training cluster for distributed training. If network isolation is used for
      *        training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *        model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *        <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public void setEnableNetworkIsolation(Boolean enableNetworkIsolation) {
@@ -604,20 +714,11 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *         between peers within a training cluster for distributed training. If network isolation is used for
      *         training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *         model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *         <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean getEnableNetworkIsolation() {
@@ -631,21 +732,12 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @param enableNetworkIsolation
      *        Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *        between peers within a training cluster for distributed training. If network isolation is used for
      *        training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *        model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *        <note>
-     *        <p>
-     *        The Semantic Segmentation built-in algorithm does not support network isolation.
-     *        </p>
+     *        model artifacts through the specified VPC, but the training container does not have network access.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -661,20 +753,11 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
      * configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the
      * specified VPC, but the training container does not have network access.
      * </p>
-     * <note>
-     * <p>
-     * The Semantic Segmentation built-in algorithm does not support network isolation.
-     * </p>
-     * </note>
      * 
      * @return Isolates the training container. No inbound or outbound network calls can be made, except for calls
      *         between peers within a training cluster for distributed training. If network isolation is used for
      *         training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and
-     *         model artifacts through the specified VPC, but the training container does not have network access.</p>
-     *         <note>
-     *         <p>
-     *         The Semantic Segmentation built-in algorithm does not support network isolation.
-     *         </p>
+     *         model artifacts through the specified VPC, but the training container does not have network access.
      */
 
     public Boolean isEnableNetworkIsolation() {
@@ -758,6 +841,88 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
     }
 
     /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *        <code>False</code>).
+     */
+
+    public void setEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        this.enableManagedSpotTraining = enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @return A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *         <code>False</code>).
+     */
+
+    public Boolean getEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @param enableManagedSpotTraining
+     *        A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *        <code>False</code>).
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public HyperParameterTrainingJobDefinition withEnableManagedSpotTraining(Boolean enableManagedSpotTraining) {
+        setEnableManagedSpotTraining(enableManagedSpotTraining);
+        return this;
+    }
+
+    /**
+     * <p>
+     * A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (<code>False</code>).
+     * </p>
+     * 
+     * @return A Boolean indicating whether managed spot training is enabled (<code>True</code>) or not (
+     *         <code>False</code>).
+     */
+
+    public Boolean isEnableManagedSpotTraining() {
+        return this.enableManagedSpotTraining;
+    }
+
+    /**
+     * @param checkpointConfig
+     */
+
+    public void setCheckpointConfig(CheckpointConfig checkpointConfig) {
+        this.checkpointConfig = checkpointConfig;
+    }
+
+    /**
+     * @return
+     */
+
+    public CheckpointConfig getCheckpointConfig() {
+        return this.checkpointConfig;
+    }
+
+    /**
+     * @param checkpointConfig
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public HyperParameterTrainingJobDefinition withCheckpointConfig(CheckpointConfig checkpointConfig) {
+        setCheckpointConfig(checkpointConfig);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -769,6 +934,12 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
+        if (getDefinitionName() != null)
+            sb.append("DefinitionName: ").append(getDefinitionName()).append(",");
+        if (getTuningObjective() != null)
+            sb.append("TuningObjective: ").append(getTuningObjective()).append(",");
+        if (getHyperParameterRanges() != null)
+            sb.append("HyperParameterRanges: ").append(getHyperParameterRanges()).append(",");
         if (getStaticHyperParameters() != null)
             sb.append("StaticHyperParameters: ").append(getStaticHyperParameters()).append(",");
         if (getAlgorithmSpecification() != null)
@@ -788,7 +959,11 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         if (getEnableNetworkIsolation() != null)
             sb.append("EnableNetworkIsolation: ").append(getEnableNetworkIsolation()).append(",");
         if (getEnableInterContainerTrafficEncryption() != null)
-            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption());
+            sb.append("EnableInterContainerTrafficEncryption: ").append(getEnableInterContainerTrafficEncryption()).append(",");
+        if (getEnableManagedSpotTraining() != null)
+            sb.append("EnableManagedSpotTraining: ").append(getEnableManagedSpotTraining()).append(",");
+        if (getCheckpointConfig() != null)
+            sb.append("CheckpointConfig: ").append(getCheckpointConfig());
         sb.append("}");
         return sb.toString();
     }
@@ -803,6 +978,18 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         if (obj instanceof HyperParameterTrainingJobDefinition == false)
             return false;
         HyperParameterTrainingJobDefinition other = (HyperParameterTrainingJobDefinition) obj;
+        if (other.getDefinitionName() == null ^ this.getDefinitionName() == null)
+            return false;
+        if (other.getDefinitionName() != null && other.getDefinitionName().equals(this.getDefinitionName()) == false)
+            return false;
+        if (other.getTuningObjective() == null ^ this.getTuningObjective() == null)
+            return false;
+        if (other.getTuningObjective() != null && other.getTuningObjective().equals(this.getTuningObjective()) == false)
+            return false;
+        if (other.getHyperParameterRanges() == null ^ this.getHyperParameterRanges() == null)
+            return false;
+        if (other.getHyperParameterRanges() != null && other.getHyperParameterRanges().equals(this.getHyperParameterRanges()) == false)
+            return false;
         if (other.getStaticHyperParameters() == null ^ this.getStaticHyperParameters() == null)
             return false;
         if (other.getStaticHyperParameters() != null && other.getStaticHyperParameters().equals(this.getStaticHyperParameters()) == false)
@@ -844,6 +1031,14 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         if (other.getEnableInterContainerTrafficEncryption() != null
                 && other.getEnableInterContainerTrafficEncryption().equals(this.getEnableInterContainerTrafficEncryption()) == false)
             return false;
+        if (other.getEnableManagedSpotTraining() == null ^ this.getEnableManagedSpotTraining() == null)
+            return false;
+        if (other.getEnableManagedSpotTraining() != null && other.getEnableManagedSpotTraining().equals(this.getEnableManagedSpotTraining()) == false)
+            return false;
+        if (other.getCheckpointConfig() == null ^ this.getCheckpointConfig() == null)
+            return false;
+        if (other.getCheckpointConfig() != null && other.getCheckpointConfig().equals(this.getCheckpointConfig()) == false)
+            return false;
         return true;
     }
 
@@ -852,6 +1047,9 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         final int prime = 31;
         int hashCode = 1;
 
+        hashCode = prime * hashCode + ((getDefinitionName() == null) ? 0 : getDefinitionName().hashCode());
+        hashCode = prime * hashCode + ((getTuningObjective() == null) ? 0 : getTuningObjective().hashCode());
+        hashCode = prime * hashCode + ((getHyperParameterRanges() == null) ? 0 : getHyperParameterRanges().hashCode());
         hashCode = prime * hashCode + ((getStaticHyperParameters() == null) ? 0 : getStaticHyperParameters().hashCode());
         hashCode = prime * hashCode + ((getAlgorithmSpecification() == null) ? 0 : getAlgorithmSpecification().hashCode());
         hashCode = prime * hashCode + ((getRoleArn() == null) ? 0 : getRoleArn().hashCode());
@@ -862,6 +1060,8 @@ public class HyperParameterTrainingJobDefinition implements Serializable, Clonea
         hashCode = prime * hashCode + ((getStoppingCondition() == null) ? 0 : getStoppingCondition().hashCode());
         hashCode = prime * hashCode + ((getEnableNetworkIsolation() == null) ? 0 : getEnableNetworkIsolation().hashCode());
         hashCode = prime * hashCode + ((getEnableInterContainerTrafficEncryption() == null) ? 0 : getEnableInterContainerTrafficEncryption().hashCode());
+        hashCode = prime * hashCode + ((getEnableManagedSpotTraining() == null) ? 0 : getEnableManagedSpotTraining().hashCode());
+        hashCode = prime * hashCode + ((getCheckpointConfig() == null) ? 0 : getCheckpointConfig().hashCode());
         return hashCode;
     }
 

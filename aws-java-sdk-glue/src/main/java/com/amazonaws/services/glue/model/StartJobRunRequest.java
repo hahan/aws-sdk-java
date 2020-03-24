@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -363,6 +363,13 @@ public class StartJobRunRequest extends com.amazonaws.AmazonWebServiceRequest im
         setArguments(arguments);
         return this;
     }
+
+    /**
+     * Add a single Arguments entry
+     *
+     * @see StartJobRunRequest#withArguments
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public StartJobRunRequest addArgumentsEntry(String key, String value) {
         if (null == this.arguments) {
@@ -818,6 +825,7 @@ public class StartJobRunRequest extends com.amazonaws.AmazonWebServiceRequest im
      *        1 executor per worker.
      *        </p>
      *        </li>
+     * @see WorkerType
      */
 
     public void setWorkerType(String workerType) {
@@ -870,6 +878,7 @@ public class StartJobRunRequest extends com.amazonaws.AmazonWebServiceRequest im
      *         1 executor per worker.
      *         </p>
      *         </li>
+     * @see WorkerType
      */
 
     public String getWorkerType() {
@@ -924,10 +933,67 @@ public class StartJobRunRequest extends com.amazonaws.AmazonWebServiceRequest im
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
+     * @see WorkerType
      */
 
     public StartJobRunRequest withWorkerType(String workerType) {
         setWorkerType(workerType);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2
+     * executors per worker.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1
+     * executor per worker.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1
+     * executor per worker.
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * @param workerType
+     *        The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or
+     *        G.2X.</p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk,
+     *        and 2 executors per worker.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1
+     *        executor per worker.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and
+     *        1 executor per worker.
+     *        </p>
+     *        </li>
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see WorkerType
+     */
+
+    public StartJobRunRequest withWorkerType(WorkerType workerType) {
+        this.workerType = workerType.toString();
         return this;
     }
 

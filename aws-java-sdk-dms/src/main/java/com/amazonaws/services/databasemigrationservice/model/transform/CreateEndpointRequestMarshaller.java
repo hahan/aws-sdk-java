@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -68,6 +68,8 @@ public class CreateEndpointRequestMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("MongoDbSettings").build();
     private static final MarshallingInfo<StructuredPojo> KINESISSETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("KinesisSettings").build();
+    private static final MarshallingInfo<StructuredPojo> KAFKASETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("KafkaSettings").build();
     private static final MarshallingInfo<StructuredPojo> ELASTICSEARCHSETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("ElasticsearchSettings").build();
     private static final MarshallingInfo<StructuredPojo> REDSHIFTSETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
@@ -109,6 +111,7 @@ public class CreateEndpointRequestMarshaller {
             protocolMarshaller.marshall(createEndpointRequest.getDmsTransferSettings(), DMSTRANSFERSETTINGS_BINDING);
             protocolMarshaller.marshall(createEndpointRequest.getMongoDbSettings(), MONGODBSETTINGS_BINDING);
             protocolMarshaller.marshall(createEndpointRequest.getKinesisSettings(), KINESISSETTINGS_BINDING);
+            protocolMarshaller.marshall(createEndpointRequest.getKafkaSettings(), KAFKASETTINGS_BINDING);
             protocolMarshaller.marshall(createEndpointRequest.getElasticsearchSettings(), ELASTICSEARCHSETTINGS_BINDING);
             protocolMarshaller.marshall(createEndpointRequest.getRedshiftSettings(), REDSHIFTSETTINGS_BINDING);
         } catch (Exception e) {

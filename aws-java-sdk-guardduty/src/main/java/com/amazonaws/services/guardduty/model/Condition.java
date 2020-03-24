@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -18,6 +18,9 @@ import com.amazonaws.protocol.StructuredPojo;
 import com.amazonaws.protocol.ProtocolMarshaller;
 
 /**
+ * <p>
+ * Contains information about the condition.
+ * </p>
  * 
  * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition" target="_top">AWS API
  *      Documentation</a>
@@ -67,9 +70,17 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
      */
     @Deprecated
     private Integer lte;
-
+    /**
+     * <p>
+     * Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     */
     private java.util.List<String> equals;
-
+    /**
+     * <p>
+     * Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     */
     private java.util.List<String> notEquals;
     /**
      * <p>
@@ -397,7 +408,11 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * @return
+     * <p>
+     * Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
+     * @return Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
      */
 
     public java.util.List<String> getEquals() {
@@ -405,7 +420,12 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
      * @param equals
+     *        Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
      */
 
     public void setEquals(java.util.Collection<String> equals) {
@@ -419,12 +439,16 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
+     * Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setEquals(java.util.Collection)} or {@link #withEquals(java.util.Collection)} if you want to override the
      * existing values.
      * </p>
      * 
      * @param equals
+     *        Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -439,7 +463,12 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
      * @param equals
+     *        Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -449,7 +478,11 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * @return
+     * <p>
+     * Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
+     * @return Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
      */
 
     public java.util.List<String> getNotEquals() {
@@ -457,7 +490,12 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
      * @param notEquals
+     *        Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
      */
 
     public void setNotEquals(java.util.Collection<String> notEquals) {
@@ -471,12 +509,16 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
+     * Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setNotEquals(java.util.Collection)} or {@link #withNotEquals(java.util.Collection)} if you want to
      * override the existing values.
      * </p>
      * 
      * @param notEquals
+     *        Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -491,7 +533,12 @@ public class Condition implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+     * </p>
+     * 
      * @param notEquals
+     *        Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

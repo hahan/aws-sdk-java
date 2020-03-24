@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -20,7 +20,8 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
 
     /**
      * <p>
-     * Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.
+     * Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
+     * detected.
      * </p>
      */
     private java.util.List<ModerationLabel> moderationLabels;
@@ -30,13 +31,20 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
      * </p>
      */
     private String moderationModelVersion;
+    /**
+     * <p>
+     * Shows the results of the human in the loop evaluation.
+     * </p>
+     */
+    private HumanLoopActivationOutput humanLoopActivationOutput;
 
     /**
      * <p>
-     * Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.
+     * Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
+     * detected.
      * </p>
      * 
-     * @return Array of detected Moderation labels and the time, in millseconds from the start of the video, they were
+     * @return Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
      *         detected.
      */
 
@@ -46,11 +54,12 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
 
     /**
      * <p>
-     * Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.
+     * Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
+     * detected.
      * </p>
      * 
      * @param moderationLabels
-     *        Array of detected Moderation labels and the time, in millseconds from the start of the video, they were
+     *        Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
      *        detected.
      */
 
@@ -65,7 +74,8 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
 
     /**
      * <p>
-     * Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.
+     * Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
+     * detected.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -74,7 +84,7 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
      * </p>
      * 
      * @param moderationLabels
-     *        Array of detected Moderation labels and the time, in millseconds from the start of the video, they were
+     *        Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
      *        detected.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -91,11 +101,12 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
 
     /**
      * <p>
-     * Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.
+     * Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
+     * detected.
      * </p>
      * 
      * @param moderationLabels
-     *        Array of detected Moderation labels and the time, in millseconds from the start of the video, they were
+     *        Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were
      *        detected.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -146,6 +157,46 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
     }
 
     /**
+     * <p>
+     * Shows the results of the human in the loop evaluation.
+     * </p>
+     * 
+     * @param humanLoopActivationOutput
+     *        Shows the results of the human in the loop evaluation.
+     */
+
+    public void setHumanLoopActivationOutput(HumanLoopActivationOutput humanLoopActivationOutput) {
+        this.humanLoopActivationOutput = humanLoopActivationOutput;
+    }
+
+    /**
+     * <p>
+     * Shows the results of the human in the loop evaluation.
+     * </p>
+     * 
+     * @return Shows the results of the human in the loop evaluation.
+     */
+
+    public HumanLoopActivationOutput getHumanLoopActivationOutput() {
+        return this.humanLoopActivationOutput;
+    }
+
+    /**
+     * <p>
+     * Shows the results of the human in the loop evaluation.
+     * </p>
+     * 
+     * @param humanLoopActivationOutput
+     *        Shows the results of the human in the loop evaluation.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public DetectModerationLabelsResult withHumanLoopActivationOutput(HumanLoopActivationOutput humanLoopActivationOutput) {
+        setHumanLoopActivationOutput(humanLoopActivationOutput);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -160,7 +211,9 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
         if (getModerationLabels() != null)
             sb.append("ModerationLabels: ").append(getModerationLabels()).append(",");
         if (getModerationModelVersion() != null)
-            sb.append("ModerationModelVersion: ").append(getModerationModelVersion());
+            sb.append("ModerationModelVersion: ").append(getModerationModelVersion()).append(",");
+        if (getHumanLoopActivationOutput() != null)
+            sb.append("HumanLoopActivationOutput: ").append(getHumanLoopActivationOutput());
         sb.append("}");
         return sb.toString();
     }
@@ -183,6 +236,10 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
             return false;
         if (other.getModerationModelVersion() != null && other.getModerationModelVersion().equals(this.getModerationModelVersion()) == false)
             return false;
+        if (other.getHumanLoopActivationOutput() == null ^ this.getHumanLoopActivationOutput() == null)
+            return false;
+        if (other.getHumanLoopActivationOutput() != null && other.getHumanLoopActivationOutput().equals(this.getHumanLoopActivationOutput()) == false)
+            return false;
         return true;
     }
 
@@ -193,6 +250,7 @@ public class DetectModerationLabelsResult extends com.amazonaws.AmazonWebService
 
         hashCode = prime * hashCode + ((getModerationLabels() == null) ? 0 : getModerationLabels().hashCode());
         hashCode = prime * hashCode + ((getModerationModelVersion() == null) ? 0 : getModerationModelVersion().hashCode());
+        hashCode = prime * hashCode + ((getHumanLoopActivationOutput() == null) ? 0 : getHumanLoopActivationOutput().hashCode());
         return hashCode;
     }
 

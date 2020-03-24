@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -111,80 +111,80 @@ public class AmazonWorkDocsClient extends AmazonWebServiceClient implements Amaz
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("FailedDependencyException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.FailedDependencyException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("FailedDependencyException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.FailedDependencyExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ConcurrentModificationException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.ConcurrentModificationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ConcurrentModificationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.ConcurrentModificationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidOperationException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.InvalidOperationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidOperationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.InvalidOperationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("CustomMetadataLimitExceededException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.CustomMetadataLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("CustomMetadataLimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.CustomMetadataLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("UnauthorizedResourceAccessException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.UnauthorizedResourceAccessException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("UnauthorizedResourceAccessException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.UnauthorizedResourceAccessExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManySubscriptionsException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.TooManySubscriptionsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManySubscriptionsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.TooManySubscriptionsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("EntityAlreadyExistsException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.EntityAlreadyExistsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("EntityAlreadyExistsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.EntityAlreadyExistsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("EntityNotExistsException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.EntityNotExistsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("EntityNotExistsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.EntityNotExistsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DocumentLockedForCommentsException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.DocumentLockedForCommentsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DocumentLockedForCommentsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.DocumentLockedForCommentsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("StorageLimitExceededException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.StorageLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("StorageLimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.StorageLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("StorageLimitWillExceedException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.StorageLimitWillExceedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("StorageLimitWillExceedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.StorageLimitWillExceedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ProhibitedStateException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.ProhibitedStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ProhibitedStateException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.ProhibitedStateExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("IllegalUserStateException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.IllegalUserStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("IllegalUserStateException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.IllegalUserStateExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgumentException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.InvalidArgumentException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgumentException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.InvalidArgumentExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ConflictingOperationException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.ConflictingOperationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ConflictingOperationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.ConflictingOperationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidCommentOperationException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.InvalidCommentOperationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidCommentOperationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.InvalidCommentOperationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidPasswordException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.InvalidPasswordException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidPasswordException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.InvalidPasswordExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("UnauthorizedOperationException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.UnauthorizedOperationException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("UnauthorizedOperationException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.UnauthorizedOperationExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyLabelsException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.TooManyLabelsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyLabelsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.TooManyLabelsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DraftUploadOutOfSyncException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.DraftUploadOutOfSyncException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DraftUploadOutOfSyncException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.DraftUploadOutOfSyncExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceAlreadyCheckedOutException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.ResourceAlreadyCheckedOutException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceAlreadyCheckedOutException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.ResourceAlreadyCheckedOutExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("RequestedEntityTooLargeException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.RequestedEntityTooLargeException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("RequestedEntityTooLargeException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.RequestedEntityTooLargeExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.ServiceUnavailableException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServiceUnavailableException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.ServiceUnavailableExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DeactivatingLastSystemUserException").withModeledClass(
-                                    com.amazonaws.services.workdocs.model.DeactivatingLastSystemUserException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DeactivatingLastSystemUserException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.workdocs.model.transform.DeactivatingLastSystemUserExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.workdocs.model.AmazonWorkDocsException.class));
 
     public static AmazonWorkDocsClientBuilder builder() {
@@ -2051,6 +2051,12 @@ public class AmazonWorkDocsClient extends AmazonWebServiceClient implements Amaz
      * <p>
      * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action
      * for SigV4 (administrative API) clients.
+     * </p>
+     * <p>
+     * This action requires an authentication token. To get an authentication token, register an application with Amazon
+     * WorkDocs. For more information, see <a
+     * href="https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html">Authentication and Access
+     * Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.
      * </p>
      * 
      * @param getCurrentUserRequest

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -38,7 +38,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <ul>
      * <li>
      * <p>
-     * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     * A name must contain from 1 to 40 alphanumeric characters or hyphens.
      * </p>
      * </li>
      * <li>
@@ -60,6 +60,12 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      */
     private String replicationGroupDescription;
+    /**
+     * <p>
+     * The name of the Global Datastore
+     * </p>
+     */
+    private String globalReplicationGroupId;
     /**
      * <p>
      * The identifier of the cluster that serves as the primary for this replication group. This cluster must already
@@ -207,6 +213,9 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <p>
      * <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>,
      * <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
+     * </p>
+     * <p>
+     * <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code>
      * </p>
      * <p>
      * <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>
@@ -548,7 +557,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </li>
      * <li>
      * <p>
-     * Cannot contain any of the following characters: '/', '"', or '@'.
+     * The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special
+     * characters cannot be used in the AUTH token.
      * </p>
      * </li>
      * </ul>
@@ -569,8 +579,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     * <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created
-     * in an Amazon VPC.
+     * <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being
+     * created in an Amazon VPC.
      * </p>
      * <p>
      * If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -608,6 +618,12 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      */
     private Boolean atRestEncryptionEnabled;
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     */
+    private String kmsKeyId;
 
     /**
      * <p>
@@ -619,7 +635,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <ul>
      * <li>
      * <p>
-     * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     * A name must contain from 1 to 40 alphanumeric characters or hyphens.
      * </p>
      * </li>
      * <li>
@@ -642,7 +658,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        <ul>
      *        <li>
      *        <p>
-     *        A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     *        A name must contain from 1 to 40 alphanumeric characters or hyphens.
      *        </p>
      *        </li>
      *        <li>
@@ -671,7 +687,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <ul>
      * <li>
      * <p>
-     * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     * A name must contain from 1 to 40 alphanumeric characters or hyphens.
      * </p>
      * </li>
      * <li>
@@ -693,7 +709,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *         <ul>
      *         <li>
      *         <p>
-     *         A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     *         A name must contain from 1 to 40 alphanumeric characters or hyphens.
      *         </p>
      *         </li>
      *         <li>
@@ -722,7 +738,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <ul>
      * <li>
      * <p>
-     * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     * A name must contain from 1 to 40 alphanumeric characters or hyphens.
      * </p>
      * </li>
      * <li>
@@ -745,7 +761,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        <ul>
      *        <li>
      *        <p>
-     *        A name must contain from 1 to 20 alphanumeric characters or hyphens.
+     *        A name must contain from 1 to 40 alphanumeric characters or hyphens.
      *        </p>
      *        </li>
      *        <li>
@@ -803,6 +819,46 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
 
     public CreateReplicationGroupRequest withReplicationGroupDescription(String replicationGroupDescription) {
         setReplicationGroupDescription(replicationGroupDescription);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore
+     * </p>
+     * 
+     * @param globalReplicationGroupId
+     *        The name of the Global Datastore
+     */
+
+    public void setGlobalReplicationGroupId(String globalReplicationGroupId) {
+        this.globalReplicationGroupId = globalReplicationGroupId;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore
+     * </p>
+     * 
+     * @return The name of the Global Datastore
+     */
+
+    public String getGlobalReplicationGroupId() {
+        return this.globalReplicationGroupId;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore
+     * </p>
+     * 
+     * @param globalReplicationGroupId
+     *        The name of the Global Datastore
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateReplicationGroupRequest withGlobalReplicationGroupId(String globalReplicationGroupId) {
+        setGlobalReplicationGroupId(globalReplicationGroupId);
         return this;
     }
 
@@ -1768,6 +1824,9 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
      * </p>
      * <p>
+     * <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code>
+     * </p>
+     * <p>
      * <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>
      * </p>
      * </li>
@@ -1889,6 +1948,10 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        <p>
      *        <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>,
      *        <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
+     *        </p>
+     *        <p>
+     *        <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>,
+     *        <code>cache.t3.medium</code>
      *        </p>
      *        <p>
      *        <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>,
@@ -2023,6 +2086,9 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
      * </p>
      * <p>
+     * <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code>
+     * </p>
+     * <p>
      * <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>
      * </p>
      * </li>
@@ -2143,6 +2209,10 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *         <p>
      *         <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>,
      *         <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
+     *         </p>
+     *         <p>
+     *         <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>,
+     *         <code>cache.t3.medium</code>
      *         </p>
      *         <p>
      *         <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>,
@@ -2277,6 +2347,9 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
      * </p>
      * <p>
+     * <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code>
+     * </p>
+     * <p>
      * <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>
      * </p>
      * </li>
@@ -2398,6 +2471,10 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        <p>
      *        <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>,
      *        <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
+     *        </p>
+     *        <p>
+     *        <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>,
+     *        <code>cache.t3.medium</code>
      *        </p>
      *        <p>
      *        <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>,
@@ -4008,7 +4085,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </li>
      * <li>
      * <p>
-     * Cannot contain any of the following characters: '/', '"', or '@'.
+     * The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special
+     * characters cannot be used in the AUTH token.
      * </p>
      * </li>
      * </ul>
@@ -4045,7 +4123,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        </li>
      *        <li>
      *        <p>
-     *        Cannot contain any of the following characters: '/', '"', or '@'.
+     *        The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable
+     *        special characters cannot be used in the AUTH token.
      *        </p>
      *        </li>
      *        </ul>
@@ -4088,7 +4167,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </li>
      * <li>
      * <p>
-     * Cannot contain any of the following characters: '/', '"', or '@'.
+     * The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special
+     * characters cannot be used in the AUTH token.
      * </p>
      * </li>
      * </ul>
@@ -4124,7 +4204,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *         </li>
      *         <li>
      *         <p>
-     *         Cannot contain any of the following characters: '/', '"', or '@'.
+     *         The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable
+     *         special characters cannot be used in the AUTH token.
      *         </p>
      *         </li>
      *         </ul>
@@ -4167,7 +4248,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </li>
      * <li>
      * <p>
-     * Cannot contain any of the following characters: '/', '"', or '@'.
+     * The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special
+     * characters cannot be used in the AUTH token.
      * </p>
      * </li>
      * </ul>
@@ -4204,7 +4286,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        </li>
      *        <li>
      *        <p>
-     *        Cannot contain any of the following characters: '/', '"', or '@'.
+     *        The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable
+     *        special characters cannot be used in the AUTH token.
      *        </p>
      *        </li>
      *        </ul>
@@ -4230,8 +4313,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     * <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created
-     * in an Amazon VPC.
+     * <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being
+     * created in an Amazon VPC.
      * </p>
      * <p>
      * If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4259,8 +4342,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        </p>
      *        <p>
      *        This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     *        <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being
-     *        created in an Amazon VPC.
+     *        <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is
+     *        being created in an Amazon VPC.
      *        </p>
      *        <p>
      *        If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4294,8 +4377,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     * <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created
-     * in an Amazon VPC.
+     * <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being
+     * created in an Amazon VPC.
      * </p>
      * <p>
      * If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4322,8 +4405,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *         </p>
      *         <p>
      *         This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     *         <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being
-     *         created in an Amazon VPC.
+     *         <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is
+     *         being created in an Amazon VPC.
      *         </p>
      *         <p>
      *         If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4357,8 +4440,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     * <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created
-     * in an Amazon VPC.
+     * <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being
+     * created in an Amazon VPC.
      * </p>
      * <p>
      * If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4386,8 +4469,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *        </p>
      *        <p>
      *        This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     *        <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being
-     *        created in an Amazon VPC.
+     *        <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is
+     *        being created in an Amazon VPC.
      *        </p>
      *        <p>
      *        If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4423,8 +4506,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     * <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created
-     * in an Amazon VPC.
+     * <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being
+     * created in an Amazon VPC.
      * </p>
      * <p>
      * If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4451,8 +4534,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
      *         </p>
      *         <p>
      *         This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the
-     *         <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being
-     *         created in an Amazon VPC.
+     *         <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is
+     *         being created in an Amazon VPC.
      *         </p>
      *         <p>
      *         If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.
@@ -4620,6 +4703,46 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
     }
 
     /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @param kmsKeyId
+     *        The ID of the KMS key used to encrypt the disk in the cluster.
+     */
+
+    public void setKmsKeyId(String kmsKeyId) {
+        this.kmsKeyId = kmsKeyId;
+    }
+
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @return The ID of the KMS key used to encrypt the disk in the cluster.
+     */
+
+    public String getKmsKeyId() {
+        return this.kmsKeyId;
+    }
+
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @param kmsKeyId
+     *        The ID of the KMS key used to encrypt the disk in the cluster.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateReplicationGroupRequest withKmsKeyId(String kmsKeyId) {
+        setKmsKeyId(kmsKeyId);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -4635,6 +4758,8 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
             sb.append("ReplicationGroupId: ").append(getReplicationGroupId()).append(",");
         if (getReplicationGroupDescription() != null)
             sb.append("ReplicationGroupDescription: ").append(getReplicationGroupDescription()).append(",");
+        if (getGlobalReplicationGroupId() != null)
+            sb.append("GlobalReplicationGroupId: ").append(getGlobalReplicationGroupId()).append(",");
         if (getPrimaryClusterId() != null)
             sb.append("PrimaryClusterId: ").append(getPrimaryClusterId()).append(",");
         if (getAutomaticFailoverEnabled() != null)
@@ -4686,7 +4811,9 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
         if (getTransitEncryptionEnabled() != null)
             sb.append("TransitEncryptionEnabled: ").append(getTransitEncryptionEnabled()).append(",");
         if (getAtRestEncryptionEnabled() != null)
-            sb.append("AtRestEncryptionEnabled: ").append(getAtRestEncryptionEnabled());
+            sb.append("AtRestEncryptionEnabled: ").append(getAtRestEncryptionEnabled()).append(",");
+        if (getKmsKeyId() != null)
+            sb.append("KmsKeyId: ").append(getKmsKeyId());
         sb.append("}");
         return sb.toString();
     }
@@ -4708,6 +4835,10 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
         if (other.getReplicationGroupDescription() == null ^ this.getReplicationGroupDescription() == null)
             return false;
         if (other.getReplicationGroupDescription() != null && other.getReplicationGroupDescription().equals(this.getReplicationGroupDescription()) == false)
+            return false;
+        if (other.getGlobalReplicationGroupId() == null ^ this.getGlobalReplicationGroupId() == null)
+            return false;
+        if (other.getGlobalReplicationGroupId() != null && other.getGlobalReplicationGroupId().equals(this.getGlobalReplicationGroupId()) == false)
             return false;
         if (other.getPrimaryClusterId() == null ^ this.getPrimaryClusterId() == null)
             return false;
@@ -4813,6 +4944,10 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
             return false;
         if (other.getAtRestEncryptionEnabled() != null && other.getAtRestEncryptionEnabled().equals(this.getAtRestEncryptionEnabled()) == false)
             return false;
+        if (other.getKmsKeyId() == null ^ this.getKmsKeyId() == null)
+            return false;
+        if (other.getKmsKeyId() != null && other.getKmsKeyId().equals(this.getKmsKeyId()) == false)
+            return false;
         return true;
     }
 
@@ -4823,6 +4958,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
 
         hashCode = prime * hashCode + ((getReplicationGroupId() == null) ? 0 : getReplicationGroupId().hashCode());
         hashCode = prime * hashCode + ((getReplicationGroupDescription() == null) ? 0 : getReplicationGroupDescription().hashCode());
+        hashCode = prime * hashCode + ((getGlobalReplicationGroupId() == null) ? 0 : getGlobalReplicationGroupId().hashCode());
         hashCode = prime * hashCode + ((getPrimaryClusterId() == null) ? 0 : getPrimaryClusterId().hashCode());
         hashCode = prime * hashCode + ((getAutomaticFailoverEnabled() == null) ? 0 : getAutomaticFailoverEnabled().hashCode());
         hashCode = prime * hashCode + ((getNumCacheClusters() == null) ? 0 : getNumCacheClusters().hashCode());
@@ -4849,6 +4985,7 @@ public class CreateReplicationGroupRequest extends com.amazonaws.AmazonWebServic
         hashCode = prime * hashCode + ((getAuthToken() == null) ? 0 : getAuthToken().hashCode());
         hashCode = prime * hashCode + ((getTransitEncryptionEnabled() == null) ? 0 : getTransitEncryptionEnabled().hashCode());
         hashCode = prime * hashCode + ((getAtRestEncryptionEnabled() == null) ? 0 : getAtRestEncryptionEnabled().hashCode());
+        hashCode = prime * hashCode + ((getKmsKeyId() == null) ? 0 : getKmsKeyId().hashCode());
         return hashCode;
     }
 

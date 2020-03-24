@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -73,7 +73,7 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
  * <li>
  * <p>
  * <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and
- * Endpoints:</a> Provides a list of each AWS region and endpoints available for use with AWS Storage Gateway.
+ * Endpoints:</a> Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway.
  * </p>
  * </li>
  * </ul>
@@ -1129,6 +1129,41 @@ public class AWSStorageGatewayAsyncClient extends AWSStorageGatewayClient implem
 
                 try {
                     result = executeDeleteVolume(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeAvailabilityMonitorTestResult> describeAvailabilityMonitorTestAsync(
+            DescribeAvailabilityMonitorTestRequest request) {
+
+        return describeAvailabilityMonitorTestAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeAvailabilityMonitorTestResult> describeAvailabilityMonitorTestAsync(
+            final DescribeAvailabilityMonitorTestRequest request,
+            final com.amazonaws.handlers.AsyncHandler<DescribeAvailabilityMonitorTestRequest, DescribeAvailabilityMonitorTestResult> asyncHandler) {
+        final DescribeAvailabilityMonitorTestRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<DescribeAvailabilityMonitorTestResult>() {
+            @Override
+            public DescribeAvailabilityMonitorTestResult call() throws Exception {
+                DescribeAvailabilityMonitorTestResult result = null;
+
+                try {
+                    result = executeDescribeAvailabilityMonitorTest(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -2442,6 +2477,39 @@ public class AWSStorageGatewayAsyncClient extends AWSStorageGatewayClient implem
 
                 try {
                     result = executeShutdownGateway(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartAvailabilityMonitorTestResult> startAvailabilityMonitorTestAsync(StartAvailabilityMonitorTestRequest request) {
+
+        return startAvailabilityMonitorTestAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<StartAvailabilityMonitorTestResult> startAvailabilityMonitorTestAsync(final StartAvailabilityMonitorTestRequest request,
+            final com.amazonaws.handlers.AsyncHandler<StartAvailabilityMonitorTestRequest, StartAvailabilityMonitorTestResult> asyncHandler) {
+        final StartAvailabilityMonitorTestRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<StartAvailabilityMonitorTestResult>() {
+            @Override
+            public StartAvailabilityMonitorTestResult call() throws Exception {
+                StartAvailabilityMonitorTestResult result = null;
+
+                try {
+                    result = executeStartAvailabilityMonitorTest(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

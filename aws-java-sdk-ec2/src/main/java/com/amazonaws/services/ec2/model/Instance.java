@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -187,7 +187,7 @@ public class Instance implements Serializable, Cloneable {
     private Boolean enaSupport;
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      */
     private String hypervisor;
@@ -221,6 +221,12 @@ public class Instance implements Serializable, Cloneable {
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<InstanceNetworkInterface> networkInterfaces;
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost.
+     * </p>
+     */
+    private String outpostArn;
     /**
      * <p>
      * The device name of the root device volume (for example, <code>/dev/sda1</code>).
@@ -310,6 +316,12 @@ public class Instance implements Serializable, Cloneable {
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<LicenseConfiguration> licenses;
+    /**
+     * <p>
+     * The metadata options for the instance.
+     * </p>
+     */
+    private InstanceMetadataOptionsResponse metadataOptions;
 
     /**
      * <p>
@@ -1570,11 +1582,12 @@ public class Instance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      * 
      * @param hypervisor
-     *        The hypervisor type of the instance.
+     *        The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro
+     *        hypervisors.
      * @see HypervisorType
      */
 
@@ -1584,10 +1597,11 @@ public class Instance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      * 
-     * @return The hypervisor type of the instance.
+     * @return The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro
+     *         hypervisors.
      * @see HypervisorType
      */
 
@@ -1597,11 +1611,12 @@ public class Instance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      * 
      * @param hypervisor
-     *        The hypervisor type of the instance.
+     *        The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro
+     *        hypervisors.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see HypervisorType
      */
@@ -1613,11 +1628,12 @@ public class Instance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      * 
      * @param hypervisor
-     *        The hypervisor type of the instance.
+     *        The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro
+     *        hypervisors.
      * @see HypervisorType
      */
 
@@ -1627,11 +1643,12 @@ public class Instance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The hypervisor type of the instance.
+     * The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.
      * </p>
      * 
      * @param hypervisor
-     *        The hypervisor type of the instance.
+     *        The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro
+     *        hypervisors.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see HypervisorType
      */
@@ -1974,6 +1991,46 @@ public class Instance implements Serializable, Cloneable {
 
     public Instance withNetworkInterfaces(java.util.Collection<InstanceNetworkInterface> networkInterfaces) {
         setNetworkInterfaces(networkInterfaces);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost.
+     * </p>
+     * 
+     * @param outpostArn
+     *        The Amazon Resource Name (ARN) of the Outpost.
+     */
+
+    public void setOutpostArn(String outpostArn) {
+        this.outpostArn = outpostArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost.
+     * </p>
+     * 
+     * @return The Amazon Resource Name (ARN) of the Outpost.
+     */
+
+    public String getOutpostArn() {
+        return this.outpostArn;
+    }
+
+    /**
+     * <p>
+     * The Amazon Resource Name (ARN) of the Outpost.
+     * </p>
+     * 
+     * @param outpostArn
+     *        The Amazon Resource Name (ARN) of the Outpost.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Instance withOutpostArn(String outpostArn) {
+        setOutpostArn(outpostArn);
         return this;
     }
 
@@ -2755,6 +2812,46 @@ public class Instance implements Serializable, Cloneable {
     }
 
     /**
+     * <p>
+     * The metadata options for the instance.
+     * </p>
+     * 
+     * @param metadataOptions
+     *        The metadata options for the instance.
+     */
+
+    public void setMetadataOptions(InstanceMetadataOptionsResponse metadataOptions) {
+        this.metadataOptions = metadataOptions;
+    }
+
+    /**
+     * <p>
+     * The metadata options for the instance.
+     * </p>
+     * 
+     * @return The metadata options for the instance.
+     */
+
+    public InstanceMetadataOptionsResponse getMetadataOptions() {
+        return this.metadataOptions;
+    }
+
+    /**
+     * <p>
+     * The metadata options for the instance.
+     * </p>
+     * 
+     * @param metadataOptions
+     *        The metadata options for the instance.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Instance withMetadataOptions(InstanceMetadataOptionsResponse metadataOptions) {
+        setMetadataOptions(metadataOptions);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -2828,6 +2925,8 @@ public class Instance implements Serializable, Cloneable {
             sb.append("ElasticInferenceAcceleratorAssociations: ").append(getElasticInferenceAcceleratorAssociations()).append(",");
         if (getNetworkInterfaces() != null)
             sb.append("NetworkInterfaces: ").append(getNetworkInterfaces()).append(",");
+        if (getOutpostArn() != null)
+            sb.append("OutpostArn: ").append(getOutpostArn()).append(",");
         if (getRootDeviceName() != null)
             sb.append("RootDeviceName: ").append(getRootDeviceName()).append(",");
         if (getRootDeviceType() != null)
@@ -2855,7 +2954,9 @@ public class Instance implements Serializable, Cloneable {
         if (getHibernationOptions() != null)
             sb.append("HibernationOptions: ").append(getHibernationOptions()).append(",");
         if (getLicenses() != null)
-            sb.append("Licenses: ").append(getLicenses());
+            sb.append("Licenses: ").append(getLicenses()).append(",");
+        if (getMetadataOptions() != null)
+            sb.append("MetadataOptions: ").append(getMetadataOptions());
         sb.append("}");
         return sb.toString();
     }
@@ -2995,6 +3096,10 @@ public class Instance implements Serializable, Cloneable {
             return false;
         if (other.getNetworkInterfaces() != null && other.getNetworkInterfaces().equals(this.getNetworkInterfaces()) == false)
             return false;
+        if (other.getOutpostArn() == null ^ this.getOutpostArn() == null)
+            return false;
+        if (other.getOutpostArn() != null && other.getOutpostArn().equals(this.getOutpostArn()) == false)
+            return false;
         if (other.getRootDeviceName() == null ^ this.getRootDeviceName() == null)
             return false;
         if (other.getRootDeviceName() != null && other.getRootDeviceName().equals(this.getRootDeviceName()) == false)
@@ -3052,6 +3157,10 @@ public class Instance implements Serializable, Cloneable {
             return false;
         if (other.getLicenses() != null && other.getLicenses().equals(this.getLicenses()) == false)
             return false;
+        if (other.getMetadataOptions() == null ^ this.getMetadataOptions() == null)
+            return false;
+        if (other.getMetadataOptions() != null && other.getMetadataOptions().equals(this.getMetadataOptions()) == false)
+            return false;
         return true;
     }
 
@@ -3091,6 +3200,7 @@ public class Instance implements Serializable, Cloneable {
         hashCode = prime * hashCode + ((getElasticGpuAssociations() == null) ? 0 : getElasticGpuAssociations().hashCode());
         hashCode = prime * hashCode + ((getElasticInferenceAcceleratorAssociations() == null) ? 0 : getElasticInferenceAcceleratorAssociations().hashCode());
         hashCode = prime * hashCode + ((getNetworkInterfaces() == null) ? 0 : getNetworkInterfaces().hashCode());
+        hashCode = prime * hashCode + ((getOutpostArn() == null) ? 0 : getOutpostArn().hashCode());
         hashCode = prime * hashCode + ((getRootDeviceName() == null) ? 0 : getRootDeviceName().hashCode());
         hashCode = prime * hashCode + ((getRootDeviceType() == null) ? 0 : getRootDeviceType().hashCode());
         hashCode = prime * hashCode + ((getSecurityGroups() == null) ? 0 : getSecurityGroups().hashCode());
@@ -3105,6 +3215,7 @@ public class Instance implements Serializable, Cloneable {
         hashCode = prime * hashCode + ((getCapacityReservationSpecification() == null) ? 0 : getCapacityReservationSpecification().hashCode());
         hashCode = prime * hashCode + ((getHibernationOptions() == null) ? 0 : getHibernationOptions().hashCode());
         hashCode = prime * hashCode + ((getLicenses() == null) ? 0 : getLicenses().hashCode());
+        hashCode = prime * hashCode + ((getMetadataOptions() == null) ? 0 : getMetadataOptions().hashCode());
         return hashCode;
     }
 

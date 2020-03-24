@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,7 +27,7 @@ public class AssociateRoleToGroupRequest extends com.amazonaws.AmazonWebServiceR
 
     /** The ID of the Greengrass group. */
     private String groupId;
-    /** The ARN of the role you wish to associate with this group. */
+    /** The ARN of the role you wish to associate with this group. The existence of the role is not validated. */
     private String roleArn;
 
     /**
@@ -65,10 +65,10 @@ public class AssociateRoleToGroupRequest extends com.amazonaws.AmazonWebServiceR
     }
 
     /**
-     * The ARN of the role you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      * 
      * @param roleArn
-     *        The ARN of the role you wish to associate with this group.
+     *        The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      */
 
     public void setRoleArn(String roleArn) {
@@ -76,9 +76,9 @@ public class AssociateRoleToGroupRequest extends com.amazonaws.AmazonWebServiceR
     }
 
     /**
-     * The ARN of the role you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      * 
-     * @return The ARN of the role you wish to associate with this group.
+     * @return The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      */
 
     public String getRoleArn() {
@@ -86,10 +86,10 @@ public class AssociateRoleToGroupRequest extends com.amazonaws.AmazonWebServiceR
     }
 
     /**
-     * The ARN of the role you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      * 
      * @param roleArn
-     *        The ARN of the role you wish to associate with this group.
+     *        The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

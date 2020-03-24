@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -167,6 +167,39 @@ public class AWSDataSyncAsyncClient extends AWSDataSyncClient implements AWSData
     }
 
     @Override
+    public java.util.concurrent.Future<CreateLocationFsxWindowsResult> createLocationFsxWindowsAsync(CreateLocationFsxWindowsRequest request) {
+
+        return createLocationFsxWindowsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<CreateLocationFsxWindowsResult> createLocationFsxWindowsAsync(final CreateLocationFsxWindowsRequest request,
+            final com.amazonaws.handlers.AsyncHandler<CreateLocationFsxWindowsRequest, CreateLocationFsxWindowsResult> asyncHandler) {
+        final CreateLocationFsxWindowsRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<CreateLocationFsxWindowsResult>() {
+            @Override
+            public CreateLocationFsxWindowsResult call() throws Exception {
+                CreateLocationFsxWindowsResult result = null;
+
+                try {
+                    result = executeCreateLocationFsxWindows(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<CreateLocationNfsResult> createLocationNfsAsync(CreateLocationNfsRequest request) {
 
         return createLocationNfsAsync(request, null);
@@ -217,6 +250,39 @@ public class AWSDataSyncAsyncClient extends AWSDataSyncClient implements AWSData
 
                 try {
                     result = executeCreateLocationS3(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<CreateLocationSmbResult> createLocationSmbAsync(CreateLocationSmbRequest request) {
+
+        return createLocationSmbAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<CreateLocationSmbResult> createLocationSmbAsync(final CreateLocationSmbRequest request,
+            final com.amazonaws.handlers.AsyncHandler<CreateLocationSmbRequest, CreateLocationSmbResult> asyncHandler) {
+        final CreateLocationSmbRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<CreateLocationSmbResult>() {
+            @Override
+            public CreateLocationSmbResult call() throws Exception {
+                CreateLocationSmbResult result = null;
+
+                try {
+                    result = executeCreateLocationSmb(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -431,6 +497,39 @@ public class AWSDataSyncAsyncClient extends AWSDataSyncClient implements AWSData
     }
 
     @Override
+    public java.util.concurrent.Future<DescribeLocationFsxWindowsResult> describeLocationFsxWindowsAsync(DescribeLocationFsxWindowsRequest request) {
+
+        return describeLocationFsxWindowsAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeLocationFsxWindowsResult> describeLocationFsxWindowsAsync(final DescribeLocationFsxWindowsRequest request,
+            final com.amazonaws.handlers.AsyncHandler<DescribeLocationFsxWindowsRequest, DescribeLocationFsxWindowsResult> asyncHandler) {
+        final DescribeLocationFsxWindowsRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<DescribeLocationFsxWindowsResult>() {
+            @Override
+            public DescribeLocationFsxWindowsResult call() throws Exception {
+                DescribeLocationFsxWindowsResult result = null;
+
+                try {
+                    result = executeDescribeLocationFsxWindows(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<DescribeLocationNfsResult> describeLocationNfsAsync(DescribeLocationNfsRequest request) {
 
         return describeLocationNfsAsync(request, null);
@@ -481,6 +580,39 @@ public class AWSDataSyncAsyncClient extends AWSDataSyncClient implements AWSData
 
                 try {
                     result = executeDescribeLocationS3(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeLocationSmbResult> describeLocationSmbAsync(DescribeLocationSmbRequest request) {
+
+        return describeLocationSmbAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeLocationSmbResult> describeLocationSmbAsync(final DescribeLocationSmbRequest request,
+            final com.amazonaws.handlers.AsyncHandler<DescribeLocationSmbRequest, DescribeLocationSmbResult> asyncHandler) {
+        final DescribeLocationSmbRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<DescribeLocationSmbResult>() {
+            @Override
+            public DescribeLocationSmbResult call() throws Exception {
+                DescribeLocationSmbResult result = null;
+
+                try {
+                    result = executeDescribeLocationSmb(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -119,6 +119,37 @@ public interface AWSCostAndUsageReportAsync extends AWSCostAndUsageReport {
     java.util.concurrent.Future<DescribeReportDefinitionsResult> describeReportDefinitionsAsync(
             DescribeReportDefinitionsRequest describeReportDefinitionsRequest,
             com.amazonaws.handlers.AsyncHandler<DescribeReportDefinitionsRequest, DescribeReportDefinitionsResult> asyncHandler);
+
+    /**
+     * <p>
+     * Allows you to programatically update your report preferences.
+     * </p>
+     * 
+     * @param modifyReportDefinitionRequest
+     * @return A Java Future containing the result of the ModifyReportDefinition operation returned by the service.
+     * @sample AWSCostAndUsageReportAsync.ModifyReportDefinition
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<ModifyReportDefinitionResult> modifyReportDefinitionAsync(ModifyReportDefinitionRequest modifyReportDefinitionRequest);
+
+    /**
+     * <p>
+     * Allows you to programatically update your report preferences.
+     * </p>
+     * 
+     * @param modifyReportDefinitionRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the ModifyReportDefinition operation returned by the service.
+     * @sample AWSCostAndUsageReportAsyncHandler.ModifyReportDefinition
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<ModifyReportDefinitionResult> modifyReportDefinitionAsync(ModifyReportDefinitionRequest modifyReportDefinitionRequest,
+            com.amazonaws.handlers.AsyncHandler<ModifyReportDefinitionRequest, ModifyReportDefinitionResult> asyncHandler);
 
     /**
      * <p>

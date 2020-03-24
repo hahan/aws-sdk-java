@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -78,6 +78,39 @@ public class AWSMediaConnectAsyncClient extends AWSMediaConnectClient implements
 
                 try {
                     result = executeAddFlowOutputs(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<AddFlowSourcesResult> addFlowSourcesAsync(AddFlowSourcesRequest request) {
+
+        return addFlowSourcesAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<AddFlowSourcesResult> addFlowSourcesAsync(final AddFlowSourcesRequest request,
+            final com.amazonaws.handlers.AsyncHandler<AddFlowSourcesRequest, AddFlowSourcesResult> asyncHandler) {
+        final AddFlowSourcesRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<AddFlowSourcesResult>() {
+            @Override
+            public AddFlowSourcesResult call() throws Exception {
+                AddFlowSourcesResult result = null;
+
+                try {
+                    result = executeAddFlowSources(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);
@@ -358,6 +391,39 @@ public class AWSMediaConnectAsyncClient extends AWSMediaConnectClient implements
     }
 
     @Override
+    public java.util.concurrent.Future<RemoveFlowSourceResult> removeFlowSourceAsync(RemoveFlowSourceRequest request) {
+
+        return removeFlowSourceAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<RemoveFlowSourceResult> removeFlowSourceAsync(final RemoveFlowSourceRequest request,
+            final com.amazonaws.handlers.AsyncHandler<RemoveFlowSourceRequest, RemoveFlowSourceResult> asyncHandler) {
+        final RemoveFlowSourceRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<RemoveFlowSourceResult>() {
+            @Override
+            public RemoveFlowSourceResult call() throws Exception {
+                RemoveFlowSourceResult result = null;
+
+                try {
+                    result = executeRemoveFlowSource(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public java.util.concurrent.Future<RevokeFlowEntitlementResult> revokeFlowEntitlementAsync(RevokeFlowEntitlementRequest request) {
 
         return revokeFlowEntitlementAsync(request, null);
@@ -507,6 +573,39 @@ public class AWSMediaConnectAsyncClient extends AWSMediaConnectClient implements
 
                 try {
                     result = executeUntagResource(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<UpdateFlowResult> updateFlowAsync(UpdateFlowRequest request) {
+
+        return updateFlowAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<UpdateFlowResult> updateFlowAsync(final UpdateFlowRequest request,
+            final com.amazonaws.handlers.AsyncHandler<UpdateFlowRequest, UpdateFlowResult> asyncHandler) {
+        final UpdateFlowRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<UpdateFlowResult>() {
+            @Override
+            public UpdateFlowResult call() throws Exception {
+                UpdateFlowResult result = null;
+
+                try {
+                    result = executeUpdateFlow(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -33,6 +33,15 @@ import com.amazonaws.services.appstream.model.*;
  * AWS resources that are required to host and run your applications, scales automatically, and provides access to your
  * users on demand.
  * </p>
+ * <note>
+ * <p>
+ * You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more
+ * information, see <a href=
+ * "https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html"
+ * >Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon
+ * AppStream 2.0 Administration Guide</i>.
+ * </p>
+ * </note>
  * <p>
  * To learn more about AppStream 2.0, see the following resources:
  * </p>
@@ -1280,7 +1289,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param listTagsForResourceRequest
@@ -1299,7 +1308,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param listTagsForResourceRequest
@@ -1455,7 +1464,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param tagResourceRequest
@@ -1482,7 +1491,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param tagResourceRequest
@@ -1508,7 +1517,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param untagResourceRequest
@@ -1529,7 +1538,7 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * For more information about tags, see <a
      * href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a>
-     * in the <i>Amazon AppStream 2.0 Developer Guide</i>.
+     * in the <i>Amazon AppStream 2.0 Administration Guide</i>.
      * </p>
      * 
      * @param untagResourceRequest
@@ -1585,9 +1594,9 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the
      * fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>,
-     * <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, and
-     * <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or
-     * <code>STOPPING</code> state, you can't update it.
+     * <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>,
+     * <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet
+     * is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.
      * </p>
      * 
      * @param updateFleetRequest
@@ -1605,9 +1614,9 @@ public interface AmazonAppStreamAsync extends AmazonAppStream {
      * <p>
      * If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the
      * fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>,
-     * <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, and
-     * <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or
-     * <code>STOPPING</code> state, you can't update it.
+     * <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>,
+     * <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet
+     * is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.
      * </p>
      * 
      * @param updateFleetRequest

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -54,7 +54,7 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
     private String address;
     /**
      * <p>
-     * The timezone of a room profile.
+     * The time zone of a room profile.
      * </p>
      */
     private String timezone;
@@ -76,6 +76,12 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private String wakeWord;
+    /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     */
+    private String locale;
 
     /**
      * <p>
@@ -251,11 +257,11 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The timezone of a room profile.
+     * The time zone of a room profile.
      * </p>
      * 
      * @param timezone
-     *        The timezone of a room profile.
+     *        The time zone of a room profile.
      */
 
     public void setTimezone(String timezone) {
@@ -264,10 +270,10 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The timezone of a room profile.
+     * The time zone of a room profile.
      * </p>
      * 
-     * @return The timezone of a room profile.
+     * @return The time zone of a room profile.
      */
 
     public String getTimezone() {
@@ -276,11 +282,11 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
-     * The timezone of a room profile.
+     * The time zone of a room profile.
      * </p>
      * 
      * @param timezone
-     *        The timezone of a room profile.
+     *        The time zone of a room profile.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -467,6 +473,46 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The locale of a room profile. (This is currently available only to a limited preview audience.)
+     */
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @return The locale of a room profile. (This is currently available only to a limited preview audience.)
+     */
+
+    public String getLocale() {
+        return this.locale;
+    }
+
+    /**
+     * <p>
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * </p>
+     * 
+     * @param locale
+     *        The locale of a room profile. (This is currently available only to a limited preview audience.)
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public ProfileData withLocale(String locale) {
+        setLocale(locale);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -493,7 +539,9 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
         if (getTemperatureUnit() != null)
             sb.append("TemperatureUnit: ").append(getTemperatureUnit()).append(",");
         if (getWakeWord() != null)
-            sb.append("WakeWord: ").append(getWakeWord());
+            sb.append("WakeWord: ").append(getWakeWord()).append(",");
+        if (getLocale() != null)
+            sb.append("Locale: ").append(getLocale());
         sb.append("}");
         return sb.toString();
     }
@@ -540,6 +588,10 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getWakeWord() != null && other.getWakeWord().equals(this.getWakeWord()) == false)
             return false;
+        if (other.getLocale() == null ^ this.getLocale() == null)
+            return false;
+        if (other.getLocale() != null && other.getLocale().equals(this.getLocale()) == false)
+            return false;
         return true;
     }
 
@@ -556,6 +608,7 @@ public class ProfileData implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getDistanceUnit() == null) ? 0 : getDistanceUnit().hashCode());
         hashCode = prime * hashCode + ((getTemperatureUnit() == null) ? 0 : getTemperatureUnit().hashCode());
         hashCode = prime * hashCode + ((getWakeWord() == null) ? 0 : getWakeWord().hashCode());
+        hashCode = prime * hashCode + ((getLocale() == null) ? 0 : getLocale().hashCode());
         return hashCode;
     }
 

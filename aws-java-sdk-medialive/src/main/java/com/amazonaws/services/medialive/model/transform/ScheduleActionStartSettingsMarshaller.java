@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,6 +31,8 @@ public class ScheduleActionStartSettingsMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("fixedModeScheduleActionStartSettings").build();
     private static final MarshallingInfo<StructuredPojo> FOLLOWMODESCHEDULEACTIONSTARTSETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("followModeScheduleActionStartSettings").build();
+    private static final MarshallingInfo<StructuredPojo> IMMEDIATEMODESCHEDULEACTIONSTARTSETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("immediateModeScheduleActionStartSettings").build();
 
     private static final ScheduleActionStartSettingsMarshaller instance = new ScheduleActionStartSettingsMarshaller();
 
@@ -50,6 +52,8 @@ public class ScheduleActionStartSettingsMarshaller {
         try {
             protocolMarshaller.marshall(scheduleActionStartSettings.getFixedModeScheduleActionStartSettings(), FIXEDMODESCHEDULEACTIONSTARTSETTINGS_BINDING);
             protocolMarshaller.marshall(scheduleActionStartSettings.getFollowModeScheduleActionStartSettings(), FOLLOWMODESCHEDULEACTIONSTARTSETTINGS_BINDING);
+            protocolMarshaller.marshall(scheduleActionStartSettings.getImmediateModeScheduleActionStartSettings(),
+                    IMMEDIATEMODESCHEDULEACTIONSTARTSETTINGS_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

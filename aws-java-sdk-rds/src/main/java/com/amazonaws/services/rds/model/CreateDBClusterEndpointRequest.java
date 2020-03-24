@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -40,7 +40,7 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
     private String dBClusterEndpointIdentifier;
     /**
      * <p>
-     * The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     * The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      * </p>
      */
     private String endpointType;
@@ -57,6 +57,12 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<String> excludedMembers;
+    /**
+     * <p>
+     * The tags to be assigned to the Amazon RDS resource.
+     * </p>
+     */
+    private com.amazonaws.internal.SdkInternalList<Tag> tags;
 
     /**
      * <p>
@@ -146,11 +152,11 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     * The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      * </p>
      * 
      * @param endpointType
-     *        The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     *        The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      */
 
     public void setEndpointType(String endpointType) {
@@ -159,10 +165,10 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     * The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      * </p>
      * 
-     * @return The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     * @return The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      */
 
     public String getEndpointType() {
@@ -171,11 +177,11 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
 
     /**
      * <p>
-     * The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     * The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      * </p>
      * 
      * @param endpointType
-     *        The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>.
+     *        The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -340,6 +346,79 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
     }
 
     /**
+     * <p>
+     * The tags to be assigned to the Amazon RDS resource.
+     * </p>
+     * 
+     * @return The tags to be assigned to the Amazon RDS resource.
+     */
+
+    public java.util.List<Tag> getTags() {
+        if (tags == null) {
+            tags = new com.amazonaws.internal.SdkInternalList<Tag>();
+        }
+        return tags;
+    }
+
+    /**
+     * <p>
+     * The tags to be assigned to the Amazon RDS resource.
+     * </p>
+     * 
+     * @param tags
+     *        The tags to be assigned to the Amazon RDS resource.
+     */
+
+    public void setTags(java.util.Collection<Tag> tags) {
+        if (tags == null) {
+            this.tags = null;
+            return;
+        }
+
+        this.tags = new com.amazonaws.internal.SdkInternalList<Tag>(tags);
+    }
+
+    /**
+     * <p>
+     * The tags to be assigned to the Amazon RDS resource.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
+     * existing values.
+     * </p>
+     * 
+     * @param tags
+     *        The tags to be assigned to the Amazon RDS resource.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateDBClusterEndpointRequest withTags(Tag... tags) {
+        if (this.tags == null) {
+            setTags(new com.amazonaws.internal.SdkInternalList<Tag>(tags.length));
+        }
+        for (Tag ele : tags) {
+            this.tags.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * The tags to be assigned to the Amazon RDS resource.
+     * </p>
+     * 
+     * @param tags
+     *        The tags to be assigned to the Amazon RDS resource.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateDBClusterEndpointRequest withTags(java.util.Collection<Tag> tags) {
+        setTags(tags);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -360,7 +439,9 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
         if (getStaticMembers() != null)
             sb.append("StaticMembers: ").append(getStaticMembers()).append(",");
         if (getExcludedMembers() != null)
-            sb.append("ExcludedMembers: ").append(getExcludedMembers());
+            sb.append("ExcludedMembers: ").append(getExcludedMembers()).append(",");
+        if (getTags() != null)
+            sb.append("Tags: ").append(getTags());
         sb.append("}");
         return sb.toString();
     }
@@ -395,6 +476,10 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
             return false;
         if (other.getExcludedMembers() != null && other.getExcludedMembers().equals(this.getExcludedMembers()) == false)
             return false;
+        if (other.getTags() == null ^ this.getTags() == null)
+            return false;
+        if (other.getTags() != null && other.getTags().equals(this.getTags()) == false)
+            return false;
         return true;
     }
 
@@ -408,6 +493,7 @@ public class CreateDBClusterEndpointRequest extends com.amazonaws.AmazonWebServi
         hashCode = prime * hashCode + ((getEndpointType() == null) ? 0 : getEndpointType().hashCode());
         hashCode = prime * hashCode + ((getStaticMembers() == null) ? 0 : getStaticMembers().hashCode());
         hashCode = prime * hashCode + ((getExcludedMembers() == null) ? 0 : getExcludedMembers().hashCode());
+        hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         return hashCode;
     }
 

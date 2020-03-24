@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -46,13 +46,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -81,6 +98,19 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </p>
      */
     private java.util.List<SourceRevision> sourceRevisions;
+    /**
+     * <p>
+     * The interaction or event that started a pipeline execution, such as automated change detection or a
+     * <code>StartPipelineExecution</code> API call.
+     * </p>
+     */
+    private ExecutionTrigger trigger;
+    /**
+     * <p>
+     * The interaction that stopped a pipeline execution.
+     * </p>
+     */
+    private StopExecutionTrigger stopTrigger;
 
     /**
      * <p>
@@ -134,13 +164,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -160,13 +207,31 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      *        </li>
      *        <li>
      *        <p>
+     *        Stopped: The pipeline execution was manually stopped. For more information, see <a href=
+     *        "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *        >Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop
+     *        mode, the execution is either completing or abandoning in-progress actions. For more information, see <a
+     *        href
+     *        ="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">
+     *        Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        Succeeded: The pipeline execution was completed successfully.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
      *        Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     *        execution advanced and continued through the pipeline instead.
+     *        execution advanced and continued through the pipeline instead. For more information, see <a
+     *        href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded"
+     *        >Superseded Executions</a>.
      *        </p>
      *        </li>
      *        <li>
@@ -193,13 +258,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -218,13 +300,32 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      *         </li>
      *         <li>
      *         <p>
+     *         Stopped: The pipeline execution was manually stopped. For more information, see <a href=
+     *         "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *         >Stopped Executions</a>.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected
+     *         stop mode, the execution is either completing or abandoning in-progress actions. For more information,
+     *         see <a href=
+     *         "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *         >Stopped Executions</a>.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
      *         Succeeded: The pipeline execution was completed successfully.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
      *         Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer
-     *         pipeline execution advanced and continued through the pipeline instead.
+     *         pipeline execution advanced and continued through the pipeline instead. For more information, see <a
+     *         href=
+     *         "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     *         Executions</a>.
      *         </p>
      *         </li>
      *         <li>
@@ -251,13 +352,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -277,13 +395,31 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      *        </li>
      *        <li>
      *        <p>
+     *        Stopped: The pipeline execution was manually stopped. For more information, see <a href=
+     *        "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *        >Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop
+     *        mode, the execution is either completing or abandoning in-progress actions. For more information, see <a
+     *        href
+     *        ="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">
+     *        Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        Succeeded: The pipeline execution was completed successfully.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
      *        Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     *        execution advanced and continued through the pipeline instead.
+     *        execution advanced and continued through the pipeline instead. For more information, see <a
+     *        href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded"
+     *        >Superseded Executions</a>.
      *        </p>
      *        </li>
      *        <li>
@@ -312,13 +448,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -338,13 +491,31 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      *        </li>
      *        <li>
      *        <p>
+     *        Stopped: The pipeline execution was manually stopped. For more information, see <a href=
+     *        "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *        >Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop
+     *        mode, the execution is either completing or abandoning in-progress actions. For more information, see <a
+     *        href
+     *        ="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">
+     *        Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        Succeeded: The pipeline execution was completed successfully.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
      *        Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     *        execution advanced and continued through the pipeline instead.
+     *        execution advanced and continued through the pipeline instead. For more information, see <a
+     *        href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded"
+     *        >Superseded Executions</a>.
      *        </p>
      *        </li>
      *        <li>
@@ -371,13 +542,30 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      * </li>
      * <li>
      * <p>
+     * Stopped: The pipeline execution was manually stopped. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode,
+     * the execution is either completing or abandoning in-progress actions. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     * >Stopped Executions</a>.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
      * Succeeded: The pipeline execution was completed successfully.
      * </p>
      * </li>
      * <li>
      * <p>
      * Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     * execution advanced and continued through the pipeline instead.
+     * execution advanced and continued through the pipeline instead. For more information, see <a
+     * href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded
+     * Executions</a>.
      * </p>
      * </li>
      * <li>
@@ -397,13 +585,31 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
      *        </li>
      *        <li>
      *        <p>
+     *        Stopped: The pipeline execution was manually stopped. For more information, see <a href=
+     *        "https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped"
+     *        >Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop
+     *        mode, the execution is either completing or abandoning in-progress actions. For more information, see <a
+     *        href
+     *        ="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">
+     *        Stopped Executions</a>.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
      *        Succeeded: The pipeline execution was completed successfully.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
      *        Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline
-     *        execution advanced and continued through the pipeline instead.
+     *        execution advanced and continued through the pipeline instead. For more information, see <a
+     *        href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded"
+     *        >Superseded Executions</a>.
      *        </p>
      *        </li>
      *        <li>
@@ -571,6 +777,92 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
     }
 
     /**
+     * <p>
+     * The interaction or event that started a pipeline execution, such as automated change detection or a
+     * <code>StartPipelineExecution</code> API call.
+     * </p>
+     * 
+     * @param trigger
+     *        The interaction or event that started a pipeline execution, such as automated change detection or a
+     *        <code>StartPipelineExecution</code> API call.
+     */
+
+    public void setTrigger(ExecutionTrigger trigger) {
+        this.trigger = trigger;
+    }
+
+    /**
+     * <p>
+     * The interaction or event that started a pipeline execution, such as automated change detection or a
+     * <code>StartPipelineExecution</code> API call.
+     * </p>
+     * 
+     * @return The interaction or event that started a pipeline execution, such as automated change detection or a
+     *         <code>StartPipelineExecution</code> API call.
+     */
+
+    public ExecutionTrigger getTrigger() {
+        return this.trigger;
+    }
+
+    /**
+     * <p>
+     * The interaction or event that started a pipeline execution, such as automated change detection or a
+     * <code>StartPipelineExecution</code> API call.
+     * </p>
+     * 
+     * @param trigger
+     *        The interaction or event that started a pipeline execution, such as automated change detection or a
+     *        <code>StartPipelineExecution</code> API call.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public PipelineExecutionSummary withTrigger(ExecutionTrigger trigger) {
+        setTrigger(trigger);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The interaction that stopped a pipeline execution.
+     * </p>
+     * 
+     * @param stopTrigger
+     *        The interaction that stopped a pipeline execution.
+     */
+
+    public void setStopTrigger(StopExecutionTrigger stopTrigger) {
+        this.stopTrigger = stopTrigger;
+    }
+
+    /**
+     * <p>
+     * The interaction that stopped a pipeline execution.
+     * </p>
+     * 
+     * @return The interaction that stopped a pipeline execution.
+     */
+
+    public StopExecutionTrigger getStopTrigger() {
+        return this.stopTrigger;
+    }
+
+    /**
+     * <p>
+     * The interaction that stopped a pipeline execution.
+     * </p>
+     * 
+     * @param stopTrigger
+     *        The interaction that stopped a pipeline execution.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public PipelineExecutionSummary withStopTrigger(StopExecutionTrigger stopTrigger) {
+        setStopTrigger(stopTrigger);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -591,7 +883,11 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
         if (getLastUpdateTime() != null)
             sb.append("LastUpdateTime: ").append(getLastUpdateTime()).append(",");
         if (getSourceRevisions() != null)
-            sb.append("SourceRevisions: ").append(getSourceRevisions());
+            sb.append("SourceRevisions: ").append(getSourceRevisions()).append(",");
+        if (getTrigger() != null)
+            sb.append("Trigger: ").append(getTrigger()).append(",");
+        if (getStopTrigger() != null)
+            sb.append("StopTrigger: ").append(getStopTrigger());
         sb.append("}");
         return sb.toString();
     }
@@ -626,6 +922,14 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
             return false;
         if (other.getSourceRevisions() != null && other.getSourceRevisions().equals(this.getSourceRevisions()) == false)
             return false;
+        if (other.getTrigger() == null ^ this.getTrigger() == null)
+            return false;
+        if (other.getTrigger() != null && other.getTrigger().equals(this.getTrigger()) == false)
+            return false;
+        if (other.getStopTrigger() == null ^ this.getStopTrigger() == null)
+            return false;
+        if (other.getStopTrigger() != null && other.getStopTrigger().equals(this.getStopTrigger()) == false)
+            return false;
         return true;
     }
 
@@ -639,6 +943,8 @@ public class PipelineExecutionSummary implements Serializable, Cloneable, Struct
         hashCode = prime * hashCode + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         hashCode = prime * hashCode + ((getLastUpdateTime() == null) ? 0 : getLastUpdateTime().hashCode());
         hashCode = prime * hashCode + ((getSourceRevisions() == null) ? 0 : getSourceRevisions().hashCode());
+        hashCode = prime * hashCode + ((getTrigger() == null) ? 0 : getTrigger().hashCode());
+        hashCode = prime * hashCode + ((getStopTrigger() == null) ? 0 : getStopTrigger().hashCode());
         return hashCode;
     }
 

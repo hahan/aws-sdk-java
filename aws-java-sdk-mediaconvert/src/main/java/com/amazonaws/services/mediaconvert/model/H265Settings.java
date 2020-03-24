@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -34,8 +34,8 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
      */
     private String alternateTransferFunctionSei;
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when
-     * rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be
+     * unique when rounded down to the nearest multiple of 1000.
      */
     private Integer bitrate;
     /** H.265 Level. */
@@ -92,14 +92,15 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     /** Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000. */
     private Integer hrdBufferSize;
     /**
-     * Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and
-     * Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity
-     * (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
-     * use the same field polarity as the source. Therefore, behavior depends on the input scan type. - If the source is
-     * interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The
-     * output could therefore be a mix of "top field first" and "bottom field first". - If the source is progressive,
-     * the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the
-     * Follow options you chose.
+     * Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     * regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     * (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow,
+     * Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with
+     * the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same
+     * polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and
+     * "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or
+     * "bottom field first" polarity, depending on which of the Follow options you chose. If you don't choose a value,
+     * the service will default to Progressive (PROGRESSIVE).
      */
     private String interlaceMode;
     /**
@@ -152,7 +153,12 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
      * content
      */
     private String sampleAdaptiveOffsetFilterMode;
-    /** Scene change detection (inserts I-frames on scene changes). */
+    /**
+     * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves
+     * video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     * (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     * https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
+     */
     private String sceneChangeDetect;
     /**
      * Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive
@@ -190,14 +196,13 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     /** Inserts timecode for each frame as 4 bytes of an unregistered SEI message. */
     private String unregisteredSeiTimecode;
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include
-     * writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with
-     * downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow,
-     * ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-     * This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd
-     * Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the
-     * samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes
-     * parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting
+     * only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1
+     * to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29
+     * N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in
+     * the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might
+     * not work properly with some downstream systems and video players. The service defaults to marking your output as
+     * HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      */
     private String writeMp4PackagingType;
 
@@ -312,12 +317,12 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when
-     * rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be
+     * unique when rounded down to the nearest multiple of 1000.
      * 
      * @param bitrate
-     *        Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique
-     *        when rounded down to the nearest multiple of 1000.
+     *        Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates
+     *        must be unique when rounded down to the nearest multiple of 1000.
      */
 
     public void setBitrate(Integer bitrate) {
@@ -325,11 +330,11 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when
-     * rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be
+     * unique when rounded down to the nearest multiple of 1000.
      * 
-     * @return Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique
-     *         when rounded down to the nearest multiple of 1000.
+     * @return Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates
+     *         must be unique when rounded down to the nearest multiple of 1000.
      */
 
     public Integer getBitrate() {
@@ -337,12 +342,12 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when
-     * rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be
+     * unique when rounded down to the nearest multiple of 1000.
      * 
      * @param bitrate
-     *        Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique
-     *        when rounded down to the nearest multiple of 1000.
+     *        Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates
+     *        must be unique when rounded down to the nearest multiple of 1000.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -1084,25 +1089,26 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and
-     * Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity
-     * (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
-     * use the same field polarity as the source. Therefore, behavior depends on the input scan type. - If the source is
-     * interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The
-     * output could therefore be a mix of "top field first" and "bottom field first". - If the source is progressive,
-     * the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the
-     * Follow options you chose.
+     * Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     * regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     * (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow,
+     * Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with
+     * the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same
+     * polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and
+     * "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or
+     * "bottom field first" polarity, depending on which of the Follow options you chose. If you don't choose a value,
+     * the service will default to Progressive (PROGRESSIVE).
      * 
      * @param interlaceMode
-     *        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First
-     *        (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having
-     *        the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow,
-     *        Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior
-     *        depends on the input scan type. - If the source is interlaced, the output will be interlaced with the same
-     *        polarity as the source (it will follow the source). The output could therefore be a mix of
-     *        "top field first" and "bottom field first". - If the source is progressive, the output will be interlaced
-     *        with "top field first" or "bottom field first" polarity, depending on which of the Follow options you
-     *        chose.
+     *        Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     *        regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     *        (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose
+     *        Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an
+     *        interlaced output with the same field polarity as the source. If the source is interlaced, the output will
+     *        be interlaced with the same polarity as the source (it will follow the source). The output could therefore
+     *        be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be
+     *        interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow
+     *        options you chose. If you don't choose a value, the service will default to Progressive (PROGRESSIVE).
      * @see H265InterlaceMode
      */
 
@@ -1111,24 +1117,26 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and
-     * Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity
-     * (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
-     * use the same field polarity as the source. Therefore, behavior depends on the input scan type. - If the source is
-     * interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The
-     * output could therefore be a mix of "top field first" and "bottom field first". - If the source is progressive,
-     * the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the
-     * Follow options you chose.
+     * Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     * regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     * (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow,
+     * Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with
+     * the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same
+     * polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and
+     * "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or
+     * "bottom field first" polarity, depending on which of the Follow options you chose. If you don't choose a value,
+     * the service will default to Progressive (PROGRESSIVE).
      * 
-     * @return Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First
-     *         (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having
-     *         the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow,
-     *         Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior
-     *         depends on the input scan type. - If the source is interlaced, the output will be interlaced with the
-     *         same polarity as the source (it will follow the source). The output could therefore be a mix of
-     *         "top field first" and "bottom field first". - If the source is progressive, the output will be interlaced
-     *         with "top field first" or "bottom field first" polarity, depending on which of the Follow options you
-     *         chose.
+     * @return Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive
+     *         output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field
+     *         First (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout.
+     *         Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create
+     *         an interlaced output with the same field polarity as the source. If the source is interlaced, the output
+     *         will be interlaced with the same polarity as the source (it will follow the source). The output could
+     *         therefore be a mix of "top field first" and "bottom field first". If the source is progressive, your
+     *         output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of
+     *         the Follow options you chose. If you don't choose a value, the service will default to Progressive
+     *         (PROGRESSIVE).
      * @see H265InterlaceMode
      */
 
@@ -1137,25 +1145,26 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and
-     * Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity
-     * (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
-     * use the same field polarity as the source. Therefore, behavior depends on the input scan type. - If the source is
-     * interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The
-     * output could therefore be a mix of "top field first" and "bottom field first". - If the source is progressive,
-     * the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the
-     * Follow options you chose.
+     * Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     * regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     * (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow,
+     * Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with
+     * the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same
+     * polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and
+     * "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or
+     * "bottom field first" polarity, depending on which of the Follow options you chose. If you don't choose a value,
+     * the service will default to Progressive (PROGRESSIVE).
      * 
      * @param interlaceMode
-     *        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First
-     *        (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having
-     *        the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow,
-     *        Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior
-     *        depends on the input scan type. - If the source is interlaced, the output will be interlaced with the same
-     *        polarity as the source (it will follow the source). The output could therefore be a mix of
-     *        "top field first" and "bottom field first". - If the source is progressive, the output will be interlaced
-     *        with "top field first" or "bottom field first" polarity, depending on which of the Follow options you
-     *        chose.
+     *        Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     *        regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     *        (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose
+     *        Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an
+     *        interlaced output with the same field polarity as the source. If the source is interlaced, the output will
+     *        be interlaced with the same polarity as the source (it will follow the source). The output could therefore
+     *        be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be
+     *        interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow
+     *        options you chose. If you don't choose a value, the service will default to Progressive (PROGRESSIVE).
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265InterlaceMode
      */
@@ -1166,25 +1175,26 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and
-     * Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity
-     * (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
-     * use the same field polarity as the source. Therefore, behavior depends on the input scan type. - If the source is
-     * interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The
-     * output could therefore be a mix of "top field first" and "bottom field first". - If the source is progressive,
-     * the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the
-     * Follow options you chose.
+     * Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     * regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     * (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow,
+     * Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with
+     * the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same
+     * polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and
+     * "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or
+     * "bottom field first" polarity, depending on which of the Follow options you chose. If you don't choose a value,
+     * the service will default to Progressive (PROGRESSIVE).
      * 
      * @param interlaceMode
-     *        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First
-     *        (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having
-     *        the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow,
-     *        Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior
-     *        depends on the input scan type. - If the source is interlaced, the output will be interlaced with the same
-     *        polarity as the source (it will follow the source). The output could therefore be a mix of
-     *        "top field first" and "bottom field first". - If the source is progressive, the output will be interlaced
-     *        with "top field first" or "bottom field first" polarity, depending on which of the Follow options you
-     *        chose.
+     *        Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output,
+     *        regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First
+     *        (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose
+     *        Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an
+     *        interlaced output with the same field polarity as the source. If the source is interlaced, the output will
+     *        be interlaced with the same polarity as the source (it will follow the source). The output could therefore
+     *        be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be
+     *        interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow
+     *        options you chose. If you don't choose a value, the service will default to Progressive (PROGRESSIVE).
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265InterlaceMode
      */
@@ -1717,10 +1727,16 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Scene change detection (inserts I-frames on scene changes).
+     * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves
+     * video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     * (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     * https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * 
      * @param sceneChangeDetect
-     *        Scene change detection (inserts I-frames on scene changes).
+     *        Enable this setting to insert I-frames at scene changes that the service automatically detects. This
+     *        improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     *        (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * @see H265SceneChangeDetect
      */
 
@@ -1729,9 +1745,15 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Scene change detection (inserts I-frames on scene changes).
+     * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves
+     * video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     * (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     * https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * 
-     * @return Scene change detection (inserts I-frames on scene changes).
+     * @return Enable this setting to insert I-frames at scene changes that the service automatically detects. This
+     *         improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     *         (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     *         https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * @see H265SceneChangeDetect
      */
 
@@ -1740,10 +1762,16 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Scene change detection (inserts I-frames on scene changes).
+     * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves
+     * video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     * (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     * https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * 
      * @param sceneChangeDetect
-     *        Scene change detection (inserts I-frames on scene changes).
+     *        Enable this setting to insert I-frames at scene changes that the service automatically detects. This
+     *        improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     *        (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265SceneChangeDetect
      */
@@ -1754,10 +1782,16 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Scene change detection (inserts I-frames on scene changes).
+     * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves
+     * video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     * (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     * https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * 
      * @param sceneChangeDetect
-     *        Scene change detection (inserts I-frames on scene changes).
+     *        Enable this setting to insert I-frames at scene changes that the service automatically detects. This
+     *        improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection
+     *        (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see
+     *        https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265SceneChangeDetect
      */
@@ -2245,24 +2279,23 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include
-     * writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with
-     * downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow,
-     * ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-     * This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd
-     * Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the
-     * samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes
-     * parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting
+     * only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1
+     * to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29
+     * N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in
+     * the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might
+     * not work properly with some downstream systems and video players. The service defaults to marking your output as
+     * HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      * 
      * @param writeMp4PackagingType
-     *        Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you
-     *        include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work
-     *        properly with downstream systems and video players. If the location of parameter set NAL units don't
-     *        matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose
-     *        HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1
-     *        SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set
-     *        NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output
-     *        as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     *        If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this
+     *        setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4
+     *        outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following
+     *        specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
+     *        service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4
+     *        outputs, when you choose HVC1, your output video might not work properly with some downstream systems and
+     *        video players. The service defaults to marking your output as HEV1. For these outputs, the service writes
+     *        parameter set NAL units directly into the samples.
      * @see H265WriteMp4PackagingType
      */
 
@@ -2271,23 +2304,22 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include
-     * writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with
-     * downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow,
-     * ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-     * This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd
-     * Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the
-     * samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes
-     * parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting
+     * only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1
+     * to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29
+     * N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in
+     * the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might
+     * not work properly with some downstream systems and video players. The service defaults to marking your output as
+     * HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      * 
-     * @return Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you
-     *         include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work
-     *         properly with downstream systems and video players. If the location of parameter set NAL units don't
-     *         matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose
-     *         HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1
-     *         SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set
-     *         NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your
-     *         output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     * @return If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this
+     *         setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4
+     *         outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following
+     *         specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
+     *         service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4
+     *         outputs, when you choose HVC1, your output video might not work properly with some downstream systems and
+     *         video players. The service defaults to marking your output as HEV1. For these outputs, the service writes
+     *         parameter set NAL units directly into the samples.
      * @see H265WriteMp4PackagingType
      */
 
@@ -2296,24 +2328,23 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include
-     * writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with
-     * downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow,
-     * ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-     * This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd
-     * Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the
-     * samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes
-     * parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting
+     * only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1
+     * to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29
+     * N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in
+     * the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might
+     * not work properly with some downstream systems and video players. The service defaults to marking your output as
+     * HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      * 
      * @param writeMp4PackagingType
-     *        Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you
-     *        include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work
-     *        properly with downstream systems and video players. If the location of parameter set NAL units don't
-     *        matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose
-     *        HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1
-     *        SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set
-     *        NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output
-     *        as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     *        If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this
+     *        setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4
+     *        outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following
+     *        specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
+     *        service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4
+     *        outputs, when you choose HVC1, your output video might not work properly with some downstream systems and
+     *        video players. The service defaults to marking your output as HEV1. For these outputs, the service writes
+     *        parameter set NAL units directly into the samples.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265WriteMp4PackagingType
      */
@@ -2324,24 +2355,23 @@ public class H265Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include
-     * writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with
-     * downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow,
-     * ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-     * This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd
-     * Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the
-     * samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes
-     * parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting
+     * only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1
+     * to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29
+     * N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in
+     * the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might
+     * not work properly with some downstream systems and video players. The service defaults to marking your output as
+     * HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      * 
      * @param writeMp4PackagingType
-     *        Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you
-     *        include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work
-     *        properly with downstream systems and video players. If the location of parameter set NAL units don't
-     *        matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose
-     *        HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1
-     *        SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set
-     *        NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output
-     *        as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     *        If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this
+     *        setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4
+     *        outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following
+     *        specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
+     *        service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4
+     *        outputs, when you choose HVC1, your output video might not work properly with some downstream systems and
+     *        video players. The service defaults to marking your output as HEV1. For these outputs, the service writes
+     *        parameter set NAL units directly into the samples.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see H265WriteMp4PackagingType
      */

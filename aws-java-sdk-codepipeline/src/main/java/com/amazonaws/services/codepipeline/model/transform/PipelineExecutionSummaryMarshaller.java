@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -38,6 +38,10 @@ public class PipelineExecutionSummaryMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("lastUpdateTime").timestampFormat("unixTimestamp").build();
     private static final MarshallingInfo<List> SOURCEREVISIONS_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("sourceRevisions").build();
+    private static final MarshallingInfo<StructuredPojo> TRIGGER_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("trigger").build();
+    private static final MarshallingInfo<StructuredPojo> STOPTRIGGER_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("stopTrigger").build();
 
     private static final PipelineExecutionSummaryMarshaller instance = new PipelineExecutionSummaryMarshaller();
 
@@ -60,6 +64,8 @@ public class PipelineExecutionSummaryMarshaller {
             protocolMarshaller.marshall(pipelineExecutionSummary.getStartTime(), STARTTIME_BINDING);
             protocolMarshaller.marshall(pipelineExecutionSummary.getLastUpdateTime(), LASTUPDATETIME_BINDING);
             protocolMarshaller.marshall(pipelineExecutionSummary.getSourceRevisions(), SOURCEREVISIONS_BINDING);
+            protocolMarshaller.marshall(pipelineExecutionSummary.getTrigger(), TRIGGER_BINDING);
+            protocolMarshaller.marshall(pipelineExecutionSummary.getStopTrigger(), STOPTRIGGER_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

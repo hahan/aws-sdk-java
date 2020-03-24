@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -29,7 +29,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in conjunction
-     * with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive.
+     * with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive.
      * </p>
      * <p>
      * Constraints:
@@ -121,15 +121,45 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     private String snapshotType;
     /**
      * <p>
-     * This parameter is not currently supported.
+     * A filter that specifies one or more DB snapshots to describe.
      * </p>
+     * <p>
+     * Supported filters:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>snapshot-type</code> - Accepts types of DB snapshots.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>engine</code> - Accepts names of database engines.
+     * </p>
+     * </li>
+     * </ul>
      */
     private com.amazonaws.internal.SdkInternalList<Filter> filters;
     /**
      * <p>
      * The maximum number of records to include in the response. If more records exist than the specified
-     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     * remaining results can be retrieved.
+     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can
+     * retrieve the remaining results.
      * </p>
      * <p>
      * Default: 100
@@ -178,7 +208,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in conjunction
-     * with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive.
+     * with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive.
      * </p>
      * <p>
      * Constraints:
@@ -193,7 +223,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * 
      * @param dBInstanceIdentifier
      *        The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in
-     *        conjunction with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive. </p>
+     *        conjunction with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive. </p>
      *        <p>
      *        Constraints:
      *        </p>
@@ -212,7 +242,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in conjunction
-     * with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive.
+     * with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive.
      * </p>
      * <p>
      * Constraints:
@@ -226,7 +256,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * </ul>
      * 
      * @return The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in
-     *         conjunction with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive. </p>
+     *         conjunction with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive. </p>
      *         <p>
      *         Constraints:
      *         </p>
@@ -245,7 +275,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in conjunction
-     * with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive.
+     * with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive.
      * </p>
      * <p>
      * Constraints:
@@ -260,7 +290,7 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * 
      * @param dBInstanceIdentifier
      *        The ID of the DB instance to retrieve the list of DB snapshots for. This parameter can't be used in
-     *        conjunction with <code>DBSnapshotIdentifier</code>. This parameter is not case-sensitive. </p>
+     *        conjunction with <code>DBSnapshotIdentifier</code>. This parameter isn't case-sensitive. </p>
      *        <p>
      *        Constraints:
      *        </p>
@@ -744,10 +774,70 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * This parameter is not currently supported.
+     * A filter that specifies one or more DB snapshots to describe.
      * </p>
+     * <p>
+     * Supported filters:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>snapshot-type</code> - Accepts types of DB snapshots.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>engine</code> - Accepts names of database engines.
+     * </p>
+     * </li>
+     * </ul>
      * 
-     * @return This parameter is not currently supported.
+     * @return A filter that specifies one or more DB snapshots to describe.</p>
+     *         <p>
+     *         Supported filters:
+     *         </p>
+     *         <ul>
+     *         <li>
+     *         <p>
+     *         <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names
+     *         (ARNs).
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>snapshot-type</code> - Accepts types of DB snapshots.
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         <code>engine</code> - Accepts names of database engines.
+     *         </p>
+     *         </li>
      */
 
     public java.util.List<Filter> getFilters() {
@@ -759,11 +849,71 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * This parameter is not currently supported.
+     * A filter that specifies one or more DB snapshots to describe.
      * </p>
+     * <p>
+     * Supported filters:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>snapshot-type</code> - Accepts types of DB snapshots.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>engine</code> - Accepts names of database engines.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param filters
-     *        This parameter is not currently supported.
+     *        A filter that specifies one or more DB snapshots to describe.</p>
+     *        <p>
+     *        Supported filters:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names
+     *        (ARNs).
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>snapshot-type</code> - Accepts types of DB snapshots.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>engine</code> - Accepts names of database engines.
+     *        </p>
+     *        </li>
      */
 
     public void setFilters(java.util.Collection<Filter> filters) {
@@ -777,8 +927,38 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * This parameter is not currently supported.
+     * A filter that specifies one or more DB snapshots to describe.
      * </p>
+     * <p>
+     * Supported filters:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>snapshot-type</code> - Accepts types of DB snapshots.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>engine</code> - Accepts names of database engines.
+     * </p>
+     * </li>
+     * </ul>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
      * {@link #setFilters(java.util.Collection)} or {@link #withFilters(java.util.Collection)} if you want to override
@@ -786,7 +966,37 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * </p>
      * 
      * @param filters
-     *        This parameter is not currently supported.
+     *        A filter that specifies one or more DB snapshots to describe.</p>
+     *        <p>
+     *        Supported filters:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names
+     *        (ARNs).
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>snapshot-type</code> - Accepts types of DB snapshots.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>engine</code> - Accepts names of database engines.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -802,11 +1012,71 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
 
     /**
      * <p>
-     * This parameter is not currently supported.
+     * A filter that specifies one or more DB snapshots to describe.
      * </p>
+     * <p>
+     * Supported filters:
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>snapshot-type</code> - Accepts types of DB snapshots.
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>engine</code> - Accepts names of database engines.
+     * </p>
+     * </li>
+     * </ul>
      * 
      * @param filters
-     *        This parameter is not currently supported.
+     *        A filter that specifies one or more DB snapshots to describe.</p>
+     *        <p>
+     *        Supported filters:
+     *        </p>
+     *        <ul>
+     *        <li>
+     *        <p>
+     *        <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names
+     *        (ARNs).
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>snapshot-type</code> - Accepts types of DB snapshots.
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        <code>engine</code> - Accepts names of database engines.
+     *        </p>
+     *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -818,8 +1088,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The maximum number of records to include in the response. If more records exist than the specified
-     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     * remaining results can be retrieved.
+     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can
+     * retrieve the remaining results.
      * </p>
      * <p>
      * Default: 100
@@ -830,8 +1100,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * 
      * @param maxRecords
      *        The maximum number of records to include in the response. If more records exist than the specified
-     *        <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     *        remaining results can be retrieved. </p>
+     *        <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you
+     *        can retrieve the remaining results. </p>
      *        <p>
      *        Default: 100
      *        </p>
@@ -846,8 +1116,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The maximum number of records to include in the response. If more records exist than the specified
-     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     * remaining results can be retrieved.
+     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can
+     * retrieve the remaining results.
      * </p>
      * <p>
      * Default: 100
@@ -857,8 +1127,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * </p>
      * 
      * @return The maximum number of records to include in the response. If more records exist than the specified
-     *         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     *         remaining results can be retrieved. </p>
+     *         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you
+     *         can retrieve the remaining results. </p>
      *         <p>
      *         Default: 100
      *         </p>
@@ -873,8 +1143,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
     /**
      * <p>
      * The maximum number of records to include in the response. If more records exist than the specified
-     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     * remaining results can be retrieved.
+     * <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can
+     * retrieve the remaining results.
      * </p>
      * <p>
      * Default: 100
@@ -885,8 +1155,8 @@ public class DescribeDBSnapshotsRequest extends com.amazonaws.AmazonWebServiceRe
      * 
      * @param maxRecords
      *        The maximum number of records to include in the response. If more records exist than the specified
-     *        <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the
-     *        remaining results can be retrieved. </p>
+     *        <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you
+     *        can retrieve the remaining results. </p>
      *        <p>
      *        Default: 100
      *        </p>

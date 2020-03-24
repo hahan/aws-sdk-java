@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,6 +31,27 @@ public class CreateApplicationRequest extends com.amazonaws.AmazonWebServiceRequ
      * </p>
      */
     private String resourceGroupName;
+    /**
+     * <p>
+     * When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * </p>
+     */
+    private Boolean opsCenterEnabled;
+    /**
+     * <p>
+     * The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive
+     * notifications for updates to the opsItem.
+     * </p>
+     */
+    private String opsItemSNSTopicArn;
+    /**
+     * <p>
+     * List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     * <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256
+     * characters.
+     * </p>
+     */
+    private java.util.List<Tag> tags;
 
     /**
      * <p>
@@ -73,6 +94,190 @@ public class CreateApplicationRequest extends com.amazonaws.AmazonWebServiceRequ
     }
 
     /**
+     * <p>
+     * When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * </p>
+     * 
+     * @param opsCenterEnabled
+     *        When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     */
+
+    public void setOpsCenterEnabled(Boolean opsCenterEnabled) {
+        this.opsCenterEnabled = opsCenterEnabled;
+    }
+
+    /**
+     * <p>
+     * When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * </p>
+     * 
+     * @return When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     */
+
+    public Boolean getOpsCenterEnabled() {
+        return this.opsCenterEnabled;
+    }
+
+    /**
+     * <p>
+     * When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * </p>
+     * 
+     * @param opsCenterEnabled
+     *        When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateApplicationRequest withOpsCenterEnabled(Boolean opsCenterEnabled) {
+        setOpsCenterEnabled(opsCenterEnabled);
+        return this;
+    }
+
+    /**
+     * <p>
+     * When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     * </p>
+     * 
+     * @return When set to <code>true</code>, creates opsItems for any problems detected on an application.
+     */
+
+    public Boolean isOpsCenterEnabled() {
+        return this.opsCenterEnabled;
+    }
+
+    /**
+     * <p>
+     * The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive
+     * notifications for updates to the opsItem.
+     * </p>
+     * 
+     * @param opsItemSNSTopicArn
+     *        The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to
+     *        receive notifications for updates to the opsItem.
+     */
+
+    public void setOpsItemSNSTopicArn(String opsItemSNSTopicArn) {
+        this.opsItemSNSTopicArn = opsItemSNSTopicArn;
+    }
+
+    /**
+     * <p>
+     * The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive
+     * notifications for updates to the opsItem.
+     * </p>
+     * 
+     * @return The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to
+     *         receive notifications for updates to the opsItem.
+     */
+
+    public String getOpsItemSNSTopicArn() {
+        return this.opsItemSNSTopicArn;
+    }
+
+    /**
+     * <p>
+     * The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive
+     * notifications for updates to the opsItem.
+     * </p>
+     * 
+     * @param opsItemSNSTopicArn
+     *        The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to
+     *        receive notifications for updates to the opsItem.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateApplicationRequest withOpsItemSNSTopicArn(String opsItemSNSTopicArn) {
+        setOpsItemSNSTopicArn(opsItemSNSTopicArn);
+        return this;
+    }
+
+    /**
+     * <p>
+     * List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     * <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256
+     * characters.
+     * </p>
+     * 
+     * @return List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     *         <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value
+     *         is 256 characters.
+     */
+
+    public java.util.List<Tag> getTags() {
+        return tags;
+    }
+
+    /**
+     * <p>
+     * List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     * <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256
+     * characters.
+     * </p>
+     * 
+     * @param tags
+     *        List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     *        <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value
+     *        is 256 characters.
+     */
+
+    public void setTags(java.util.Collection<Tag> tags) {
+        if (tags == null) {
+            this.tags = null;
+            return;
+        }
+
+        this.tags = new java.util.ArrayList<Tag>(tags);
+    }
+
+    /**
+     * <p>
+     * List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     * <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256
+     * characters.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
+     * {@link #setTags(java.util.Collection)} or {@link #withTags(java.util.Collection)} if you want to override the
+     * existing values.
+     * </p>
+     * 
+     * @param tags
+     *        List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     *        <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value
+     *        is 256 characters.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateApplicationRequest withTags(Tag... tags) {
+        if (this.tags == null) {
+            setTags(new java.util.ArrayList<Tag>(tags.length));
+        }
+        for (Tag ele : tags) {
+            this.tags.add(ele);
+        }
+        return this;
+    }
+
+    /**
+     * <p>
+     * List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     * <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256
+     * characters.
+     * </p>
+     * 
+     * @param tags
+     *        List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (
+     *        <code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value
+     *        is 256 characters.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateApplicationRequest withTags(java.util.Collection<Tag> tags) {
+        setTags(tags);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -85,7 +290,13 @@ public class CreateApplicationRequest extends com.amazonaws.AmazonWebServiceRequ
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         if (getResourceGroupName() != null)
-            sb.append("ResourceGroupName: ").append(getResourceGroupName());
+            sb.append("ResourceGroupName: ").append(getResourceGroupName()).append(",");
+        if (getOpsCenterEnabled() != null)
+            sb.append("OpsCenterEnabled: ").append(getOpsCenterEnabled()).append(",");
+        if (getOpsItemSNSTopicArn() != null)
+            sb.append("OpsItemSNSTopicArn: ").append(getOpsItemSNSTopicArn()).append(",");
+        if (getTags() != null)
+            sb.append("Tags: ").append(getTags());
         sb.append("}");
         return sb.toString();
     }
@@ -104,6 +315,18 @@ public class CreateApplicationRequest extends com.amazonaws.AmazonWebServiceRequ
             return false;
         if (other.getResourceGroupName() != null && other.getResourceGroupName().equals(this.getResourceGroupName()) == false)
             return false;
+        if (other.getOpsCenterEnabled() == null ^ this.getOpsCenterEnabled() == null)
+            return false;
+        if (other.getOpsCenterEnabled() != null && other.getOpsCenterEnabled().equals(this.getOpsCenterEnabled()) == false)
+            return false;
+        if (other.getOpsItemSNSTopicArn() == null ^ this.getOpsItemSNSTopicArn() == null)
+            return false;
+        if (other.getOpsItemSNSTopicArn() != null && other.getOpsItemSNSTopicArn().equals(this.getOpsItemSNSTopicArn()) == false)
+            return false;
+        if (other.getTags() == null ^ this.getTags() == null)
+            return false;
+        if (other.getTags() != null && other.getTags().equals(this.getTags()) == false)
+            return false;
         return true;
     }
 
@@ -113,6 +336,9 @@ public class CreateApplicationRequest extends com.amazonaws.AmazonWebServiceRequ
         int hashCode = 1;
 
         hashCode = prime * hashCode + ((getResourceGroupName() == null) ? 0 : getResourceGroupName().hashCode());
+        hashCode = prime * hashCode + ((getOpsCenterEnabled() == null) ? 0 : getOpsCenterEnabled().hashCode());
+        hashCode = prime * hashCode + ((getOpsItemSNSTopicArn() == null) ? 0 : getOpsItemSNSTopicArn().hashCode());
+        hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         return hashCode;
     }
 

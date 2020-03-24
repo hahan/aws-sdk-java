@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -41,6 +41,9 @@ import javax.annotation.Generated;
  * <p>
  * <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>,
  * <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code>
+ * </p>
+ * <p>
+ * <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code>
  * </p>
  * <p>
  * <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>
@@ -154,7 +157,8 @@ public class CacheNode implements Serializable, Cloneable {
     private String cacheNodeId;
     /**
      * <p>
-     * The current state of this cache node.
+     * The current state of this cache node, one of the following values: <code>available</code>, <code>creating</code>,
+     * <code>rebooting</code>, or <code>deleting</code>.
      * </p>
      */
     private String cacheNodeStatus;
@@ -238,11 +242,13 @@ public class CacheNode implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The current state of this cache node.
+     * The current state of this cache node, one of the following values: <code>available</code>, <code>creating</code>,
+     * <code>rebooting</code>, or <code>deleting</code>.
      * </p>
      * 
      * @param cacheNodeStatus
-     *        The current state of this cache node.
+     *        The current state of this cache node, one of the following values: <code>available</code>,
+     *        <code>creating</code>, <code>rebooting</code>, or <code>deleting</code>.
      */
 
     public void setCacheNodeStatus(String cacheNodeStatus) {
@@ -251,10 +257,12 @@ public class CacheNode implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The current state of this cache node.
+     * The current state of this cache node, one of the following values: <code>available</code>, <code>creating</code>,
+     * <code>rebooting</code>, or <code>deleting</code>.
      * </p>
      * 
-     * @return The current state of this cache node.
+     * @return The current state of this cache node, one of the following values: <code>available</code>,
+     *         <code>creating</code>, <code>rebooting</code>, or <code>deleting</code>.
      */
 
     public String getCacheNodeStatus() {
@@ -263,11 +271,13 @@ public class CacheNode implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The current state of this cache node.
+     * The current state of this cache node, one of the following values: <code>available</code>, <code>creating</code>,
+     * <code>rebooting</code>, or <code>deleting</code>.
      * </p>
      * 
      * @param cacheNodeStatus
-     *        The current state of this cache node.
+     *        The current state of this cache node, one of the following values: <code>available</code>,
+     *        <code>creating</code>, <code>rebooting</code>, or <code>deleting</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

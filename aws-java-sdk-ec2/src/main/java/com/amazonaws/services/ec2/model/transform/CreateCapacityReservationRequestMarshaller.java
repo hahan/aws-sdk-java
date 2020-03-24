@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -54,6 +54,10 @@ public class CreateCapacityReservationRequestMarshaller implements Marshaller<Re
 
         if (createCapacityReservationRequest.getAvailabilityZone() != null) {
             request.addParameter("AvailabilityZone", StringUtils.fromString(createCapacityReservationRequest.getAvailabilityZone()));
+        }
+
+        if (createCapacityReservationRequest.getAvailabilityZoneId() != null) {
+            request.addParameter("AvailabilityZoneId", StringUtils.fromString(createCapacityReservationRequest.getAvailabilityZoneId()));
         }
 
         if (createCapacityReservationRequest.getTenancy() != null) {

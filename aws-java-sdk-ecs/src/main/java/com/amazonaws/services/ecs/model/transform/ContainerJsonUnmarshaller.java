@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -59,6 +59,18 @@ public class ContainerJsonUnmarshaller implements Unmarshaller<Container, JsonUn
                 if (context.testExpression("name", targetDepth)) {
                     context.nextToken();
                     container.setName(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("image", targetDepth)) {
+                    context.nextToken();
+                    container.setImage(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("imageDigest", targetDepth)) {
+                    context.nextToken();
+                    container.setImageDigest(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("runtimeId", targetDepth)) {
+                    context.nextToken();
+                    container.setRuntimeId(context.getUnmarshaller(String.class).unmarshall(context));
                 }
                 if (context.testExpression("lastStatus", targetDepth)) {
                     context.nextToken();

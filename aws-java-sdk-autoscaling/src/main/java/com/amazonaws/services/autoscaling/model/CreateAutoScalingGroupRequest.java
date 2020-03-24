@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -36,11 +36,6 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration.
      * </p>
      * <p>
-     * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling Group Using
-     * a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     * </p>
-     * <p>
      * If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following parameters:
      * <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
      * </p>
@@ -52,8 +47,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an Auto
-     * Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * </p>
      * <p>
      * If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -68,12 +63,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * The policy includes parameters that not only define the distribution of On-Demand Instances and Spot Instances,
-     * the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance types to fulfill
+     * the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill
      * On-Demand and Spot capacity, but also the parameters that specify the instance configuration information—the
      * launch template and instance types.
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -188,8 +185,9 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -271,6 +269,20 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      */
     private String serviceLinkedRoleARN;
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     */
+    private Integer maxInstanceLifetime;
 
     /**
      * <p>
@@ -317,22 +329,12 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration.
      * </p>
      * <p>
-     * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling Group Using
-     * a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     * </p>
-     * <p>
      * If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following parameters:
      * <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
      * </p>
      * 
      * @param launchConfigurationName
      *        The name of the launch configuration.</p>
-     *        <p>
-     *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling
-     *        Group Using a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     *        </p>
      *        <p>
      *        If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following
      *        parameters: <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
@@ -347,21 +349,11 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration.
      * </p>
      * <p>
-     * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling Group Using
-     * a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     * </p>
-     * <p>
      * If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following parameters:
      * <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
      * </p>
      * 
      * @return The name of the launch configuration.</p>
-     *         <p>
-     *         For more information, see <a
-     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling
-     *         Group Using a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     *         </p>
      *         <p>
      *         If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following
      *         parameters: <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
@@ -376,22 +368,12 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The name of the launch configuration.
      * </p>
      * <p>
-     * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling Group Using
-     * a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     * </p>
-     * <p>
      * If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following parameters:
      * <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
      * </p>
      * 
      * @param launchConfigurationName
      *        The name of the launch configuration.</p>
-     *        <p>
-     *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling
-     *        Group Using a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-     *        </p>
      *        <p>
      *        If you do not specify <code>LaunchConfigurationName</code>, you must specify one of the following
      *        parameters: <code>InstanceId</code>, <code>LaunchTemplate</code>, or <code>MixedInstancesPolicy</code>.
@@ -409,8 +391,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an Auto
-     * Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * </p>
      * <p>
      * If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -421,8 +403,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        The launch template to use to launch instances.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an
-     *        Auto Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *        >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      *        </p>
      *        <p>
      *        If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -439,8 +421,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an Auto
-     * Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * </p>
      * <p>
      * If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -450,8 +432,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * @return The launch template to use to launch instances.</p>
      *         <p>
      *         For more information, see <a
-     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an
-     *         Auto Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *         >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      *         </p>
      *         <p>
      *         If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -468,8 +450,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * For more information, see <a
-     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an Auto
-     * Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     * >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      * </p>
      * <p>
      * If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -480,8 +462,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        The launch template to use to launch instances.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html">Creating an
-     *        Auto Scaling Group Using a Launch Template</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html"
+     *        >LaunchTemplateSpecification</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.
      *        </p>
      *        <p>
      *        If you do not specify <code>LaunchTemplate</code>, you must specify one of the following parameters:
@@ -501,12 +483,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * The policy includes parameters that not only define the distribution of On-Demand Instances and Spot Instances,
-     * the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance types to fulfill
+     * the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill
      * On-Demand and Spot capacity, but also the parameters that specify the instance configuration information—the
      * launch template and instance types.
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -520,12 +504,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        optional parameters are unspecified, their default values are used.</p>
      *        <p>
      *        The policy includes parameters that not only define the distribution of On-Demand Instances and Spot
-     *        Instances, the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance
+     *        Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance
      *        types to fulfill On-Demand and Spot capacity, but also the parameters that specify the instance
      *        configuration information—the launch template and instance types.
      *        </p>
      *        <p>
      *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *        >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups
      *        with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
@@ -545,12 +531,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * The policy includes parameters that not only define the distribution of On-Demand Instances and Spot Instances,
-     * the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance types to fulfill
+     * the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill
      * On-Demand and Spot capacity, but also the parameters that specify the instance configuration information—the
      * launch template and instance types.
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -563,12 +551,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *         optional parameters are unspecified, their default values are used.</p>
      *         <p>
      *         The policy includes parameters that not only define the distribution of On-Demand Instances and Spot
-     *         Instances, the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance
+     *         Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance
      *         types to fulfill On-Demand and Spot capacity, but also the parameters that specify the instance
      *         configuration information—the launch template and instance types.
      *         </p>
      *         <p>
      *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *         >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling
      *         Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User
      *         Guide</i>.
@@ -589,12 +579,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * </p>
      * <p>
      * The policy includes parameters that not only define the distribution of On-Demand Instances and Spot Instances,
-     * the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance types to fulfill
+     * the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill
      * On-Demand and Spot capacity, but also the parameters that specify the instance configuration information—the
      * launch template and instance types.
      * </p>
      * <p>
      * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     * >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with
      * Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
@@ -608,12 +600,14 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        optional parameters are unspecified, their default values are used.</p>
      *        <p>
      *        The policy includes parameters that not only define the distribution of On-Demand Instances and Spot
-     *        Instances, the maximum price to pay for Spot instances, and how the Auto Scaling group allocates instance
+     *        Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance
      *        types to fulfill On-Demand and Spot capacity, but also the parameters that specify the instance
      *        configuration information—the launch template and instance types.
      *        </p>
      *        <p>
      *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html"
+     *        >MixedInstancesPolicy</a> in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
      *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups
      *        with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
@@ -1384,8 +1378,9 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1397,8 +1392,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        ignored. The default value is <code>0</code>.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *        Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *        >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
      *        <p>
      *        Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1415,8 +1410,9 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1427,8 +1423,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *         are ignored. The default value is <code>0</code>.</p>
      *         <p>
      *         For more information, see <a
-     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *         Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *         >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *         </p>
      *         <p>
      *         Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1445,8 +1441,9 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      * The default value is <code>0</code>.
      * </p>
      * <p>
-     * For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health
-     * Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period">Health
+     * Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -1458,8 +1455,8 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
      *        ignored. The default value is <code>0</code>.</p>
      *        <p>
      *        For more information, see <a
-     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto
-     *        Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period"
+     *        >Health Check Grace Period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      *        </p>
      *        <p>
      *        Conditional: This parameter is required if you are adding an <code>ELB</code> health check.
@@ -2084,6 +2081,92 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
     }
 
     /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @param maxInstanceLifetime
+     *        The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     *        Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        </p>
+     *        <p>
+     *        Valid Range: Minimum value of 604800.
+     */
+
+    public void setMaxInstanceLifetime(Integer maxInstanceLifetime) {
+        this.maxInstanceLifetime = maxInstanceLifetime;
+    }
+
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @return The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *         <p>
+     *         For more information, see <a
+     *         href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing
+     *         Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User
+     *         Guide</i>.
+     *         </p>
+     *         <p>
+     *         Valid Range: Minimum value of 604800.
+     */
+
+    public Integer getMaxInstanceLifetime() {
+        return this.maxInstanceLifetime;
+    }
+
+    /**
+     * <p>
+     * The maximum amount of time, in seconds, that an instance can be in service.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     * Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * </p>
+     * <p>
+     * Valid Range: Minimum value of 604800.
+     * </p>
+     * 
+     * @param maxInstanceLifetime
+     *        The maximum amount of time, in seconds, that an instance can be in service.</p>
+     *        <p>
+     *        For more information, see <a
+     *        href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto
+     *        Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     *        </p>
+     *        <p>
+     *        Valid Range: Minimum value of 604800.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public CreateAutoScalingGroupRequest withMaxInstanceLifetime(Integer maxInstanceLifetime) {
+        setMaxInstanceLifetime(maxInstanceLifetime);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -2136,7 +2219,9 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
         if (getTags() != null)
             sb.append("Tags: ").append(getTags()).append(",");
         if (getServiceLinkedRoleARN() != null)
-            sb.append("ServiceLinkedRoleARN: ").append(getServiceLinkedRoleARN());
+            sb.append("ServiceLinkedRoleARN: ").append(getServiceLinkedRoleARN()).append(",");
+        if (getMaxInstanceLifetime() != null)
+            sb.append("MaxInstanceLifetime: ").append(getMaxInstanceLifetime());
         sb.append("}");
         return sb.toString();
     }
@@ -2237,6 +2322,10 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
             return false;
         if (other.getServiceLinkedRoleARN() != null && other.getServiceLinkedRoleARN().equals(this.getServiceLinkedRoleARN()) == false)
             return false;
+        if (other.getMaxInstanceLifetime() == null ^ this.getMaxInstanceLifetime() == null)
+            return false;
+        if (other.getMaxInstanceLifetime() != null && other.getMaxInstanceLifetime().equals(this.getMaxInstanceLifetime()) == false)
+            return false;
         return true;
     }
 
@@ -2266,6 +2355,7 @@ public class CreateAutoScalingGroupRequest extends com.amazonaws.AmazonWebServic
         hashCode = prime * hashCode + ((getLifecycleHookSpecificationList() == null) ? 0 : getLifecycleHookSpecificationList().hashCode());
         hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode());
         hashCode = prime * hashCode + ((getServiceLinkedRoleARN() == null) ? 0 : getServiceLinkedRoleARN().hashCode());
+        hashCode = prime * hashCode + ((getMaxInstanceLifetime() == null) ? 0 : getMaxInstanceLifetime().hashCode());
         return hashCode;
     }
 

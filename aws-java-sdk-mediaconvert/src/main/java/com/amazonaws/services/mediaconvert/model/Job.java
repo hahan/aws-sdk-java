@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -29,6 +29,17 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
 
     /** Accelerated transcoding can significantly speed up jobs with long, visually complex content. */
     private AccelerationSettings accelerationSettings;
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     * (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
+     * (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus
+     * is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible
+     * with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings
+     * aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated
+     * transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without
+     * accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     */
+    private String accelerationStatus;
     /** An identifier for this resource that is unique within all of AWS. */
     private String arn;
     /**
@@ -53,14 +64,18 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
      * when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental
      * MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and
      * ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime,
-     * Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the
-     * service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
+     * Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those
+     * cases, jobPercentComplete returns a null value.
      */
     private Integer jobPercentComplete;
     /** The job template that the job is created from, if it is created from a job template. */
     private String jobTemplate;
+    /** Provides messages from the service about jobs that you have already successfully submitted. */
+    private JobMessages messages;
     /** List of output group details */
     private java.util.List<OutputGroupDetail> outputGroupDetails;
+    /** Relative priority on the job. */
+    private Integer priority;
     /**
      * Optional. When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to
      * the default queue. For more about queues, see the User Guide topic at
@@ -76,6 +91,12 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
     private String role;
     /** JobSettings contains all the transcode settings for a job. */
     private JobSettings settings;
+    /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When
+     * this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see
+     * with one RTS in a reserved queue. This setting is disabled by default.
+     */
+    private String simulateReservedQueue;
     /** A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR. */
     private String status;
     /**
@@ -123,6 +144,117 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
 
     public Job withAccelerationSettings(AccelerationSettings accelerationSettings) {
         setAccelerationSettings(accelerationSettings);
+        return this;
+    }
+
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     * (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
+     * (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus
+     * is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible
+     * with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings
+     * aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated
+     * transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without
+     * accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     * 
+     * @param accelerationStatus
+     *        Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     *        (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have
+     *        Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other
+     *        states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files
+     *        and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is
+     *        ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the
+     *        service either fails your job or runs it without accelerated transcoding, depending on how you set
+     *        Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding,
+     *        AccelerationStatus is NOT_ACCELERATED.
+     * @see AccelerationStatus
+     */
+
+    public void setAccelerationStatus(String accelerationStatus) {
+        this.accelerationStatus = accelerationStatus;
+    }
+
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     * (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
+     * (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus
+     * is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible
+     * with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings
+     * aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated
+     * transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without
+     * accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     * 
+     * @return Describes whether the current job is running with accelerated transcoding. For jobs that have
+     *         Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs
+     *         that have Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the
+     *         other states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input
+     *         files and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is
+     *         ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the
+     *         service either fails your job or runs it without accelerated transcoding, depending on how you set
+     *         Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding,
+     *         AccelerationStatus is NOT_ACCELERATED.
+     * @see AccelerationStatus
+     */
+
+    public String getAccelerationStatus() {
+        return this.accelerationStatus;
+    }
+
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     * (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
+     * (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus
+     * is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible
+     * with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings
+     * aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated
+     * transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without
+     * accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     * 
+     * @param accelerationStatus
+     *        Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     *        (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have
+     *        Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other
+     *        states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files
+     *        and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is
+     *        ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the
+     *        service either fails your job or runs it without accelerated transcoding, depending on how you set
+     *        Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding,
+     *        AccelerationStatus is NOT_ACCELERATED.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see AccelerationStatus
+     */
+
+    public Job withAccelerationStatus(String accelerationStatus) {
+        setAccelerationStatus(accelerationStatus);
+        return this;
+    }
+
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     * (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
+     * (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus
+     * is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible
+     * with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings
+     * aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated
+     * transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without
+     * accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     * 
+     * @param accelerationStatus
+     *        Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration
+     *        (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have
+     *        Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other
+     *        states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files
+     *        and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is
+     *        ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the
+     *        service either fails your job or runs it without accelerated transcoding, depending on how you set
+     *        Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding,
+     *        AccelerationStatus is NOT_ACCELERATED.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see AccelerationStatus
+     */
+
+    public Job withAccelerationStatus(AccelerationStatus accelerationStatus) {
+        this.accelerationStatus = accelerationStatus.toString();
         return this;
     }
 
@@ -427,17 +559,16 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
      * when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental
      * MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and
      * ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime,
-     * Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the
-     * service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
+     * Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those
+     * cases, jobPercentComplete returns a null value.
      * 
      * @param jobPercentComplete
      *        An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time
      *        from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS
      *        Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response
      *        to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input
-     *        containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs
-     *        that use input clipping, the service can't provide information about job progress. In those cases,
-     *        jobPercentComplete returns a null value.
+     *        containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can't provide
+     *        information about job progress. In those cases, jobPercentComplete returns a null value.
      */
 
     public void setJobPercentComplete(Integer jobPercentComplete) {
@@ -449,16 +580,15 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
      * when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental
      * MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and
      * ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime,
-     * Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the
-     * service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
+     * Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those
+     * cases, jobPercentComplete returns a null value.
      * 
      * @return An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time
      *         from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS
      *         Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response
      *         to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input
-     *         containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs
-     *         that use input clipping, the service can't provide information about job progress. In those cases,
-     *         jobPercentComplete returns a null value.
+     *         containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can't provide
+     *         information about job progress. In those cases, jobPercentComplete returns a null value.
      */
 
     public Integer getJobPercentComplete() {
@@ -470,17 +600,16 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
      * when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental
      * MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and
      * ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime,
-     * Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the
-     * service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
+     * Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those
+     * cases, jobPercentComplete returns a null value.
      * 
      * @param jobPercentComplete
      *        An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time
      *        from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS
      *        Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response
      *        to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input
-     *        containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs
-     *        that use input clipping, the service can't provide information about job progress. In those cases,
-     *        jobPercentComplete returns a null value.
+     *        containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can't provide
+     *        information about job progress. In those cases, jobPercentComplete returns a null value.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -520,6 +649,40 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
 
     public Job withJobTemplate(String jobTemplate) {
         setJobTemplate(jobTemplate);
+        return this;
+    }
+
+    /**
+     * Provides messages from the service about jobs that you have already successfully submitted.
+     * 
+     * @param messages
+     *        Provides messages from the service about jobs that you have already successfully submitted.
+     */
+
+    public void setMessages(JobMessages messages) {
+        this.messages = messages;
+    }
+
+    /**
+     * Provides messages from the service about jobs that you have already successfully submitted.
+     * 
+     * @return Provides messages from the service about jobs that you have already successfully submitted.
+     */
+
+    public JobMessages getMessages() {
+        return this.messages;
+    }
+
+    /**
+     * Provides messages from the service about jobs that you have already successfully submitted.
+     * 
+     * @param messages
+     *        Provides messages from the service about jobs that you have already successfully submitted.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Job withMessages(JobMessages messages) {
+        setMessages(messages);
         return this;
     }
 
@@ -582,6 +745,40 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
 
     public Job withOutputGroupDetails(java.util.Collection<OutputGroupDetail> outputGroupDetails) {
         setOutputGroupDetails(outputGroupDetails);
+        return this;
+    }
+
+    /**
+     * Relative priority on the job.
+     * 
+     * @param priority
+     *        Relative priority on the job.
+     */
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * Relative priority on the job.
+     * 
+     * @return Relative priority on the job.
+     */
+
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    /**
+     * Relative priority on the job.
+     * 
+     * @param priority
+     *        Relative priority on the job.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public Job withPriority(Integer priority) {
+        setPriority(priority);
         return this;
     }
 
@@ -739,6 +936,73 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
 
     public Job withSettings(JobSettings settings) {
         setSettings(settings);
+        return this;
+    }
+
+    /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When
+     * this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see
+     * with one RTS in a reserved queue. This setting is disabled by default.
+     * 
+     * @param simulateReservedQueue
+     *        Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you
+     *        need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to
+     *        what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     * @see SimulateReservedQueue
+     */
+
+    public void setSimulateReservedQueue(String simulateReservedQueue) {
+        this.simulateReservedQueue = simulateReservedQueue;
+    }
+
+    /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When
+     * this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see
+     * with one RTS in a reserved queue. This setting is disabled by default.
+     * 
+     * @return Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you
+     *         need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance
+     *         to what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     * @see SimulateReservedQueue
+     */
+
+    public String getSimulateReservedQueue() {
+        return this.simulateReservedQueue;
+    }
+
+    /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When
+     * this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see
+     * with one RTS in a reserved queue. This setting is disabled by default.
+     * 
+     * @param simulateReservedQueue
+     *        Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you
+     *        need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to
+     *        what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see SimulateReservedQueue
+     */
+
+    public Job withSimulateReservedQueue(String simulateReservedQueue) {
+        setSimulateReservedQueue(simulateReservedQueue);
+        return this;
+    }
+
+    /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When
+     * this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see
+     * with one RTS in a reserved queue. This setting is disabled by default.
+     * 
+     * @param simulateReservedQueue
+     *        Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you
+     *        need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to
+     *        what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see SimulateReservedQueue
+     */
+
+    public Job withSimulateReservedQueue(SimulateReservedQueue simulateReservedQueue) {
+        this.simulateReservedQueue = simulateReservedQueue.toString();
         return this;
     }
 
@@ -937,6 +1201,13 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         return this;
     }
 
+    /**
+     * Add a single UserMetadata entry
+     *
+     * @see Job#withUserMetadata
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public Job addUserMetadataEntry(String key, String value) {
         if (null == this.userMetadata) {
             this.userMetadata = new java.util.HashMap<String, String>();
@@ -972,6 +1243,8 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         sb.append("{");
         if (getAccelerationSettings() != null)
             sb.append("AccelerationSettings: ").append(getAccelerationSettings()).append(",");
+        if (getAccelerationStatus() != null)
+            sb.append("AccelerationStatus: ").append(getAccelerationStatus()).append(",");
         if (getArn() != null)
             sb.append("Arn: ").append(getArn()).append(",");
         if (getBillingTagsSource() != null)
@@ -990,8 +1263,12 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
             sb.append("JobPercentComplete: ").append(getJobPercentComplete()).append(",");
         if (getJobTemplate() != null)
             sb.append("JobTemplate: ").append(getJobTemplate()).append(",");
+        if (getMessages() != null)
+            sb.append("Messages: ").append(getMessages()).append(",");
         if (getOutputGroupDetails() != null)
             sb.append("OutputGroupDetails: ").append(getOutputGroupDetails()).append(",");
+        if (getPriority() != null)
+            sb.append("Priority: ").append(getPriority()).append(",");
         if (getQueue() != null)
             sb.append("Queue: ").append(getQueue()).append(",");
         if (getRetryCount() != null)
@@ -1000,6 +1277,8 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
             sb.append("Role: ").append(getRole()).append(",");
         if (getSettings() != null)
             sb.append("Settings: ").append(getSettings()).append(",");
+        if (getSimulateReservedQueue() != null)
+            sb.append("SimulateReservedQueue: ").append(getSimulateReservedQueue()).append(",");
         if (getStatus() != null)
             sb.append("Status: ").append(getStatus()).append(",");
         if (getStatusUpdateInterval() != null)
@@ -1025,6 +1304,10 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         if (other.getAccelerationSettings() == null ^ this.getAccelerationSettings() == null)
             return false;
         if (other.getAccelerationSettings() != null && other.getAccelerationSettings().equals(this.getAccelerationSettings()) == false)
+            return false;
+        if (other.getAccelerationStatus() == null ^ this.getAccelerationStatus() == null)
+            return false;
+        if (other.getAccelerationStatus() != null && other.getAccelerationStatus().equals(this.getAccelerationStatus()) == false)
             return false;
         if (other.getArn() == null ^ this.getArn() == null)
             return false;
@@ -1062,9 +1345,17 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getJobTemplate() != null && other.getJobTemplate().equals(this.getJobTemplate()) == false)
             return false;
+        if (other.getMessages() == null ^ this.getMessages() == null)
+            return false;
+        if (other.getMessages() != null && other.getMessages().equals(this.getMessages()) == false)
+            return false;
         if (other.getOutputGroupDetails() == null ^ this.getOutputGroupDetails() == null)
             return false;
         if (other.getOutputGroupDetails() != null && other.getOutputGroupDetails().equals(this.getOutputGroupDetails()) == false)
+            return false;
+        if (other.getPriority() == null ^ this.getPriority() == null)
+            return false;
+        if (other.getPriority() != null && other.getPriority().equals(this.getPriority()) == false)
             return false;
         if (other.getQueue() == null ^ this.getQueue() == null)
             return false;
@@ -1081,6 +1372,10 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         if (other.getSettings() == null ^ this.getSettings() == null)
             return false;
         if (other.getSettings() != null && other.getSettings().equals(this.getSettings()) == false)
+            return false;
+        if (other.getSimulateReservedQueue() == null ^ this.getSimulateReservedQueue() == null)
+            return false;
+        if (other.getSimulateReservedQueue() != null && other.getSimulateReservedQueue().equals(this.getSimulateReservedQueue()) == false)
             return false;
         if (other.getStatus() == null ^ this.getStatus() == null)
             return false;
@@ -1107,6 +1402,7 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         int hashCode = 1;
 
         hashCode = prime * hashCode + ((getAccelerationSettings() == null) ? 0 : getAccelerationSettings().hashCode());
+        hashCode = prime * hashCode + ((getAccelerationStatus() == null) ? 0 : getAccelerationStatus().hashCode());
         hashCode = prime * hashCode + ((getArn() == null) ? 0 : getArn().hashCode());
         hashCode = prime * hashCode + ((getBillingTagsSource() == null) ? 0 : getBillingTagsSource().hashCode());
         hashCode = prime * hashCode + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
@@ -1116,11 +1412,14 @@ public class Job implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getId() == null) ? 0 : getId().hashCode());
         hashCode = prime * hashCode + ((getJobPercentComplete() == null) ? 0 : getJobPercentComplete().hashCode());
         hashCode = prime * hashCode + ((getJobTemplate() == null) ? 0 : getJobTemplate().hashCode());
+        hashCode = prime * hashCode + ((getMessages() == null) ? 0 : getMessages().hashCode());
         hashCode = prime * hashCode + ((getOutputGroupDetails() == null) ? 0 : getOutputGroupDetails().hashCode());
+        hashCode = prime * hashCode + ((getPriority() == null) ? 0 : getPriority().hashCode());
         hashCode = prime * hashCode + ((getQueue() == null) ? 0 : getQueue().hashCode());
         hashCode = prime * hashCode + ((getRetryCount() == null) ? 0 : getRetryCount().hashCode());
         hashCode = prime * hashCode + ((getRole() == null) ? 0 : getRole().hashCode());
         hashCode = prime * hashCode + ((getSettings() == null) ? 0 : getSettings().hashCode());
+        hashCode = prime * hashCode + ((getSimulateReservedQueue() == null) ? 0 : getSimulateReservedQueue().hashCode());
         hashCode = prime * hashCode + ((getStatus() == null) ? 0 : getStatus().hashCode());
         hashCode = prime * hashCode + ((getStatusUpdateInterval() == null) ? 0 : getStatusUpdateInterval().hashCode());
         hashCode = prime * hashCode + ((getTiming() == null) ? 0 : getTiming().hashCode());

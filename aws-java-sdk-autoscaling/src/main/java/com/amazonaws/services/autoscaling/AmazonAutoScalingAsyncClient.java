@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -32,9 +32,9 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
  * <p>
  * <fullname>Amazon EC2 Auto Scaling</fullname>
  * <p>
- * Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined
- * policies, schedules, and health checks. Use this service with AWS Auto Scaling, Amazon CloudWatch, and Elastic Load
- * Balancing.
+ * Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined scaling
+ * policies, scheduled actions, and health checks. Use this service with AWS Auto Scaling, Amazon CloudWatch, and
+ * Elastic Load Balancing.
  * </p>
  * <p>
  * For more information, including information about granting IAM users required permissions for Amazon EC2 Auto Scaling

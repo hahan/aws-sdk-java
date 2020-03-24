@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -18,7 +18,10 @@ import com.amazonaws.protocol.StructuredPojo;
 import com.amazonaws.protocol.ProtocolMarshaller;
 
 /**
- * <p/>
+ * <p>
+ * Provides information about the values of pending modifications to a replication instance. This data type is an object
+ * of the <code>ReplicationInstance</code> user-defined data type.
+ * </p>
  * 
  * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationPendingModifiedValues"
  *      target="_top">AWS API Documentation</a>
@@ -44,7 +47,7 @@ public class ReplicationPendingModifiedValues implements Serializable, Cloneable
     private Integer allocatedStorage;
     /**
      * <p>
-     * Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      * <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * </p>
      */
@@ -159,12 +162,12 @@ public class ReplicationPendingModifiedValues implements Serializable, Cloneable
 
     /**
      * <p>
-     * Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      * <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * </p>
      * 
      * @param multiAZ
-     *        Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     *        Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      *        <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      */
 
@@ -174,11 +177,11 @@ public class ReplicationPendingModifiedValues implements Serializable, Cloneable
 
     /**
      * <p>
-     * Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      * <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * </p>
      * 
-     * @return Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * @return Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      *         <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      */
 
@@ -188,12 +191,12 @@ public class ReplicationPendingModifiedValues implements Serializable, Cloneable
 
     /**
      * <p>
-     * Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      * <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * </p>
      * 
      * @param multiAZ
-     *        Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     *        Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      *        <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -205,11 +208,11 @@ public class ReplicationPendingModifiedValues implements Serializable, Cloneable
 
     /**
      * <p>
-     * Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      * <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      * </p>
      * 
-     * @return Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the
+     * @return Specifies whether the replication instance is a Multi-AZ deployment. You can't set the
      *         <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>.
      */
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -47,6 +47,8 @@ public enum ElasticMapReduceActions implements Action {
     DescribeSecurityConfiguration("elasticmapreduce:DescribeSecurityConfiguration"),
     /** Action for the DescribeStep operation. */
     DescribeStep("elasticmapreduce:DescribeStep"),
+    /** Action for the GetBlockPublicAccessConfiguration operation. */
+    GetBlockPublicAccessConfiguration("elasticmapreduce:GetBlockPublicAccessConfiguration"),
     /** Action for the ListBootstrapActions operation. */
     ListBootstrapActions("elasticmapreduce:ListBootstrapActions"),
     /** Action for the ListClusters operation. */
@@ -61,12 +63,16 @@ public enum ElasticMapReduceActions implements Action {
     ListSecurityConfigurations("elasticmapreduce:ListSecurityConfigurations"),
     /** Action for the ListSteps operation. */
     ListSteps("elasticmapreduce:ListSteps"),
+    /** Action for the ModifyCluster operation. */
+    ModifyCluster("elasticmapreduce:ModifyCluster"),
     /** Action for the ModifyInstanceFleet operation. */
     ModifyInstanceFleet("elasticmapreduce:ModifyInstanceFleet"),
     /** Action for the ModifyInstanceGroups operation. */
     ModifyInstanceGroups("elasticmapreduce:ModifyInstanceGroups"),
     /** Action for the PutAutoScalingPolicy operation. */
     PutAutoScalingPolicy("elasticmapreduce:PutAutoScalingPolicy"),
+    /** Action for the PutBlockPublicAccessConfiguration operation. */
+    PutBlockPublicAccessConfiguration("elasticmapreduce:PutBlockPublicAccessConfiguration"),
     /** Action for the RemoveAutoScalingPolicy operation. */
     RemoveAutoScalingPolicy("elasticmapreduce:RemoveAutoScalingPolicy"),
     /** Action for the RemoveTags operation. */

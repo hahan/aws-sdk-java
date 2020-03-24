@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -86,35 +86,43 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidTagException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.InvalidTagException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidTagException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.InvalidTagExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.TooManyTagsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.TooManyTagsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.ResourceInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidParameterException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.InvalidParameterExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.ResourceNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.ResourceInUseExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgsException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.InvalidArgsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.ResourceNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidArnException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.InvalidArnException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidArgsException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.InvalidArgsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("RequestInProgressException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.RequestInProgressException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidArnException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.InvalidArnExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidStateException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.InvalidStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TagPolicyException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.TagPolicyExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidDomainValidationOptionsException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.InvalidDomainValidationOptionsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("RequestInProgressException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.RequestInProgressExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.certificatemanager.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidStateException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.InvalidStateExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidDomainValidationOptionsException")
+                                    .withExceptionUnmarshaller(
+                                            com.amazonaws.services.certificatemanager.model.transform.InvalidDomainValidationOptionsExceptionUnmarshaller
+                                                    .getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.certificatemanager.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.certificatemanager.model.AWSCertificateManagerException.class));
 
     /**
@@ -347,6 +355,10 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      *         tag value that begins with <code>aws:</code>.
      * @throws TooManyTagsException
      *         The request contains too many tags. Try the request again with fewer tags.
+     * @throws TagPolicyException
+     *         A specified tag did not comply with an existing tag policy and was rejected.
+     * @throws InvalidParameterException
+     *         An input parameter was invalid.
      * @sample AWSCertificateManager.AddTagsToCertificate
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate" target="_top">AWS API
      *      Documentation</a>
@@ -522,14 +534,15 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
 
     /**
      * <p>
-     * Exports a private certificate issued by a private certificate authority (CA) for use anywhere. You can export the
-     * certificate, the certificate chain, and the encrypted private key associated with the public key embedded in the
-     * certificate. You must store the private key securely. The private key is a 2048 bit RSA key. You must provide a
-     * passphrase for the private key when exporting it. You can use the following OpenSSL command to decrypt it later.
-     * Provide the passphrase when prompted.
+     * Exports a private certificate issued by a private certificate authority (CA) for use anywhere. The exported file
+     * contains the certificate, the certificate chain, and the encrypted private 2048-bit RSA key associated with the
+     * public key that is embedded in the certificate. For security, you must assign a passphrase for the private key
+     * when exporting it.
      * </p>
      * <p>
-     * <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code>
+     * For information about exporting and formatting a certificate using the ACM console or CLI, see <a
+     * href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html">Export a Private
+     * Certificate</a>.
      * </p>
      * 
      * @param exportCertificateRequest
@@ -589,10 +602,10 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
 
     /**
      * <p>
-     * Retrieves a certificate specified by an ARN and its certificate chain . The chain is an ordered list of
-     * certificates that contains the end entity certificate, intermediate certificates of subordinate CAs, and the root
-     * certificate in that order. The certificate and certificate chain are base64 encoded. If you want to decode the
-     * certificate to see the individual fields, you can use OpenSSL.
+     * Retrieves an Amazon-issued certificate and its certificate chain. The chain consists of the certificate of the
+     * issuing CA and the intermediate certificates of any other subordinate CAs. All of the certificates are base64
+     * encoded. You can use <a href="https://wiki.openssl.org/index.php/Command_Line_Utilities">OpenSSL</a> to decode
+     * the certificates and inspect individual fields.
      * </p>
      * 
      * @param getCertificateRequest
@@ -714,7 +727,7 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      * <li>
      * <p>
      * To import a new certificate, omit the <code>CertificateArn</code> argument. Include this argument only when you
-     * want to replace a previously imported certificate.
+     * want to replace a previously imported certifica
      * </p>
      * </li>
      * <li>
@@ -731,6 +744,12 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      * private key files in the manner required by the programming language you're using.
      * </p>
      * </li>
+     * <li>
+     * <p>
+     * The cryptographic algorithm of an imported certificate must match the algorithm of the signing CA. For example,
+     * if the signing CA key type is RSA, then the certificate key type must also be RSA.
+     * </p>
+     * </li>
      * </ul>
      * <p>
      * This operation returns the <a
@@ -744,7 +763,16 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      *         The specified certificate cannot be found in the caller's account or the caller's account cannot be
      *         found.
      * @throws LimitExceededException
-     *         An ACM limit has been exceeded.
+     *         An ACM quota has been exceeded.
+     * @throws InvalidTagException
+     *         One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a
+     *         tag value that begins with <code>aws:</code>.
+     * @throws TooManyTagsException
+     *         The request contains too many tags. Try the request again with fewer tags.
+     * @throws TagPolicyException
+     *         A specified tag did not comply with an existing tag policy and was rejected.
+     * @throws InvalidParameterException
+     *         An input parameter was invalid.
      * @sample AWSCertificateManager.ImportCertificate
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate" target="_top">AWS API
      *      Documentation</a>
@@ -794,7 +822,8 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
     /**
      * <p>
      * Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a
-     * specific status be listed. You can also filter by specific attributes of the certificate.
+     * specific status be listed. You can also filter by specific attributes of the certificate. Default filtering
+     * returns only <code>RSA_2048</code> certificates. For more information, see <a>Filters</a>.
      * </p>
      * 
      * @param listCertificatesRequest
@@ -929,6 +958,10 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      * @throws InvalidTagException
      *         One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a
      *         tag value that begins with <code>aws:</code>.
+     * @throws TagPolicyException
+     *         A specified tag did not comply with an existing tag policy and was rejected.
+     * @throws InvalidParameterException
+     *         An input parameter was invalid.
      * @sample AWSCertificateManager.RemoveTagsFromCertificate
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate" target="_top">AWS
      *      API Documentation</a>
@@ -1058,11 +1091,20 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      * @param requestCertificateRequest
      * @return Result of the RequestCertificate operation returned by the service.
      * @throws LimitExceededException
-     *         An ACM limit has been exceeded.
+     *         An ACM quota has been exceeded.
      * @throws InvalidDomainValidationOptionsException
      *         One or more values in the <a>DomainValidationOption</a> structure is incorrect.
      * @throws InvalidArnException
      *         The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+     * @throws InvalidTagException
+     *         One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a
+     *         tag value that begins with <code>aws:</code>.
+     * @throws TooManyTagsException
+     *         The request contains too many tags. Try the request again with fewer tags.
+     * @throws TagPolicyException
+     *         A specified tag did not comply with an existing tag policy and was rejected.
+     * @throws InvalidParameterException
+     *         An input parameter was invalid.
      * @sample AWSCertificateManager.RequestCertificate
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate" target="_top">AWS API
      *      Documentation</a>
@@ -1193,7 +1235,7 @@ public class AWSCertificateManagerClient extends AmazonWebServiceClient implemen
      *         The specified certificate cannot be found in the caller's account or the caller's account cannot be
      *         found.
      * @throws LimitExceededException
-     *         An ACM limit has been exceeded.
+     *         An ACM quota has been exceeded.
      * @throws InvalidStateException
      *         Processing has reached an invalid state.
      * @throws InvalidArnException

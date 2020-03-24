@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,7 +31,8 @@ public enum AWSRegion {
     ApSoutheast2("ap-southeast-2"),
     ApNortheast1("ap-northeast-1"),
     EuNorth1("eu-north-1"),
-    ApNortheast3("ap-northeast-3");
+    ApNortheast3("ap-northeast-3"),
+    ApEast1("ap-east-1");
 
     private String value;
 

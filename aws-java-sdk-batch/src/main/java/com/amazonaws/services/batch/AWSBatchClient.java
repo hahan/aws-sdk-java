@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -90,11 +90,11 @@ public class AWSBatchClient extends AmazonWebServiceClient implements AWSBatch {
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ServerException").withModeledClass(
-                                    com.amazonaws.services.batch.model.ServerException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ServerException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.batch.model.transform.ServerExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ClientException").withModeledClass(
-                                    com.amazonaws.services.batch.model.ClientException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ClientException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.batch.model.transform.ClientExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.batch.model.AWSBatchException.class));
 
     /**
@@ -672,7 +672,7 @@ public class AWSBatchClient extends AmazonWebServiceClient implements AWSBatch {
 
     /**
      * <p>
-     * Deregisters an AWS Batch job definition.
+     * Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
      * </p>
      * 
      * @param deregisterJobDefinitionRequest

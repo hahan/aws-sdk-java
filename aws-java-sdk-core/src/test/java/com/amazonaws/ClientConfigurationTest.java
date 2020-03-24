@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,7 +24,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
 
+import com.amazonaws.http.SystemPropertyTlsKeyManagersProvider;
+import com.amazonaws.http.TlsKeyManagersProvider;
 import com.amazonaws.retry.PredefinedRetryPolicies;
+import com.amazonaws.retry.RetryMode;
 import com.amazonaws.retry.RetryPolicy;
 import com.amazonaws.util.ImmutableMapParameter;
 import java.lang.reflect.Field;
@@ -36,6 +39,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -248,12 +252,24 @@ public class ClientConfigurationTest {
 
         config = new ClientConfiguration();
         assertNull(config.getProxyHost());
-        environmentVariableHelper.set("https_proxy", "bad-url");
+
+        environmentVariableHelper.set("https_proxy", "");
+        config = new ClientConfiguration();
         assertNull(config.getProxyHost());
+
+        environmentVariableHelper.set("https_proxy", "bad-url");
+        config = new ClientConfiguration();
+        assertNull(config.getProxyHost());
+
         environmentVariableHelper.set("https_proxy", "https://test1:1234");
+        config = new ClientConfiguration();
         assertEquals("test1", config.getProxyHost());
+
         environmentVariableHelper.set("HTTPS_PROXY", "https://test2:1234");
+        config = new ClientConfiguration();
         assertEquals("test2", config.getProxyHost());
+
+        config = new ClientConfiguration();
         System.setProperty("https.proxyHost", "test3");
         assertEquals("test3", config.getProxyHost());
         config.setProxyHost("test4");
@@ -264,10 +280,19 @@ public class ClientConfigurationTest {
         config = new ClientConfiguration();
         config.setProtocol(Protocol.HTTP);
         assertNull(config.getProxyHost());
+
         environmentVariableHelper.set("http_proxy", "http://test1:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("test1", config.getProxyHost());
+
         environmentVariableHelper.set("HTTP_PROXY", "http://test2:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("test2", config.getProxyHost());
+
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         System.setProperty("http.proxyHost", "test3");
         assertEquals("test3", config.getProxyHost());
         config.setProxyHost("test4");
@@ -284,12 +309,24 @@ public class ClientConfigurationTest {
 
         config = new ClientConfiguration();
         assertEquals(-1, config.getProxyPort());
-        environmentVariableHelper.set("https_proxy", "bad-url");
+
+        environmentVariableHelper.set("https_proxy", "");
+        config = new ClientConfiguration();
         assertEquals(-1, config.getProxyPort());
+
+        environmentVariableHelper.set("https_proxy", "bad-url");
+        config = new ClientConfiguration();
+        assertEquals(-1, config.getProxyPort());
+
         environmentVariableHelper.set("https_proxy", "https://test1:1");
+        config = new ClientConfiguration();
         assertEquals(1, config.getProxyPort());
+
         environmentVariableHelper.set("HTTPS_PROXY", "https://test2:2");
+        config = new ClientConfiguration();
         assertEquals(2, config.getProxyPort());
+
+        config = new ClientConfiguration();
         System.setProperty("https.proxyPort", "3");
         assertEquals(3, config.getProxyPort());
         config.setProxyPort(4);
@@ -300,10 +337,19 @@ public class ClientConfigurationTest {
         config = new ClientConfiguration();
         config.setProtocol(Protocol.HTTP);
         assertEquals(-1, config.getProxyPort());
+
         environmentVariableHelper.set("http_proxy", "http://test1:1");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals(1, config.getProxyPort());
+
         environmentVariableHelper.set("HTTP_PROXY", "http://test2:2");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals(2, config.getProxyPort());
+
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         System.setProperty("http.proxyPort", "3");
         assertEquals(3, config.getProxyPort());
         config.setProxyPort(4);
@@ -320,12 +366,24 @@ public class ClientConfigurationTest {
 
         config = new ClientConfiguration();
         assertNull(config.getProxyUsername());
-        environmentVariableHelper.set("https_proxy", "bad-url");
+
+        environmentVariableHelper.set("https_proxy", "");
+        config = new ClientConfiguration();
         assertNull(config.getProxyUsername());
+
+        environmentVariableHelper.set("https_proxy", "bad-url");
+        config = new ClientConfiguration();
+        assertNull(config.getProxyUsername());
+
         environmentVariableHelper.set("https_proxy", "https://user1:pass@test:1234");
+        config = new ClientConfiguration();
         assertEquals("user1", config.getProxyUsername());
+
         environmentVariableHelper.set("HTTPS_PROXY", "https://user2:pass@test:1234");
+        config = new ClientConfiguration();
         assertEquals("user2", config.getProxyUsername());
+
+        config = new ClientConfiguration();
         System.setProperty("https.proxyUser", "user3");
         assertEquals("user3", config.getProxyUsername());
         config.setProxyUsername("user4");
@@ -336,10 +394,19 @@ public class ClientConfigurationTest {
         config = new ClientConfiguration();
         config.setProtocol(Protocol.HTTP);
         assertNull(config.getProxyUsername());
+
         environmentVariableHelper.set("http_proxy", "http://user1:pass@test:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("user1", config.getProxyUsername());
+
         environmentVariableHelper.set("HTTP_PROXY", "http://user2:pass@test:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("user2", config.getProxyUsername());
+
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         System.setProperty("http.proxyUser", "user3");
         assertEquals("user3", config.getProxyUsername());
         config.setProxyUsername("user4");
@@ -356,12 +423,24 @@ public class ClientConfigurationTest {
 
         config = new ClientConfiguration();
         assertNull(config.getProxyPassword());
-        environmentVariableHelper.set("https_proxy", "bad-url");
+
+        environmentVariableHelper.set("https_proxy", "");
+        config = new ClientConfiguration();
         assertNull(config.getProxyPassword());
+
+        environmentVariableHelper.set("https_proxy", "bad-url");
+        config = new ClientConfiguration();
+        assertNull(config.getProxyPassword());
+
         environmentVariableHelper.set("https_proxy", "https://user:pass1@test:1234");
+        config = new ClientConfiguration();
         assertEquals("pass1", config.getProxyPassword());
+
         environmentVariableHelper.set("HTTPS_PROXY", "https://user:pass2@test:1234");
+        config = new ClientConfiguration();
         assertEquals("pass2", config.getProxyPassword());
+
+        config = new ClientConfiguration();
         System.setProperty("https.proxyPassword", "pass3");
         assertEquals("pass3", config.getProxyPassword());
         config.setProxyPassword("pass4");
@@ -372,10 +451,19 @@ public class ClientConfigurationTest {
         config = new ClientConfiguration();
         config.setProtocol(Protocol.HTTP);
         assertNull(config.getProxyPassword());
+
         environmentVariableHelper.set("http_proxy", "http://user:pass1@test:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("pass1", config.getProxyPassword());
+
         environmentVariableHelper.set("HTTP_PROXY", "http://user:pass2@test:1234");
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         assertEquals("pass2", config.getProxyPassword());
+
+        config = new ClientConfiguration();
+        config.setProtocol(Protocol.HTTP);
         System.setProperty("http.proxyPassword", "pass3");
         assertEquals("pass3", config.getProxyPassword());
         config.setProxyPassword("pass4");
@@ -385,7 +473,9 @@ public class ClientConfigurationTest {
 
         config = new ClientConfiguration();
         assertNull(config.getProxyPassword());
+
         environmentVariableHelper.set("https_proxy", "http://user:pass:with:colon@test:1234");
+        config = new ClientConfiguration();
         assertEquals("pass:with:colon", config.getProxyPassword());
         environmentVariableHelper.reset();
     }
@@ -482,6 +572,14 @@ public class ClientConfigurationTest {
                             .setSslSocketFactory(Mockito.mock(ConnectionSocketFactory.class));
             } else if (clzz.isAssignableFrom(List.class)) {
                 field.set(customConfig, new ArrayList<Object>());
+            } else if (clzz.isAssignableFrom(AtomicReference.class)) {
+                if (field.getName().equals("httpProxyHolder")) {
+                    field.set(customConfig, new AtomicReference<ClientConfiguration.URLHolder>(new ClientConfiguration.URLHolder()));
+                }
+            } else if (clzz.isAssignableFrom(TlsKeyManagersProvider.class)) {
+                field.set(customConfig, new SystemPropertyTlsKeyManagersProvider());
+            } else if (clzz.isAssignableFrom(RetryMode.class)) {
+                field.set(customConfig, RetryMode.LEGACY);
             } else {
                 throw new RuntimeException(
                         String.format("Field %s of type %s is not supported",
@@ -512,6 +610,66 @@ public class ClientConfigurationTest {
            }
        };
        assertThat(new ClientConfiguration(config).getSocketTimeout(), equalTo(Integer.MAX_VALUE));
+    }
+
+    @Test
+    public void getProxyUserName_envVarSet_noUserName_doesNotThrow() {
+        EnvironmentVariableHelper environmentVariableHelper = new EnvironmentVariableHelper();
+
+        environmentVariableHelper.set("HTTPS_PROXY", "http://localhost");
+        new ClientConfiguration().getProxyUsername();
+        environmentVariableHelper.reset();
+
+        environmentVariableHelper.set("HTTP_PROXY", "http://localhost");
+        ClientConfiguration cfg = new ClientConfiguration();
+        cfg.setProtocol(Protocol.HTTP);
+        cfg.getProxyUsername();
+        environmentVariableHelper.reset();
+    }
+
+    @Test
+    public void getProxyPassword_envVarSet_noPassword_doesNotThrow() {
+        EnvironmentVariableHelper environmentVariableHelper = new EnvironmentVariableHelper();
+
+        environmentVariableHelper.set("HTTPS_PROXY", "http://localhost");
+        new ClientConfiguration().getProxyPassword();
+        environmentVariableHelper.reset();
+
+        environmentVariableHelper.set("HTTP_PROXY", "http://localhost");
+        ClientConfiguration cfg = new ClientConfiguration();
+        cfg.setProtocol(Protocol.HTTP);
+        cfg.getProxyPassword();
+        environmentVariableHelper.reset();
+    }
+
+    @Test
+    public void protocolChanged_resolvesCorrectProxyVar() {
+        EnvironmentVariableHelper environmentVariableHelper = new EnvironmentVariableHelper();
+        environmentVariableHelper.set("HTTP_PROXY", "http://http-proxy");
+        environmentVariableHelper.set("HTTPS_PROXY", "http://https-proxy");
+
+        ClientConfiguration cfg = new ClientConfiguration();
+        assertThat(cfg.getProxyHost(), equalTo("https-proxy"));
+
+        cfg.setProtocol(Protocol.HTTP);
+        assertThat(cfg.getProxyHost(), equalTo("http-proxy"));
+
+        environmentVariableHelper.reset();
+    }
+
+    @Test
+    public void getProxyHost_envVarSet_emptyUrl_doesNotThrow() {
+        EnvironmentVariableHelper environmentVariableHelper = new EnvironmentVariableHelper();
+
+        environmentVariableHelper.set("https_proxy", "");
+        ClientConfiguration config = new ClientConfiguration();
+        assertNull(config.getProxyHost());
+        environmentVariableHelper.reset();
+
+        environmentVariableHelper.set("http_proxy", "");
+        config = new ClientConfiguration();
+        assertNull(config.getProxyHost());
+        environmentVariableHelper.reset();
     }
 
     private boolean isStaticField(Field field) {

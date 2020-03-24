@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,7 +31,7 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     /**
      * <p>
      * The ML compute instance type for the transform job. If you are using built-in algorithms to transform moderately
-     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * </p>
      */
     private String instanceType;
@@ -44,25 +44,29 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     private Integer instanceCount;
     /**
      * <p>
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
-     * attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be
-     * any of the following formats:
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage
+     * volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code>
+     * can be any of the following formats:
      * </p>
      * <ul>
      * <li>
      * <p>
-     * // KMS Key ID
-     * </p>
-     * <p>
-     * <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * // Amazon Resource Name (ARN) of a KMS Key
+     * Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
+     * </li>
+     * <li>
      * <p>
-     * <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Alias name: <code>alias/ExampleAlias</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      * </p>
      * </li>
      * </ul>
@@ -72,12 +76,12 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     /**
      * <p>
      * The ML compute instance type for the transform job. If you are using built-in algorithms to transform moderately
-     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * </p>
      * 
      * @param instanceType
      *        The ML compute instance type for the transform job. If you are using built-in algorithms to transform
-     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * @see TransformInstanceType
      */
 
@@ -88,11 +92,11 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     /**
      * <p>
      * The ML compute instance type for the transform job. If you are using built-in algorithms to transform moderately
-     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * </p>
      * 
      * @return The ML compute instance type for the transform job. If you are using built-in algorithms to transform
-     *         moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     *         moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * @see TransformInstanceType
      */
 
@@ -103,12 +107,12 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     /**
      * <p>
      * The ML compute instance type for the transform job. If you are using built-in algorithms to transform moderately
-     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * </p>
      * 
      * @param instanceType
      *        The ML compute instance type for the transform job. If you are using built-in algorithms to transform
-     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see TransformInstanceType
      */
@@ -121,12 +125,12 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
     /**
      * <p>
      * The ML compute instance type for the transform job. If you are using built-in algorithms to transform moderately
-     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     * sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * </p>
      * 
      * @param instanceType
      *        The ML compute instance type for the transform job. If you are using built-in algorithms to transform
-     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code>instance types.
+     *        moderately sized datasets, we recommend using ml.m4.xlarge or <code>ml.m5.large</code> instance types.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see TransformInstanceType
      */
@@ -184,48 +188,56 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
 
     /**
      * <p>
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
-     * attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be
-     * any of the following formats:
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage
+     * volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code>
+     * can be any of the following formats:
      * </p>
      * <ul>
      * <li>
      * <p>
-     * // KMS Key ID
-     * </p>
-     * <p>
-     * <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * // Amazon Resource Name (ARN) of a KMS Key
+     * Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
+     * </li>
+     * <li>
      * <p>
-     * <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Alias name: <code>alias/ExampleAlias</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      * </p>
      * </li>
      * </ul>
      * 
      * @param volumeKmsKeyId
-     *        The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage
-     *        volume attached to the ML compute instance(s) that run the batch transform job. The
+     *        The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the
+     *        storage volume attached to the ML compute instance(s) that run the batch transform job. The
      *        <code>VolumeKmsKeyId</code> can be any of the following formats:</p>
      *        <ul>
      *        <li>
      *        <p>
-     *        // KMS Key ID
-     *        </p>
-     *        <p>
-     *        <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *        Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        // Amazon Resource Name (ARN) of a KMS Key
+     *        Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *        </p>
+     *        </li>
+     *        <li>
      *        <p>
-     *        <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *        Alias name: <code>alias/ExampleAlias</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      *        </p>
      *        </li>
      */
@@ -236,47 +248,55 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
 
     /**
      * <p>
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
-     * attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be
-     * any of the following formats:
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage
+     * volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code>
+     * can be any of the following formats:
      * </p>
      * <ul>
      * <li>
      * <p>
-     * // KMS Key ID
-     * </p>
-     * <p>
-     * <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * // Amazon Resource Name (ARN) of a KMS Key
+     * Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
+     * </li>
+     * <li>
      * <p>
-     * <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Alias name: <code>alias/ExampleAlias</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      * </p>
      * </li>
      * </ul>
      * 
-     * @return The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage
-     *         volume attached to the ML compute instance(s) that run the batch transform job. The
+     * @return The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the
+     *         storage volume attached to the ML compute instance(s) that run the batch transform job. The
      *         <code>VolumeKmsKeyId</code> can be any of the following formats:</p>
      *         <ul>
      *         <li>
      *         <p>
-     *         // KMS Key ID
-     *         </p>
-     *         <p>
-     *         <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *         Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         // Amazon Resource Name (ARN) of a KMS Key
+     *         Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *         </p>
+     *         </li>
+     *         <li>
      *         <p>
-     *         <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *         Alias name: <code>alias/ExampleAlias</code>
+     *         </p>
+     *         </li>
+     *         <li>
+     *         <p>
+     *         Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      *         </p>
      *         </li>
      */
@@ -287,48 +307,56 @@ public class TransformResources implements Serializable, Cloneable, StructuredPo
 
     /**
      * <p>
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
-     * attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be
-     * any of the following formats:
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage
+     * volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code>
+     * can be any of the following formats:
      * </p>
      * <ul>
      * <li>
      * <p>
-     * // KMS Key ID
-     * </p>
-     * <p>
-     * <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * // Amazon Resource Name (ARN) of a KMS Key
+     * Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      * </p>
+     * </li>
+     * <li>
      * <p>
-     * <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     * Alias name: <code>alias/ExampleAlias</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      * </p>
      * </li>
      * </ul>
      * 
      * @param volumeKmsKeyId
-     *        The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage
-     *        volume attached to the ML compute instance(s) that run the batch transform job. The
+     *        The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the
+     *        storage volume attached to the ML compute instance(s) that run the batch transform job. The
      *        <code>VolumeKmsKeyId</code> can be any of the following formats:</p>
      *        <ul>
      *        <li>
      *        <p>
-     *        // KMS Key ID
-     *        </p>
-     *        <p>
-     *        <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *        Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        // Amazon Resource Name (ARN) of a KMS Key
+     *        Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
      *        </p>
+     *        </li>
+     *        <li>
      *        <p>
-     *        <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+     *        Alias name: <code>alias/ExampleAlias</code>
+     *        </p>
+     *        </li>
+     *        <li>
+     *        <p>
+     *        Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>
      *        </p>
      *        </li>
      * @return Returns a reference to this object so that method calls can be chained together.

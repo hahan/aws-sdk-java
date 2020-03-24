@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -82,29 +82,29 @@ public class AWSServiceCatalogClient extends AmazonWebServiceClient implements A
                     .withSupportsCbor(false)
                     .withSupportsIon(false)
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidParametersException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.InvalidParametersException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidParametersException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.InvalidParametersExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("OperationNotSupportedException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.OperationNotSupportedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("OperationNotSupportedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.OperationNotSupportedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InvalidStateException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.InvalidStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidStateException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.InvalidStateExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DuplicateResourceException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.DuplicateResourceException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DuplicateResourceException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.DuplicateResourceExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.LimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("LimitExceededException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.LimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.ResourceNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceNotFoundException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.ResourceNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TagOptionNotMigratedException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.TagOptionNotMigratedException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("TagOptionNotMigratedException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.TagOptionNotMigratedExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withModeledClass(
-                                    com.amazonaws.services.servicecatalog.model.ResourceInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ResourceInUseException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.servicecatalog.model.transform.ResourceInUseExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.servicecatalog.model.AWSServiceCatalogException.class));
 
     /**
@@ -2647,6 +2647,11 @@ public class AWSServiceCatalogClient extends AmazonWebServiceClient implements A
     }
 
     /**
+     * <p>
+     * Finds the default parameters for a specific self-service action on a specific provisioned product and returns a
+     * map of the results to the user.
+     * </p>
+     * 
      * @param describeServiceActionExecutionParametersRequest
      * @return Result of the DescribeServiceActionExecutionParameters operation returned by the service.
      * @throws InvalidParametersException
@@ -3690,6 +3695,8 @@ public class AWSServiceCatalogClient extends AmazonWebServiceClient implements A
      * @return Result of the ListPortfolioAccess operation returned by the service.
      * @throws ResourceNotFoundException
      *         The specified resource was not found.
+     * @throws InvalidParametersException
+     *         One or more parameters provided to the operation are not valid.
      * @sample AWSServiceCatalog.ListPortfolioAccess
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess"
      *      target="_top">AWS API Documentation</a>

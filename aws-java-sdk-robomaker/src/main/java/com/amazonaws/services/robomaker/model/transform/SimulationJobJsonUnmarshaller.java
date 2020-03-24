@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -88,6 +88,10 @@ public class SimulationJobJsonUnmarshaller implements Unmarshaller<SimulationJob
                     context.nextToken();
                     simulationJob.setOutputLocation(OutputLocationJsonUnmarshaller.getInstance().unmarshall(context));
                 }
+                if (context.testExpression("loggingConfig", targetDepth)) {
+                    context.nextToken();
+                    simulationJob.setLoggingConfig(LoggingConfigJsonUnmarshaller.getInstance().unmarshall(context));
+                }
                 if (context.testExpression("maxJobDurationInSeconds", targetDepth)) {
                     context.nextToken();
                     simulationJob.setMaxJobDurationInSeconds(context.getUnmarshaller(Long.class).unmarshall(context));
@@ -110,6 +114,10 @@ public class SimulationJobJsonUnmarshaller implements Unmarshaller<SimulationJob
                     simulationJob.setSimulationApplications(new ListUnmarshaller<SimulationApplicationConfig>(SimulationApplicationConfigJsonUnmarshaller
                             .getInstance()).unmarshall(context));
                 }
+                if (context.testExpression("dataSources", targetDepth)) {
+                    context.nextToken();
+                    simulationJob.setDataSources(new ListUnmarshaller<DataSource>(DataSourceJsonUnmarshaller.getInstance()).unmarshall(context));
+                }
                 if (context.testExpression("tags", targetDepth)) {
                     context.nextToken();
                     simulationJob.setTags(new MapUnmarshaller<String, String>(context.getUnmarshaller(String.class), context.getUnmarshaller(String.class))
@@ -118,6 +126,10 @@ public class SimulationJobJsonUnmarshaller implements Unmarshaller<SimulationJob
                 if (context.testExpression("vpcConfig", targetDepth)) {
                     context.nextToken();
                     simulationJob.setVpcConfig(VPCConfigResponseJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("networkInterface", targetDepth)) {
+                    context.nextToken();
+                    simulationJob.setNetworkInterface(NetworkInterfaceJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
                 if (context.getLastParsedParentElement() == null || context.getLastParsedParentElement().equals(currentParentElement)) {

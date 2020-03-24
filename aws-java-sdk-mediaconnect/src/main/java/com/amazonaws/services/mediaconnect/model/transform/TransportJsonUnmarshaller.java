@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -48,6 +48,10 @@ public class TransportJsonUnmarshaller implements Unmarshaller<Transport, JsonUn
                 break;
 
             if (token == FIELD_NAME || token == START_OBJECT) {
+                if (context.testExpression("cidrAllowList", targetDepth)) {
+                    context.nextToken();
+                    transport.setCidrAllowList(new ListUnmarshaller<String>(context.getUnmarshaller(String.class)).unmarshall(context));
+                }
                 if (context.testExpression("maxBitrate", targetDepth)) {
                     context.nextToken();
                     transport.setMaxBitrate(context.getUnmarshaller(Integer.class).unmarshall(context));
@@ -59,6 +63,10 @@ public class TransportJsonUnmarshaller implements Unmarshaller<Transport, JsonUn
                 if (context.testExpression("protocol", targetDepth)) {
                     context.nextToken();
                     transport.setProtocol(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("remoteId", targetDepth)) {
+                    context.nextToken();
+                    transport.setRemoteId(context.getUnmarshaller(String.class).unmarshall(context));
                 }
                 if (context.testExpression("smoothingLatency", targetDepth)) {
                     context.nextToken();

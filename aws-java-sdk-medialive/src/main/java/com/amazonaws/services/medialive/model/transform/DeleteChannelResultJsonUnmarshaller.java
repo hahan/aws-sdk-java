@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -90,6 +90,11 @@ public class DeleteChannelResultJsonUnmarshaller implements Unmarshaller<DeleteC
                 if (context.testExpression("name", targetDepth)) {
                     context.nextToken();
                     deleteChannelResult.setName(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("pipelineDetails", targetDepth)) {
+                    context.nextToken();
+                    deleteChannelResult.setPipelineDetails(new ListUnmarshaller<PipelineDetail>(PipelineDetailJsonUnmarshaller.getInstance())
+                            .unmarshall(context));
                 }
                 if (context.testExpression("pipelinesRunningCount", targetDepth)) {
                     context.nextToken();

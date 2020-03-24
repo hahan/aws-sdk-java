@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -53,9 +53,9 @@ import com.amazonaws.services.autoscaling.model.transform.*;
  * <p>
  * <fullname>Amazon EC2 Auto Scaling</fullname>
  * <p>
- * Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined
- * policies, schedules, and health checks. Use this service with AWS Auto Scaling, Amazon CloudWatch, and Elastic Load
- * Balancing.
+ * Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined scaling
+ * policies, scheduled actions, and health checks. Use this service with AWS Auto Scaling, Amazon CloudWatch, and
+ * Elastic Load Balancing.
  * </p>
  * <p>
  * For more information, including information about granting IAM users required permissions for Amazon EC2 Auto Scaling
@@ -735,7 +735,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this
      * limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling
-     * Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param createAutoScalingGroupRequest
@@ -805,7 +805,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this
      * limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling
-     * Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * For more information, see <a
@@ -1380,12 +1380,12 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
 
     /**
      * <p>
-     * Describes the current Amazon EC2 Auto Scaling resource limits for your AWS account.
+     * Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account.
      * </p>
      * <p>
-     * For information about requesting an increase in these limits, see <a
+     * For information about requesting an increase, see <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling
-     * Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+     * Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param describeAccountLimitsRequest
@@ -2844,6 +2844,15 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Moves the specified instances into the standby state.
      * </p>
      * <p>
+     * If you choose to decrement the desired capacity of the Auto Scaling group, the instances can enter standby as
+     * long as the desired capacity of the Auto Scaling group after the instances are placed into standby is equal to or
+     * greater than the minimum capacity of the group.
+     * </p>
+     * <p>
+     * If you choose not to decrement the desired capacity of the Auto Scaling group, the Auto Scaling group launches
+     * new instances to replace the instances on standby.
+     * </p>
+     * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing
      * Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
@@ -2961,6 +2970,9 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Moves the specified instances out of the standby state.
      * </p>
      * <p>
+     * After you put the instances back in service, the desired capacity is incremented.
+     * </p>
+     * <p>
      * For more information, see <a
      * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing
      * Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
@@ -3047,7 +3059,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * </li>
      * <li>
      * <p>
-     * If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using using
+     * If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using
      * <a>RecordLifecycleActionHeartbeat</a>.
      * </p>
      * </li>
@@ -3199,9 +3211,12 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
 
     /**
      * <p>
-     * Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name
-     * and set the parameters to change. Any existing parameter not changed in an update to an existing policy is not
-     * changed in this update request.
+     * Creates or updates a scaling policy for an Auto Scaling group.
+     * </p>
+     * <p>
+     * For more information about using scaling policies to scale your Auto Scaling group automatically, see <a
+     * href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html">Dynamic Scaling</a> in
+     * the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param putScalingPolicyRequest
@@ -3748,10 +3763,21 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
 
     /**
      * <p>
-     * Terminates the specified instance and optionally adjusts the desired group size.
+     * Terminates the specified instance and optionally adjusts the desired group size. This call simply makes a
+     * termination request. The instance is not terminated immediately. When an instance is terminated, the instance
+     * status changes to <code>terminated</code>. You can't connect to or start an instance after you've terminated it.
      * </p>
      * <p>
-     * This call simply makes a termination request. The instance is not terminated immediately.
+     * If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to
+     * replace the ones that are terminated.
+     * </p>
+     * <p>
+     * By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the
+     * desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto
+     * Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more
+     * information, see <a href=
+     * "https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage"
+     * >Rebalancing Activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param terminateInstanceInAutoScalingGroupRequest
@@ -3816,17 +3842,17 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * <p>
      * To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any
      * parameters that you don't specify are not changed by this update request. The new settings take effect on any
-     * scaling activities after this call returns. Scaling activities that are currently in progress aren't affected.
+     * scaling activities after this call returns.
      * </p>
      * <p>
      * If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get
-     * the updated configuration, but existing instances continue to run with the configuration that they were
-     * originally launched with. When you update a group to specify a mixed instances policy instead of a launch
-     * configuration or template, existing instances may be replaced to match the new purchasing options that you
-     * specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies
-     * 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot
-     * Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old
-     * ones, so that updating your group does not compromise the performance or availability of your application.
+     * the updated configuration. Existing instances continue to run with the configuration that they were originally
+     * launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or
+     * template, existing instances may be replaced to match the new purchasing options that you specified in the
+     * policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot
+     * capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances.
+     * When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that
+     * updating your group does not compromise the performance or availability of your application.
      * </p>
      * <p>
      * Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>, or <code>MinSize</code>:

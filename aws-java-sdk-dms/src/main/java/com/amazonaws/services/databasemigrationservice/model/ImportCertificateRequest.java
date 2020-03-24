@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,8 +27,8 @@ public class ImportCertificateRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII
-     * letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII
+     * letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      * </p>
      */
     private String certificateIdentifier;
@@ -53,13 +53,13 @@ public class ImportCertificateRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII
-     * letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII
+     * letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      * </p>
      * 
      * @param certificateIdentifier
-     *        A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only
-     *        ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     *        A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only
+     *        ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
 
     public void setCertificateIdentifier(String certificateIdentifier) {
@@ -68,12 +68,12 @@ public class ImportCertificateRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII
-     * letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII
+     * letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      * </p>
      * 
-     * @return A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only
-     *         ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * @return A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only
+     *         ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
 
     public String getCertificateIdentifier() {
@@ -82,13 +82,13 @@ public class ImportCertificateRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII
-     * letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII
+     * letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      * </p>
      * 
      * @param certificateIdentifier
-     *        A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only
-     *        ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     *        A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only
+     *        ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -34,7 +34,7 @@ public class ListSecurityProfilesForTargetRequest extends com.amazonaws.AmazonWe
     private Integer maxResults;
     /**
      * <p>
-     * If true, return child groups as well.
+     * If true, return child groups too.
      * </p>
      */
     private Boolean recursive;
@@ -127,11 +127,11 @@ public class ListSecurityProfilesForTargetRequest extends com.amazonaws.AmazonWe
 
     /**
      * <p>
-     * If true, return child groups as well.
+     * If true, return child groups too.
      * </p>
      * 
      * @param recursive
-     *        If true, return child groups as well.
+     *        If true, return child groups too.
      */
 
     public void setRecursive(Boolean recursive) {
@@ -140,10 +140,10 @@ public class ListSecurityProfilesForTargetRequest extends com.amazonaws.AmazonWe
 
     /**
      * <p>
-     * If true, return child groups as well.
+     * If true, return child groups too.
      * </p>
      * 
-     * @return If true, return child groups as well.
+     * @return If true, return child groups too.
      */
 
     public Boolean getRecursive() {
@@ -152,11 +152,11 @@ public class ListSecurityProfilesForTargetRequest extends com.amazonaws.AmazonWe
 
     /**
      * <p>
-     * If true, return child groups as well.
+     * If true, return child groups too.
      * </p>
      * 
      * @param recursive
-     *        If true, return child groups as well.
+     *        If true, return child groups too.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -167,10 +167,10 @@ public class ListSecurityProfilesForTargetRequest extends com.amazonaws.AmazonWe
 
     /**
      * <p>
-     * If true, return child groups as well.
+     * If true, return child groups too.
      * </p>
      * 
-     * @return If true, return child groups as well.
+     * @return If true, return child groups too.
      */
 
     public Boolean isRecursive() {

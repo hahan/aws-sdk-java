@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -37,8 +37,8 @@ public class PresetSettings implements Serializable, Cloneable, StructuredPojo {
     private ContainerSettings containerSettings;
     /**
      * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video
-     * codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per
-     * output.
+     * codec that you choose when you specify a value for Video codec (codec). Include one instance of
+     * (VideoDescription) per output.
      */
     private VideoDescription videoDescription;
 
@@ -214,12 +214,12 @@ public class PresetSettings implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video
-     * codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per
-     * output.
+     * codec that you choose when you specify a value for Video codec (codec). Include one instance of
+     * (VideoDescription) per output.
      * 
      * @param videoDescription
      *        (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the
-     *        video codec you choose when you specify a value for Video codec (codec). Include one instance of
+     *        video codec that you choose when you specify a value for Video codec (codec). Include one instance of
      *        (VideoDescription) per output.
      */
 
@@ -229,11 +229,11 @@ public class PresetSettings implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video
-     * codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per
-     * output.
+     * codec that you choose when you specify a value for Video codec (codec). Include one instance of
+     * (VideoDescription) per output.
      * 
      * @return (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the
-     *         video codec you choose when you specify a value for Video codec (codec). Include one instance of
+     *         video codec that you choose when you specify a value for Video codec (codec). Include one instance of
      *         (VideoDescription) per output.
      */
 
@@ -243,12 +243,12 @@ public class PresetSettings implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video
-     * codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per
-     * output.
+     * codec that you choose when you specify a value for Video codec (codec). Include one instance of
+     * (VideoDescription) per output.
      * 
      * @param videoDescription
      *        (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the
-     *        video codec you choose when you specify a value for Video codec (codec). Include one instance of
+     *        video codec that you choose when you specify a value for Video codec (codec). Include one instance of
      *        (VideoDescription) per output.
      * @return Returns a reference to this object so that method calls can be chained together.
      */

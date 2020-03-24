@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -220,7 +220,13 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
     /**
      * <p>
      * Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the
-     * bot, use the <a>DeleteBotVersion</a> operation.
+     * bot, use the <a>DeleteBotVersion</a> operation. The <code>DeleteBot</code> operation doesn't immediately remove
+     * the bot schema. Instead, it is marked for deletion and removed later.
+     * </p>
+     * <p>
+     * Amazon Lex stores utterances indefinitely for improving the ability of your bot to respond to user inputs. These
+     * utterances are not removed when the bot is deleted. To remove the utterances, use the <a>DeleteUtterances</a>
+     * operation.
      * </p>
      * <p>
      * If a bot has an alias, you can't delete it. Instead, the <code>DeleteBot</code> operation returns a
@@ -243,7 +249,13 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
     /**
      * <p>
      * Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the
-     * bot, use the <a>DeleteBotVersion</a> operation.
+     * bot, use the <a>DeleteBotVersion</a> operation. The <code>DeleteBot</code> operation doesn't immediately remove
+     * the bot schema. Instead, it is marked for deletion and removed later.
+     * </p>
+     * <p>
+     * Amazon Lex stores utterances indefinitely for improving the ability of your bot to respond to user inputs. These
+     * utterances are not removed when the bot is deleted. To remove the utterances, use the <a>DeleteUtterances</a>
+     * operation.
      * </p>
      * <p>
      * If a bot has an alias, you can't delete it. Instead, the <code>DeleteBot</code> operation returns a
@@ -603,7 +615,10 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * respond to user input.
      * </p>
      * <p>
-     * Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.
+     * Use the <code>DeleteUtterances</code> operation to manually delete stored utterances for a specific user. When
+     * you use the <code>DeleteUtterances</code> operation, utterances stored for improving your bot's ability to
+     * respond to user input are deleted immediately. Utterances stored for use with the <code>GetUtterancesView</code>
+     * operation are deleted after 15 days.
      * </p>
      * <p>
      * This operation requires permissions for the <code>lex:DeleteUtterances</code> action.
@@ -627,7 +642,10 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * respond to user input.
      * </p>
      * <p>
-     * Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.
+     * Use the <code>DeleteUtterances</code> operation to manually delete stored utterances for a specific user. When
+     * you use the <code>DeleteUtterances</code> operation, utterances stored for improving your bot's ability to
+     * respond to user input are deleted immediately. Utterances stored for use with the <code>GetUtterancesView</code>
+     * operation are deleted after 15 days.
      * </p>
      * <p>
      * This operation requires permissions for the <code>lex:DeleteUtterances</code> action.
@@ -1475,13 +1493,16 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * After you publish a new version of a bot, you can get information about the old version and the new so that you
      * can compare the performance across the two versions.
      * </p>
-     * <note>
      * <p>
      * Utterance statistics are generated once a day. Data is available for the last 15 days. You can request
-     * information for up to 5 versions in each request. The response contains information about a maximum of 100
-     * utterances for each version.
+     * information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances
+     * received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for
+     * each version.
      * </p>
-     * </note>
+     * <p>
+     * If you set <code>childDirected</code> field to true when you created your bot, or if you opted out of
+     * participating in improving Amazon Lex, utterances are not available.
+     * </p>
      * <p>
      * This operation requires permissions for the <code>lex:GetUtterancesView</code> action.
      * </p>
@@ -1509,13 +1530,16 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * After you publish a new version of a bot, you can get information about the old version and the new so that you
      * can compare the performance across the two versions.
      * </p>
-     * <note>
      * <p>
      * Utterance statistics are generated once a day. Data is available for the last 15 days. You can request
-     * information for up to 5 versions in each request. The response contains information about a maximum of 100
-     * utterances for each version.
+     * information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances
+     * received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for
+     * each version.
      * </p>
-     * </note>
+     * <p>
+     * If you set <code>childDirected</code> field to true when you created your bot, or if you opted out of
+     * participating in improving Amazon Lex, utterances are not available.
+     * </p>
      * <p>
      * This operation requires permissions for the <code>lex:GetUtterancesView</code> action.
      * </p>
@@ -1535,6 +1559,39 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
 
     /**
      * <p>
+     * Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have
+     * tags associated with them.
+     * </p>
+     * 
+     * @param listTagsForResourceRequest
+     * @return A Java Future containing the result of the ListTagsForResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsync.ListTagsForResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResource" target="_top">AWS
+     *      API Documentation</a>
+     */
+    java.util.concurrent.Future<ListTagsForResourceResult> listTagsForResourceAsync(ListTagsForResourceRequest listTagsForResourceRequest);
+
+    /**
+     * <p>
+     * Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have
+     * tags associated with them.
+     * </p>
+     * 
+     * @param listTagsForResourceRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the ListTagsForResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsyncHandler.ListTagsForResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResource" target="_top">AWS
+     *      API Documentation</a>
+     */
+    java.util.concurrent.Future<ListTagsForResourceResult> listTagsForResourceAsync(ListTagsForResourceRequest listTagsForResourceRequest,
+            com.amazonaws.handlers.AsyncHandler<ListTagsForResourceRequest, ListTagsForResourceResult> asyncHandler);
+
+    /**
+     * <p>
      * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are
      * only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can
      * use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum
@@ -1550,7 +1607,7 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * </p>
      * <p>
      * This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see
-     * <a>auth-and-access-control</a>.
+     * <a>security-iam</a>.
      * </p>
      * 
      * @param putBotRequest
@@ -1578,7 +1635,7 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      * </p>
      * <p>
      * This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see
-     * <a>auth-and-access-control</a>.
+     * <a>security-iam</a>.
      * </p>
      * 
      * @param putBotRequest
@@ -1893,5 +1950,69 @@ public interface AmazonLexModelBuildingAsync extends AmazonLexModelBuilding {
      */
     java.util.concurrent.Future<StartImportResult> startImportAsync(StartImportRequest startImportRequest,
             com.amazonaws.handlers.AsyncHandler<StartImportRequest, StartImportResult> asyncHandler);
+
+    /**
+     * <p>
+     * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced
+     * with the new value.
+     * </p>
+     * 
+     * @param tagResourceRequest
+     * @return A Java Future containing the result of the TagResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsync.TagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResource" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<TagResourceResult> tagResourceAsync(TagResourceRequest tagResourceRequest);
+
+    /**
+     * <p>
+     * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced
+     * with the new value.
+     * </p>
+     * 
+     * @param tagResourceRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the TagResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsyncHandler.TagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResource" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<TagResourceResult> tagResourceAsync(TagResourceRequest tagResourceRequest,
+            com.amazonaws.handlers.AsyncHandler<TagResourceRequest, TagResourceResult> asyncHandler);
+
+    /**
+     * <p>
+     * Removes tags from a bot, bot alias or bot channel.
+     * </p>
+     * 
+     * @param untagResourceRequest
+     * @return A Java Future containing the result of the UntagResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsync.UntagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResource" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<UntagResourceResult> untagResourceAsync(UntagResourceRequest untagResourceRequest);
+
+    /**
+     * <p>
+     * Removes tags from a bot, bot alias or bot channel.
+     * </p>
+     * 
+     * @param untagResourceRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the UntagResource operation returned by the service.
+     * @sample AmazonLexModelBuildingAsyncHandler.UntagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResource" target="_top">AWS API
+     *      Documentation</a>
+     */
+    java.util.concurrent.Future<UntagResourceResult> untagResourceAsync(UntagResourceRequest untagResourceRequest,
+            com.amazonaws.handlers.AsyncHandler<UntagResourceRequest, UntagResourceResult> asyncHandler);
 
 }

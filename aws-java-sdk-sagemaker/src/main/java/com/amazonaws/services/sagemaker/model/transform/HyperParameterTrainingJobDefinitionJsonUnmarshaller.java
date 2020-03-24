@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -48,6 +48,18 @@ public class HyperParameterTrainingJobDefinitionJsonUnmarshaller implements Unma
                 break;
 
             if (token == FIELD_NAME || token == START_OBJECT) {
+                if (context.testExpression("DefinitionName", targetDepth)) {
+                    context.nextToken();
+                    hyperParameterTrainingJobDefinition.setDefinitionName(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("TuningObjective", targetDepth)) {
+                    context.nextToken();
+                    hyperParameterTrainingJobDefinition.setTuningObjective(HyperParameterTuningJobObjectiveJsonUnmarshaller.getInstance().unmarshall(context));
+                }
+                if (context.testExpression("HyperParameterRanges", targetDepth)) {
+                    context.nextToken();
+                    hyperParameterTrainingJobDefinition.setHyperParameterRanges(ParameterRangesJsonUnmarshaller.getInstance().unmarshall(context));
+                }
                 if (context.testExpression("StaticHyperParameters", targetDepth)) {
                     context.nextToken();
                     hyperParameterTrainingJobDefinition.setStaticHyperParameters(new MapUnmarshaller<String, String>(context.getUnmarshaller(String.class),
@@ -90,6 +102,14 @@ public class HyperParameterTrainingJobDefinitionJsonUnmarshaller implements Unma
                 if (context.testExpression("EnableInterContainerTrafficEncryption", targetDepth)) {
                     context.nextToken();
                     hyperParameterTrainingJobDefinition.setEnableInterContainerTrafficEncryption(context.getUnmarshaller(Boolean.class).unmarshall(context));
+                }
+                if (context.testExpression("EnableManagedSpotTraining", targetDepth)) {
+                    context.nextToken();
+                    hyperParameterTrainingJobDefinition.setEnableManagedSpotTraining(context.getUnmarshaller(Boolean.class).unmarshall(context));
+                }
+                if (context.testExpression("CheckpointConfig", targetDepth)) {
+                    context.nextToken();
+                    hyperParameterTrainingJobDefinition.setCheckpointConfig(CheckpointConfigJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
                 if (context.getLastParsedParentElement() == null || context.getLastParsedParentElement().equals(currentParentElement)) {

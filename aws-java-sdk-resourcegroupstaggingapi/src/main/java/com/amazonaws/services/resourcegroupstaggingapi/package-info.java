@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -31,31 +31,63 @@
  * <ul>
  * <li>
  * <p>
- * Tag and untag supported resources located in the specified region for the AWS account
+ * Tag and untag supported resources located in the specified Region for the AWS account.
  * </p>
  * </li>
  * <li>
  * <p>
- * Use tag-based filters to search for resources located in the specified region for the AWS account
+ * Use tag-based filters to search for resources located in the specified Region for the AWS account.
  * </p>
  * </li>
  * <li>
  * <p>
- * List all existing tag keys in the specified region for the AWS account
+ * List all existing tag keys in the specified Region for the AWS account.
  * </p>
  * </li>
  * <li>
  * <p>
- * List all existing values for the specified key in the specified region for the AWS account
+ * List all existing values for the specified key in the specified Region for the AWS account.
  * </p>
  * </li>
  * </ul>
  * <p>
- * To make full use of the resource groups tagging API operations, you might need additional IAM permissions, including
- * permission to access the resources of individual services as well as permission to view and apply tags to those
- * resources. For more information, see <a
- * href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-resource-groups.html"
- * >Obtaining Permissions for Resource Groups and Tag Editor</a>.
+ * To use resource groups tagging API operations, you must add the following permissions to your IAM policy:
+ * </p>
+ * <ul>
+ * <li>
+ * <p>
+ * <code>tag:GetResources</code>
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * <code>tag:TagResources</code>
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * <code>tag:UntagResources</code>
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * <code>tag:GetTagKeys</code>
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * <code>tag:GetTagValues</code>
+ * </p>
+ * </li>
+ * </ul>
+ * <p>
+ * You'll also need permissions to access the resources of individual services so that you can tag and untag those
+ * resources.
+ * </p>
+ * <p>
+ * For more information on IAM policies, see <a
+ * href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html">Managing IAM Policies</a> in the
+ * <i>IAM User Guide</i>.
  * </p>
  * <p>
  * You can use the Resource Groups Tagging API to tag resources for the following AWS services.
@@ -73,12 +105,17 @@
  * </li>
  * <li>
  * <p>
- * AWS AppStream
+ * Amazon AppStream
  * </p>
  * </li>
  * <li>
  * <p>
  * AWS AppSync
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS App Mesh
  * </p>
  * </li>
  * <li>
@@ -89,6 +126,11 @@
  * <li>
  * <p>
  * Amazon Aurora
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS Backup
  * </p>
  * </li>
  * <li>
@@ -148,6 +190,16 @@
  * </li>
  * <li>
  * <p>
+ * AWS CodeCommit
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS CodePipeline
+ * </p>
+ * </li>
+ * <li>
+ * <p>
  * AWS CodeStar
  * </p>
  * </li>
@@ -173,6 +225,11 @@
  * </li>
  * <li>
  * <p>
+ * AWS Data Exchange
+ * </p>
+ * </li>
+ * <li>
+ * <p>
  * AWS Data Pipeline
  * </p>
  * </li>
@@ -183,7 +240,12 @@
  * </li>
  * <li>
  * <p>
- * AWS Datasync
+ * AWS DataSync
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS Device Farm
  * </p>
  * </li>
  * <li>
@@ -219,6 +281,11 @@
  * <li>
  * <p>
  * Amazon ECS
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * Amazon EKS
  * </p>
  * </li>
  * <li>
@@ -273,12 +340,17 @@
  * </li>
  * <li>
  * <p>
- * Amazon Glacier
+ * Amazon S3 Glacier
  * </p>
  * </li>
  * <li>
  * <p>
  * AWS Glue
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * Amazon GuardDuty
  * </p>
  * </li>
  * <li>
@@ -308,7 +380,17 @@
  * </li>
  * <li>
  * <p>
+ * AWS IoT Events
+ * </p>
+ * </li>
+ * <li>
+ * <p>
  * AWS IoT Greengrass
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS IoT 1-Click
  * </p>
  * </li>
  * <li>
@@ -368,6 +450,16 @@
  * </li>
  * <li>
  * <p>
+ * AWS Organizations
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * Amazon Quantum Ledger Database (QLDB)
+ * </p>
+ * </li>
+ * <li>
+ * <p>
  * Amazon RDS
  * </p>
  * </li>
@@ -418,6 +510,11 @@
  * </li>
  * <li>
  * <p>
+ * AWS Security Hub
+ * </p>
+ * </li>
+ * <li>
+ * <p>
  * AWS Service Catalog
  * </p>
  * </li>
@@ -433,7 +530,7 @@
  * </li>
  * <li>
  * <p>
- * AWS Simple System Manager (SSM)
+ * Amazon Simple Workflow Service
  * </p>
  * </li>
  * <li>
@@ -444,6 +541,11 @@
  * <li>
  * <p>
  * AWS Storage Gateway
+ * </p>
+ * </li>
+ * <li>
+ * <p>
+ * AWS Systems Manager
  * </p>
  * </li>
  * <li>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -536,6 +536,49 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
 
     /**
      * <p>
+     * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more
+     * information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param getBlockPublicAccessConfigurationRequest
+     * @return A Java Future containing the result of the GetBlockPublicAccessConfiguration operation returned by the
+     *         service.
+     * @sample AmazonElasticMapReduceAsync.GetBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    java.util.concurrent.Future<GetBlockPublicAccessConfigurationResult> getBlockPublicAccessConfigurationAsync(
+            GetBlockPublicAccessConfigurationRequest getBlockPublicAccessConfigurationRequest);
+
+    /**
+     * <p>
+     * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more
+     * information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param getBlockPublicAccessConfigurationRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the GetBlockPublicAccessConfiguration operation returned by the
+     *         service.
+     * @sample AmazonElasticMapReduceAsyncHandler.GetBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    java.util.concurrent.Future<GetBlockPublicAccessConfigurationResult> getBlockPublicAccessConfigurationAsync(
+            GetBlockPublicAccessConfigurationRequest getBlockPublicAccessConfigurationRequest,
+            com.amazonaws.handlers.AsyncHandler<GetBlockPublicAccessConfigurationRequest, GetBlockPublicAccessConfigurationResult> asyncHandler);
+
+    /**
+     * <p>
      * Provides information about the bootstrap actions associated with a cluster.
      * </p>
      * 
@@ -772,7 +815,8 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+     * Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the
+     * request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.
      * </p>
      * 
      * @param listStepsRequest
@@ -786,7 +830,8 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+     * Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the
+     * request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.
      * </p>
      * 
      * @param listStepsRequest
@@ -802,6 +847,37 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
      */
     java.util.concurrent.Future<ListStepsResult> listStepsAsync(ListStepsRequest listStepsRequest,
             com.amazonaws.handlers.AsyncHandler<ListStepsRequest, ListStepsResult> asyncHandler);
+
+    /**
+     * <p>
+     * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+     * </p>
+     * 
+     * @param modifyClusterRequest
+     * @return A Java Future containing the result of the ModifyCluster operation returned by the service.
+     * @sample AmazonElasticMapReduceAsync.ModifyCluster
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyCluster" target="_top">AWS
+     *      API Documentation</a>
+     */
+    java.util.concurrent.Future<ModifyClusterResult> modifyClusterAsync(ModifyClusterRequest modifyClusterRequest);
+
+    /**
+     * <p>
+     * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+     * </p>
+     * 
+     * @param modifyClusterRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the ModifyCluster operation returned by the service.
+     * @sample AmazonElasticMapReduceAsyncHandler.ModifyCluster
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyCluster" target="_top">AWS
+     *      API Documentation</a>
+     */
+    java.util.concurrent.Future<ModifyClusterResult> modifyClusterAsync(ModifyClusterRequest modifyClusterRequest,
+            com.amazonaws.handlers.AsyncHandler<ModifyClusterRequest, ModifyClusterResult> asyncHandler);
 
     /**
      * <p>
@@ -934,6 +1010,49 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
      */
     java.util.concurrent.Future<PutAutoScalingPolicyResult> putAutoScalingPolicyAsync(PutAutoScalingPolicyRequest putAutoScalingPolicyRequest,
             com.amazonaws.handlers.AsyncHandler<PutAutoScalingPolicyRequest, PutAutoScalingPolicyResult> asyncHandler);
+
+    /**
+     * <p>
+     * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region.
+     * For more information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param putBlockPublicAccessConfigurationRequest
+     * @return A Java Future containing the result of the PutBlockPublicAccessConfiguration operation returned by the
+     *         service.
+     * @sample AmazonElasticMapReduceAsync.PutBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    java.util.concurrent.Future<PutBlockPublicAccessConfigurationResult> putBlockPublicAccessConfigurationAsync(
+            PutBlockPublicAccessConfigurationRequest putBlockPublicAccessConfigurationRequest);
+
+    /**
+     * <p>
+     * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region.
+     * For more information see <a
+     * href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+     * Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.
+     * </p>
+     * 
+     * @param putBlockPublicAccessConfigurationRequest
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the PutBlockPublicAccessConfiguration operation returned by the
+     *         service.
+     * @sample AmazonElasticMapReduceAsyncHandler.PutBlockPublicAccessConfiguration
+     * @see <a
+     *      href="http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration"
+     *      target="_top">AWS API Documentation</a>
+     */
+    java.util.concurrent.Future<PutBlockPublicAccessConfigurationResult> putBlockPublicAccessConfigurationAsync(
+            PutBlockPublicAccessConfigurationRequest putBlockPublicAccessConfigurationRequest,
+            com.amazonaws.handlers.AsyncHandler<PutBlockPublicAccessConfigurationRequest, PutBlockPublicAccessConfigurationResult> asyncHandler);
 
     /**
      * <p>
@@ -1173,10 +1292,13 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified
-     * clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when
-     * you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers
-     * action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+     * Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users
+     * of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root
+     * user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account
+     * can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only
+     * the IAM user that created the cluster can perform actions. This action works on running clusters. You can
+     * override the default <code>true</code> setting when you create a cluster by using the
+     * <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.
      * </p>
      * 
      * @param setVisibleToAllUsersRequest
@@ -1190,10 +1312,13 @@ public interface AmazonElasticMapReduceAsync extends AmazonElasticMapReduce {
 
     /**
      * <p>
-     * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified
-     * clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when
-     * you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers
-     * action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+     * Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users
+     * of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root
+     * user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account
+     * can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only
+     * the IAM user that created the cluster can perform actions. This action works on running clusters. You can
+     * override the default <code>true</code> setting when you create a cluster by using the
+     * <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.
      * </p>
      * 
      * @param setVisibleToAllUsersRequest

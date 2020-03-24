@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -229,6 +229,20 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private NotificationProperty notificationProperty;
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     */
+    private String glueVersion;
 
     /**
      * <p>
@@ -741,6 +755,13 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
         setArguments(arguments);
         return this;
     }
+
+    /**
+     * Add a single Arguments entry
+     *
+     * @see JobRun#withArguments
+     * @returns a reference to this object so that method calls can be chained together.
+     */
 
     public JobRun addArgumentsEntry(String key, String value) {
         if (null == this.arguments) {
@@ -1638,6 +1659,94 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @param glueVersion
+     *        Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     *        indicates the version supported for jobs of type Spark. </p>
+     *        <p>
+     *        For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *        see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *        guide.
+     *        </p>
+     *        <p>
+     *        Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+
+    public void setGlueVersion(String glueVersion) {
+        this.glueVersion = glueVersion;
+    }
+
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @return Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python
+     *         version indicates the version supported for jobs of type Spark. </p>
+     *         <p>
+     *         For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *         see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *         guide.
+     *         </p>
+     *         <p>
+     *         Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+
+    public String getGlueVersion() {
+        return this.glueVersion;
+    }
+
+    /**
+     * <p>
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     * indicates the version supported for jobs of type Spark.
+     * </p>
+     * <p>
+     * For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a
+     * href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.
+     * </p>
+     * <p>
+     * Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * </p>
+     * 
+     * @param glueVersion
+     *        Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version
+     *        indicates the version supported for jobs of type Spark. </p>
+     *        <p>
+     *        For more information about the available AWS Glue versions and corresponding Spark and Python versions,
+     *        see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
+     *        guide.
+     *        </p>
+     *        <p>
+     *        Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public JobRun withGlueVersion(String glueVersion) {
+        setGlueVersion(glueVersion);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1690,7 +1799,9 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
         if (getLogGroupName() != null)
             sb.append("LogGroupName: ").append(getLogGroupName()).append(",");
         if (getNotificationProperty() != null)
-            sb.append("NotificationProperty: ").append(getNotificationProperty());
+            sb.append("NotificationProperty: ").append(getNotificationProperty()).append(",");
+        if (getGlueVersion() != null)
+            sb.append("GlueVersion: ").append(getGlueVersion());
         sb.append("}");
         return sb.toString();
     }
@@ -1789,6 +1900,10 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getNotificationProperty() != null && other.getNotificationProperty().equals(this.getNotificationProperty()) == false)
             return false;
+        if (other.getGlueVersion() == null ^ this.getGlueVersion() == null)
+            return false;
+        if (other.getGlueVersion() != null && other.getGlueVersion().equals(this.getGlueVersion()) == false)
+            return false;
         return true;
     }
 
@@ -1818,6 +1933,7 @@ public class JobRun implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getSecurityConfiguration() == null) ? 0 : getSecurityConfiguration().hashCode());
         hashCode = prime * hashCode + ((getLogGroupName() == null) ? 0 : getLogGroupName().hashCode());
         hashCode = prime * hashCode + ((getNotificationProperty() == null) ? 0 : getNotificationProperty().hashCode());
+        hashCode = prime * hashCode + ((getGlueVersion() == null) ? 0 : getGlueVersion().hashCode());
         return hashCode;
     }
 

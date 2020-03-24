@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -13,6 +13,8 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws;
+
+import com.amazonaws.retry.RetryMode;
 
 /**
  * SDKGlobalConfiguration is to configure any global settings
@@ -258,6 +260,15 @@ public class SDKGlobalConfiguration {
     /** Environment variable name for the AWS session token */
     public static final String AWS_SESSION_TOKEN_ENV_VAR = "AWS_SESSION_TOKEN";
 
+    /** Environment variable name for the AWS Web Identity Token File Path */
+    public static final String AWS_WEB_IDENTITY_ENV_VAR = "AWS_WEB_IDENTITY_TOKEN_FILE";
+
+    /** Environment variable name for the AWS role arn */
+    public static final String AWS_ROLE_ARN_ENV_VAR = "AWS_ROLE_ARN";
+
+    /** Environment variable name for the AWS role arn */
+    public static final String AWS_ROLE_SESSION_NAME_ENV_VAR = "AWS_ROLE_SESSION_NAME";
+
     /**
      * Environment variable containing region used to configure clients.
      */
@@ -324,6 +335,26 @@ public class SDKGlobalConfiguration {
      * monitoring events.
      */
     public static final String AWS_CSM_CLIENT_ID_ENV_VAR = "AWS_CSM_CLIENT_ID";
+
+    /**
+     * System properties to set the retry mode to use. See {@link RetryMode} for available values
+     */
+    public static final String AWS_RETRY_MODE_SYSTEM_PROPERTY = "com.amazonaws.sdk.retryMode";
+
+    /**
+     * Environment variable to set the retry mode to use. See {@link RetryMode} for available values
+     */
+    public static final String AWS_RETRY_MODE_ENV_VAR = "AWS_RETRY_MODE";
+
+    /**
+     * System properties to set the retry max attempts
+     */
+    public static final String AWS_MAX_ATTEMPTS_SYSTEM_PROPERTY = "com.amazonaws.sdk.maxAttempts";
+
+    /**
+     * Environment variable to set the retry max attempts
+     */
+    public static final String AWS_MAX_ATTEMPTS_ENV_VAR= "AWS_MAX_ATTEMPTS";
 
     /**
      * @deprecated by {@link SDKGlobalTime#setGlobalTimeOffset(int)}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -27,6 +27,8 @@ import com.amazonaws.annotation.SdkInternalApi;
 @SdkInternalApi
 public class DescribeVoicesRequestMarshaller {
 
+    private static final MarshallingInfo<String> ENGINE_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
+            .marshallLocation(MarshallLocation.QUERY_PARAM).marshallLocationName("Engine").build();
     private static final MarshallingInfo<String> LANGUAGECODE_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.QUERY_PARAM).marshallLocationName("LanguageCode").build();
     private static final MarshallingInfo<Boolean> INCLUDEADDITIONALLANGUAGECODES_BINDING = MarshallingInfo.builder(MarshallingType.BOOLEAN)
@@ -50,6 +52,7 @@ public class DescribeVoicesRequestMarshaller {
         }
 
         try {
+            protocolMarshaller.marshall(describeVoicesRequest.getEngine(), ENGINE_BINDING);
             protocolMarshaller.marshall(describeVoicesRequest.getLanguageCode(), LANGUAGECODE_BINDING);
             protocolMarshaller.marshall(describeVoicesRequest.getIncludeAdditionalLanguageCodes(), INCLUDEADDITIONALLANGUAGECODES_BINDING);
             protocolMarshaller.marshall(describeVoicesRequest.getNextToken(), NEXTTOKEN_BINDING);

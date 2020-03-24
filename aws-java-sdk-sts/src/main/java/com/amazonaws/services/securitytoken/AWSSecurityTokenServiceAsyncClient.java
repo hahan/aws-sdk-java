@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -443,6 +443,39 @@ public class AWSSecurityTokenServiceAsyncClient extends AWSSecurityTokenServiceC
 
                 try {
                     result = executeDecodeAuthorizationMessage(finalRequest);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(finalRequest, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetAccessKeyInfoResult> getAccessKeyInfoAsync(GetAccessKeyInfoRequest request) {
+
+        return getAccessKeyInfoAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<GetAccessKeyInfoResult> getAccessKeyInfoAsync(final GetAccessKeyInfoRequest request,
+            final com.amazonaws.handlers.AsyncHandler<GetAccessKeyInfoRequest, GetAccessKeyInfoResult> asyncHandler) {
+        final GetAccessKeyInfoRequest finalRequest = beforeClientExecution(request);
+
+        return executorService.submit(new java.util.concurrent.Callable<GetAccessKeyInfoResult>() {
+            @Override
+            public GetAccessKeyInfoResult call() throws Exception {
+                GetAccessKeyInfoResult result = null;
+
+                try {
+                    result = executeGetAccessKeyInfo(finalRequest);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

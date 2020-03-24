@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -35,7 +35,7 @@ public class ListAuditFindingsRequest extends com.amazonaws.AmazonWebServiceRequ
     private String checkName;
     /**
      * <p>
-     * Information identifying the non-compliant resource.
+     * Information identifying the noncompliant resource.
      * </p>
      */
     private ResourceIdentifier resourceIdentifier;
@@ -154,11 +154,11 @@ public class ListAuditFindingsRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Information identifying the non-compliant resource.
+     * Information identifying the noncompliant resource.
      * </p>
      * 
      * @param resourceIdentifier
-     *        Information identifying the non-compliant resource.
+     *        Information identifying the noncompliant resource.
      */
 
     public void setResourceIdentifier(ResourceIdentifier resourceIdentifier) {
@@ -167,10 +167,10 @@ public class ListAuditFindingsRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Information identifying the non-compliant resource.
+     * Information identifying the noncompliant resource.
      * </p>
      * 
-     * @return Information identifying the non-compliant resource.
+     * @return Information identifying the noncompliant resource.
      */
 
     public ResourceIdentifier getResourceIdentifier() {
@@ -179,11 +179,11 @@ public class ListAuditFindingsRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Information identifying the non-compliant resource.
+     * Information identifying the noncompliant resource.
      * </p>
      * 
      * @param resourceIdentifier
-     *        Information identifying the non-compliant resource.
+     *        Information identifying the noncompliant resource.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

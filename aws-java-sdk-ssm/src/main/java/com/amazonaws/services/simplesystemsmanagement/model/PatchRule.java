@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -49,6 +49,12 @@ public class PatchRule implements Serializable, Cloneable, StructuredPojo {
      * </p>
      */
     private Integer approveAfterDays;
+    /**
+     * <p>
+     * Example API
+     * </p>
+     */
+    private String approveUntilDate;
     /**
      * <p>
      * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates
@@ -234,6 +240,46 @@ public class PatchRule implements Serializable, Cloneable, StructuredPojo {
 
     /**
      * <p>
+     * Example API
+     * </p>
+     * 
+     * @param approveUntilDate
+     *        Example API
+     */
+
+    public void setApproveUntilDate(String approveUntilDate) {
+        this.approveUntilDate = approveUntilDate;
+    }
+
+    /**
+     * <p>
+     * Example API
+     * </p>
+     * 
+     * @return Example API
+     */
+
+    public String getApproveUntilDate() {
+        return this.approveUntilDate;
+    }
+
+    /**
+     * <p>
+     * Example API
+     * </p>
+     * 
+     * @param approveUntilDate
+     *        Example API
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public PatchRule withApproveUntilDate(String approveUntilDate) {
+        setApproveUntilDate(approveUntilDate);
+        return this;
+    }
+
+    /**
+     * <p>
      * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates
      * available in the specified repository. The default value is 'false'. Applies to Linux instances only.
      * </p>
@@ -314,6 +360,8 @@ public class PatchRule implements Serializable, Cloneable, StructuredPojo {
             sb.append("ComplianceLevel: ").append(getComplianceLevel()).append(",");
         if (getApproveAfterDays() != null)
             sb.append("ApproveAfterDays: ").append(getApproveAfterDays()).append(",");
+        if (getApproveUntilDate() != null)
+            sb.append("ApproveUntilDate: ").append(getApproveUntilDate()).append(",");
         if (getEnableNonSecurity() != null)
             sb.append("EnableNonSecurity: ").append(getEnableNonSecurity());
         sb.append("}");
@@ -342,6 +390,10 @@ public class PatchRule implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getApproveAfterDays() != null && other.getApproveAfterDays().equals(this.getApproveAfterDays()) == false)
             return false;
+        if (other.getApproveUntilDate() == null ^ this.getApproveUntilDate() == null)
+            return false;
+        if (other.getApproveUntilDate() != null && other.getApproveUntilDate().equals(this.getApproveUntilDate()) == false)
+            return false;
         if (other.getEnableNonSecurity() == null ^ this.getEnableNonSecurity() == null)
             return false;
         if (other.getEnableNonSecurity() != null && other.getEnableNonSecurity().equals(this.getEnableNonSecurity()) == false)
@@ -357,6 +409,7 @@ public class PatchRule implements Serializable, Cloneable, StructuredPojo {
         hashCode = prime * hashCode + ((getPatchFilterGroup() == null) ? 0 : getPatchFilterGroup().hashCode());
         hashCode = prime * hashCode + ((getComplianceLevel() == null) ? 0 : getComplianceLevel().hashCode());
         hashCode = prime * hashCode + ((getApproveAfterDays() == null) ? 0 : getApproveAfterDays().hashCode());
+        hashCode = prime * hashCode + ((getApproveUntilDate() == null) ? 0 : getApproveUntilDate().hashCode());
         hashCode = prime * hashCode + ((getEnableNonSecurity() == null) ? 0 : getEnableNonSecurity().hashCode());
         return hashCode;
     }

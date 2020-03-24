@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -55,6 +55,14 @@ public class ApplicationInfoJsonUnmarshaller implements Unmarshaller<Application
                 if (context.testExpression("LifeCycle", targetDepth)) {
                     context.nextToken();
                     applicationInfo.setLifeCycle(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("OpsItemSNSTopicArn", targetDepth)) {
+                    context.nextToken();
+                    applicationInfo.setOpsItemSNSTopicArn(context.getUnmarshaller(String.class).unmarshall(context));
+                }
+                if (context.testExpression("OpsCenterEnabled", targetDepth)) {
+                    context.nextToken();
+                    applicationInfo.setOpsCenterEnabled(context.getUnmarshaller(Boolean.class).unmarshall(context));
                 }
                 if (context.testExpression("Remarks", targetDepth)) {
                     context.nextToken();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -41,6 +41,8 @@ public class JobTemplateMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("lastUpdated").timestampFormat("unixTimestamp").build();
     private static final MarshallingInfo<String> NAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("name").build();
+    private static final MarshallingInfo<Integer> PRIORITY_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("priority").build();
     private static final MarshallingInfo<String> QUEUE_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("queue").build();
     private static final MarshallingInfo<StructuredPojo> SETTINGS_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
@@ -73,6 +75,7 @@ public class JobTemplateMarshaller {
             protocolMarshaller.marshall(jobTemplate.getDescription(), DESCRIPTION_BINDING);
             protocolMarshaller.marshall(jobTemplate.getLastUpdated(), LASTUPDATED_BINDING);
             protocolMarshaller.marshall(jobTemplate.getName(), NAME_BINDING);
+            protocolMarshaller.marshall(jobTemplate.getPriority(), PRIORITY_BINDING);
             protocolMarshaller.marshall(jobTemplate.getQueue(), QUEUE_BINDING);
             protocolMarshaller.marshall(jobTemplate.getSettings(), SETTINGS_BINDING);
             protocolMarshaller.marshall(jobTemplate.getStatusUpdateInterval(), STATUSUPDATEINTERVAL_BINDING);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -29,6 +29,13 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
     /** Specifies the group to which the audio Rendition belongs. */
     private String audioGroupId;
     /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     * MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container.
+     * Regardless of the value that you specify here, if this output has video, the service will place the output into an
+     * MPEG2-TS container.
+     */
+    private String audioOnlyContainer;
+    /**
      * List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are
      * associated to the video, separate by ','.
      */
@@ -46,7 +53,11 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
     private String audioTrackType;
     /** When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest */
     private String iFrameOnlyManifest;
-    /** String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters. */
+    /**
+     * Use this setting to add an identifying string to the filename of each segment. The service adds this string
+     * between the name modifier and segment index number. You can use format identifiers in the string. For more
+     * information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
+     */
     private String segmentModifier;
 
     /**
@@ -80,6 +91,81 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
 
     public HlsSettings withAudioGroupId(String audioGroupId) {
         setAudioGroupId(audioGroupId);
+        return this;
+    }
+
+    /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     * MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container.
+     * Regardless of the value that you specify here, if this output has video, the service will place the output into an
+     * MPEG2-TS container.
+     * 
+     * @param audioOnlyContainer
+     *        Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     *        MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw
+     *        container. Regardless of the value that you specify here, if this output has video, the service will place
+     *        the output into an MPEG2-TS container.
+     * @see HlsAudioOnlyContainer
+     */
+
+    public void setAudioOnlyContainer(String audioOnlyContainer) {
+        this.audioOnlyContainer = audioOnlyContainer;
+    }
+
+    /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     * MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container.
+     * Regardless of the value that you specify here, if this output has video, the service will place the output into an
+     * MPEG2-TS container.
+     * 
+     * @return Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     *         MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw
+     *         container. Regardless of the value that you specify here, if this output has video, the service will
+     *         place the output into an MPEG2-TS container.
+     * @see HlsAudioOnlyContainer
+     */
+
+    public String getAudioOnlyContainer() {
+        return this.audioOnlyContainer;
+    }
+
+    /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     * MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container.
+     * Regardless of the value that you specify here, if this output has video, the service will place the output into an
+     * MPEG2-TS container.
+     * 
+     * @param audioOnlyContainer
+     *        Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     *        MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw
+     *        container. Regardless of the value that you specify here, if this output has video, the service will place
+     *        the output into an MPEG2-TS container.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see HlsAudioOnlyContainer
+     */
+
+    public HlsSettings withAudioOnlyContainer(String audioOnlyContainer) {
+        setAudioOnlyContainer(audioOnlyContainer);
+        return this;
+    }
+
+    /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     * MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container.
+     * Regardless of the value that you specify here, if this output has video, the service will place the output into an
+     * MPEG2-TS container.
+     * 
+     * @param audioOnlyContainer
+     *        Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an
+     *        MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw
+     *        container. Regardless of the value that you specify here, if this output has video, the service will place
+     *        the output into an MPEG2-TS container.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     * @see HlsAudioOnlyContainer
+     */
+
+    public HlsSettings withAudioOnlyContainer(HlsAudioOnlyContainer audioOnlyContainer) {
+        this.audioOnlyContainer = audioOnlyContainer.toString();
         return this;
     }
 
@@ -282,11 +368,15 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.
+     * Use this setting to add an identifying string to the filename of each segment. The service adds this string
+     * between the name modifier and segment index number. You can use format identifiers in the string. For more
+     * information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      * 
      * @param segmentModifier
-     *        String concatenated to end of segment filenames. Accepts
-     *        "Format Identifiers":#format_identifier_parameters.
+     *        Use this setting to add an identifying string to the filename of each segment. The service adds this
+     *        string between the name modifier and segment index number. You can use format identifiers in the string.
+     *        For more information, see
+     *        https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      */
 
     public void setSegmentModifier(String segmentModifier) {
@@ -294,10 +384,14 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.
+     * Use this setting to add an identifying string to the filename of each segment. The service adds this string
+     * between the name modifier and segment index number. You can use format identifiers in the string. For more
+     * information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      * 
-     * @return String concatenated to end of segment filenames. Accepts
-     *         "Format Identifiers":#format_identifier_parameters.
+     * @return Use this setting to add an identifying string to the filename of each segment. The service adds this
+     *         string between the name modifier and segment index number. You can use format identifiers in the string.
+     *         For more information, see
+     *         https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      */
 
     public String getSegmentModifier() {
@@ -305,11 +399,15 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.
+     * Use this setting to add an identifying string to the filename of each segment. The service adds this string
+     * between the name modifier and segment index number. You can use format identifiers in the string. For more
+     * information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      * 
      * @param segmentModifier
-     *        String concatenated to end of segment filenames. Accepts
-     *        "Format Identifiers":#format_identifier_parameters.
+     *        Use this setting to add an identifying string to the filename of each segment. The service adds this
+     *        string between the name modifier and segment index number. You can use format identifiers in the string.
+     *        For more information, see
+     *        https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -332,6 +430,8 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
         sb.append("{");
         if (getAudioGroupId() != null)
             sb.append("AudioGroupId: ").append(getAudioGroupId()).append(",");
+        if (getAudioOnlyContainer() != null)
+            sb.append("AudioOnlyContainer: ").append(getAudioOnlyContainer()).append(",");
         if (getAudioRenditionSets() != null)
             sb.append("AudioRenditionSets: ").append(getAudioRenditionSets()).append(",");
         if (getAudioTrackType() != null)
@@ -358,6 +458,10 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
             return false;
         if (other.getAudioGroupId() != null && other.getAudioGroupId().equals(this.getAudioGroupId()) == false)
             return false;
+        if (other.getAudioOnlyContainer() == null ^ this.getAudioOnlyContainer() == null)
+            return false;
+        if (other.getAudioOnlyContainer() != null && other.getAudioOnlyContainer().equals(this.getAudioOnlyContainer()) == false)
+            return false;
         if (other.getAudioRenditionSets() == null ^ this.getAudioRenditionSets() == null)
             return false;
         if (other.getAudioRenditionSets() != null && other.getAudioRenditionSets().equals(this.getAudioRenditionSets()) == false)
@@ -383,6 +487,7 @@ public class HlsSettings implements Serializable, Cloneable, StructuredPojo {
         int hashCode = 1;
 
         hashCode = prime * hashCode + ((getAudioGroupId() == null) ? 0 : getAudioGroupId().hashCode());
+        hashCode = prime * hashCode + ((getAudioOnlyContainer() == null) ? 0 : getAudioOnlyContainer().hashCode());
         hashCode = prime * hashCode + ((getAudioRenditionSets() == null) ? 0 : getAudioRenditionSets().hashCode());
         hashCode = prime * hashCode + ((getAudioTrackType() == null) ? 0 : getAudioTrackType().hashCode());
         hashCode = prime * hashCode + ((getIFrameOnlyManifest() == null) ? 0 : getIFrameOnlyManifest().hashCode());

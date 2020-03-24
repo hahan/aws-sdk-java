@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -54,7 +54,9 @@ public class CreateLaunchTemplateVersionRequest extends AmazonWebServiceRequest 
     /**
      * <p>
      * The version number of the launch template version on which to base the new version. The new version inherits the
-     * same launch parameters as the source version, except for parameters that you specify in LaunchTemplateData.
+     * same launch parameters as the source version, except for parameters that you specify in
+     * <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a new
+     * version unless they are explicitly included.
      * </p>
      */
     private String sourceVersion;
@@ -236,13 +238,16 @@ public class CreateLaunchTemplateVersionRequest extends AmazonWebServiceRequest 
     /**
      * <p>
      * The version number of the launch template version on which to base the new version. The new version inherits the
-     * same launch parameters as the source version, except for parameters that you specify in LaunchTemplateData.
+     * same launch parameters as the source version, except for parameters that you specify in
+     * <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a new
+     * version unless they are explicitly included.
      * </p>
      * 
      * @param sourceVersion
      *        The version number of the launch template version on which to base the new version. The new version
      *        inherits the same launch parameters as the source version, except for parameters that you specify in
-     *        LaunchTemplateData.
+     *        <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a
+     *        new version unless they are explicitly included.
      */
 
     public void setSourceVersion(String sourceVersion) {
@@ -252,12 +257,15 @@ public class CreateLaunchTemplateVersionRequest extends AmazonWebServiceRequest 
     /**
      * <p>
      * The version number of the launch template version on which to base the new version. The new version inherits the
-     * same launch parameters as the source version, except for parameters that you specify in LaunchTemplateData.
+     * same launch parameters as the source version, except for parameters that you specify in
+     * <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a new
+     * version unless they are explicitly included.
      * </p>
      * 
      * @return The version number of the launch template version on which to base the new version. The new version
      *         inherits the same launch parameters as the source version, except for parameters that you specify in
-     *         LaunchTemplateData.
+     *         <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating
+     *         a new version unless they are explicitly included.
      */
 
     public String getSourceVersion() {
@@ -267,13 +275,16 @@ public class CreateLaunchTemplateVersionRequest extends AmazonWebServiceRequest 
     /**
      * <p>
      * The version number of the launch template version on which to base the new version. The new version inherits the
-     * same launch parameters as the source version, except for parameters that you specify in LaunchTemplateData.
+     * same launch parameters as the source version, except for parameters that you specify in
+     * <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a new
+     * version unless they are explicitly included.
      * </p>
      * 
      * @param sourceVersion
      *        The version number of the launch template version on which to base the new version. The new version
      *        inherits the same launch parameters as the source version, except for parameters that you specify in
-     *        LaunchTemplateData.
+     *        <code>LaunchTemplateData</code>. Snapshots applied to the block device mapping are ignored when creating a
+     *        new version unless they are explicitly included.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

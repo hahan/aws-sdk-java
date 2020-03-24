@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -63,6 +63,16 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * The instance ID.
      * </p>
+     * <note>
+     * <p>
+     * <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     * <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM documents
+     * that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>,
+     * you cannot use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>,
+     * <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these
+     * parameters, you must use the <code>Targets</code> parameter.
+     * </p>
+     * </note>
      */
     private String instanceId;
     /**
@@ -73,7 +83,8 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
     private java.util.Map<String, java.util.List<String>> parameters;
     /**
      * <p>
-     * The targets (either instances or tags) for the association.
+     * The targets (either instances or tags) for the association. You must specify a value for <code>Targets</code> if
+     * you don't specify a value for <code>InstanceId</code>.
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<Target> targets;
@@ -354,9 +365,28 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * The instance ID.
      * </p>
+     * <note>
+     * <p>
+     * <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     * <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM documents
+     * that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>,
+     * you cannot use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>,
+     * <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these
+     * parameters, you must use the <code>Targets</code> parameter.
+     * </p>
+     * </note>
      * 
      * @param instanceId
-     *        The instance ID.
+     *        The instance ID.</p> <note>
+     *        <p>
+     *        <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     *        <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM
+     *        documents that use schema version 2.0 or later will fail. In addition, if you use the parameter
+     *        <code>InstanceId</code>, you cannot use the parameters <code>AssociationName</code>,
+     *        <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,
+     *        <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you must use the
+     *        <code>Targets</code> parameter.
+     *        </p>
      */
 
     public void setInstanceId(String instanceId) {
@@ -367,8 +397,27 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * The instance ID.
      * </p>
+     * <note>
+     * <p>
+     * <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     * <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM documents
+     * that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>,
+     * you cannot use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>,
+     * <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these
+     * parameters, you must use the <code>Targets</code> parameter.
+     * </p>
+     * </note>
      * 
-     * @return The instance ID.
+     * @return The instance ID.</p> <note>
+     *         <p>
+     *         <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     *         <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM
+     *         documents that use schema version 2.0 or later will fail. In addition, if you use the parameter
+     *         <code>InstanceId</code>, you cannot use the parameters <code>AssociationName</code>,
+     *         <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,
+     *         <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you must use
+     *         the <code>Targets</code> parameter.
+     *         </p>
      */
 
     public String getInstanceId() {
@@ -379,9 +428,28 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
      * <p>
      * The instance ID.
      * </p>
+     * <note>
+     * <p>
+     * <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     * <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM documents
+     * that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>,
+     * you cannot use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>,
+     * <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these
+     * parameters, you must use the <code>Targets</code> parameter.
+     * </p>
+     * </note>
      * 
      * @param instanceId
-     *        The instance ID.
+     *        The instance ID.</p> <note>
+     *        <p>
+     *        <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the
+     *        <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with SSM
+     *        documents that use schema version 2.0 or later will fail. In addition, if you use the parameter
+     *        <code>InstanceId</code>, you cannot use the parameters <code>AssociationName</code>,
+     *        <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,
+     *        <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you must use the
+     *        <code>Targets</code> parameter.
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -430,6 +498,13 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
         return this;
     }
 
+    /**
+     * Add a single Parameters entry
+     *
+     * @see CreateAssociationRequest#withParameters
+     * @returns a reference to this object so that method calls can be chained together.
+     */
+
     public CreateAssociationRequest addParametersEntry(String key, java.util.List<String> value) {
         if (null == this.parameters) {
             this.parameters = new java.util.HashMap<String, java.util.List<String>>();
@@ -453,10 +528,12 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * The targets (either instances or tags) for the association.
+     * The targets (either instances or tags) for the association. You must specify a value for <code>Targets</code> if
+     * you don't specify a value for <code>InstanceId</code>.
      * </p>
      * 
-     * @return The targets (either instances or tags) for the association.
+     * @return The targets (either instances or tags) for the association. You must specify a value for
+     *         <code>Targets</code> if you don't specify a value for <code>InstanceId</code>.
      */
 
     public java.util.List<Target> getTargets() {
@@ -468,11 +545,13 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * The targets (either instances or tags) for the association.
+     * The targets (either instances or tags) for the association. You must specify a value for <code>Targets</code> if
+     * you don't specify a value for <code>InstanceId</code>.
      * </p>
      * 
      * @param targets
-     *        The targets (either instances or tags) for the association.
+     *        The targets (either instances or tags) for the association. You must specify a value for
+     *        <code>Targets</code> if you don't specify a value for <code>InstanceId</code>.
      */
 
     public void setTargets(java.util.Collection<Target> targets) {
@@ -486,7 +565,8 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * The targets (either instances or tags) for the association.
+     * The targets (either instances or tags) for the association. You must specify a value for <code>Targets</code> if
+     * you don't specify a value for <code>InstanceId</code>.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -495,7 +575,8 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
      * </p>
      * 
      * @param targets
-     *        The targets (either instances or tags) for the association.
+     *        The targets (either instances or tags) for the association. You must specify a value for
+     *        <code>Targets</code> if you don't specify a value for <code>InstanceId</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -511,11 +592,13 @@ public class CreateAssociationRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * The targets (either instances or tags) for the association.
+     * The targets (either instances or tags) for the association. You must specify a value for <code>Targets</code> if
+     * you don't specify a value for <code>InstanceId</code>.
      * </p>
      * 
      * @param targets
-     *        The targets (either instances or tags) for the association.
+     *        The targets (either instances or tags) for the association. You must specify a value for
+     *        <code>Targets</code> if you don't specify a value for <code>InstanceId</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

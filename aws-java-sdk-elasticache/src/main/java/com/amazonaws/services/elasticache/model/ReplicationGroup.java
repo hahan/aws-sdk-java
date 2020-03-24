@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -38,6 +38,12 @@ public class ReplicationGroup implements Serializable, Cloneable {
      * </p>
      */
     private String description;
+    /**
+     * <p>
+     * The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * </p>
+     */
+    private GlobalReplicationGroupInfo globalReplicationGroupInfo;
     /**
      * <p>
      * The current state of this replication group - <code>creating</code>, <code>available</code>,
@@ -162,6 +168,12 @@ public class ReplicationGroup implements Serializable, Cloneable {
     private Boolean authTokenEnabled;
     /**
      * <p>
+     * The date the auth token was last modified
+     * </p>
+     */
+    private java.util.Date authTokenLastModifiedDate;
+    /**
+     * <p>
      * A flag that enables in-transit encryption when set to <code>true</code>.
      * </p>
      * <p>
@@ -196,6 +208,12 @@ public class ReplicationGroup implements Serializable, Cloneable {
      * </p>
      */
     private Boolean atRestEncryptionEnabled;
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     */
+    private String kmsKeyId;
 
     /**
      * <p>
@@ -274,6 +292,46 @@ public class ReplicationGroup implements Serializable, Cloneable {
 
     public ReplicationGroup withDescription(String description) {
         setDescription(description);
+        return this;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * </p>
+     * 
+     * @param globalReplicationGroupInfo
+     *        The name of the Global Datastore and role of this replication group in the Global Datastore.
+     */
+
+    public void setGlobalReplicationGroupInfo(GlobalReplicationGroupInfo globalReplicationGroupInfo) {
+        this.globalReplicationGroupInfo = globalReplicationGroupInfo;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * </p>
+     * 
+     * @return The name of the Global Datastore and role of this replication group in the Global Datastore.
+     */
+
+    public GlobalReplicationGroupInfo getGlobalReplicationGroupInfo() {
+        return this.globalReplicationGroupInfo;
+    }
+
+    /**
+     * <p>
+     * The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * </p>
+     * 
+     * @param globalReplicationGroupInfo
+     *        The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public ReplicationGroup withGlobalReplicationGroupInfo(GlobalReplicationGroupInfo globalReplicationGroupInfo) {
+        setGlobalReplicationGroupInfo(globalReplicationGroupInfo);
         return this;
     }
 
@@ -1261,6 +1319,46 @@ public class ReplicationGroup implements Serializable, Cloneable {
 
     /**
      * <p>
+     * The date the auth token was last modified
+     * </p>
+     * 
+     * @param authTokenLastModifiedDate
+     *        The date the auth token was last modified
+     */
+
+    public void setAuthTokenLastModifiedDate(java.util.Date authTokenLastModifiedDate) {
+        this.authTokenLastModifiedDate = authTokenLastModifiedDate;
+    }
+
+    /**
+     * <p>
+     * The date the auth token was last modified
+     * </p>
+     * 
+     * @return The date the auth token was last modified
+     */
+
+    public java.util.Date getAuthTokenLastModifiedDate() {
+        return this.authTokenLastModifiedDate;
+    }
+
+    /**
+     * <p>
+     * The date the auth token was last modified
+     * </p>
+     * 
+     * @param authTokenLastModifiedDate
+     *        The date the auth token was last modified
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public ReplicationGroup withAuthTokenLastModifiedDate(java.util.Date authTokenLastModifiedDate) {
+        setAuthTokenLastModifiedDate(authTokenLastModifiedDate);
+        return this;
+    }
+
+    /**
+     * <p>
      * A flag that enables in-transit encryption when set to <code>true</code>.
      * </p>
      * <p>
@@ -1548,6 +1646,46 @@ public class ReplicationGroup implements Serializable, Cloneable {
     }
 
     /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @param kmsKeyId
+     *        The ID of the KMS key used to encrypt the disk in the cluster.
+     */
+
+    public void setKmsKeyId(String kmsKeyId) {
+        this.kmsKeyId = kmsKeyId;
+    }
+
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @return The ID of the KMS key used to encrypt the disk in the cluster.
+     */
+
+    public String getKmsKeyId() {
+        return this.kmsKeyId;
+    }
+
+    /**
+     * <p>
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     * </p>
+     * 
+     * @param kmsKeyId
+     *        The ID of the KMS key used to encrypt the disk in the cluster.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public ReplicationGroup withKmsKeyId(String kmsKeyId) {
+        setKmsKeyId(kmsKeyId);
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object. This is useful for testing and debugging. Sensitive data will be
      * redacted from this string using a placeholder value.
      *
@@ -1563,6 +1701,8 @@ public class ReplicationGroup implements Serializable, Cloneable {
             sb.append("ReplicationGroupId: ").append(getReplicationGroupId()).append(",");
         if (getDescription() != null)
             sb.append("Description: ").append(getDescription()).append(",");
+        if (getGlobalReplicationGroupInfo() != null)
+            sb.append("GlobalReplicationGroupInfo: ").append(getGlobalReplicationGroupInfo()).append(",");
         if (getStatus() != null)
             sb.append("Status: ").append(getStatus()).append(",");
         if (getPendingModifiedValues() != null)
@@ -1587,10 +1727,14 @@ public class ReplicationGroup implements Serializable, Cloneable {
             sb.append("CacheNodeType: ").append(getCacheNodeType()).append(",");
         if (getAuthTokenEnabled() != null)
             sb.append("AuthTokenEnabled: ").append(getAuthTokenEnabled()).append(",");
+        if (getAuthTokenLastModifiedDate() != null)
+            sb.append("AuthTokenLastModifiedDate: ").append(getAuthTokenLastModifiedDate()).append(",");
         if (getTransitEncryptionEnabled() != null)
             sb.append("TransitEncryptionEnabled: ").append(getTransitEncryptionEnabled()).append(",");
         if (getAtRestEncryptionEnabled() != null)
-            sb.append("AtRestEncryptionEnabled: ").append(getAtRestEncryptionEnabled());
+            sb.append("AtRestEncryptionEnabled: ").append(getAtRestEncryptionEnabled()).append(",");
+        if (getKmsKeyId() != null)
+            sb.append("KmsKeyId: ").append(getKmsKeyId());
         sb.append("}");
         return sb.toString();
     }
@@ -1612,6 +1756,10 @@ public class ReplicationGroup implements Serializable, Cloneable {
         if (other.getDescription() == null ^ this.getDescription() == null)
             return false;
         if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false)
+            return false;
+        if (other.getGlobalReplicationGroupInfo() == null ^ this.getGlobalReplicationGroupInfo() == null)
+            return false;
+        if (other.getGlobalReplicationGroupInfo() != null && other.getGlobalReplicationGroupInfo().equals(this.getGlobalReplicationGroupInfo()) == false)
             return false;
         if (other.getStatus() == null ^ this.getStatus() == null)
             return false;
@@ -1661,6 +1809,10 @@ public class ReplicationGroup implements Serializable, Cloneable {
             return false;
         if (other.getAuthTokenEnabled() != null && other.getAuthTokenEnabled().equals(this.getAuthTokenEnabled()) == false)
             return false;
+        if (other.getAuthTokenLastModifiedDate() == null ^ this.getAuthTokenLastModifiedDate() == null)
+            return false;
+        if (other.getAuthTokenLastModifiedDate() != null && other.getAuthTokenLastModifiedDate().equals(this.getAuthTokenLastModifiedDate()) == false)
+            return false;
         if (other.getTransitEncryptionEnabled() == null ^ this.getTransitEncryptionEnabled() == null)
             return false;
         if (other.getTransitEncryptionEnabled() != null && other.getTransitEncryptionEnabled().equals(this.getTransitEncryptionEnabled()) == false)
@@ -1668,6 +1820,10 @@ public class ReplicationGroup implements Serializable, Cloneable {
         if (other.getAtRestEncryptionEnabled() == null ^ this.getAtRestEncryptionEnabled() == null)
             return false;
         if (other.getAtRestEncryptionEnabled() != null && other.getAtRestEncryptionEnabled().equals(this.getAtRestEncryptionEnabled()) == false)
+            return false;
+        if (other.getKmsKeyId() == null ^ this.getKmsKeyId() == null)
+            return false;
+        if (other.getKmsKeyId() != null && other.getKmsKeyId().equals(this.getKmsKeyId()) == false)
             return false;
         return true;
     }
@@ -1679,6 +1835,7 @@ public class ReplicationGroup implements Serializable, Cloneable {
 
         hashCode = prime * hashCode + ((getReplicationGroupId() == null) ? 0 : getReplicationGroupId().hashCode());
         hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        hashCode = prime * hashCode + ((getGlobalReplicationGroupInfo() == null) ? 0 : getGlobalReplicationGroupInfo().hashCode());
         hashCode = prime * hashCode + ((getStatus() == null) ? 0 : getStatus().hashCode());
         hashCode = prime * hashCode + ((getPendingModifiedValues() == null) ? 0 : getPendingModifiedValues().hashCode());
         hashCode = prime * hashCode + ((getMemberClusters() == null) ? 0 : getMemberClusters().hashCode());
@@ -1691,8 +1848,10 @@ public class ReplicationGroup implements Serializable, Cloneable {
         hashCode = prime * hashCode + ((getClusterEnabled() == null) ? 0 : getClusterEnabled().hashCode());
         hashCode = prime * hashCode + ((getCacheNodeType() == null) ? 0 : getCacheNodeType().hashCode());
         hashCode = prime * hashCode + ((getAuthTokenEnabled() == null) ? 0 : getAuthTokenEnabled().hashCode());
+        hashCode = prime * hashCode + ((getAuthTokenLastModifiedDate() == null) ? 0 : getAuthTokenLastModifiedDate().hashCode());
         hashCode = prime * hashCode + ((getTransitEncryptionEnabled() == null) ? 0 : getTransitEncryptionEnabled().hashCode());
         hashCode = prime * hashCode + ((getAtRestEncryptionEnabled() == null) ? 0 : getAtRestEncryptionEnabled().hashCode());
+        hashCode = prime * hashCode + ((getKmsKeyId() == null) ? 0 : getKmsKeyId().hashCode());
         return hashCode;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -1995,13 +1995,6 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
      * <li>
      * <p>
      * A new tag with a key identical to that of an existing tag overwrites the existing tag.
-     * </p>
-     * </li>
-     * <li>
-     * <p>
-     * Tagging actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <a
-     * href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support
-     * request</a>.
      * </p>
      * </li>
      * </ul>

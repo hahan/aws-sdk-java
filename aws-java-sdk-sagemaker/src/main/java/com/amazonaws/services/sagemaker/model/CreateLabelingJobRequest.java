@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -131,14 +131,15 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     private LabelingJobAlgorithmsConfig labelingJobAlgorithmsConfig;
     /**
      * <p>
-     * Configures the information required for human workers to complete a labeling task.
+     * Configures the labeling task and how it is presented to workers; including, but not limited to price, keywords,
+     * and batch size (task count).
      * </p>
      */
     private HumanTaskConfig humanTaskConfig;
     /**
      * <p>
      * An array of key/value pairs. For more information, see <a
-     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
      * Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * </p>
      */
@@ -799,11 +800,13 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Configures the information required for human workers to complete a labeling task.
+     * Configures the labeling task and how it is presented to workers; including, but not limited to price, keywords,
+     * and batch size (task count).
      * </p>
      * 
      * @param humanTaskConfig
-     *        Configures the information required for human workers to complete a labeling task.
+     *        Configures the labeling task and how it is presented to workers; including, but not limited to price,
+     *        keywords, and batch size (task count).
      */
 
     public void setHumanTaskConfig(HumanTaskConfig humanTaskConfig) {
@@ -812,10 +815,12 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Configures the information required for human workers to complete a labeling task.
+     * Configures the labeling task and how it is presented to workers; including, but not limited to price, keywords,
+     * and batch size (task count).
      * </p>
      * 
-     * @return Configures the information required for human workers to complete a labeling task.
+     * @return Configures the labeling task and how it is presented to workers; including, but not limited to price,
+     *         keywords, and batch size (task count).
      */
 
     public HumanTaskConfig getHumanTaskConfig() {
@@ -824,11 +829,13 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
 
     /**
      * <p>
-     * Configures the information required for human workers to complete a labeling task.
+     * Configures the labeling task and how it is presented to workers; including, but not limited to price, keywords,
+     * and batch size (task count).
      * </p>
      * 
      * @param humanTaskConfig
-     *        Configures the information required for human workers to complete a labeling task.
+     *        Configures the labeling task and how it is presented to workers; including, but not limited to price,
+     *        keywords, and batch size (task count).
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -840,12 +847,12 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     /**
      * <p>
      * An array of key/value pairs. For more information, see <a
-     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
      * Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * </p>
      * 
      * @return An array of key/value pairs. For more information, see <a
-     *         href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
+     *         href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
      *         >Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      */
 
@@ -856,13 +863,13 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     /**
      * <p>
      * An array of key/value pairs. For more information, see <a
-     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
      * Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * </p>
      * 
      * @param tags
      *        An array of key/value pairs. For more information, see <a
-     *        href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
      *        >Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      */
 
@@ -878,7 +885,7 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     /**
      * <p>
      * An array of key/value pairs. For more information, see <a
-     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
      * Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * </p>
      * <p>
@@ -889,7 +896,7 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
      * 
      * @param tags
      *        An array of key/value pairs. For more information, see <a
-     *        href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
      *        >Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -907,13 +914,13 @@ public class CreateLabelingJobRequest extends com.amazonaws.AmazonWebServiceRequ
     /**
      * <p>
      * An array of key/value pairs. For more information, see <a
-     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+     * href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
      * Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * </p>
      * 
      * @param tags
      *        An array of key/value pairs. For more information, see <a
-     *        href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
+     *        href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what"
      *        >Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */

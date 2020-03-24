@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -26,7 +26,7 @@ import com.amazonaws.protocol.ProtocolMarshaller;
 @Generated("com.amazonaws:aws-java-sdk-code-generator")
 public class Mp2Settings implements Serializable, Cloneable, StructuredPojo {
 
-    /** Average bitrate in bits/second. */
+    /** Specify the average bitrate in bits per second. */
     private Integer bitrate;
     /**
      * Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give
@@ -37,10 +37,10 @@ public class Mp2Settings implements Serializable, Cloneable, StructuredPojo {
     private Integer sampleRate;
 
     /**
-     * Average bitrate in bits/second.
+     * Specify the average bitrate in bits per second.
      * 
      * @param bitrate
-     *        Average bitrate in bits/second.
+     *        Specify the average bitrate in bits per second.
      */
 
     public void setBitrate(Integer bitrate) {
@@ -48,9 +48,9 @@ public class Mp2Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Average bitrate in bits/second.
+     * Specify the average bitrate in bits per second.
      * 
-     * @return Average bitrate in bits/second.
+     * @return Specify the average bitrate in bits per second.
      */
 
     public Integer getBitrate() {
@@ -58,10 +58,10 @@ public class Mp2Settings implements Serializable, Cloneable, StructuredPojo {
     }
 
     /**
-     * Average bitrate in bits/second.
+     * Specify the average bitrate in bits per second.
      * 
      * @param bitrate
-     *        Average bitrate in bits/second.
+     *        Specify the average bitrate in bits per second.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

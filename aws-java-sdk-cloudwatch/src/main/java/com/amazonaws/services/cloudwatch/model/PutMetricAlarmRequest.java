@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -39,7 +39,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     private String alarmDescription;
     /**
      * <p>
-     * Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * Indicates whether actions should be executed during any changes to the alarm state. The default is
+     * <code>TRUE</code>.
      * </p>
      */
     private Boolean actionsEnabled;
@@ -53,7 +54,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -73,7 +74,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -93,7 +94,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -105,7 +106,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     private com.amazonaws.internal.SdkInternalList<String> insufficientDataActions;
     /**
      * <p>
-     * The name for the metric associated with the alarm.
+     * The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must
+     * specify either <code>MetricName</code> or a <code>Metrics</code> array.
      * </p>
      * <p>
      * If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
@@ -150,6 +152,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * are 10, 30, and any multiple of 60.
      * </p>
      * <p>
+     * <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based on a
+     * metric math expression, you specify the period for each metric within the objects in the <code>Metrics</code>
+     * array.
+     * </p>
+     * <p>
      * Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      * <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
      * sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case,
@@ -172,8 +179,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      */
     private String unit;
@@ -191,7 +207,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     private Integer evaluationPeriods;
     /**
      * <p>
-     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an
+     * The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an
      * "M out of N" alarm. In that case, this value is the M. For more information, see <a
      * href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      * >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
@@ -201,6 +217,10 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * The value against which the specified statistic is compared.
+     * </p>
+     * <p>
+     * This parameter is required for alarms based on static thresholds, but should not be used for alarms based on
+     * anomaly detection models.
      * </p>
      */
     private Double threshold;
@@ -244,13 +264,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-     * metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math
-     * expression.
+     * metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     * <code>MetricName</code> or a <code>Metrics</code> array.
+     * </p>
+     * <p>
+     * Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
      * </p>
      * <p>
      * One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
-     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see
-     * <a>MetricDataQuery</a>.
+     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a
+     * href
+     * ="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.
      * </p>
      * <p>
      * If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -366,11 +390,13 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * Indicates whether actions should be executed during any changes to the alarm state. The default is
+     * <code>TRUE</code>.
      * </p>
      * 
      * @param actionsEnabled
-     *        Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     *        Indicates whether actions should be executed during any changes to the alarm state. The default is
+     *        <code>TRUE</code>.
      */
 
     public void setActionsEnabled(Boolean actionsEnabled) {
@@ -379,10 +405,12 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * Indicates whether actions should be executed during any changes to the alarm state. The default is
+     * <code>TRUE</code>.
      * </p>
      * 
-     * @return Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * @return Indicates whether actions should be executed during any changes to the alarm state. The default is
+     *         <code>TRUE</code>.
      */
 
     public Boolean getActionsEnabled() {
@@ -391,11 +419,13 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * Indicates whether actions should be executed during any changes to the alarm state. The default is
+     * <code>TRUE</code>.
      * </p>
      * 
      * @param actionsEnabled
-     *        Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     *        Indicates whether actions should be executed during any changes to the alarm state. The default is
+     *        <code>TRUE</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -406,10 +436,12 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * Indicates whether actions should be executed during any changes to the alarm state. The default is
+     * <code>TRUE</code>.
      * </p>
      * 
-     * @return Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+     * @return Indicates whether actions should be executed during any changes to the alarm state. The default is
+     *         <code>TRUE</code>.
      */
 
     public Boolean isActionsEnabled() {
@@ -426,7 +458,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -443,7 +475,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *         <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *         <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *         <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *         </p>
      *         <p>
      *         Valid Values (for use with IAM roles):
@@ -469,7 +501,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -487,7 +519,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -515,7 +547,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -538,7 +570,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -568,7 +600,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -586,7 +618,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -611,7 +643,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -628,7 +660,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *         <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *         <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *         <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *         </p>
      *         <p>
      *         Valid Values (for use with IAM roles):
@@ -654,7 +686,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -672,7 +704,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -700,7 +732,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -723,7 +755,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -753,7 +785,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -771,7 +803,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -796,7 +828,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -813,7 +845,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *         <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *         <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *         <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *         <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *         </p>
      *         <p>
      *         Valid Values (for use with IAM roles):
@@ -839,7 +871,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -857,7 +889,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -885,7 +917,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -908,7 +940,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -938,7 +970,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
      * <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
      * | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     * <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      * </p>
      * <p>
      * Valid Values (for use with IAM roles):
@@ -956,7 +988,7 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
      *        <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
      *        <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> |
-     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
+     *        <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code>
      *        </p>
      *        <p>
      *        Valid Values (for use with IAM roles):
@@ -973,7 +1005,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The name for the metric associated with the alarm.
+     * The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must
+     * specify either <code>MetricName</code> or a <code>Metrics</code> array.
      * </p>
      * <p>
      * If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
@@ -983,7 +1016,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * </p>
      * 
      * @param metricName
-     *        The name for the metric associated with the alarm.</p>
+     *        The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you
+     *        must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p>
      *        <p>
      *        If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
      *        <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or
@@ -997,7 +1031,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The name for the metric associated with the alarm.
+     * The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must
+     * specify either <code>MetricName</code> or a <code>Metrics</code> array.
      * </p>
      * <p>
      * If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
@@ -1006,7 +1041,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * array.
      * </p>
      * 
-     * @return The name for the metric associated with the alarm.</p>
+     * @return The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you
+     *         must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p>
      *         <p>
      *         If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
      *         <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or
@@ -1020,7 +1056,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The name for the metric associated with the alarm.
+     * The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must
+     * specify either <code>MetricName</code> or a <code>Metrics</code> array.
      * </p>
      * <p>
      * If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
@@ -1030,7 +1067,8 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * </p>
      * 
      * @param metricName
-     *        The name for the metric associated with the alarm.</p>
+     *        The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you
+     *        must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p>
      *        <p>
      *        If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
      *        <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or
@@ -1318,6 +1356,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * are 10, 30, and any multiple of 60.
      * </p>
      * <p>
+     * <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based on a
+     * metric math expression, you specify the period for each metric within the objects in the <code>Metrics</code>
+     * array.
+     * </p>
+     * <p>
      * Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      * <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
      * sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case,
@@ -1334,6 +1377,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * @param period
      *        The length, in seconds, used each time the metric specified in <code>MetricName</code> is evaluated. Valid
      *        values are 10, 30, and any multiple of 60.</p>
+     *        <p>
+     *        <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based
+     *        on a metric math expression, you specify the period for each metric within the objects in the
+     *        <code>Metrics</code> array.
+     *        </p>
      *        <p>
      *        Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      *        <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
@@ -1358,6 +1406,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * are 10, 30, and any multiple of 60.
      * </p>
      * <p>
+     * <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based on a
+     * metric math expression, you specify the period for each metric within the objects in the <code>Metrics</code>
+     * array.
+     * </p>
+     * <p>
      * Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      * <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
      * sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case,
@@ -1373,6 +1426,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * 
      * @return The length, in seconds, used each time the metric specified in <code>MetricName</code> is evaluated.
      *         Valid values are 10, 30, and any multiple of 60.</p>
+     *         <p>
+     *         <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based
+     *         on a metric math expression, you specify the period for each metric within the objects in the
+     *         <code>Metrics</code> array.
+     *         </p>
      *         <p>
      *         Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      *         <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
@@ -1397,6 +1455,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * are 10, 30, and any multiple of 60.
      * </p>
      * <p>
+     * <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based on a
+     * metric math expression, you specify the period for each metric within the objects in the <code>Metrics</code>
+     * array.
+     * </p>
+     * <p>
      * Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      * <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
      * sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case,
@@ -1413,6 +1476,11 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * @param period
      *        The length, in seconds, used each time the metric specified in <code>MetricName</code> is evaluated. Valid
      *        values are 10, 30, and any multiple of 60.</p>
+     *        <p>
+     *        <code>Period</code> is required for alarms based on static thresholds. If you are creating an alarm based
+     *        on a metric math expression, you specify the period for each metric within the objects in the
+     *        <code>Metrics</code> array.
+     *        </p>
      *        <p>
      *        Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
      *        <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
@@ -1441,8 +1509,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      * 
      * @param unit
@@ -1451,8 +1528,18 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your
      *        data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p>
      *        <p>
-     *        If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch
-     *        alarm can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     *        If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for
+     *        the metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the
+     *        alarm will work as intended.
+     *        </p>
+     *        <p>
+     *        However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     *        behavior is not defined and will behave un-predictably.
+     *        </p>
+     *        <p>
+     *        We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is
+     *        not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code>
+     *        state.
      * @see StandardUnit
      */
 
@@ -1468,8 +1555,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      * 
      * @return The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are
@@ -1478,8 +1574,18 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *         your data. Metric data points that specify a unit of measure, such as Percent, are aggregated
      *         separately.</p>
      *         <p>
-     *         If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch
-     *         alarm can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     *         If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for
+     *         the metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the
+     *         alarm will work as intended.
+     *         </p>
+     *         <p>
+     *         However, if the metric is published with multiple types of units and you don't specify a unit, the
+     *         alarm's behavior is not defined and will behave un-predictably.
+     *         </p>
+     *         <p>
+     *         We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is
+     *         not published for this metric. Doing so causes the alarm to be stuck in the
+     *         <code>INSUFFICIENT DATA</code> state.
      * @see StandardUnit
      */
 
@@ -1495,8 +1601,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      * 
      * @param unit
@@ -1505,8 +1620,18 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your
      *        data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p>
      *        <p>
-     *        If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch
-     *        alarm can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     *        If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for
+     *        the metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the
+     *        alarm will work as intended.
+     *        </p>
+     *        <p>
+     *        However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     *        behavior is not defined and will behave un-predictably.
+     *        </p>
+     *        <p>
+     *        We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is
+     *        not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code>
+     *        state.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see StandardUnit
      */
@@ -1524,8 +1649,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      * 
      * @param unit
@@ -1534,8 +1668,18 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your
      *        data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p>
      *        <p>
-     *        If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch
-     *        alarm can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     *        If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for
+     *        the metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the
+     *        alarm will work as intended.
+     *        </p>
+     *        <p>
+     *        However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     *        behavior is not defined and will behave un-predictably.
+     *        </p>
+     *        <p>
+     *        We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is
+     *        not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code>
+     *        state.
      * @see StandardUnit
      */
 
@@ -1551,8 +1695,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * points that specify a unit of measure, such as Percent, are aggregated separately.
      * </p>
      * <p>
-     * If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm
-     * can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     * If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
+     * metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the alarm will
+     * work as intended.
+     * </p>
+     * <p>
+     * However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     * behavior is not defined and will behave un-predictably.
+     * </p>
+     * <p>
+     * We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not
+     * published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.
      * </p>
      * 
      * @param unit
@@ -1561,8 +1714,18 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      *        You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your
      *        data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p>
      *        <p>
-     *        If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch
-     *        alarm can get stuck in the <code>INSUFFICIENT DATA</code> state.
+     *        If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for
+     *        the metric and attempts to evaluate the alarm. Usually metrics are published with only one unit, so the
+     *        alarm will work as intended.
+     *        </p>
+     *        <p>
+     *        However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
+     *        behavior is not defined and will behave un-predictably.
+     *        </p>
+     *        <p>
+     *        We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is
+     *        not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code>
+     *        state.
      * @return Returns a reference to this object so that method calls can be chained together.
      * @see StandardUnit
      */
@@ -1647,15 +1810,15 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an
+     * The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an
      * "M out of N" alarm. In that case, this value is the M. For more information, see <a
      * href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      * >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
      * </p>
      * 
      * @param datapointsToAlarm
-     *        The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting
-     *        an "M out of N" alarm. In that case, this value is the M. For more information, see <a href=
+     *        The number of data points that must be breaching to trigger the alarm. This is used only if you are
+     *        setting an "M out of N" alarm. In that case, this value is the M. For more information, see <a href=
      *        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      *        >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
      */
@@ -1666,13 +1829,13 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an
+     * The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an
      * "M out of N" alarm. In that case, this value is the M. For more information, see <a
      * href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      * >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
      * </p>
      * 
-     * @return The number of datapoints that must be breaching to trigger the alarm. This is used only if you are
+     * @return The number of data points that must be breaching to trigger the alarm. This is used only if you are
      *         setting an "M out of N" alarm. In that case, this value is the M. For more information, see <a href=
      *         "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      *         >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
@@ -1684,15 +1847,15 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
 
     /**
      * <p>
-     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an
+     * The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an
      * "M out of N" alarm. In that case, this value is the M. For more information, see <a
      * href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      * >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
      * </p>
      * 
      * @param datapointsToAlarm
-     *        The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting
-     *        an "M out of N" alarm. In that case, this value is the M. For more information, see <a href=
+     *        The number of data points that must be breaching to trigger the alarm. This is used only if you are
+     *        setting an "M out of N" alarm. In that case, this value is the M. For more information, see <a href=
      *        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation"
      *        >Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -1707,9 +1870,16 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <p>
      * The value against which the specified statistic is compared.
      * </p>
+     * <p>
+     * This parameter is required for alarms based on static thresholds, but should not be used for alarms based on
+     * anomaly detection models.
+     * </p>
      * 
      * @param threshold
-     *        The value against which the specified statistic is compared.
+     *        The value against which the specified statistic is compared.</p>
+     *        <p>
+     *        This parameter is required for alarms based on static thresholds, but should not be used for alarms based
+     *        on anomaly detection models.
      */
 
     public void setThreshold(Double threshold) {
@@ -1720,8 +1890,15 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <p>
      * The value against which the specified statistic is compared.
      * </p>
+     * <p>
+     * This parameter is required for alarms based on static thresholds, but should not be used for alarms based on
+     * anomaly detection models.
+     * </p>
      * 
-     * @return The value against which the specified statistic is compared.
+     * @return The value against which the specified statistic is compared.</p>
+     *         <p>
+     *         This parameter is required for alarms based on static thresholds, but should not be used for alarms based
+     *         on anomaly detection models.
      */
 
     public Double getThreshold() {
@@ -1732,9 +1909,16 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * <p>
      * The value against which the specified statistic is compared.
      * </p>
+     * <p>
+     * This parameter is required for alarms based on static thresholds, but should not be used for alarms based on
+     * anomaly detection models.
+     * </p>
      * 
      * @param threshold
-     *        The value against which the specified statistic is compared.
+     *        The value against which the specified statistic is compared.</p>
+     *        <p>
+     *        This parameter is required for alarms based on static thresholds, but should not be used for alarms based
+     *        on anomaly detection models.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -2022,13 +2206,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-     * metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math
-     * expression.
+     * metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     * <code>MetricName</code> or a <code>Metrics</code> array.
+     * </p>
+     * <p>
+     * Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
      * </p>
      * <p>
      * One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
-     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see
-     * <a>MetricDataQuery</a>.
+     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a
+     * href
+     * ="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.
      * </p>
      * <p>
      * If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2038,12 +2226,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * </p>
      * 
      * @return An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the
-     *         result of a metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric
-     *         or performs a math expression.</p>
+     *         result of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify
+     *         either <code>MetricName</code> or a <code>Metrics</code> array.</p>
+     *         <p>
+     *         Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
+     *         </p>
      *         <p>
      *         One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
      *         expression by setting <code>ReturnValue</code> to true for this object in the array. For more
-     *         information, see <a>MetricDataQuery</a>.
+     *         information, see <a
+     *         href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html"
+     *         >MetricDataQuery</a>.
      *         </p>
      *         <p>
      *         If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2062,13 +2255,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-     * metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math
-     * expression.
+     * metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     * <code>MetricName</code> or a <code>Metrics</code> array.
+     * </p>
+     * <p>
+     * Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
      * </p>
      * <p>
      * One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
-     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see
-     * <a>MetricDataQuery</a>.
+     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a
+     * href
+     * ="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.
      * </p>
      * <p>
      * If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2079,12 +2276,16 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * 
      * @param metrics
      *        An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result
-     *        of a metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or
-     *        performs a math expression.</p>
+     *        of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     *        <code>MetricName</code> or a <code>Metrics</code> array.</p>
+     *        <p>
+     *        Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
+     *        </p>
      *        <p>
      *        One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
      *        expression by setting <code>ReturnValue</code> to true for this object in the array. For more information,
-     *        see <a>MetricDataQuery</a>.
+     *        see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">
+     *        MetricDataQuery</a>.
      *        </p>
      *        <p>
      *        If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2105,13 +2306,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-     * metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math
-     * expression.
+     * metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     * <code>MetricName</code> or a <code>Metrics</code> array.
+     * </p>
+     * <p>
+     * Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
      * </p>
      * <p>
      * One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
-     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see
-     * <a>MetricDataQuery</a>.
+     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a
+     * href
+     * ="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.
      * </p>
      * <p>
      * If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2127,12 +2332,16 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * 
      * @param metrics
      *        An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result
-     *        of a metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or
-     *        performs a math expression.</p>
+     *        of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     *        <code>MetricName</code> or a <code>Metrics</code> array.</p>
+     *        <p>
+     *        Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
+     *        </p>
      *        <p>
      *        One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
      *        expression by setting <code>ReturnValue</code> to true for this object in the array. For more information,
-     *        see <a>MetricDataQuery</a>.
+     *        see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">
+     *        MetricDataQuery</a>.
      *        </p>
      *        <p>
      *        If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2155,13 +2364,17 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
     /**
      * <p>
      * An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-     * metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math
-     * expression.
+     * metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     * <code>MetricName</code> or a <code>Metrics</code> array.
+     * </p>
+     * <p>
+     * Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
      * </p>
      * <p>
      * One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
-     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see
-     * <a>MetricDataQuery</a>.
+     * expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a
+     * href
+     * ="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.
      * </p>
      * <p>
      * If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,
@@ -2172,12 +2385,16 @@ public class PutMetricAlarmRequest extends com.amazonaws.AmazonWebServiceRequest
      * 
      * @param metrics
      *        An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result
-     *        of a metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or
-     *        performs a math expression.</p>
+     *        of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either
+     *        <code>MetricName</code> or a <code>Metrics</code> array.</p>
+     *        <p>
+     *        Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.
+     *        </p>
      *        <p>
      *        One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this
      *        expression by setting <code>ReturnValue</code> to true for this object in the array. For more information,
-     *        see <a>MetricDataQuery</a>.
+     *        see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">
+     *        MetricDataQuery</a>.
      *        </p>
      *        <p>
      *        If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -1037,7 +1037,7 @@ public interface AWSGreengrass {
     ListSubscriptionDefinitionsResult listSubscriptionDefinitions(ListSubscriptionDefinitionsRequest listSubscriptionDefinitionsRequest);
 
     /**
-     * Retrieves the tags for a resource.
+     * Retrieves a list of resource tags for a resource arn.
      * 
      * @param listTagsForResourceRequest
      * @return Result of the ListTagsForResource operation returned by the service.
@@ -1095,9 +1095,12 @@ public interface AWSGreengrass {
     StopBulkDeploymentResult stopBulkDeployment(StopBulkDeploymentRequest stopBulkDeploymentRequest);
 
     /**
-     * Add tags to a resource.
+     * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition',
+     * 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and
+     * 'BulkDeployment'.
      * 
      * @param tagResourceRequest
+     *        A map of the key-value pairs for the resource tag.
      * @return Result of the TagResource operation returned by the service.
      * @throws BadRequestException
      *         invalid request
@@ -1108,7 +1111,7 @@ public interface AWSGreengrass {
     TagResourceResult tagResource(TagResourceRequest tagResourceRequest);
 
     /**
-     * Remove tags with specified keys from a resource.
+     * Remove resource tags from a Greengrass Resource.
      * 
      * @param untagResourceRequest
      * @return Result of the UntagResource operation returned by the service.

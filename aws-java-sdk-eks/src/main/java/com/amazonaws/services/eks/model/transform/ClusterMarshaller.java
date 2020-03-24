@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -12,6 +12,8 @@
  */
 package com.amazonaws.services.eks.model.transform;
 
+import java.util.Map;
+import java.util.List;
 import javax.annotation.Generated;
 
 import com.amazonaws.SdkClientException;
@@ -43,6 +45,8 @@ public class ClusterMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("resourcesVpcConfig").build();
     private static final MarshallingInfo<StructuredPojo> LOGGING_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("logging").build();
+    private static final MarshallingInfo<StructuredPojo> IDENTITY_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("identity").build();
     private static final MarshallingInfo<String> STATUS_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("status").build();
     private static final MarshallingInfo<StructuredPojo> CERTIFICATEAUTHORITY_BINDING = MarshallingInfo.builder(MarshallingType.STRUCTURED)
@@ -51,6 +55,10 @@ public class ClusterMarshaller {
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("clientRequestToken").build();
     private static final MarshallingInfo<String> PLATFORMVERSION_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("platformVersion").build();
+    private static final MarshallingInfo<Map> TAGS_BINDING = MarshallingInfo.builder(MarshallingType.MAP).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("tags").build();
+    private static final MarshallingInfo<List> ENCRYPTIONCONFIG_BINDING = MarshallingInfo.builder(MarshallingType.LIST)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("encryptionConfig").build();
 
     private static final ClusterMarshaller instance = new ClusterMarshaller();
 
@@ -76,10 +84,13 @@ public class ClusterMarshaller {
             protocolMarshaller.marshall(cluster.getRoleArn(), ROLEARN_BINDING);
             protocolMarshaller.marshall(cluster.getResourcesVpcConfig(), RESOURCESVPCCONFIG_BINDING);
             protocolMarshaller.marshall(cluster.getLogging(), LOGGING_BINDING);
+            protocolMarshaller.marshall(cluster.getIdentity(), IDENTITY_BINDING);
             protocolMarshaller.marshall(cluster.getStatus(), STATUS_BINDING);
             protocolMarshaller.marshall(cluster.getCertificateAuthority(), CERTIFICATEAUTHORITY_BINDING);
             protocolMarshaller.marshall(cluster.getClientRequestToken(), CLIENTREQUESTTOKEN_BINDING);
             protocolMarshaller.marshall(cluster.getPlatformVersion(), PLATFORMVERSION_BINDING);
+            protocolMarshaller.marshall(cluster.getTags(), TAGS_BINDING);
+            protocolMarshaller.marshall(cluster.getEncryptionConfig(), ENCRYPTIONCONFIG_BINDING);
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

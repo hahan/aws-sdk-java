@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -86,6 +86,10 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
      * <p>
      * The ID of the network interface.
      * </p>
+     * <p>
+     * If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a
+     * launch specification.
+     * </p>
      */
     private String networkInterfaceId;
     /**
@@ -115,7 +119,7 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
     private Integer secondaryPrivateIpAddressCount;
     /**
      * <p>
-     * The ID of the subnet associated with the network string. Applies only if creating a network interface when
+     * The ID of the subnet associated with the network interface. Applies only if creating a network interface when
      * launching an instance.
      * </p>
      */
@@ -607,9 +611,16 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
      * <p>
      * The ID of the network interface.
      * </p>
+     * <p>
+     * If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a
+     * launch specification.
+     * </p>
      * 
      * @param networkInterfaceId
-     *        The ID of the network interface.
+     *        The ID of the network interface.</p>
+     *        <p>
+     *        If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in
+     *        a launch specification.
      */
 
     public void setNetworkInterfaceId(String networkInterfaceId) {
@@ -620,8 +631,15 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
      * <p>
      * The ID of the network interface.
      * </p>
+     * <p>
+     * If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a
+     * launch specification.
+     * </p>
      * 
-     * @return The ID of the network interface.
+     * @return The ID of the network interface.</p>
+     *         <p>
+     *         If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in
+     *         a launch specification.
      */
 
     public String getNetworkInterfaceId() {
@@ -632,9 +650,16 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
      * <p>
      * The ID of the network interface.
      * </p>
+     * <p>
+     * If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a
+     * launch specification.
+     * </p>
      * 
      * @param networkInterfaceId
-     *        The ID of the network interface.
+     *        The ID of the network interface.</p>
+     *        <p>
+     *        If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in
+     *        a launch specification.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -854,13 +879,13 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
 
     /**
      * <p>
-     * The ID of the subnet associated with the network string. Applies only if creating a network interface when
+     * The ID of the subnet associated with the network interface. Applies only if creating a network interface when
      * launching an instance.
      * </p>
      * 
      * @param subnetId
-     *        The ID of the subnet associated with the network string. Applies only if creating a network interface when
-     *        launching an instance.
+     *        The ID of the subnet associated with the network interface. Applies only if creating a network interface
+     *        when launching an instance.
      */
 
     public void setSubnetId(String subnetId) {
@@ -869,11 +894,11 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
 
     /**
      * <p>
-     * The ID of the subnet associated with the network string. Applies only if creating a network interface when
+     * The ID of the subnet associated with the network interface. Applies only if creating a network interface when
      * launching an instance.
      * </p>
      * 
-     * @return The ID of the subnet associated with the network string. Applies only if creating a network interface
+     * @return The ID of the subnet associated with the network interface. Applies only if creating a network interface
      *         when launching an instance.
      */
 
@@ -883,13 +908,13 @@ public class InstanceNetworkInterfaceSpecification implements Serializable, Clon
 
     /**
      * <p>
-     * The ID of the subnet associated with the network string. Applies only if creating a network interface when
+     * The ID of the subnet associated with the network interface. Applies only if creating a network interface when
      * launching an instance.
      * </p>
      * 
      * @param subnetId
-     *        The ID of the subnet associated with the network string. Applies only if creating a network interface when
-     *        launching an instance.
+     *        The ID of the subnet associated with the network interface. Applies only if creating a network interface
+     *        when launching an instance.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

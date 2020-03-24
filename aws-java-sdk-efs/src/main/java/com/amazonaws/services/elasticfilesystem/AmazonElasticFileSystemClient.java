@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -82,68 +82,84 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
                     .withSupportsIon(false)
                     .withContentTypeOverride("")
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("UnsupportedAvailabilityZone").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.UnsupportedAvailabilityZoneException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("UnsupportedAvailabilityZone").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.UnsupportedAvailabilityZoneExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("IpAddressInUse").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.IpAddressInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("AccessPointNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.AccessPointNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("MountTargetConflict").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.MountTargetConflictException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("IpAddressInUse").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.IpAddressInUseExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("SecurityGroupNotFound").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.SecurityGroupNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("MountTargetConflict").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.MountTargetConflictExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("FileSystemInUse").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.FileSystemInUseException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InvalidPolicyException").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.InvalidPolicyExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("FileSystemAlreadyExists").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.FileSystemAlreadyExistsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("SecurityGroupNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.SecurityGroupNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("NetworkInterfaceLimitExceeded").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.NetworkInterfaceLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("FileSystemInUse").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.FileSystemInUseExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("IncorrectFileSystemLifeCycleState").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.IncorrectFileSystemLifeCycleStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("FileSystemAlreadyExists").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.FileSystemAlreadyExistsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("NoFreeAddressesInSubnet").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.NoFreeAddressesInSubnetException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("NetworkInterfaceLimitExceeded").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.NetworkInterfaceLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("FileSystemNotFound").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.FileSystemNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("AccessPointAlreadyExists").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.AccessPointAlreadyExistsExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InsufficientThroughputCapacity").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.InsufficientThroughputCapacityException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("IncorrectFileSystemLifeCycleState").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.IncorrectFileSystemLifeCycleStateExceptionUnmarshaller
+                                            .getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("MountTargetNotFound").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.MountTargetNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("AccessPointLimitExceeded").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.AccessPointLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("SubnetNotFound").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.SubnetNotFoundException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("NoFreeAddressesInSubnet").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.NoFreeAddressesInSubnetExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("IncorrectMountTargetState").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.IncorrectMountTargetStateException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("FileSystemNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.FileSystemNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("SecurityGroupLimitExceeded").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.SecurityGroupLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("InsufficientThroughputCapacity").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.InsufficientThroughputCapacityExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("ThroughputLimitExceeded").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.ThroughputLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("MountTargetNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.MountTargetNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("DependencyTimeout").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.DependencyTimeoutException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("SubnetNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.SubnetNotFoundExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("TooManyRequests").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.TooManyRequestsException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("IncorrectMountTargetState").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.IncorrectMountTargetStateExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("FileSystemLimitExceeded").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.FileSystemLimitExceededException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("SecurityGroupLimitExceeded").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.SecurityGroupLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("BadRequest").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.BadRequestException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("ThroughputLimitExceeded").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.ThroughputLimitExceededExceptionUnmarshaller.getInstance()))
                     .addErrorMetadata(
-                            new JsonErrorShapeMetadata().withErrorCode("InternalServerError").withModeledClass(
-                                    com.amazonaws.services.elasticfilesystem.model.InternalServerErrorException.class))
+                            new JsonErrorShapeMetadata().withErrorCode("DependencyTimeout").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.DependencyTimeoutExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("PolicyNotFound").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.PolicyNotFoundExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("TooManyRequests").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.TooManyRequestsExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("FileSystemLimitExceeded").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.FileSystemLimitExceededExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("BadRequest").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.BadRequestExceptionUnmarshaller.getInstance()))
+                    .addErrorMetadata(
+                            new JsonErrorShapeMetadata().withErrorCode("InternalServerError").withExceptionUnmarshaller(
+                                    com.amazonaws.services.elasticfilesystem.model.transform.InternalServerErrorExceptionUnmarshaller.getInstance()))
                     .withBaseServiceExceptionClass(com.amazonaws.services.elasticfilesystem.model.AmazonElasticFileSystemException.class));
 
     /**
@@ -342,6 +358,81 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/elasticfilesystem/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/elasticfilesystem/request.handler2s"));
         requestHandler2s.addAll(chainFactory.getGlobalHandlers());
+    }
+
+    /**
+     * <p>
+     * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies
+     * an operating system user and group, and a file system path, to any file system request made through the access
+     * point. The operating system user and group override any identity information provided by the NFS client. The file
+     * system path is exposed as the access point's root directory. Applications using the access point can only access
+     * data in its own directory and below. To learn more, see <a
+     * href="https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html">Mounting a File System Using EFS Access
+     * Points</a>.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.
+     * </p>
+     * 
+     * @param createAccessPointRequest
+     * @return Result of the CreateAccessPoint operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws AccessPointAlreadyExistsException
+     *         Returned if the access point you are trying to create already exists, with the creation token you
+     *         provided in the request.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws AccessPointLimitExceededException
+     *         Returned if the AWS account has already created the maximum number of access points allowed per file
+     *         system.
+     * @sample AmazonElasticFileSystem.CreateAccessPoint
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateAccessPoint"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public CreateAccessPointResult createAccessPoint(CreateAccessPointRequest request) {
+        request = beforeClientExecution(request);
+        return executeCreateAccessPoint(request);
+    }
+
+    @SdkInternalApi
+    final CreateAccessPointResult executeCreateAccessPoint(CreateAccessPointRequest createAccessPointRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(createAccessPointRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<CreateAccessPointRequest> request = null;
+        Response<CreateAccessPointResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new CreateAccessPointRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(createAccessPointRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "CreateAccessPoint");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<CreateAccessPointResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new CreateAccessPointResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
     }
 
     /**
@@ -732,6 +823,7 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
      *      API Documentation</a>
      */
     @Override
+    @Deprecated
     public CreateTagsResult createTags(CreateTagsRequest request) {
         request = beforeClientExecution(request);
         return executeCreateTags(request);
@@ -763,6 +855,71 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
 
             HttpResponseHandler<AmazonWebServiceResponse<CreateTagsResult>> responseHandler = protocolFactory.createResponseHandler(new JsonOperationMetadata()
                     .withPayloadJson(true).withHasStreamingSuccessResponse(false), new CreateTagsResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Deletes the specified access point. After deletion is complete, new clients can no longer connect to the access
+     * points. Clients connected to the access point at the time of deletion will continue to function until they
+     * terminate their connection.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:DeleteAccessPoint</code> action.
+     * </p>
+     * 
+     * @param deleteAccessPointRequest
+     * @return Result of the DeleteAccessPoint operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
+     * @sample AmazonElasticFileSystem.DeleteAccessPoint
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteAccessPoint"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public DeleteAccessPointResult deleteAccessPoint(DeleteAccessPointRequest request) {
+        request = beforeClientExecution(request);
+        return executeDeleteAccessPoint(request);
+    }
+
+    @SdkInternalApi
+    final DeleteAccessPointResult executeDeleteAccessPoint(DeleteAccessPointRequest deleteAccessPointRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(deleteAccessPointRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<DeleteAccessPointRequest> request = null;
+        Response<DeleteAccessPointResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new DeleteAccessPointRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(deleteAccessPointRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "DeleteAccessPoint");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<DeleteAccessPointResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new DeleteAccessPointResultJsonUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();
@@ -841,6 +998,73 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
 
             HttpResponseHandler<AmazonWebServiceResponse<DeleteFileSystemResult>> responseHandler = protocolFactory.createResponseHandler(
                     new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new DeleteFileSystemResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Deletes the <code>FileSystemPolicy</code> for the specified file system. The default
+     * <code>FileSystemPolicy</code> goes into effect once the existing policy is deleted. For more information about
+     * the default file system policy, see <a
+     * href="https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html">Using Resource-based Policies with
+     * EFS</a>.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:DeleteFileSystemPolicy</code> action.
+     * </p>
+     * 
+     * @param deleteFileSystemPolicyRequest
+     * @return Result of the DeleteFileSystemPolicy operation returned by the service.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws IncorrectFileSystemLifeCycleStateException
+     *         Returned if the file system's lifecycle state is not "available".
+     * @sample AmazonElasticFileSystem.DeleteFileSystemPolicy
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemPolicy"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public DeleteFileSystemPolicyResult deleteFileSystemPolicy(DeleteFileSystemPolicyRequest request) {
+        request = beforeClientExecution(request);
+        return executeDeleteFileSystemPolicy(request);
+    }
+
+    @SdkInternalApi
+    final DeleteFileSystemPolicyResult executeDeleteFileSystemPolicy(DeleteFileSystemPolicyRequest deleteFileSystemPolicyRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(deleteFileSystemPolicyRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<DeleteFileSystemPolicyRequest> request = null;
+        Response<DeleteFileSystemPolicyResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new DeleteFileSystemPolicyRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(deleteFileSystemPolicyRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "DeleteFileSystemPolicy");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<DeleteFileSystemPolicyResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false),
+                    new DeleteFileSystemPolicyResultJsonUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();
@@ -974,6 +1198,7 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
      *      API Documentation</a>
      */
     @Override
+    @Deprecated
     public DeleteTagsResult deleteTags(DeleteTagsRequest request) {
         request = beforeClientExecution(request);
         return executeDeleteTags(request);
@@ -1005,6 +1230,137 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
 
             HttpResponseHandler<AmazonWebServiceResponse<DeleteTagsResult>> responseHandler = protocolFactory.createResponseHandler(new JsonOperationMetadata()
                     .withPayloadJson(true).withHasStreamingSuccessResponse(false), new DeleteTagsResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Returns the description of a specific Amazon EFS access point if the <code>AccessPointId</code> is provided. If
+     * you provide an EFS <code>FileSystemId</code>, it returns descriptions of all access points for that file system.
+     * You can provide either an <code>AccessPointId</code> or a <code>FileSystemId</code> in the request, but not both.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:DescribeAccessPoints</code> action.
+     * </p>
+     * 
+     * @param describeAccessPointsRequest
+     * @return Result of the DescribeAccessPoints operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
+     * @sample AmazonElasticFileSystem.DescribeAccessPoints
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccessPoints"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public DescribeAccessPointsResult describeAccessPoints(DescribeAccessPointsRequest request) {
+        request = beforeClientExecution(request);
+        return executeDescribeAccessPoints(request);
+    }
+
+    @SdkInternalApi
+    final DescribeAccessPointsResult executeDescribeAccessPoints(DescribeAccessPointsRequest describeAccessPointsRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(describeAccessPointsRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<DescribeAccessPointsRequest> request = null;
+        Response<DescribeAccessPointsResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new DescribeAccessPointsRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(describeAccessPointsRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "DescribeAccessPoints");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<DescribeAccessPointsResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new DescribeAccessPointsResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Returns the <code>FileSystemPolicy</code> for the specified EFS file system.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:DescribeFileSystemPolicy</code> action.
+     * </p>
+     * 
+     * @param describeFileSystemPolicyRequest
+     * @return Result of the DescribeFileSystemPolicy operation returned by the service.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws PolicyNotFoundException
+     *         Returned if the default file system policy is in effect for the EFS file system specified.
+     * @sample AmazonElasticFileSystem.DescribeFileSystemPolicy
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemPolicy"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public DescribeFileSystemPolicyResult describeFileSystemPolicy(DescribeFileSystemPolicyRequest request) {
+        request = beforeClientExecution(request);
+        return executeDescribeFileSystemPolicy(request);
+    }
+
+    @SdkInternalApi
+    final DescribeFileSystemPolicyResult executeDescribeFileSystemPolicy(DescribeFileSystemPolicyRequest describeFileSystemPolicyRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(describeFileSystemPolicyRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<DescribeFileSystemPolicyRequest> request = null;
+        Response<DescribeFileSystemPolicyResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new DescribeFileSystemPolicyRequestProtocolMarshaller(protocolFactory).marshall(super
+                        .beforeMarshalling(describeFileSystemPolicyRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "DescribeFileSystemPolicy");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<DescribeFileSystemPolicyResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false),
+                    new DescribeFileSystemPolicyResultJsonUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();
@@ -1276,6 +1632,8 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
      *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
      * @throws MountTargetNotFoundException
      *         Returned if there is no mount target with the specified ID found in the caller's account.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
      * @sample AmazonElasticFileSystem.DescribeMountTargets
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets"
      *      target="_top">AWS API Documentation</a>
@@ -1346,6 +1704,7 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
      *      API Documentation</a>
      */
     @Override
+    @Deprecated
     public DescribeTagsResult describeTags(DescribeTagsRequest request) {
         request = beforeClientExecution(request);
         return executeDescribeTags(request);
@@ -1377,6 +1736,72 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
 
             HttpResponseHandler<AmazonWebServiceResponse<DescribeTagsResult>> responseHandler = protocolFactory.createResponseHandler(
                     new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new DescribeTagsResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Lists all tags for a top-level EFS resource. You must provide the ID of the resource that you want to retrieve
+     * the tags for.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:DescribeAccessPoints</code> action.
+     * </p>
+     * 
+     * @param listTagsForResourceRequest
+     * @return Result of the ListTagsForResource operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
+     * @sample AmazonElasticFileSystem.ListTagsForResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ListTagsForResource"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public ListTagsForResourceResult listTagsForResource(ListTagsForResourceRequest request) {
+        request = beforeClientExecution(request);
+        return executeListTagsForResource(request);
+    }
+
+    @SdkInternalApi
+    final ListTagsForResourceResult executeListTagsForResource(ListTagsForResourceRequest listTagsForResourceRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(listTagsForResourceRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<ListTagsForResourceRequest> request = null;
+        Response<ListTagsForResourceResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new ListTagsForResourceRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(listTagsForResourceRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "ListTagsForResource");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<ListTagsForResourceResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new ListTagsForResourceResultJsonUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();
@@ -1481,6 +1906,78 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
 
     /**
      * <p>
+     * Applies an Amazon EFS <code>FileSystemPolicy</code> to an Amazon EFS file system. A file system policy is an IAM
+     * resource-based policy and can contain multiple policy statements. A file system always has exactly one file
+     * system policy, which can be the default policy or an explicit policy set or updated using this API operation.
+     * When an explicit policy is set, it overrides the default policy. For more information about the default file
+     * system policy, see <a
+     * href="https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy">Default
+     * EFS File System Policy</a>.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:PutFileSystemPolicy</code> action.
+     * </p>
+     * 
+     * @param putFileSystemPolicyRequest
+     * @return Result of the PutFileSystemPolicy operation returned by the service.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws InvalidPolicyException
+     *         Returned if the <code>FileSystemPolicy</code> is is malformed or contains an error such as an invalid
+     *         parameter value or a missing required parameter. Returned in the case of a policy lockout safety check
+     *         error.
+     * @throws IncorrectFileSystemLifeCycleStateException
+     *         Returned if the file system's lifecycle state is not "available".
+     * @sample AmazonElasticFileSystem.PutFileSystemPolicy
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutFileSystemPolicy"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public PutFileSystemPolicyResult putFileSystemPolicy(PutFileSystemPolicyRequest request) {
+        request = beforeClientExecution(request);
+        return executePutFileSystemPolicy(request);
+    }
+
+    @SdkInternalApi
+    final PutFileSystemPolicyResult executePutFileSystemPolicy(PutFileSystemPolicyRequest putFileSystemPolicyRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(putFileSystemPolicyRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<PutFileSystemPolicyRequest> request = null;
+        Response<PutFileSystemPolicyResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new PutFileSystemPolicyRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(putFileSystemPolicyRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "PutFileSystemPolicy");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<PutFileSystemPolicyResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new PutFileSystemPolicyResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
      * Enables lifecycle management by creating a new <code>LifecycleConfiguration</code> object. A
      * <code>LifecycleConfiguration</code> object defines when files in an Amazon EFS file system are automatically
      * transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A <code>LifecycleConfiguration</code>
@@ -1566,6 +2063,138 @@ public class AmazonElasticFileSystemClient extends AmazonWebServiceClient implem
             HttpResponseHandler<AmazonWebServiceResponse<PutLifecycleConfigurationResult>> responseHandler = protocolFactory.createResponseHandler(
                     new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false),
                     new PutLifecycleConfigurationResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Creates a tag for an EFS resource. You can create tags for EFS file systems and access points using this API
+     * operation.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:TagResource</code> action.
+     * </p>
+     * 
+     * @param tagResourceRequest
+     * @return Result of the TagResource operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
+     * @sample AmazonElasticFileSystem.TagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/TagResource" target="_top">AWS
+     *      API Documentation</a>
+     */
+    @Override
+    public TagResourceResult tagResource(TagResourceRequest request) {
+        request = beforeClientExecution(request);
+        return executeTagResource(request);
+    }
+
+    @SdkInternalApi
+    final TagResourceResult executeTagResource(TagResourceRequest tagResourceRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(tagResourceRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<TagResourceRequest> request = null;
+        Response<TagResourceResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new TagResourceRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(tagResourceRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "TagResource");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<TagResourceResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new TagResourceResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Removes tags from an EFS resource. You can remove tags from EFS file systems and access points using this API
+     * operation.
+     * </p>
+     * <p>
+     * This operation requires permissions for the <code>elasticfilesystem:UntagResource</code> action.
+     * </p>
+     * 
+     * @param untagResourceRequest
+     * @return Result of the UntagResource operation returned by the service.
+     * @throws BadRequestException
+     *         Returned if the request is malformed or contains an error such as an invalid parameter value or a missing
+     *         required parameter.
+     * @throws InternalServerErrorException
+     *         Returned if an error occurred on the server side.
+     * @throws FileSystemNotFoundException
+     *         Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+     * @throws AccessPointNotFoundException
+     *         Returned if the specified <code>AccessPointId</code> value doesn't exist in the requester's AWS account.
+     * @sample AmazonElasticFileSystem.UntagResource
+     * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UntagResource"
+     *      target="_top">AWS API Documentation</a>
+     */
+    @Override
+    public UntagResourceResult untagResource(UntagResourceRequest request) {
+        request = beforeClientExecution(request);
+        return executeUntagResource(request);
+    }
+
+    @SdkInternalApi
+    final UntagResourceResult executeUntagResource(UntagResourceRequest untagResourceRequest) {
+
+        ExecutionContext executionContext = createExecutionContext(untagResourceRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<UntagResourceRequest> request = null;
+        Response<UntagResourceResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new UntagResourceRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(untagResourceRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+                request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+                request.addHandlerContext(HandlerContextKey.SERVICE_ID, "EFS");
+                request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "UntagResource");
+                request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<UntagResourceResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new UntagResourceResultJsonUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();

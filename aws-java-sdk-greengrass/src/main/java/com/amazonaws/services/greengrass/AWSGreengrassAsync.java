@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -2200,7 +2200,7 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
             com.amazonaws.handlers.AsyncHandler<ListSubscriptionDefinitionsRequest, ListSubscriptionDefinitionsResult> asyncHandler);
 
     /**
-     * Retrieves the tags for a resource.
+     * Retrieves a list of resource tags for a resource arn.
      * 
      * @param listTagsForResourceRequest
      * @return A Java Future containing the result of the ListTagsForResource operation returned by the service.
@@ -2211,7 +2211,7 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
     java.util.concurrent.Future<ListTagsForResourceResult> listTagsForResourceAsync(ListTagsForResourceRequest listTagsForResourceRequest);
 
     /**
-     * Retrieves the tags for a resource.
+     * Retrieves a list of resource tags for a resource arn.
      * 
      * @param listTagsForResourceRequest
      * @param asyncHandler
@@ -2320,9 +2320,12 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
             com.amazonaws.handlers.AsyncHandler<StopBulkDeploymentRequest, StopBulkDeploymentResult> asyncHandler);
 
     /**
-     * Add tags to a resource.
+     * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition',
+     * 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and
+     * 'BulkDeployment'.
      * 
      * @param tagResourceRequest
+     *        A map of the key-value pairs for the resource tag.
      * @return A Java Future containing the result of the TagResource operation returned by the service.
      * @sample AWSGreengrassAsync.TagResource
      * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResource" target="_top">AWS API
@@ -2331,9 +2334,12 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
     java.util.concurrent.Future<TagResourceResult> tagResourceAsync(TagResourceRequest tagResourceRequest);
 
     /**
-     * Add tags to a resource.
+     * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition',
+     * 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and
+     * 'BulkDeployment'.
      * 
      * @param tagResourceRequest
+     *        A map of the key-value pairs for the resource tag.
      * @param asyncHandler
      *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
      *        implementation of the callback methods in this interface to receive notification of successful or
@@ -2347,7 +2353,7 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
             com.amazonaws.handlers.AsyncHandler<TagResourceRequest, TagResourceResult> asyncHandler);
 
     /**
-     * Remove tags with specified keys from a resource.
+     * Remove resource tags from a Greengrass Resource.
      * 
      * @param untagResourceRequest
      * @return A Java Future containing the result of the UntagResource operation returned by the service.
@@ -2358,7 +2364,7 @@ public interface AWSGreengrassAsync extends AWSGreengrass {
     java.util.concurrent.Future<UntagResourceResult> untagResourceAsync(UntagResourceRequest untagResourceRequest);
 
     /**
-     * Remove tags with specified keys from a resource.
+     * Remove resource tags from a Greengrass Resource.
      * 
      * @param untagResourceRequest
      * @param asyncHandler

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -28,6 +28,8 @@ import com.amazonaws.annotation.SdkInternalApi;
 @SdkInternalApi
 public class PrivateLinkConfigMarshaller {
 
+    private static final MarshallingInfo<String> VPCENDPOINTID_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
+            .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("VpcEndpointId").build();
     private static final MarshallingInfo<String> PRIVATELINKENDPOINT_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PAYLOAD).marshallLocationName("PrivateLinkEndpoint").build();
     private static final MarshallingInfo<List> SUBNETARNS_BINDING = MarshallingInfo.builder(MarshallingType.LIST).marshallLocation(MarshallLocation.PAYLOAD)
@@ -51,6 +53,7 @@ public class PrivateLinkConfigMarshaller {
         }
 
         try {
+            protocolMarshaller.marshall(privateLinkConfig.getVpcEndpointId(), VPCENDPOINTID_BINDING);
             protocolMarshaller.marshall(privateLinkConfig.getPrivateLinkEndpoint(), PRIVATELINKENDPOINT_BINDING);
             protocolMarshaller.marshall(privateLinkConfig.getSubnetArns(), SUBNETARNS_BINDING);
             protocolMarshaller.marshall(privateLinkConfig.getSecurityGroupArns(), SECURITYGROUPARNS_BINDING);

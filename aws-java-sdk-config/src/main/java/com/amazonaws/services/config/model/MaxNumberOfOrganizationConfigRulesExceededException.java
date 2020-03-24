@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2015-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
  * the License. A copy of the License is located at
@@ -15,7 +15,9 @@ package com.amazonaws.services.config.model;
 import javax.annotation.Generated;
 
 /**
- * 
+ * <p>
+ * You have reached the limit of the number of organization config rules you can create.
+ * </p>
  */
 @Generated("com.amazonaws:aws-java-sdk-code-generator")
 public class MaxNumberOfOrganizationConfigRulesExceededException extends com.amazonaws.services.config.model.AmazonConfigException {
